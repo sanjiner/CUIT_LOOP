@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    tools:context=".PushActivity" >
+	
+    <RelativeLayout
+        android:id="@+id/rl_coinActivity_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/weather_top_bg"
+        android:orientation="horizontal" >
+		<ImageButton 
+     	 	android:layout_width="wrap_content"
+     	 	android:layout_height="wrap_content"
+     	 	android:src="@drawable/back_map_normal"
+     	 	android:onClick="return_infocenter"
+     	 	android:layout_marginLeft="5dp"
+     	 	android:clickable="true"
+     	 	android:background="@android:color/transparent"
+     	 	/>
+		
+        <TextView
+            android:id="@+id/infocenter_push_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="积分规则"
+            android:textColor="@color/theme1_red"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+    <LinearLayout 
+        android:id="@+id/lv_coin_way"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_coinActivity_title"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+       	<ScrollView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content" >
+	
+			<LinearLayout
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="vertical" >
+
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:textSize="18sp"
+				    android:layout_marginBottom="6dp"
+				    android:text="@string/coin1" />
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:textSize="18sp"
+				    android:layout_marginBottom="6dp"
+				    android:text="@string/coin2" />
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:textSize="18sp"
+				    android:layout_marginBottom="6dp"
+				    android:text="@string/coin3" />
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:textSize="18sp"
+				    android:layout_marginBottom="6dp"
+				    android:text="@string/coin4" />
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:textSize="18sp"
+				    android:layout_marginBottom="6dp"
+				    android:text="@string/coin5" />
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:textSize="18sp"
+				    android:layout_marginBottom="6dp"
+				    android:text="@string/coin6" />
+				<TextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:textSize="18sp"
+				    android:layout_marginBottom="6dp"
+				    android:text="@string/coin7" />
+				
+
+			</LinearLayout>
+		</ScrollView>
+	</LinearLayout>
+    
+
+</RelativeLayout>

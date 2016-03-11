@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PlaceRoadActivity" >
+
+    <RelativeLayout
+        android:id="@+id/rl_road_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/weather_top_bg"
+        android:orientation="horizontal" >
+		<ImageButton 
+     	 	android:layout_width="wrap_content"
+     	 	android:layout_height="wrap_content"
+     	 	android:src="@drawable/back_map_normal"
+     	 	android:onClick="road_returen"
+     	 	android:layout_marginLeft="5dp"
+     	 	android:clickable="true"
+     	 	android:background="@android:color/transparent"
+     	 	/>
+		
+        <TextView
+            android:id="@+id/place_road_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="N/A"
+            android:textColor="@color/theme1_red"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+    
+    <com.baidu.mapapi.map.MapView 
+    	android:id="@+id/road_bmapView"
+    	android:layout_below="@+id/rl_road_title"
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent" 
+		android:clickable="true"     
+		/>
+
+</RelativeLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+		<RadioGroup
+            android:id="@+id/place_main_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:orientation="horizontal"
+            android:background="@drawable/weather_top_bg"
+            android:layout_gravity="top" >
+            <RadioButton 
+                android:id="@+id/place_radio_eat"
+                style="@style/place_tabs_button"
+                android:checked="true"
+                android:text="@string/eat"/>
+            <RadioButton 
+                android:id="@+id/place_radio_hotel"
+                style="@style/place_tabs_button"
+                android:text="@string/hotel"/>
+            <RadioButton 
+                android:id="@+id/place_radio_road"
+                style="@style/place_tabs_button"
+                android:text="@string/road"/>
+            <RadioButton 
+                android:id="@+id/place_radio_shop"
+                style="@style/place_tabs_button"
+                android:text="@string/shop"/>
+        </RadioGroup>
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/login_bg">
+            <include
+                android:id="@+id/place_page_eat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                layout="@layout/place_eat" />
+            <include
+                android:id="@+id/place_page_hotel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                layout="@layout/place_hotel" />
+            <include
+                android:id="@+id/place_page_shop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                layout="@layout/place_shop" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+</TabHost>

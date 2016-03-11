@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_more"
+	android:background="@drawable/login_bg">
+    <TextView 
+        android:id="@+id/more_title"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_height_other"
+        android:paddingTop="10dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/travel_top_bg"
+        android:gravity="center_horizontal"
+        android:textColor="@color/theme1_red"
+        android:textSize="20sp"
+        android:text="@string/main_more"/>
+    <ScrollView
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_below="@id/more_title"
+    	android:scrollbars="vertical" >
+        <LinearLayout
+	        android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:paddingLeft="10dp"
+	    	android:paddingRight="10dp"
+	    	android:orientation="vertical">
+	        <TextView 
+	            android:id="@+id/more_infocenter"
+			    style="@style/more_list"
+			    android:layout_marginTop="20dp"
+			    android:onClick="more_infocenter"
+				android:background="@drawable/ic_preference_first"
+				android:text="@string/infocenter"/>
+	        <TextView 
+	            android:id="@+id/more_usersetting"
+			    style="@style/more_list"
+			    android:onClick="more_usersetting"
+				android:background="@drawable/ic_preference_last"
+				android:text="@string/usersetting"/>
+	        
+	        <TextView
+	            android:id="@+id/more_sharemanage"
+	            style="@style/more_list" 
+	            android:layout_marginTop="10dp"
+	            android:onClick="more_sharemanage"
+				android:background="@drawable/ic_preference_first"
+				android:text="@string/sharemanage"/>
+	        <TextView 
+	            android:id="@+id/more_feature"
+			    style="@style/more_list"
+			    android:onClick="more_feature"
+				android:background="@drawable/ic_preference_mid"
+				android:text="@string/feature"/>
+	        <TextView 
+	            android:id="@+id/more_recommend"
+			    style="@style/more_list"
+			    android:onClick="more_recommend"
+				android:background="@drawable/ic_preference_last"
+				android:text="@string/recommend"/>
+	        
+	        <TextView
+	            android:id="@+id/more_disclaimer"
+	            style="@style/more_list" 
+	            android:layout_marginTop="10dp"
+	            android:onClick="more_disclaimer"
+				android:background="@drawable/ic_preference_first"
+				android:text="@string/disclaimer"/>
+	        <TextView 
+	            android:id="@+id/more_about"
+			    style="@style/more_list"
+			    android:onClick="more_about"
+				android:background="@drawable/ic_preference_last"
+				android:text="@string/about"/>
+	        
+	        <Button 
+	            android:id="@+id/main_more_logout"
+	            android:layout_marginTop="10dp"
+	           	android:layout_width="fill_parent"
+				android:layout_height="@dimen/more_list_height"
+				android:background="@drawable/logout_btn"
+				android:textColor="#FFF"
+				android:textSize="15sp"
+				android:onClick="logout"
+				android:text="@string/logout" />
+	    </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

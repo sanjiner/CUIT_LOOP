@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <string-array name="distance">
+        <item>100米</item>
+        <item>200米</item>
+        <item>500米</item>
+        <item>1000米</item>
+    </string-array>
+    <string-array name="dishes">
+        <item>川菜</item>
+        <item>湘菜</item>
+        <item>其他</item>
+    </string-array>
+    <string-array name="fever">
+        <item>一星</item>
+        <item>二星</item>
+        <item>三星</item>
+        <item>四星</item>
+        <item>五星</item>
+    </string-array>
+    <string-array name="hotel">
+        <item>经济实用型</item>
+        <item>舒适型</item>
+        <item>其他</item>
+    </string-array>
+     <string-array name="shop">
+        <item>综合购物</item>
+        <item>大卖场</item>
+        <item>其他</item>
+    </string-array>
+
+</resources>

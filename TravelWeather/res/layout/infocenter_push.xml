@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/forecast_bg"
+    tools:context=".PushActivity" >
+	
+    <RelativeLayout
+        android:id="@+id/rl_PushActivity_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/weather_top_bg"
+        android:orientation="horizontal" >
+		<ImageButton 
+     	 	android:layout_width="wrap_content"
+     	 	android:layout_height="wrap_content"
+     	 	android:src="@drawable/back_map_normal"
+     	 	android:onClick="return_infocenter"
+     	 	android:layout_marginLeft="5dp"
+     	 	android:clickable="true"
+     	 	android:background="@android:color/transparent"
+     	 	/>
+		
+        <TextView
+            android:id="@+id/infocenter_push_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/infocenter_item3"
+            android:textColor="@color/theme1_red"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+    
+   	<RelativeLayout 
+        android:id="@+id/push_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_PushActivity_title" 
+        android:visibility="gone">
+	    <LinearLayout
+	        android:id="@+id/rl_push_number"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginTop="10dp"
+	        android:layout_marginRight="10dp"
+	        android:background="@drawable/ic_preference_first"
+	        android:orientation="horizontal"
+	        >
+	
+	        <TextView
+	            style="@style/add_list"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center"
+	            android:text="@string/push_phonenumber" />
+	
+	        <EditText 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center_vertical"
+	            android:background="#00000000"
+	            android:inputType="phone"/>
+	    </LinearLayout>
+	    
+	   	<LinearLayout 
+	       	android:id="@+id/rl_push_addcity"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:onClick="from"
+	        android:clickable="true"
+	        android:layout_below="@+id/rl_push_number"
+	        android:background="@drawable/ic_preference_mid"
+	        android:orientation="horizontal" >
+	
+	        <TextView
+	            style="@style/add_list"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="订阅城市:" />
+	
+	        <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content" />
+	    
+	        <TextView
+	            android:id="@+id/tv_addcity"
+	            style="@style/add_list"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	             />
+	
+	    </LinearLayout>
+	    
+ 
+	
+	    <LinearLayout
+	        android:id="@+id/rl_push_starttime"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginTop="10dp"
+	        android:layout_marginRight="10dp"
+	        android:layout_below="@+id/rl_push_addcity"
+	        android:clickable="true"
+	        android:onClick="start_time"
+	        android:background="@drawable/ic_preference_first"
+	        android:orientation="horizontal"
+	        >
+	
+	        <TextView
+	            style="@style/add_list"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/push_start_time" />
+	
+	         <TextView
+	             android:id="@+id/tv_start"
+	             style="@style/add_list"
+	             android:layout_width="wrap_content"
+	             android:layout_height="wrap_content" />
+	
+	    </LinearLayout>
+	    
+	    <LinearLayout 
+	       	android:id="@+id/rl_push_endtime"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginBottom="10dp"
+	        android:clickable="true"
+	        android:onClick="end_time"
+	        android:layout_below="@+id/rl_push_starttime"
+	        android:background="@drawable/ic_preference_last"
+	        android:orientation="horizontal" >
+	
+	        <TextView
+	            style="@style/add_list"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/push_end_time" />
+	
+	        <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content" />
+	        
+	        <TextView 
+	            android:id="@+id/tv_end"
+				style="@style/add_list"
+	            />
+	    </LinearLayout>
+		
+	    <Button 
+			android:layout_width="@dimen/btn_width"
+		    android:layout_height="@dimen/btn_height"
+		    android:background="@drawable/btn_theme1"
+		    android:layout_centerHorizontal="true"
+		    android:onClick="push_do"
+		    android:layout_below="@+id/rl_push_endtime"
+		    android:text="@string/push_is"
+		    android:textColor="@color/theme1_red"
+		    android:textSize="20sp"         
+	    />        
+        
+    </RelativeLayout>
+   
+   
+   	<RelativeLayout 
+        android:id="@+id/rl_push_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_PushActivity_title"
+        > 
+        <ListView
+            android:id="@+id/push_list"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:divider="@null"
+        	android:layout_alignParentTop="true"
+        	android:layout_above="@+id/push_choose">      
+        </ListView>
+        
+      	<RelativeLayout
+	        android:id="@+id/push_choose"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentBottom="true"
+	        android:clickable="true"
+	        android:onClick="push_choose"
+	        android:background="@drawable/infocenter_city_man_02"
+	        >
+	        <TextView 
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerInParent="true"
+	            android:text="添加订阅城市"
+	            android:textColor="#FFFFFF"
+	            android:textSize="20sp"
+	            /> 
+         </RelativeLayout>
+   </RelativeLayout>
+	    
+   	
+
+</RelativeLayout>

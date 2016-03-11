@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    tools:context=".PushActivity" >
+
+    <RelativeLayout
+        android:id="@+id/rl_PushActivity_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/weather_top_bg"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/ib_comment_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:src="@drawable/back_map_normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="上传实景照片"
+            android:textColor="@color/theme1_red"
+            android:textSize="24sp" />
+    </RelativeLayout>
+    <!-- 上面是通用的 不管他了 -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_PushActivity_title" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:id="@+id/rlImg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/iv_picture_upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/not_loaded" />
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/spinnerPicType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rlImg" >
+            </Spinner>
+
+            <EditText
+                android:id="@+id/et_picture_upload_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spinnerPicType"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:lines="2"
+                android:maxLength="140"
+                android:maxLines="2"
+                android:minLines="2"
+                android:scrollHorizontally="false"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+                android:singleLine="false" />
+
+            <Button
+                android:id="@+id/btn_picture_upload_addComment"
+                android:layout_width="@dimen/btn_width"
+                android:layout_height="@dimen/btn_height"
+                android:layout_below="@id/et_picture_upload_comment"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/btn_theme1"
+                android:text="@string/push_is"
+                android:textColor="@color/theme1_red"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/uploadImageResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_picture_upload_addComment"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:text="uploadImageResult 显示上传进度" />
+
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/uploadImageResult"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

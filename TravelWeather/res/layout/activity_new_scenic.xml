@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/login_bg" >
+    <RelativeLayout
+        android:id="@+id/rl_coinActivity_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/weather_top_bg"
+        android:orientation="horizontal" >
+        <TextView
+            android:id="@+id/travel_tv_new_road"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="新增景点"
+            android:textColor="@color/theme1_red"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+    
+	<RelativeLayout
+		    android:id="@+id/travel_page_line_new"
+		    android:layout_width="match_parent"
+    		android:layout_height="wrap_content"
+    		android:paddingTop="15dp"
+    		android:paddingLeft="15dp"
+    		android:paddingRight="15dp">
+		    <TextView 
+		        android:id="@+id/scenic_tv_name"
+		        android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme1_red"
+                android:textSize="20sp"
+                android:text="名称："/>
+
+		    <EditText
+		        android:id="@+id/scenic_et_name"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_toRightOf="@+id/scenic_tv_name"
+		        android:ems="10"
+		        android:background="@drawable/login_edit"
+		        android:textSize="20sp"
+		        android:gravity="center_vertical"
+		        android:clickable="true" >
+		    </EditText>
+		    
+		    <TextView 
+		        android:id="@+id/scenic_tv_position"
+		        android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/scenic_et_name"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/theme1_red"
+                android:textSize="20sp"
+                android:text="地点："/>
+		     <TextView
+		        android:id="@+id/scenic_et_position"
+		        android:layout_width="160dp"
+		        android:layout_height="wrap_content"
+		        android:layout_toRightOf="@+id/scenic_tv_position"
+		        android:layout_marginTop="15dp"
+		        android:layout_alignBottom="@+id/scenic_tv_position"
+		        android:ems="10"
+		        android:singleLine="true"
+		        android:background="@drawable/login_edit"
+		        android:textSize="13sp"
+		        android:clickable="true" >
+		    </TextView>
+
+		      <EditText
+		          android:id="@+id/et_address"
+		          android:layout_width="match_parent"
+		          android:layout_height="wrap_content"
+		          android:layout_alignRight="@+id/scenic_et_name"
+		          android:layout_below="@+id/scenic_et_name"
+		          android:layout_alignBottom="@+id/scenic_tv_position"
+		          android:layout_marginTop="15dp"
+		          android:singleLine="true"
+		          android:layout_toRightOf="@+id/scenic_et_position"
+		          android:background="@drawable/login_edit"
+		          android:clickable="true"
+		          android:ems="10"
+		          android:hint="具体地址"
+		          android:textSize="13sp" >
+
+		    </EditText>
+		    
+		    <TextView 
+		        android:id="@+id/scenic_tv_level"
+		        android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/scenic_tv_position"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/theme1_red"
+                android:textSize="20sp"
+                android:text="星级："/>
+		     <TextView
+		        android:id="@+id/scenic_et_level"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/scenic_tv_position"
+		        android:layout_toRightOf="@+id/scenic_tv_position"
+		        android:layout_marginTop="15dp"
+		        android:ems="10"
+		        android:background="@drawable/login_edit"
+		        android:textSize="20sp"
+		        android:clickable="true">
+		    </TextView>
+		    
+		    <TextView 
+		        android:id="@+id/scenic_tv_des"
+		        android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/scenic_tv_level"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/theme1_red"
+                android:textSize="20sp"
+                android:text="描述："/>
+		    <EditText
+		        android:id="@+id/scenic_et_des"
+		        android:layout_width="match_parent"
+		        android:layout_height="50dp"
+		        android:layout_below="@+id/scenic_tv_level"
+		        android:layout_toRightOf="@+id/scenic_tv_position"
+		        android:layout_marginTop="15dp"
+		        android:ems="10"
+		        android:background="@drawable/login_edit"
+		        android:textSize="20sp"
+		        android:clickable="true"
+		        >
+		    </EditText>
+		    <TextView 
+		        android:id="@+id/scenic_tv_pic"
+		        android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/scenic_et_des"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/theme1_red"
+                android:textSize="20sp"
+                android:text="图片："/>
+		    <ImageView 
+		        android:id="@+id/scenic_iv_pic"
+		        android:layout_width="wrap_content"
+		        android:layout_height="80dp"
+		        android:src="@drawable/not_loaded"
+		        android:layout_below="@+id/scenic_et_des"
+		        android:layout_toRightOf="@+id/scenic_tv_pic"
+		        android:layout_marginTop="15dp"/>
+		    <Button 
+		        android:id="@+id/scenic_btn_takephoto"
+		        android:layout_width="@dimen/btn_width"
+                android:layout_height="@dimen/btn_height"
+		        android:layout_below="@+id/scenic_iv_pic"
+		        android:layout_marginTop="20dp"
+		        android:layout_marginLeft="10dp"
+		        android:background="@drawable/btn_theme1"
+		        android:textColor="@color/theme1_red"
+		        android:textSize="20sp"
+		        android:text="@string/travel_take_photo"
+		        android:onClick="takephoto"
+		        />
+		    <Button 
+		        android:id="@+id/scenic_btn_add"
+		        android:layout_width="@dimen/btn_width"
+                android:layout_height="@dimen/btn_height"
+		        android:layout_below="@+id/scenic_iv_pic"
+		        android:layout_alignParentRight="true"
+		        android:layout_marginTop="20dp"
+		        android:layout_marginRight="10dp"
+		        android:background="@drawable/btn_theme1"
+		        android:textColor="@color/theme1_red"
+		        android:textSize="20sp"
+		        android:text="@string/travel_add"
+		        android:onClick="add"
+		        />
+		    
+
+		</RelativeLayout>
+</LinearLayout>

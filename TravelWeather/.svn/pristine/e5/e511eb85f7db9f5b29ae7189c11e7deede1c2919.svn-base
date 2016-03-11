@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <fragment 
+                android:name="cuit.travelweather.fragment.TravelFragment"
+                android:id="@+id/TravelFragment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+            <fragment 
+                android:name="cuit.travelweather.fragment.PlaceFragment"
+                android:id="@+id/PlaceFragment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+            <fragment 
+                android:name="cuit.travelweather.fragment.PictureFragment"
+                android:id="@+id/PictureFragment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+            <fragment 
+                android:name="cuit.travelweather.fragment.MoreFragment"
+                android:id="@+id/MoreFragment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+
+            <fragment
+                android:id="@+id/WeatherFragment"
+                android:name="cuit.travelweather.fragment.WeatherFragment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+
+        </FrameLayout>
+        
+        <RadioGroup
+            android:id="@+id/main_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nav_height"
+            android:orientation="horizontal"
+            android:background="@drawable/main_tab_bg"
+            android:layout_gravity="bottom" >
+            <RadioButton 
+                android:id="@+id/main_tabs_weather"
+                style="@style/main_tabs_button"
+                android:checked="true"
+                android:text="@string/main_weather"
+                android:drawableTop="@drawable/main_weather"/>
+            <RadioButton 
+                android:id="@+id/main_tabs_travel"
+                style="@style/main_tabs_button"
+                android:text="@string/main_travel"
+                android:drawableTop="@drawable/main_travel"/>
+            <RadioButton 
+                android:id="@+id/main_tabs_place"
+                style="@style/main_tabs_button"
+                android:text="@string/main_place"
+                android:drawableTop="@drawable/main_place"/>
+            <RadioButton 
+                android:id="@+id/main_tabs_picture"
+                style="@style/main_tabs_button"
+                android:text="@string/main_picture"
+                android:drawableTop="@drawable/main_picture"/>
+            <RadioButton 
+                android:id="@+id/main_tabs_more"
+                style="@style/main_tabs_button"
+                android:text="@string/main_more"
+                android:drawableTop="@drawable/main_more"/>
+            
+        </RadioGroup>
+
+    </LinearLayout>
+</TabHost>

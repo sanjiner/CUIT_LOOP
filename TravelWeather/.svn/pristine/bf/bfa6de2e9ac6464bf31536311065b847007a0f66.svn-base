@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_picture"
+    android:background="@drawable/login_bg"
+    tools:ignore="HardcodedText" >
+
+    <RadioGroup
+        android:id="@+id/picture_topbar"
+        style="@style/picture_topbar"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/weather_top_bg" >
+
+        <RadioButton
+            android:id="@+id/picture_btn_hot"
+            style="@style/picture_topbar_button"
+            android:text="@string/hot" />
+
+        <RadioButton
+            android:id="@+id/picture_btn_eat"
+            style="@style/picture_topbar_button"
+            android:text="@string/eat" />
+
+        <RadioButton
+            android:id="@+id/picture_btn_hotel"
+            style="@style/picture_topbar_button"
+            android:text="@string/hotel" />
+
+        <RadioButton
+            android:id="@+id/picture_btn_road"
+            style="@style/picture_topbar_button"
+            android:text="@string/road" />
+
+        <RadioButton
+            android:id="@+id/picture_btn_shop"
+            style="@style/picture_topbar_button"
+            android:text="@string/shop" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/picture_topbar"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/progressbar"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading" />
+        </LinearLayout>
+
+        <cuit.travelweather.util.LazyScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RelativeLayout
+                android:id="@+id/image_cache_parent_pictureFragment_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingLeft="4dp" >
+            </RelativeLayout>
+        </cuit.travelweather.util.LazyScrollView>
+
+        <Button
+            android:id="@+id/btn_iCapturePictures"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="我也拍一拍" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gw_id"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg" >
+
+    <TextView
+        android:id="@+id/more_title"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_height_other"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/travel_top_bg"
+        android:gravity="center_horizontal"
+        android:paddingTop="10dp"
+        android:text="我猜天气"
+        android:textColor="@color/theme1_red"
+        android:textSize="20sp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:onClick="guess_return"
+        android:src="@drawable/back_map_normal" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/more_title"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/gw_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:paddingTop="1dp"
+            android:text="你当前竞猜N次，共有M次竞猜成功"
+            android:textColor="@color/theme1_red"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout1" >
+
+        <TextView
+            android:id="@+id/no_present"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:lines="1"
+            android:paddingTop="1dp"
+            android:text="今日您还未参与竞猜"
+            android:textColor="@color/theme1_red"
+            android:textSize="20sp" />
+
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/title_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:onClick="guess_return"
+        android:src="@drawable/ab" />
+
+</RelativeLayout>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    tools:ignore="HardcodedText,SmallSp" >
+
+    <TextView
+        android:id="@+id/more_title"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_height_other"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/travel_top_bg"
+        android:gravity="center_horizontal"
+        android:paddingTop="10dp"
+        android:text="@string/recommend"
+        android:textColor="@color/theme1_red"
+        android:textSize="20sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/more_title"
+        android:scrollbars="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:clickable="true"
+                android:background="@drawable/place_item_bg" >
+
+                <ImageView
+                    android:id="@+id/app_icon"
+                    android:layout_width="72dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/recommend"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_launcher" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@id/app_icon"
+                    android:text="@string/app_name"
+                    android:textSize="15sp" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar1"
+                    style="@style/RatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:isIndicator="true"
+                    android:rating="3" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/ratingBar1"
+                    android:layout_toRightOf="@id/app_icon"
+                    android:ellipsize="end"
+                    android:text="让自驾出行变得更加的简单。"
+                    android:textColor="#666" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:clickable="true"
+                android:background="@drawable/place_item_bg" >
+
+                <ImageView
+                    android:id="@+id/app_icon2"
+                    android:layout_width="72dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/recommend"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_launcher" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@id/app_icon2"
+                    android:text="@string/app_name"
+                    android:textSize="15sp" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar2"
+                    style="@style/RatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:isIndicator="true"
+                    android:rating="4" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/ratingBar2"
+                    android:layout_toRightOf="@id/app_icon2"
+                    android:ellipsize="end"
+                    android:text="让自驾出行变得更加的简单。"
+                    android:textColor="#666" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

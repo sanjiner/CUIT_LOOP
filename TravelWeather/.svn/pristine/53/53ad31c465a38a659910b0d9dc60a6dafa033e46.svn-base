@@ -1,0 +1,121 @@
+package cuit.travelweather.fragment;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import cuit.travelweather.R;
+import cuit.travelweather.util.Constant;
+import cuit.travelweather.util.MyHttpClient;
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+/*
+ * [天气-分析]页面，显示分析图
+ */
+public class AnalyseFragment extends Fragment {
+
+	private View view;
+	private LayoutInflater infater;
+	private WebView webView;
+
+	private JSONObject jsonObject;
+	//
+	private Editor editor;
+	private SharedPreferences sp;
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		this.infater = inflater;
+		view = inflater.inflate(R.layout.weather_analyse, container, false);
+		init();
+		return view;
+	}
+
+	private void init() {
+		// TODO Auto-generated method stub
+		webView = (WebView) view.findViewById(R.id.analyse_webview);
+		TextView tv1 = (TextView) view.findViewById(R.id.analyse);
+		 int size = Constant.keysize;
+		if(size==1){
+			tv1.setTextSize(10);
+		}else if(size==2){
+		}else{
+			tv1.setTextSize(30);
+		}
+
+		
+		sp = getActivity().getSharedPreferences("User_SP",
+				getActivity().MODE_PRIVATE);
+		editor = sp.edit();
+		webView.getSettings().setUseWideViewPort(true);
+		webView.setInitialScale(70);
+
+		getUrl();
+	}
+
+	public void getUrl() {
+		new AsyncTask<Void, Void, Void>() {
+
+			@Override
+			protected Void doInBackground(Void... param) {
+				// TODO Auto-generated method stub
+				List<NameValuePair> params = new ArrayList<NameValuePair>();
+
+				try {
+					params.add(new BasicNameValuePair("cityID", URLEncoder
+							.encode(sp.getString("currentCity", "510122"),
+									"UTF-8")));
+				} catch (UnsupportedEncodingException e) {
+					System.out.print(e.getMessage());
+				}
+
+				jsonObject = MyHttpClient.getJson(getActivity(),
+						Constant.getWeatherPicture, params);
+
+				return null;
+
+			}
+
+			@Override
+			protected void onPostExecute(Void result) {
+				// TODO Auto-generated method stub
+				try {
+					JSONArray jsonArray = jsonObject.getJSONArray("nodes");
+					JSONObject jo = jsonArray.getJSONObject(0);
+					if (!jo.getString("T_gif").equals("")) {
+						Toast a = Toast.makeText(getActivity(), "正在加载图片中",
+								Toast.LENGTH_SHORT);
+						a.show();
+						webView.loadUrl(jo.getString("T_gif"));
+					}
+
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				super.onPostExecute(result);
+			}
+
+		}.execute();
+
+	}
+}

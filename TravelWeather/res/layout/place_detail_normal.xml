@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout 
+ 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+       android:background="@drawable/login_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,ContentDescription" 
+ 
+  
+    
+  >
+  <include 
+        android:id="@+id/title_bar" 
+        android:layout_width="fill_parent" 
+        android:layout_height="54.0dip" 
+        android:layout_alignParentTop="true" 
+        layout="@layout/place_detail_common_topbar_poi" />
+    <RelativeLayout 
+        android:gravity="center_vertical" 
+        android:id="@+id/poidetail_normal_streetscape_layout" 
+        android:background="@drawable/common_listitem_singleline_selector" 
+        android:visibility="gone" 
+        android:layout_width="fill_parent" 
+        android:layout_height="47.0dip" 
+        android:layout_marginLeft="6.0dip" 
+        android:layout_marginTop="10.0dip" 
+        android:layout_marginRight="6.0dip" 
+      >
+        <TextView 
+            android:textSize="16.0sp" 
+            android:textColor="#ff333333" 
+            android:ellipsize="end" 
+            android:gravity="center_vertical" 
+            android:id="@+id/poidetail_normal_streetscape" 
+            android:padding="6.0dip" 
+            android:layout_width="fill_parent" 
+            android:layout_height="fill_parent" 
+            android:layout_marginLeft="5.0dip" 
+            android:text="进入全景" 
+            android:singleLine="true" 
+            android:drawableLeft="@drawable/main_map_icon_streetscape_normal" 
+            android:drawablePadding="5.0dip" 
+         
+            android:layout_alignParentLeft="true" />
+        <ImageView 
+            android:id="@+id/iv_arrow" 
+            android:layout_width="wrap_content" 
+            android:layout_height="fill_parent" 
+            android:layout_marginRight="12.0dip" 
+            android:src="@drawable/common_icon_next_arrow" 
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+    <RelativeLayout 
+        android:layout_gravity="bottom" 
+        android:id="@+id/rl_poidetail_normal_btns" 
+        android:layout_width="fill_parent" 
+        android:layout_height="40.0dip" 
+        android:layout_alignParentBottom="true">
+        <LinearLayout 
+            android:orientation="horizontal" 
+            android:background="@drawable/bottom_tab_bg" 
+            android:layout_width="fill_parent" 
+            android:layout_height="wrap_content" 
+            android:layout_centerHorizontal="true">
+            <LinearLayout 
+                android:onClick="share"
+                android:gravity="center" 
+                android:orientation="horizontal" 
+                android:id="@+id/btn_poidetail_normal_share" 
+                android:background="@drawable/btn_comment_bg" 
+                android:layout_width="0.0dip" 
+                android:layout_height="fill_parent" 
+                android:layout_weight="1.0">
+                <ImageView 
+                    android:layout_width="wrap_content" 
+                    android:layout_height="wrap_content" 
+                    android:src="@drawable/icon_share" />
+                <TextView 
+                    
+                    android:textSize="14.0sp" 
+                    android:textColor="#fff4f4f4" 
+                    android:layout_width="wrap_content" 
+                    android:layout_height="wrap_content" 
+                    android:layout_marginLeft="10.0dip" 
+                    android:text="分享" />
+            </LinearLayout>
+            <View 
+                android:background="#ff000000" 
+                android:layout_width="1.0px" 
+                android:layout_height="fill_parent" 
+                android:layout_marginTop="13.0dip" 
+                android:layout_marginBottom="13.0dip" />
+            <LinearLayout 
+                android:gravity="center" 
+                android:orientation="horizontal" 
+                android:onClick="addcomment"
+                android:id="@+id/btn_poidetail_normal_fav" 
+                android:background="@drawable/btn_comment_bg" 
+                android:layout_width="0.0dip" 
+                android:layout_height="fill_parent" 
+                android:layout_weight="1.0">
+                <ImageView 
+                    android:id="@+id/iv_poidetail_normal_fav" 
+                    android:layout_width="wrap_content" 
+                    android:layout_height="wrap_content" 
+                    android:src="@drawable/icon_favorite_normal" />
+                <TextView 
+                    android:textSize="14.0sp" 
+                    android:textColor="#fff4f4f4" 
+                    android:layout_width="wrap_content" 
+                    android:layout_height="wrap_content" 
+                    android:layout_marginLeft="10.0dip" 
+                    android:text="评论" />
+            </LinearLayout>
+            <View 
+                android:id="@+id/split_poidetail_normal_correct" 
+                android:background="#ff000000" 
+                android:layout_width="0.5dip" 
+                android:layout_height="fill_parent" 
+                android:layout_marginTop="10.0dip" 
+                android:layout_marginBottom="10.0dip" />
+            <LinearLayout 
+                android:gravity="center" 
+                android:orientation="horizontal" 
+                android:id="@+id/btn_poidetail_normal_correct" 
+                android:background="@drawable/btn_comment_bg" 
+                android:layout_width="0.0dip" 
+                android:layout_height="fill_parent" 
+                android:layout_weight="1.0">
+                <ImageView 
+                    android:layout_width="wrap_content" 
+                    android:layout_height="wrap_content" 
+                    android:src="@drawable/icon_correct" />
+                <TextView 
+                    android:textSize="14.0sp" 
+                    android:textColor="#fff4f4f4" 
+                    android:layout_width="wrap_content" 
+                    android:layout_height="wrap_content" 
+                    android:layout_marginLeft="10.0dip" 
+                    android:text="纠错" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/poidetail_normal_head"
+        android:layout_width="fill_parent"
+        android:layout_height="110.0dip"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/title_bar"
+        android:paddingTop="30dp"
+        layout="@layout/place_detail_normal_head" />
+
+    <RelativeLayout
+        android:id="@+id/poidetail_normal_thereis_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/poidetail_normal_head"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
+        android:background="@drawable/sapi_tab_btn_pressed"
+       >
+
+        <TextView
+            android:id="@+id/poidetail_normal_thereis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="11.0dip"
+            android:padding="6.0dip"
+            android:text="地址："
+            android:textColor="#ff333333"
+            android:textSize="13.0sp" />
+    </RelativeLayout>
+     <RelativeLayout
+        android:id="@+id/poidetail_normal_thereis_layout2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/poidetail_normal_thereis_layout"
+        android:layout_marginTop="20dp"
+         android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
+        android:background="@drawable/sapi_tab_btn_pressed"
+         >
+
+        <TextView
+            android:id="@+id/poidetail_normal_thereis2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="11.0dip"
+            android:layout_marginRight="5.0dip"
+            android:ellipsize="end"
+            android:padding="6.0dip"
+            android:text="推荐："
+            android:textColor="#ff333333"
+            android:textSize="13.0sp" />
+        
+    </RelativeLayout>
+       <RelativeLayout
+        android:id="@+id/poidetail_normal_thereis_layout3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/poidetail_normal_thereis_layout2"
+        android:layout_marginTop="20dp"
+         android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
+        android:background="@drawable/sapi_tab_btn_pressed"
+         >
+
+        <TextView
+            android:id="@+id/poidetail_normal_thereis3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="11.0dip"
+            android:layout_marginRight="5.0dip"
+            android:ellipsize="end"
+            android:padding="6.0dip"
+            android:hint=" "
+            android:text="推荐理由："
+            android:textColor="#ff333333"
+            android:textSize="13.0sp" />
+        
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cuit.travelweather.view.MyTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textColor="@color/selected_yellow_blue"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:gravity="center"
+    android:background="@drawable/weather_top_btn_bg_qhc"/> 

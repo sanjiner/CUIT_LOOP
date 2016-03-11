@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:baidu="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+ 
+
+        <RelativeLayout
+            android:id="@+id/maincontent"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+        
+            android:layout_marginTop="9.0dip"
+            android:background="@drawable/btn_back_nor" >
+
+            <TextView
+                android:id="@+id/tv_eat_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="8dp"
+                android:singleLine="true"
+                android:text="100米"
+                android:textColor="#ff999999"
+                android:textSize="11.0sp" />
+
+            <LinearLayout
+                android:id="@+id/content_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="10.0dip"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginTop="12.0dip"
+                android:layout_toLeftOf="@id/tv_eat_distance"
+                android:orientation="horizontal" >
+            </LinearLayout>
+        
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/content_left"
+                android:layout_alignParentTop="true"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/content_title_part"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/tv_eat_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="航空大酒家"
+                        android:textColor="#ff333333"
+                        android:textSize="18.0sp" />
+
+                    <ImageView
+                        android:id="@+id/groupon_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="invisible" 
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="4.0dip"
+                        android:src="@drawable/poi_result_list_flag_groupon" />
+
+                    <ImageView
+                        android:id="@+id/discount_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="invisible"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="3.0dip"
+                        android:src="@drawable/poi_result_list_flag_premium" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/content_price_part"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4.0dip"
+                    android:orientation="horizontal" >
+
+          <!--           <RatingBar
+                        android:id="@+id/content_rating"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:progressDrawable="@drawable/place_ratingbar" /> -->
+                        <TextView 
+                            
+                             android:id="@+id/content_rating"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_gravity="center_vertical"
+                             android:layout_marginLeft="25dp"
+                             android:text="2"
+                             android:textColor="#ff737373"
+                             android:textSize="14.0sp"
+                            />
+                          <TextView 
+                            
+                             android:id="@+id/content_ratings"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_gravity="center_vertical"
+                             android:layout_marginLeft="3dp"
+                             android:text="/ 5分"
+                             android:textColor="#ff737373"
+                             android:textSize="14.0sp"
+                            />
+                        
+
+                    <TextView
+                        android:id="@+id/tv_eat_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:singleLine="true"
+                        android:text="川菜"
+                        android:textColor="#ff737373"
+                        android:textSize="14.0sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/content_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/linearLayout2"
+                android:layout_alignParentRight="true"
+                android:paddingRight="30dp"
+                android:singleLine="true"
+                android:text="人均:￥"
+                android:textColor="#ff737373"
+                android:textSize="13.0sp" />
+
+            <TextView
+                android:id="@+id/tv_eat_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/linearLayout2"
+                android:layout_alignParentRight="true"
+                android:singleLine="true"
+                android:paddingRight="8dp"
+                android:text="50"
+                android:textColor="#ff737373"
+                android:textSize="13.0sp" />
+
+            <TextView
+                android:id="@+id/tv_eat_reason"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/content_left"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_lookaround_reason"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:padding="8.0dip"
+                android:text="推荐理由：随处可见依附于建筑物而存在的风格各异、大小不同的咖啡馆、大街小巷……"
+                android:textColor="#ff666666"
+                android:textSize="12.0sp" />
+        </RelativeLayout>
+
+
+</RelativeLayout>

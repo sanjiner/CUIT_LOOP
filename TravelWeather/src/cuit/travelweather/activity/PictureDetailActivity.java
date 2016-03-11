@@ -1,0 +1,432 @@
+package cuit.travelweather.activity;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.Display;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
+import android.widget.ImageView.ScaleType;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
+import cn.trinea.android.common.entity.FailedReason;
+import cn.trinea.android.common.service.impl.ImageCache;
+import cn.trinea.android.common.service.impl.ImageMemoryCache.OnImageCallbackListener;
+import cn.trinea.android.common.service.impl.RemoveTypeLastUsedTimeFirst;
+import cuit.travelweather.R;
+import cuit.travelweather.fragment.PictureFragment;
+import cuit.travelweather.util.Constant;
+import cuit.travelweather.util.MyHttpClient;
+import cuit.travelweather.util.Split;
+
+public class PictureDetailActivity extends BaseAct {
+	private Context context = PictureDetailActivity.this;
+	// 图片网址前缀
+//	private static final String pictureBaseUrl = "http://222.18.158.81:8080/travelInterface";
+	private static final String pictureBaseUrl = "http://222.209.224.81:8080/travelInterface";
+	public static final ImageCache IMAGE_CACHE = new ImageCache(128, 512);
+	public static final String TAG_CACHE = "image_cache";
+	public static final String TAG = "PictureDetailActivity";
+	// views
+	private TextView tv_PictureDetail_location;// tv_PictureDetail_location
+	private TextView tv_PictureDetail_time;// 显示图片时间
+	private TextView tv_PictureDetail_Likes;// 显示赞的个数
+	private TextView tv_PictureDetail_Bads;// 显示踩的个数
+	private ImageButton ib_PictureDetail_Likes;
+	private ImageButton ib_PictureDetail_Bads;
+	private ImageView iv_PictureDetail_main;// 大图
+	private ListView lv_PictureDetail_comments;// 显示评论
+	private Button addView;
+
+	private JSONObject jsonObject;
+	private SimpleAdapter adapter;
+
+	HashMap<String, String> map;
+	boolean hasPressLikesOrBads = false;
+	int likesNum = 0;
+	int badsNum = 0;
+	String pictureId="";
+	private Boolean isLike = false;
+
+	private static final int SHOW_PROCESS = 1;
+	private static final int DISMISS_PROCESS = 0;
+	private static ProgressDialog pdialog;
+
+	private Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+
+				case SHOW_PROCESS:
+					pdialog.show();
+					break;
+				case DISMISS_PROCESS:
+					pdialog.dismiss();
+					break;
+			}
+			super.handleMessage(msg);
+		}
+
+	};
+	private SharedPreferences sp;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		setContentView(R.layout.activity_picture_detail);
+		initViews();
+//		getComment();
+		super.onCreate(savedInstanceState);
+	}
+
+	private void initViews() {
+		// TODO Auto-generated method stub
+		tv_PictureDetail_location = (TextView) this.findViewById(R.id.tv_PictureDetail_location);
+		tv_PictureDetail_time = (TextView) this.findViewById(R.id.tv_PictureDetail_time);
+		tv_PictureDetail_Likes = (TextView) this.findViewById(R.id.tv_PictureDetail_Likes);
+		tv_PictureDetail_Bads = (TextView) this.findViewById(R.id.tv_PictureDetail_Bads);
+		ib_PictureDetail_Likes = (ImageButton) this.findViewById(R.id.ib_PictureDetail_Likes);
+		ib_PictureDetail_Bads = (ImageButton) this.findViewById(R.id.ib_PictureDetail_Bads);
+		iv_PictureDetail_main = (ImageView) this.findViewById(R.id.iv_PictureDetail_main);
+		lv_PictureDetail_comments = (ListView) this.findViewById(R.id.lv_PictureDetail_comments);
+		addView = (Button)findViewById(R.id.submit);
+		
+		sp= getSharedPreferences("test", Activity.MODE_PRIVATE); 
+		 String size = sp.getString("affairinfo_fontsize", "2");
+		if(size.equals("1")){
+			tv_PictureDetail_location.setTextSize(10);
+			tv_PictureDetail_time.setTextSize(10);
+			tv_PictureDetail_Likes.setTextSize(10);
+			tv_PictureDetail_Bads.setTextSize(10);
+		}else if(size.equals("2")){
+		}else{
+			tv_PictureDetail_location.setTextSize(30);
+			tv_PictureDetail_time.setTextSize(30);
+			   tv_PictureDetail_Likes.setTextSize(30);
+			   tv_PictureDetail_Bads.setTextSize(30);
+		}
+		
+		
+		
+		map = (HashMap<String, String>) getIntent().getSerializableExtra("map");
+		System.out.println("map>>>>>>>" + map.toString());
+		tv_PictureDetail_time.setText("拍摄时间: " + "暂无该数据");
+		tv_PictureDetail_location.setText("拍摄地址：经度：" + map.get("lat") + " 纬度：" + map.get("lon"));
+
+		likesNum = Integer.valueOf(map.get("pictureGood"));
+		badsNum = Integer.valueOf(map.get("pictureBad"));
+		pictureId=map.get("pictureId").toString();
+		tv_PictureDetail_Likes.setText(likesNum + "人顶");
+		tv_PictureDetail_Bads.setText("    " + badsNum + "人踩");
+
+		/*************** set imageView ****************/
+		iv_PictureDetail_main.setScaleType(ScaleType.CENTER_CROP);
+		iv_PictureDetail_main.setBackgroundResource(R.drawable.image_border);
+		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) iv_PictureDetail_main
+				.getLayoutParams();
+		Display display = getWindowManager().getDefaultDisplay();
+		layoutParams.width = display.getWidth();
+		layoutParams.height = (int) (display.getHeight() * 0.618);
+		iv_PictureDetail_main.setLayoutParams(layoutParams);
+		String pictureLink = pictureBaseUrl + map.get("pictureLink");
+		IMAGE_CACHE.get(pictureLink, iv_PictureDetail_main);
+		/*************** set imageView *************/
+		//ys
+		addView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(PictureDetailActivity.this, PictureCommentActivity.class);
+				intent.putExtra("picId", map.get("pictureId"));
+				intent.putExtra("map", map);
+				startActivity(intent);
+			}
+		});
+		//ys
+		ib_PictureDetail_Bads.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				picGoodorBad("0");
+			}
+		});
+		ib_PictureDetail_Likes.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				picGoodorBad("1");
+			}
+		});
+
+	}
+
+	// 联网方法。点赞，点踩，获取评论列表。获取图片
+	private void picGoodorBad(final String type) {
+		pdialog = new ProgressDialog(context);
+		pdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		pdialog.setCancelable(false);
+		pdialog.setMessage("正在处理中……");
+		new AsyncTask<Void, Void, Void>() {
+
+			@Override
+			protected Void doInBackground(Void... param) {
+				// TODO Auto-generated method stub
+				handler.sendMessage(handler.obtainMessage(SHOW_PROCESS));
+				List<NameValuePair> params = new ArrayList<NameValuePair>();
+				try {
+					params.add(new BasicNameValuePair("pictureID",
+							URLEncoder.encode(map.get("pictureId"), "UTF-8")));
+					params.add(new BasicNameValuePair("type", URLEncoder.encode(type, "UTF-8")));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				jsonObject = MyHttpClient.getJson(context, Constant.addLikesOrBads, params);
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Void result) {
+				// TODO Auto-generated method stub
+				handler.sendMessage(handler.obtainMessage(DISMISS_PROCESS));
+				String text = "系统出错";
+				if (!isLike) {
+					isLike = true;
+					try {
+						text = jsonObject.getString("message");
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if (type.equals("1")) {
+						tv_PictureDetail_Likes.setText("    " + (likesNum + 1) + "人赞");
+					} else {
+						tv_PictureDetail_Bads.setText("    " + (badsNum + 1) + "人踩");
+					}
+					Toast.makeText(context, "评论成功", Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(context, "你已经点赞或者踩了", Toast.LENGTH_SHORT).show();
+				}
+				super.onPostExecute(result);
+			}
+
+		}.execute();
+	}
+
+	private void getComment() {
+		pdialog = new ProgressDialog(context);
+		pdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		pdialog.setCancelable(false);
+		pdialog.setMessage("正在处理中……");
+		new AsyncTask<Void, Void, Void>() {
+
+			@Override
+			protected Void doInBackground(Void... param) {
+				// TODO Auto-generated method stub
+				handler.sendMessage(handler.obtainMessage(SHOW_PROCESS));
+				ArrayList<HashMap<String, Object>> data = new ArrayList<HashMap<String, Object>>();
+				List<NameValuePair> params = new ArrayList<NameValuePair>();
+				try {
+					params.add(new BasicNameValuePair("pageNo", URLEncoder.encode("1", "UTF-8")));
+					params.add(new BasicNameValuePair("pageSize", URLEncoder.encode("4", "UTF-8")));
+					params.add(new BasicNameValuePair("commentType", URLEncoder.encode("picture", "UTF-8")));
+					params.add(new BasicNameValuePair("commentTypeId",
+							URLEncoder.encode(map.get("pictureId"), "UTF-8")));
+
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				adapter = getAdapter(data, Constant.getCommentList, params);
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Void result) {
+				// TODO Auto-generated method stub
+				handler.sendMessage(handler.obtainMessage(DISMISS_PROCESS));
+				lv_PictureDetail_comments.setAdapter(adapter);
+				super.onPostExecute(result);
+			}
+
+		}.execute();
+	}
+
+	private SimpleAdapter getAdapter(ArrayList<HashMap<String, Object>> data, String method,
+			List<NameValuePair> params) {
+
+		JSONObject json = MyHttpClient.getJson(this, method, params);
+		try {
+
+			if (true) {
+				JSONArray jsonArray = json.getJSONArray("commentList");
+				HashMap<String, Object> newmap = null;
+				JSONObject list;
+				for (int i = 0; i < jsonArray.length(); i++) {
+					newmap = new HashMap<String, Object>();
+					list = jsonArray.getJSONObject(i);
+					String commentDetails = null;
+					commentDetails = list.getString("commentDetails");
+					newmap.put("commentDetails", commentDetails);
+					data.add(i, newmap);
+
+				}
+
+				adapter = new SimpleAdapter(context, data, R.layout.picture_comment_item, new String[] {
+					"commentDetails"
+				}, new int[] {
+					R.id.place_list_tv
+				});
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return adapter;
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.picture_detail, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		Intent intent = new Intent(PictureDetailActivity.this, PictureCommentActivity.class);
+		intent.putExtra("picId", map.get("pictureId"));
+		intent.putExtra("map", map);
+		startActivity(intent);
+		return super.onMenuItemSelected(featureId, item);
+	}
+
+	static {
+		/** init icon cache **/
+		OnImageCallbackListener imageCallBack = new OnImageCallbackListener() {
+			@Override
+			public void onGetSuccess(String imageUrl, Bitmap loadedImage, View view, boolean isInCache) {
+				if (view != null && loadedImage != null) {
+					ImageView imageView = (ImageView) view;
+					imageView.setImageBitmap(loadedImage);
+					if (!isInCache) {
+						imageView.startAnimation(getInAlphaAnimation(2000));
+					}
+
+				}
+			}
+
+			/**
+			 * callback function before get image, run on ui thread
+			 * 
+			 * @param imageUrl
+			 *            imageUrl
+			 * @param view
+			 *            view need the image
+			 */
+			@Override
+			public void onPreGet(String imageUrl, View view) {
+				// Log.e(TAG_CACHE, "pre get image");
+			}
+
+			/**
+			 * callback function after get image failed, run on ui thread
+			 * 
+			 * @param imageUrl
+			 *            imageUrl
+			 * @param loadedImage
+			 *            bitmap
+			 * @param view
+			 *            view need the image
+			 * @param failedReason
+			 *            failed reason for get image
+			 */
+			@Override
+			public void onGetFailed(String imageUrl, Bitmap loadedImage, View view, FailedReason failedReason) {
+				Log.e(TAG_CACHE,
+						new StringBuilder(128).append("get image ").append(imageUrl)
+								.append(" error, failed type is: ").append(failedReason.getFailedType())
+								.append(", failed reason is: ").append(failedReason.getCause().getMessage())
+								.toString());
+			}
+
+			@Override
+			public void onGetNotInCache(String imageUrl, View view) {
+				if (view != null && view instanceof ImageView) {
+					((ImageView) view).setImageResource(R.drawable.not_loaded);// 等待载入时的图片
+				}
+			}
+		};
+		IMAGE_CACHE.setOnImageCallbackListener(imageCallBack);
+		IMAGE_CACHE.setCacheFullRemoveType(new RemoveTypeLastUsedTimeFirst<Bitmap>());
+
+		IMAGE_CACHE.setHttpReadTimeOut(10000);
+		IMAGE_CACHE.setOpenWaitingQueue(true);
+		IMAGE_CACHE.setValidTime(-1);
+		/**
+		 * close connection, default is connect keep-alive to reuse connection.
+		 * if image is from different server, you can set this
+		 */
+		// IMAGE_CACHE.setRequestProperty("Connection", "false");
+	}
+
+	public static AlphaAnimation getInAlphaAnimation(long durationMillis) {
+		AlphaAnimation inAlphaAnimation = new AlphaAnimation(0, 1);
+		inAlphaAnimation.setDuration(durationMillis);
+		return inAlphaAnimation;
+	}
+
+	@Override
+	public void onBackPressed() {
+		PictureFragment.isVisable = true;
+		finish();
+		super.onBackPressed();
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+//		initViews();
+//		getComment();
+		super.onResume();
+	}
+
+}

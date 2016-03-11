@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+        
+    	<RelativeLayout 
+    	    android:layout_width="match_parent"
+    	    android:layout_height="@dimen/title_height"
+    	    android:layout_marginTop="5dp"
+    	    android:layout_marginLeft="3dp"
+    	    android:layout_marginRight="3dp"
+    	    android:background="@drawable/weather_top_bg">
+    	    <ImageButton 
+    	        android:id="@+id/travel_map_ibtn_back"
+    	        android:layout_width="wrap_content"
+    	        android:layout_height="wrap_content"
+    	        android:onClick="map_return"
+    	        android:background="@android:color/transparent"
+    	        android:src="@drawable/map_return"/>
+
+    	    <RelativeLayout
+    	        android:id="@+id/r_radioGroup"
+    	        android:layout_width="wrap_content"
+    	        android:layout_height="wrap_content"
+    	        android:layout_centerHorizontal="true"
+    	        android:background="@drawable/weather_top_bg" >
+
+    	         <RadioGroup
+		            android:id="@+id/travel_tabs"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerInParent="true"
+		            android:orientation="horizontal" >
+		            <RadioButton 
+		                android:id="@+id/travel_rbtn_forecast"
+		                style="@style/picture_topbar_button"
+		                android:checked="true"
+		                android:text="@string/travel_forecast"/>
+		            <RadioButton 
+		                android:id="@+id/travel_rbtn_current"
+		                style="@style/picture_topbar_button"
+		                android:text="@string/travel_current"/>
+		            <RadioButton 
+		                android:id="@+id/travel_rbtn_forecast_sos"
+		                style="@style/picture_topbar_button"
+		                android:text="@string/travel_farecast_sos"/>
+		            <RadioButton 
+		                android:id="@+id/travel_rbtn_roadcondition"
+		                style="@style/picture_topbar_button"
+		                android:text="@string/travel_roadcondition"/>
+        		</RadioGroup>
+    	    </RelativeLayout>
+    	    
+    	    <ImageButton 
+    	        android:id="@+id/travel_map_ibtn_add"
+    	        android:layout_width="wrap_content"
+    	        android:layout_height="wrap_content"
+    	        android:layout_alignParentRight="true"
+    	        android:onClick="map_add"
+    	        android:background="@android:color/transparent"
+    	        android:src="@drawable/list_map"/>
+    	    <ImageButton 
+    	        android:id="@+id/travel_map_ibtn_refresh"
+    	        android:layout_width="wrap_content"
+    	        android:layout_height="wrap_content"
+    	        android:layout_toLeftOf="@+id/travel_map_ibtn_add"
+    	        android:background="@android:color/transparent"
+    	        android:src="@drawable/map_refresh"/>
+    	</RelativeLayout>
+        <RelativeLayout 
+            android:layout_width="match_parent"
+	    	android:layout_height="match_parent">
+            <com.baidu.mapapi.map.MapView 
+	    	    android:id="@+id/bmapView"
+				android:layout_width="fill_parent" 
+				android:layout_height="fill_parent" 
+				android:clickable="true"/>
+            <Button
+                android:id="@+id/route_btn_1"
+                android:layout_width="80dp"
+                android:layout_height="48dp"
+                android:background="#00ffffff"
+                android:layout_marginTop="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="60dp"
+                android:text="1"
+                android:textColor="#ff4500"
+                android:textSize="28sp"
+                android:visibility="invisible"/>
+            
+            <Button
+                android:id="@+id/route_btn_4"
+                android:layout_width="80dp"
+                android:layout_height="48dp"
+                android:background="#00ffffff"
+                android:layout_marginBottom="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="60dp"
+                android:text="28sp"
+                android:textColor="#ff4500"
+                android:textSize="28sp"
+                android:visibility="invisible"/>
+             
+             <Button
+                android:id="@+id/route_btn_2"
+                android:layout_width="80dp"
+                android:layout_height="48dp"
+                android:background="#00ffffff"
+                android:layout_marginTop="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="60dp"
+                android:text="10"
+                android:textColor="#ff4500"
+                android:textSize="28sp"
+                android:visibility="invisible"/>
+            
+            <Button
+                android:id="@+id/route_btn_3"
+                android:layout_width="80dp"
+                android:layout_height="48dp"
+                android:background="#00ffffff"
+                android:layout_marginBottom="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="60dp"
+                android:text="10"
+                android:textSize="28sp"
+                android:textColor="#ff4500"
+                android:visibility="invisible"/>
+            
+            
+            
+           
+            
+            
+        </RelativeLayout>
+    	
+
+	   
+</LinearLayout>

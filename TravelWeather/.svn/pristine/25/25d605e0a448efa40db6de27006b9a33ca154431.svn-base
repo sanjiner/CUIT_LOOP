@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/login_bg" >
+    <RelativeLayout
+        android:id="@+id/rl_coinActivity_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/weather_top_bg"
+        android:orientation="horizontal" >
+        <TextView
+            android:id="@+id/travel_tv_new_road"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="新增路况"
+            android:textColor="@color/theme1_red"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+    
+	<RelativeLayout
+		    android:id="@+id/travel_page_line_new"
+		    android:layout_width="match_parent"
+    		android:layout_height="wrap_content"
+    		android:paddingTop="30dp"
+    		android:paddingLeft="20dp"
+    		android:paddingRight="20dp">
+		    <TextView 
+		        android:id="@+id/travel_tv_site"
+		        android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme1_red"
+                android:textSize="20sp"
+                android:layout_marginTop="3dp"
+                android:text="地区："/>
+
+		    <TextView
+		        android:id="@+id/travel_et_site"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_toRightOf="@+id/travel_tv_site"
+		        android:ems="10"
+		        android:background="@drawable/login_edit"
+		        android:textSize="20sp"
+		        android:gravity="center_vertical"
+		        android:clickable="true" >
+		    </TextView>
+		    
+		    <TextView 
+		        android:id="@+id/travel_tv_site_1"
+		        android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/travel_et_site"
+                android:textColor="@color/theme1_red"
+                android:textSize="20sp"
+                android:layout_marginTop="13dp"
+                android:text="街道："/>
+
+		    <EditText
+		        android:id="@+id/travel_et_site_1"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_toRightOf="@+id/travel_tv_site"
+		        android:layout_below="@+id/travel_et_site"
+		        android:layout_marginTop="10dp"
+		        android:ems="10"
+		        android:background="@drawable/login_edit"
+		        android:textSize="20sp"
+		        android:gravity="center_vertical"
+		        android:clickable="true"
+		        android:inputType="text" >
+		    </EditText>
+		    
+		    <TextView 
+		        android:id="@+id/travel_tv_site_2"
+		        android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/travel_et_site_1"
+                android:textColor="@color/theme1_red"
+                android:textSize="20sp"
+                android:layout_marginTop="13dp"
+                android:text="定位："/>
+
+		    <TextView
+		        android:id="@+id/travel_et_site_2"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_toRightOf="@+id/travel_tv_site"
+		        android:layout_below="@+id/travel_et_site_1"
+		        android:layout_marginTop="10dp"
+		        android:ems="10"
+		        android:background="@drawable/login_edit"
+		        android:textSize="20sp"
+		        android:gravity="center_vertical"
+		        android:clickable="true" >
+		    </TextView>
+		    
+		    <TextView 
+		        android:id="@+id/travel_tv_description"
+		        android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/travel_tv_site_2"
+                android:layout_marginTop="13dp"
+                android:textColor="@color/theme1_red"
+                android:textSize="20sp"
+                android:text="@string/travel_description"/>
+		     <TextView
+		        android:id="@+id/travel_et_description"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/travel_tv_site_2"
+		        android:layout_toRightOf="@+id/travel_tv_description"
+		        android:layout_marginTop="10dp"
+		        android:ems="10"
+		        android:background="@drawable/login_edit"
+		        android:textSize="20sp"
+		        android:clickable="true" >
+		    </TextView>
+		    
+		    <TextView 
+		        android:id="@+id/travel_tv_weather"
+		        android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/travel_tv_description"
+                android:layout_marginTop="13dp"
+                android:textColor="@color/theme1_red"
+                android:textSize="20sp"
+                android:text="天气："/>
+		     <TextView
+		        android:id="@+id/travel_et_weather"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/travel_tv_description"
+		        android:layout_toRightOf="@+id/travel_tv_description"
+		        android:layout_marginTop="10dp"
+		        android:ems="10"
+		        android:background="@drawable/login_edit"
+		        android:textSize="20sp"
+		        android:clickable="true">
+		    </TextView>
+		    
+		    <TextView 
+		        android:id="@+id/travel_tv_pic"
+		        android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/travel_tv_weather"
+                android:layout_marginTop="13dp"
+                android:textColor="@color/theme1_red"
+                android:textSize="20sp"
+                android:text="图片："/>
+		    <ImageView 
+		        android:id="@+id/travel_iv_pic"
+		        android:layout_width="wrap_content"
+		        android:layout_height="80dp"
+		        android:src="@drawable/not_loaded"
+		        android:layout_below="@+id/travel_tv_weather"
+		        android:layout_toRightOf="@+id/travel_tv_description"
+		        android:layout_marginTop="10dp"/>
+		    <Button 
+		        android:id="@+id/travel_btn_takephoto"
+		        android:layout_width="@dimen/btn_width"
+                android:layout_height="@dimen/btn_height"
+		        android:layout_below="@+id/travel_iv_pic"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginLeft="10dp"
+		        android:background="@drawable/btn_theme1"
+		        android:textColor="@color/theme1_red"
+		        android:textSize="20sp"
+		        android:text="@string/travel_take_photo"
+		        android:onClick="takephoto"
+		        />
+		    <Button 
+		        android:id="@+id/travel_btn_add"
+		        android:layout_width="@dimen/btn_width"
+                android:layout_height="@dimen/btn_height"
+		        android:layout_below="@+id/travel_iv_pic"
+		        android:layout_alignParentRight="true"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginRight="10dp"
+		        android:background="@drawable/btn_theme1"
+		        android:textColor="@color/theme1_red"
+		        android:textSize="20sp"
+		        android:text="@string/travel_add"
+		        android:onClick="add"
+		        />
+		    
+
+		</RelativeLayout>
+</LinearLayout>

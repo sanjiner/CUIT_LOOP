@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/login_bg" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@drawable/weather_top_bg"
+        android:orientation="horizontal" >
+        <ImageButton
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:layout_weight="1"
+		    android:src="@drawable/back_top_normal"
+		    android:onClick="back"
+		    android:background="@android:color/transparent"
+		    android:contentDescription="@string/app_name"/>
+        <Button
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:layout_weight="1"
+		    android:text="@string/travel_list"
+		    android:textSize="20sp"
+		    android:textColor="@color/theme1_red"
+		    android:background="@drawable/weather_top_btn_selected"
+		    android:contentDescription="@string/app_name"/>
+        <Button
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:layout_weight="1"
+		    android:text="@string/travel_map"
+		    android:textSize="20sp"
+		    android:textColor="@color/theme1_red"
+		    android:background="@android:color/transparent"
+		    android:contentDescription="@string/app_name"/>
+        <Button
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:layout_weight="1"
+		    android:text="@string/travel_roadcondition"
+		    android:textSize="20sp"
+		    android:textColor="@color/theme1_red"
+		    android:background="@android:color/transparent"
+		    android:contentDescription="@string/app_name"/> 
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:scrollbars="vertical" >
+        <TextView
+            android:layout_width="match_parent"
+    		android:layout_height="wrap_content" />
+    </ScrollView>
+
+</LinearLayout>

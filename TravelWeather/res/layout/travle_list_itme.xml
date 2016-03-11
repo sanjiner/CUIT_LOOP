@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		        android:layout_width="match_parent"
+		        android:layout_height="64dp"
+		        android:background="@drawable/place_item_bg"
+				android:descendantFocusability="blocksDescendants"		        
+		        >
+				<ImageView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:layout_marginRight="5dp"
+				    android:layout_centerVertical="true"
+				    android:layout_alignParentRight="true"
+		            android:background="@android:color/transparent"
+		            android:src="@drawable/line_right" />
+		        <ImageView
+		            android:id="@+id/line_pay"
+		            android:layout_width="64dp"
+		            android:layout_height="match_parent"
+		            android:layout_centerVertical="true"
+		            android:background="@android:color/transparent"
+		            android:padding="5dp"
+		            android:src="@drawable/line_pay" />
+		        <LinearLayout
+		            android:layout_width="wrap_content"
+		            android:layout_height="32dp"
+		            android:layout_toRightOf="@id/line_pay"
+		            android:gravity="center"
+		            android:orientation="horizontal" >
+		            <ImageView
+			            android:layout_width="24dp"
+			            android:layout_height="20dp"
+			            android:src="@drawable/line_start"/>
+		            <TextView
+			            android:id="@+id/line_start"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:gravity="center_vertical"
+			            android:singleLine="true"
+			            android:ems="5"
+			            android:text="成都"
+			            android:textSize="15sp" />
+					<ImageView
+					    android:id="@+id/line_to"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:padding="2dp"
+			            android:src="@drawable/line_to"/>
+					<ImageView
+			            android:layout_width="24dp"
+			            android:layout_height="20dp"
+			            android:src="@drawable/line_end"/>
+			        <TextView
+			            android:id="@+id/line_end"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:singleLine="true"
+			            android:ellipsize="end"
+			            android:ems="5"
+			            android:text="重庆"
+			            android:textSize="15sp" />
+		        </LinearLayout>
+				<TextView
+			        android:id="@+id/line_tujing"
+			        android:layout_width="wrap_content"
+			        android:layout_height="32dp"
+			        android:layout_toRightOf="@id/line_pay"
+			        android:layout_alignParentBottom="true"
+			        android:gravity="center_vertical"
+			        android:drawableLeft="@drawable/line_pass"
+			        android:ellipsize="end"
+			        android:text="途径：" />
+				<TextView 
+				    android:id="@+id/line_nodes"
+			        android:layout_width="wrap_content"
+			        android:layout_height="32dp"
+			        android:layout_toRightOf="@id/line_tujing"
+			        android:layout_alignParentBottom="true"
+			        android:gravity="center_vertical"
+			        android:ellipsize="end"
+			        android:text="眉山、乐山"/>
+
+</RelativeLayout>

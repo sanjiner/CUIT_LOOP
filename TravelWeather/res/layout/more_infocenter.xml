@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/more_infocenter"
+    android:background="@drawable/login_bg"
+    tools:ignore="HardcodedText" >
+
+    <TextView
+        android:id="@+id/more_title"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_height_other"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/travel_top_bg"
+        android:gravity="center_horizontal"
+        android:paddingTop="10dp"
+        android:text="@string/infocenter"
+        android:textColor="@color/theme1_red"
+        android:textSize="20sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/more_title"
+        android:scrollbars="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
+
+            <TextView
+                android:id="@+id/more_text_first"
+                style="@style/more_list"
+                android:onClick="cityManagement"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/ic_preference_first"
+                android:text="@string/infocenter_item1" />
+			<TextView
+			    android:id="@+id/more_text_mid"
+                style="@style/more_list"
+                android:onClick="informationManagement"
+                android:background="@drawable/ic_preference_mid"
+                android:text="@string/infocenter_item3" />
+			
+            <TextView
+                android:id="@+id/more_text_last"
+                style="@style/more_list"
+                android:onClick="weatherGuessManagement"
+                android:background="@drawable/ic_preference_last"
+                android:text="@string/infocenter_item4" />
+            <TextView
+                android:id="@+id/more_pinglun"
+                style="@style/more_list"
+                android:layout_marginTop="10dp"
+                android:onClick="weatherCommet"
+                android:background="@drawable/ic_preference_first"
+                android:text="天气评论查看" />
+
+            <TextView
+                android:id="@+id/more_scancode"
+                style="@style/more_list"
+                android:onClick="scanCode"
+                android:background="@drawable/ic_preference_last"
+                android:text="@string/infocenter_decoding" />
+
+            <TextView
+                android:id="@+id/infocenter_decoding_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                android:hint="扫描结果："
+                android:autoLink="all"
+                android:paddingLeft="10dp" />
+
+            <TextView
+                style="@style/more_list"
+                android:id="@+id/infocenter_coin"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/ic_preference_first"
+                android:text="@string/infocenter_item5" />
+
+            <TextView
+                style="@style/more_list"
+                android:id="@+id/infocenter_coin_rank"
+                android:background="@drawable/ic_preference_mid"
+                android:onClick="coin_rank"
+                android:text="@string/infocenter_item6" />
+
+            <TextView
+                android:id="@+id/more_guize"
+                style="@style/more_list"
+                android:onClick="coin_rank_rule"
+                android:background="@drawable/ic_preference_last"
+                android:text="积分规则" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

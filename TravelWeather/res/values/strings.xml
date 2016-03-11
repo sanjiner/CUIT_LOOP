@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">驴友天气</string>
+    <string name="action_settings">设置</string>
+    <string name="logout">注销</string>
+    <string name="share">分享</string>
+    <string name="cancel">取消</string>
+    <string name="n_a">N/A</string>
+
+    <!-- login -->
+    <string name="login">登录</string>
+    <string name="login_title">登录注册中心</string>
+    <string name="regist">注册</string>
+    <string name="login_label_id">账号：</string>
+    <string name="login_label_pass">密码：</string>
+    <string name="regist_label_id">用\t户\t名：</string>
+    <string name="find_random">验\t证\t码：</string>
+    <string name="regist_label_pass">密　　码：</string>
+    <string name="regist_label_pass_confirm">确认密码：</string>
+    <string name="regist_label_Email">电子邮箱： </string>
+    <string name="login_find_back">找回密码</string>
+    <string name="find_do">确认</string>
+
+    <!-- main_tabs -->
+    <string name="main_weather">天气</string>
+    <string name="main_travel">出行</string>
+    <string name="main_place">景点</string>
+    <string name="main_picture">实景</string>
+    <string name="main_more">更多</string>
+
+    <!-- main_weather -->
+    <string name="forecast">预报</string>
+    <string name="current">实况</string>
+    <string name="trend">趋势</string>
+    <string name="life">生活</string>
+    <string name="analyse">分析图</string>
+
+    <!-- weather_trend -->
+    <string name="temperature">温度</string>
+    <string name="wind">风力</string>
+    <string name="pressure">气压</string>
+    <string name="humidity">湿度</string>
+
+    <!-- weather_life -->
+    <string name="lifeindex">生活指数</string>
+    <string name="headachefishing">头痛和钓鱼</string>
+    <string name="life_index_d">穿衣指数 :</string>
+    <string name="life_index_uv">紫外线指数：</string>
+    <string name="life_index_xc">洗车指数：</string>
+    <string name="life_index_tr">旅游指数：</string>
+    <string name="life_index_co">舒适度指数：</string>
+    <string name="life_index_ls">晾晒指数：</string>
+    <string name="life_index_ag">过敏指数：</string>
+
+    <!-- place -->
+    <string name="detail">详情</string>
+    <string name="eat">吃</string>
+    <string name="hotel">住</string>
+    <string name="road">行</string>
+    <string name="shop">购</string>
+
+    <!-- more -->
+    <string name="infocenter">个人中心</string>
+    <string name="usersetting">用户设置</string>
+    <string name="sharemanage">分享账号管理</string>
+    <string name="feature">特色功能</string>
+    <string name="recommend">精品软件推荐</string>
+    <string name="disclaimer">免责声明</string>
+    <string name="about">关于我们</string>
+
+    <!-- more about us -->
+    <string name="about_us1">蜀ICP备11018099号-1</string>
+    <string name="about_us2">主办单位：四川省人民政府</string>
+    <string name="about_us3">版权所有：四川省农村经济综合信息中心</string>
+    <string name="about_us4">咨询电话：96999 （省内拨打免长途话费）028-87343798</string>
+    <string name="about_us5">E-mail:center@scnjw.gov.cn 意见:zyyxdm@yeah.net</string>
+    <string name="about_us6">地址：四川省成都市青羊区光华村街20号（四川省气象局塔楼）</string>
+    <!-- disclaimer -->
+    <string name="disclaimer1">\t\t1．除四川省农村经济综合信息中心注明之服务条款外，其他一切因访问四川省农村经济综合信息中心而引致之任何意外、疏忽、合约毁坏、诽谤、版权或知识产权侵犯及其所造成的损失，四川省农村经济综合信息中心概不负责，亦不承担任何法律责任。</string>
+    <string name="disclaimer2">\t\t2．任何网友所发布的链接及得到之资讯、产品及服务均系网友个人行为，并不反映任何四川省农村经济综合信息中心之意见，四川省农村经济综合信息中心不为其承担任何法律责任。</string>
+    <string name="disclaimer3">\t\t3．四川省农村经济综合信息中心中所有广告所涉及的链接及得到之资讯、产品及服务均系均为广告商所提供之内容，并不反映任何四川省农村经济综合信息中心之意见，四川省农村经济综合信息中心不为其承担任何法律责任。</string>
+    <string name="disclaimer4">\t\t4．虽然四川省农村经济综合信息中心致力于给用户更好的使用体验，但访问者有义务在使用网站服务时自行承担风险，四川省农村经济综合信息中心不做任何形式的保证，不保证网站内容满足用户的要求，不保证网站服务不中断。因网络状况、通信线路等任何技术原因而导致用户不能正常访问四川省农村经济综合信息中心。四川省农村经济综合信息中心不承担任何法律责任。</string>
+    <string name="disclaimer5">\t\t5．四川省农村经济综合信息中心尊重并保护所有四川省农村经济综合信息中心用户的个人隐私权，用户注册的用户名、电子邮件地址等个人资料，非经用户亲自许可或根据相关法律的强制性规定，四川省农村经济综合信息中心不会主动地泄露给第三方。</string>
+    <string name="disclaimer6">\t\t6．任何单位或个人认为四川省农村经济综合信息中心的内容可能涉嫌侵犯其合法权益，应该及时向四川省农村经济综合信息中心或服务网站书面反馈，并提供身份证明、权属证明及详细侵权情况证明，四川省农村经济综合信息中心在收到上述法律文件后，将会尽快移除被控侵权内容。</string>
+
+    <!-- coin_manage -->
+
+    <string name="coin1">\t\t1.发图片，+10分</string>
+    <string name="coin2">\t\t2.图片被选为热门，+50分</string>
+    <string name="coin3">\t\t3.提供准确路况，+20分</string>
+    <string name="coin4">\t\t4.评论路况或图片，+5分</string>
+    <string name="coin5">\t\t5.每天登陆软件，+5分</string>
+    <string name="coin6">\t\t6.分享任何信息，+10分</string>
+    <string name="coin7">\t\t7.推荐用户加入客户端，+500分</string>
+    <string name="coin_rank">积\t分\t榜</string>
+    <string name="coin_manage">积分规则</string>
+
+    <!-- picture -->
+    <string name="hot">热门</string>
+    <string name="distance">距离</string>
+    <string name="recommendation">推荐度</string>
+    <string name="shake">摇一摇</string>
+
+    <!-- trend -->
+    <string name="week_monday">周一</string>
+    <string name="week_tuesday">周二</string>
+    <string name="week_wednesday">周三</string>
+    <string name="week_thursday">周四</string>
+    <string name="week_friday">周五</string>
+    <string name="week_saturday">周六</string>
+    <string name="week_sunday">周日</string>
+    <string name="divider">|</string>
+
+    <!-- travel -->
+    <string name="travel_line_maked">已定路线</string>
+    <string name="travel_line_new">制定路线</string>
+    <string name="travel_list">列表</string>
+    <string name="travel_map">地图</string>
+    <string name="travel_forecast">预报</string>
+    <string name="travel_current">实况</string>
+    <string name="travel_farecast_sos">预警</string>
+    <string name="travel_roadcondition">路况</string>
+    <string name="travel_site">地点：</string>
+    <string name="travel_description">描述：</string>
+    <string name="travel_take_photo">拍照</string>
+    <string name="travel_add">发布</string>
+    <string name="travel_auto_get">自动获取</string>
+
+    <!-- place -->
+    <string name="place_search_hint">请输入想要搜索的景点</string>
+
+    <!-- infocenter -->
+    <string name="infocenter_decoding">扫二维码</string>
+    <string name="infocenter_item1">关注城市管理</string>
+    <string name="infocenter_item2">关注路线管理</string>
+    <string name="infocenter_item3">订阅信息管理</string>
+    <string name="infocenter_item4">天气竞猜查看</string>
+    <string name="infocenter_item5">目前积分：</string>
+    <string name="infocenter_item6">积分排名：</string>
+    <string name="infocenter_item7">查看积分榜，积分规则</string>
+    <string name="push_phonenumber">手机号码：</string>
+    <string name="push_from">出发地点：</string>
+    <string name="push_to">目的地点：</string>
+    <string name="push_start_time">开始日期：</string>
+    <string name="push_end_time">结束日期：</string>
+    <string name="push_is">确定</string>
+    <string name="city_add"> 虚 位 以 待   </string>
+
+    <!-- usersetting -->
+    <string name="usersetting_item1">更换皮肤</string>
+    <string name="usersetting_item2">信息推送</string>
+    <string name="usersetting_item3">字体大小</string>
+    <string name="usersetting_item4">清除缓存</string>
+    <!-- feature -->
+    <string name="feature_weather_history">历史天气查询</string>
+    <string name="feature_expect">其他特色功能敬请期待</string>
+    <string name="feature_label_date">日期：</string>
+    <string name="feature_label_city">城市：</string>
+    <string name="feature_confirm">确定</string>
+    <string name="title_activity_city_management">CityManagement</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="finish">完成</string>
+    <string name="sharing">分享操作正在后台进行…</string>
+    <string name="share_to">分享到</string>
+    <string name="multi_share">图文分享</string>
+    <string name="share_completed">分享成功</string>
+    <string name="share_canceled">分享已取消</string>
+    <string name="select_one_plat_at_least">请选择一个目标平台</string>
+    <string name="list_friends">%s的朋友</string>
+    <string name="share_failed">分享失败</string>
+    <string name="weibo_oauth_regiseter">应用授权</string>
+    <string name="website">http://www.shareSDK.cn</string>
+    <string name="weibo_upload_content">分享图片</string>
+    <string name="wechat_client_inavailable">目前您的微信版本过低或未安装微信，需要安装微信才能使用</string>
+    <string name="google_plus_client_inavailable">Google+ 版本过低或者没有安装，需要升级或安装Google+才能使用！</string>
+    <string name="qq_client_inavailable">QQ 版本过低或者没有安装，需要升级或安装QQ才能使用！</string>
+    <string name="pinterest_client_inavailable">Pinterest版本过低或者没有安装，需要升级或安装Pinterest才能使用！</string>
+    <string name="instagram_client_inavailable">Instagram版本过低或者没有安装，需要升级或安装Instagram才能使用！</string>
+    <string name="sinaweibo">新浪微博</string>
+    <string name="tencentweibo">腾讯微博</string>
+    <string name="qzone">QQ空间</string>
+    <string name="wechat">微信好友</string>
+    <string name="wechatmoments">微信朋友圈</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="renren">人人网</string>
+    <string name="kaixin">开心网</string>
+    <string name="email">邮件</string>
+    <string name="shortmessage">信息</string>
+    <string name="sohumicroblog">搜狐微博</string>
+    <string name="sohusuishenkan">搜狐随身看</string>
+    <string name="neteasemicroblog">网易微博</string>
+    <string name="douban">豆瓣</string>
+    <string name="youdao">有道云笔记</string>
+    <string name="evernote">印象笔记</string>
+    <string name="linkedin">Linked In</string>
+    <string name="googleplus">Google+</string>
+    <string name="foursquare">FourSquare</string>
+    <string name="qq">QQ</string>
+    <string name="pinterest">Pinterest</string>
+    <string name="flickr">Flickr</string>
+    <string name="tumblr">Tumblr</string>
+    <string name="dropbox">Dropbox</string>
+    <string name="vkontakte">VK</string>
+    <string name="instagram">Instagram</string>
+    <string name="share_content">请输入要分享的内容</string>
+
+    <!-- added by ghy Nov.19 -->
+    <string name="scenic_title">暂无该景区信息</string>
+    <string name="scenic_details_name">峨眉山</string>
+    <string name="scenic_jieshao">景区介绍：</string>
+    <!-- added by ghy Dec.7 -->
+    <string name="scenic_point_food">美食</string>
+    <string name="scenic_point_hotel">住宿</string>
+    <string name="city_traffic">交通</string>
+    <string name="city_notes">游记</string>
+    <string name="scenic_point_traffic">路线</string>
+    <string name="scenic_point_shopping">购物</string>
+
+    <item name="tag_first" type="id"></item>
+    <item name="tag_second" type="id"></item>
+
+    <!-- 星期 -->
+    <string name="Mon">一</string>
+    <string name="Tue">二</string>
+    <string name="Wed">三</string>
+    <string name="Thu">四</string>
+    <string name="Fri">五</string>
+    <string name="Sat">六</string>
+    <string name="Sun">日</string>
+
+    <!-- 景点信息——中文 -->
+    <string name="scenicname1">杜甫草堂博物馆</string>
+    <string name="scenicname2">碧峰峡</string>
+    <string name="scenicname3">蒙顶山旅游区</string>
+    <string name="scenicname4">西岭雪山</string>
+    <string name="scenicname5">成都大熊猫繁育研究基地</string>
+    <string name="scenicname6">刘氏庄园博物馆</string>
+    <string name="scenicname7">成都金沙遗址博物馆</string>
+    <string name="scenicname8">德孝城</string>
+
+    <!-- 添加信息 -->
+    <string name="phone">电话 ：</string>
+    <string name="picture">图片 ：</string>
+    <string name="address">地址 ：</string>
+    <string name="name">名称  ：</string>
+    <string name="test">口味 ：</string>
+    <string name="condition">环境 ：</string>
+    <string name="serve">服务 ：</string>
+    <string name="say">有话要说 ：</string>
+    <string name="update_at">更新于 ：</string>
+    <string name="drop_down_list_header_default_text">点击可以刷新</string>
+    <string name="drop_down_list_header_pull_text">下拉可以刷新</string>
+    <string name="drop_down_list_header_release_text">松开可以刷新</string>
+    <string name="drop_down_list_header_loading_text">加载中&#8230;</string>
+    <string name="drop_down_list_footer_default_text"></string>
+    <string name="drop_down_list_footer_loading_text">加载中&#8230;</string>
+    <string name="drop_down_list_footer_no_more_text">没有更多了</string>
+    <string name="image_content">Image</string>
+    <string name="title_activity_picture_detail">PictureDetailActivity</string>
+    <string name="title_activity_picture_comment">PictureCommentActivity</string>
+    <string name="title_activity_picture_upload">PictureUploadActivity</string>
+    <string name="title_activity_road">RoadActivity</string>
+    <string name="title_activity_place_road">PlaceRoadActivity</string>
+    <string name="title_activity_current">CurrentActivity</string>
+    <string name="title_activity_comment4weather">Comment4weatherActivity</string>
+    <string name="title_activity_comment4_shop">Comment4ShopActivity</string>
+    <string name="title_activity_comment_detail">CommentDetailActivity</string>
+
+</resources>

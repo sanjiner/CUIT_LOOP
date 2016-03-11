@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,ContentDescription" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@drawable/weather_top_bg"
+        android:orientation="horizontal" >
+        <ImageButton 
+            android:id="@+id/travel_ibtn_return"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#000000"
+            android:onClick="back"
+            android:src="@drawable/back_top_normal"/>
+        <RadioGroup
+            android:id="@+id/travel_line_maked_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:layout_toRightOf="@+id/travel_ibtn_return"
+            android:orientation="horizontal" >
+            <RadioButton 
+                android:id="@+id/travel_rb_list"
+                style="@style/picture_topbar_button"
+                android:checked="true"
+                android:text="@string/travel_list"/>
+            <RadioButton 
+                android:id="@+id/travel_rb_map"
+                style="@style/picture_topbar_button"
+                android:text="@string/travel_map"/>
+            
+        </RadioGroup>
+        
+
+    </RelativeLayout>
+    
+    <ListView 
+            android:id="@+id/make_list"
+            android:divider="@null"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">  
+    </ListView>
+
+</LinearLayout>

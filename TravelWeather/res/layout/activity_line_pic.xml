@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    tools:context=".PushActivity" >
+
+    <RelativeLayout
+        android:id="@+id/rl_PushActivity_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/weather_top_bg"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/ib_comment_back11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:src="@drawable/back_map_normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="上传路况照片"
+            android:textColor="@color/theme1_red"
+            android:textSize="24sp" />
+    </RelativeLayout>
+    <!-- 上面是通用的 不管他了 -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_PushActivity_title" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:id="@+id/rlImg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/iv_picture_upload1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/not_loaded" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/et_picture_upload_comment1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rlImg"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:lines="2"
+                android:maxLength="140"
+                android:maxLines="2"
+                android:minLines="2"
+                android:scrollHorizontally="false"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+                android:singleLine="false" />
+
+            <Button
+                android:id="@+id/btn_picture_upload_addComment1"
+                android:layout_width="@dimen/btn_width"
+                android:layout_height="@dimen/btn_height"
+                android:layout_below="@id/et_picture_upload_comment1"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/btn_theme1"
+                android:text="@string/push_is"
+                android:textColor="@color/theme1_red"
+                android:textSize="20sp" />
+
+            
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,115 @@
+package cuit.travelweather.fragment;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TabHost;
+import android.widget.TabWidget;
+import android.widget.TextView;
+import cuit.travelweather.R;
+
+/*
+ * [天气]页面
+ */
+public class WeatherFragment extends Fragment {
+	private View view;
+	private LayoutInflater inflater;
+	private SharedPreferences sp;
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		this.inflater = inflater;
+		view = inflater.inflate(R.layout.main_weather, container, false);
+		init();
+		initTheme();
+		return view;
+	}
+
+	
+	@Override
+	public void onResume(){
+		// TODO 自动生成的方法存根
+		super.onResume();
+		initTheme();
+		
+	}
+	
+	public void initTheme(){
+		getActivity();
+		sp = getActivity().getSharedPreferences("Theme_SP",
+				Context.MODE_PRIVATE);
+		if(sp.getString("theme_type", "jianzhi").equals("qinghuaci"))
+		{
+			TabWidget tabWidget = (TabWidget) view.findViewById(android.R.id.tabs);
+			tabWidget.setBackgroundResource(R.drawable.weather_top_bg_qhc);
+			
+			
+		}
+		else if(sp.getString("theme_type", "jianzhi").equals("jianzhi"))
+		{
+			TabWidget tabWidget = (TabWidget) view.findViewById(android.R.id.tabs);
+			tabWidget.setBackgroundResource(R.drawable.weather_top_bg);
+			
+		}
+	}
+	
+	/*
+	 * 初始化TabHost
+	 */
+	private void init() {
+		TabHost tabHost = (TabHost) view.findViewById(android.R.id.tabhost);
+		tabHost.setup();
+		tabHost.addTab(tabHost.newTabSpec("forecast")
+				.setIndicator(getTabView(R.string.forecast))
+				.setContent(R.id.ForecastFragment));
+		tabHost.addTab(tabHost.newTabSpec("current")
+				.setIndicator(getTabView(R.string.current))
+				.setContent(R.id.CurrentFragment));
+		tabHost.addTab(tabHost.newTabSpec("trend")
+				.setIndicator(getTabView(R.string.trend))
+				.setContent(R.id.TrendFragment));
+		tabHost.addTab(tabHost.newTabSpec("life")
+				.setIndicator(getTabView(R.string.life))
+				.setContent(R.id.LifeFragment));
+		tabHost.addTab(tabHost.newTabSpec("analyse")
+				.setIndicator(getTabView(R.string.analyse))
+				.setContent(R.id.AnalyseFragment));
+		tabHost.setCurrentTab(0);
+	}
+
+	private View getTabView(int resId) {
+		getActivity();
+		View tabView=null;
+		sp = getActivity().getSharedPreferences("Theme_SP",
+				Context.MODE_PRIVATE);
+		if(sp.getString("theme_type", "jianzhi").equals("qinghuaci"))
+		{
+			tabView = inflater.inflate(R.layout.tab_tob_qhc, null);
+			((TextView) tabView).setText(resId);
+		}
+		
+		else if(sp.getString("theme_type", "jianzhi").equals("jianzhi"))
+		{
+			tabView = inflater.inflate(R.layout.tab_top, null);
+			((TextView) tabView).setText(resId);
+		}
+		return tabView;
+		
+	}
+
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+		// TODO Auto-generated method stub
+		super.setUserVisibleHint(isVisibleToUser);
+		if (isVisibleToUser) {
+			
+		}
+	}
+	
+	
+}

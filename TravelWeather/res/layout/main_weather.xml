@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:background="@drawable/weather_top_bg"
+            android:layout_height="@dimen/title_height"/>
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <fragment 
+                android:name="cuit.travelweather.fragment.ForecastFragment"
+                android:id="@+id/ForecastFragment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+            <fragment 
+                android:name="cuit.travelweather.fragment.CurrentFragment"
+                android:id="@+id/CurrentFragment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+            <fragment 
+                android:name="cuit.travelweather.fragment.TrendFragment"
+                android:id="@+id/TrendFragment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+            <fragment 
+                android:name="cuit.travelweather.fragment.LifeFragment"
+                android:id="@+id/LifeFragment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+            <fragment 
+                android:name="cuit.travelweather.fragment.AnalyseFragment"
+                android:id="@+id/AnalyseFragment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+        </FrameLayout>
+        
+    </LinearLayout>
+</TabHost>

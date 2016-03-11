@@ -1,0 +1,73 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   	android:background="@drawable/login_bg"
+    tools:context=".RoadActivity" >
+
+    <RelativeLayout
+        android:id="@+id/road_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/weather_top_bg"
+        android:orientation="horizontal" >
+		<ImageButton 
+     	 	android:layout_width="wrap_content"
+     	 	android:layout_height="wrap_content"
+     	 	android:src="@drawable/back_map_normal"
+     	 	android:onClick="road_return"
+     	 	android:layout_marginLeft="5dp"
+     	 	android:clickable="true"
+     	 	android:background="@android:color/transparent"
+     	 	/>
+		
+        <TextView
+            android:id="@+id/infocenter_push_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="路况信息"
+            android:textColor="@color/theme1_red"
+            android:textSize="24sp" />
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/road_title"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/progressbar"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading" />
+        </LinearLayout>
+
+        <cuit.travelweather.util.LazyScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RelativeLayout
+                android:id="@+id/image_cache_parent_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingLeft="4dp" >
+            </RelativeLayout>
+        </cuit.travelweather.util.LazyScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/usersetting"
+	android:background="@drawable/login_bg">
+    <TextView 
+        android:id="@+id/more_title"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_height_other"
+        android:paddingTop="10dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/travel_top_bg"
+        android:gravity="center_horizontal"
+        android:textColor="@color/theme1_red"
+        android:textSize="20sp"
+        android:text="字体设置"/>
+    <ScrollView
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_below="@id/more_title"
+    	android:scrollbars="vertical" >
+      <LinearLayout
+	        android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:paddingLeft="10dp"
+	    	android:paddingRight="10dp"
+	    	android:orientation="vertical">
+	        
+	        <Button
+	            android:id="@+id/size_small"
+	            style="@style/more_list" 
+	            android:layout_marginTop="10dp"
+	            android:onClick="change_theme"
+				android:background="@drawable/ic_preference_first"
+				android:text="小"/>
+	        
+	          <Button
+	            android:id="@+id/size_middle"
+	            style="@style/more_list" 
+	            android:layout_marginTop="10dp"
+	            android:onClick="change_theme"
+				android:background="@drawable/ic_preference_first"
+				android:text="中"/>
+	          
+	            <Button
+	                android:id="@+id/size_large"
+	            style="@style/more_list" 
+	            android:layout_marginTop="10dp"
+	            android:onClick="change_theme"
+				android:background="@drawable/ic_preference_first"
+				android:text="大"/>
+	    </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

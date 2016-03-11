@@ -1,0 +1,115 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    android:orientation="vertical"
+    tools:context=".PictureDetailActivity" >
+
+    <ScrollView
+        android:id="@+id/sv_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/iv_PictureDetail_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true" />
+                <!-- TODO 添加小挂件 -->
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_PictureDetail_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="显示图片时间"
+                android:textSize="18sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp" >
+
+                <ImageView
+                    android:layout_width="18sp"
+                    android:layout_height="18sp"
+                    android:src="@drawable/location" />
+
+                <TextView
+                    android:id="@+id/tv_PictureDetail_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="显示图片地址"
+                    android:textSize="18sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_PictureDetail_Likes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="显示赞的个数"
+                    android:textSize="18sp" />
+
+                <ImageButton
+                    android:id="@+id/ib_PictureDetail_Likes"
+                    android:layout_width="18sp"
+                    android:layout_height="18sp"
+                    android:src="@drawable/main_place_normal" />
+
+                <TextView
+                    android:id="@+id/tv_PictureDetail_Bads"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="显示踩的个数"
+                    android:textSize="18sp" />
+
+                <ImageButton
+                    android:id="@+id/ib_PictureDetail_Bads"
+                    android:layout_width="18sp"
+                    android:layout_height="18sp"
+                    android:src="@drawable/main_place_selected" />
+            </LinearLayout>
+            <TextView 
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="评论："
+			    android:textSize="18sp"
+			    android:layout_marginLeft="5dp"/>
+
+         	<ListView
+         	    android:id="@+id/lv_PictureDetail_comments"
+         	    android:layout_width="match_parent"
+         	    android:layout_height="118dp"
+         	    android:layout_marginTop="5dp" >
+
+            </ListView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

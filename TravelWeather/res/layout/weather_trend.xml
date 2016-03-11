@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/trend_bg">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/trend_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <TextView 
+        android:id="@+id/trend_c_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="N/A"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="45dp"
+        android:textColor="#ffffff"/>
+    <ImageButton 
+		android:id="@+id/iv_list_map"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:src="@drawable/list_map"
+		android:onClick="weather_visit"
+		android:layout_marginRight="6dp"
+        android:layout_marginTop="45dp"
+        android:layout_alignParentRight="true"
+		android:background="#00ffffff"/>
+</RelativeLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <TextView 
+        android:id="@+id/analyse"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="@string/analyse"/>
+
+    <WebView
+        android:id="@+id/analyse_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+	<TextView 
+	    android:id="@+id/analyse_no"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	    android:visibility="gone"
+	    android:text="暂无数据"
+	    android:textSize="30sp"/>
+</RelativeLayout>

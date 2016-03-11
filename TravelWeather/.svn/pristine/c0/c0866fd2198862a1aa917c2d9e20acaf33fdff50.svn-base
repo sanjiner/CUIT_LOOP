@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding//res/layout/guess_weather.xml=UTF-8
+encoding//src/cn/sharesdk/onekeyshare=UTF-8
+encoding//src/com/dcs/test/Activity=UTF-8
+encoding//src/cuit/travelweather/activity/GuessWeatherActivity.java=UTF-8
+encoding//src/cuit/travelweather/activity/OneKeyShareCallback.java=UTF-8
+encoding//src/cuit/travelweather/activity/TravelMapActivity.java=UTF-8
+encoding//src/cuit/travelweather/fragment/PictureFragment.java=UTF-8
+encoding//src/cuit/travelweather/fragment/TravelFragment.java=UTF-8
+encoding//src/cuit/travelweather/util/MyHttpClient.java=UTF-8
+encoding/<project>=GBK

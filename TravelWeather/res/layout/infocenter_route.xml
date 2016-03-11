@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    tools:context=".RouteActivity" >
+
+    <RelativeLayout
+        android:id="@+id/rltitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:gravity="right"
+        android:background="@drawable/weather_top_bg"
+        android:orientation="horizontal" >
+
+        <ImageButton 
+     	 	android:layout_width="wrap_content"
+     	 	android:layout_height="wrap_content"
+     	 	android:src="@drawable/back_map_normal"
+     	 	android:onClick="return_infocenter"
+     	 	android:layout_marginLeft="5dp"
+     	 	android:clickable="true"
+     	 	android:background="@android:color/transparent"
+     	 	/>
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height_other"
+            android:layout_alignParentTop="true"
+            android:gravity="center_horizontal"
+            android:paddingTop="10dp"
+            android:text="@string/infocenter_item2"
+            android:textColor="@color/theme1_red"
+            android:textSize="20sp" />
+
+        
+    </RelativeLayout>
+
+   	<TextView
+   	    android:layout_width="match_parent"
+   	    android:layout_height="match_parent"
+   	    android:layout_below="@id/rltitle"
+   	    android:gravity="center"
+   	    android:textSize="24sp"
+   	    android:text="功能正在开发中" />
+
+    <ListView
+            android:id="@+id/lvRoute"
+            android:layout_below="@id/rltitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+    </ListView>
+
+
+</RelativeLayout>

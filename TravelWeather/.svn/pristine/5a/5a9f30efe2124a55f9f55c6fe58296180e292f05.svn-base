@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText,ContentDescription" >
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="fill_parent"
+        android:layout_height="54.0dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/weather_top_bg"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:minHeight="34.0dip" >
+
+        <ImageView
+            android:id="@+id/iv_topbar_left_back"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:onClick="addbeakonclick"
+            android:src="@drawable/common_icon_back_btn_selector" />
+
+        <TextView
+            android:id="@+id/tv_topbar_right_map"
+            style="@style/place_tabs_button"
+            android:layout_width="54.0dip"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/common_text_btn_selector"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="commit"
+            android:text="提交"
+            android:textAppearance="@style/CommonTopBarRightText"
+            android:textSize="13.0sp" />
+
+        <TextView
+            android:id="@+id/tv_topbar_middle_detail"
+            style="@style/place_tabs_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/tv_topbar_right_map"
+            android:layout_toRightOf="@id/iv_topbar_left_back"
+            android:gravity="center"
+            android:paddingLeft="10.0dip"
+            android:paddingRight="10.0dip"
+            android:singleLine="true"
+            android:text="添加商铺"
+            android:textAppearance="@style/CommonTopBarMiddleText" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/poidetail_normal_streetscape_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="47.0dip"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/rl_title"
+        android:layout_marginLeft="6.0dip"
+        android:layout_marginRight="6.0dip"
+        android:layout_marginTop="10.0dip"
+        android:background="@drawable/common_listitem_singleline_selector"
+        android:gravity="center_vertical"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/poidetail_normal_streetscape"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5.0dip"
+            android:drawableLeft="@drawable/main_map_icon_streetscape_normal"
+            android:drawablePadding="5.0dip"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:padding="6.0dip"
+            android:singleLine="true"
+            android:text="进入全景"
+            android:textColor="#ff333333"
+            android:textSize="16.0sp" />
+
+        <ImageView
+            android:id="@+id/iv_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12.0dip"
+            android:src="@drawable/common_icon_next_arrow" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/poidetail_normal_head"
+        android:layout_width="fill_parent"
+        android:layout_height="110.0dip"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/poidetail_normal_streetscape_layout"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/LinearLayout01"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.0" >
+
+            <RelativeLayout
+                android:id="@+id/ll_poidetail_head_back"
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/iv_place_nomal_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/a" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical" >
+
+                <LinearLayout
+                    android:id="@+id/layout_head_left"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5.0dip"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical" >
+
+                    <RelativeLayout
+                        android:id="@+id/layout_title"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5.0dip"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/tv_poidetail_itemtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8.0dip"
+                            android:layout_marginTop="20dp"
+                            android:singleLine="true"
+                            android:text="地点:" />
+
+                        <TextView
+                            android:onClick="tv_position"
+                            android:id="@+id/tv_position"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:background="@drawable/login_edit"
+                            android:layout_toRightOf="@+id/tv_poidetail_itemtitle"
+                            android:layout_alignBottom="@+id/tv_poidetail_itemtitle"
+                            android:layout_marginLeft="10dp"
+                             android:clickable="true"
+                            android:ems="10"
+                            android:singleLine="true"
+                            android:textSize="10sp" >
+                         </TextView>
+
+                         <EditText
+                             android:id="@+id/et_address"
+                             android:layout_width="fill_parent"
+                             android:layout_height="22dp"
+                             android:background="@drawable/login_edit"
+                             android:layout_toRightOf="@+id/tv_position"
+                             android:layout_marginRight="20.0dip"
+                             android:layout_alignBottom="@+id/tv_poidetail_itemtitle"
+                             android:hint="具体地址"
+                             android:textSize="10sp"
+                              >
+
+                         </EditText> 
+                        
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_poidetail_place_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5.0dip"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/tv_poidetail_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:gravity="center"
+                            android:paddingTop="4.0dip"
+                            android:singleLine="true"
+                            android:text="人均：" />
+
+                        <EditText
+                            android:id="@+id/ed_shop_price"
+                            android:layout_width="100dp"
+                            android:layout_height="32dp"
+                            android:layout_marginTop="5dp"
+                            android:hint=""
+                            android:textSize="13.0sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/poidetail_normal_thereis_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/poidetail_normal_head"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="20dp" >
+
+        <TextView
+            android:id="@+id/tv_shop_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="商家名称： "
+            android:textSize="15.0sp" />
+
+        <EditText
+            android:id="@+id/ed_shop_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20.0dip"
+            android:layout_toLeftOf="@+id/tv_shop_name"
+            android:layout_toRightOf="@+id/tv_shop_name"
+            android:ellipsize="end"
+            android:padding="6.0dip"
+            android:textColor="#ff333333"
+            android:textSize="13.0sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/poidetail_normal_thereis_layout2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/poidetail_normal_thereis_layout"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="20dp" >
+
+        <TextView
+            android:id="@+id/tv_shop_tuijian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="特色推荐： "
+            android:textSize="15.0sp" />
+
+        <EditText
+            android:id="@+id/ed_shop_tuijian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20.0dip"
+            android:layout_toLeftOf="@+id/tv_shop_tuijian"
+            android:layout_toRightOf="@+id/tv_shop_tuijian"
+            android:ellipsize="end"
+            android:padding="6.0dip"
+            android:textColor="#ff333333"
+            android:textSize="13.0sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/poidetail_normal_thereis_layout3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/poidetail_normal_thereis_layout2"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="20dp" >
+
+        <TextView
+            android:id="@+id/tv_shop_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="您的点评： "
+            android:textSize="15.0sp" />
+
+        <EditText
+            android:id="@+id/ed_shop_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20.0dip"
+            android:layout_toLeftOf="@+id/tv_shop_comment"
+            android:layout_toRightOf="@+id/tv_shop_comment"
+            android:ellipsize="end"
+            android:padding="6.0dip"
+            android:textColor="#ff333333"
+            android:textSize="13.0sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/poidetail_normal_thereis_layout4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/poidetail_normal_thereis_layout3"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="20dp" >
+
+        <TextView
+            android:id="@+id/tv_shop_comment1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="商家类型： "
+            android:textSize="15.0sp" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/login_edit" >
+        </Spinner>
+    </RelativeLayout>
+
+</RelativeLayout>

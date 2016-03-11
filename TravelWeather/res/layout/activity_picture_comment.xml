@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    tools:context=".PushActivity" >
+
+    <RelativeLayout
+        android:id="@+id/rl_PushActivity_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/weather_top_bg"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/ib_comment_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:src="@drawable/back_map_normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="添加图片评论"
+            android:textColor="@color/theme1_red"
+            android:textSize="24sp" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/et_comment_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_PushActivity_title"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="top"
+        android:hint="在此输入评论内容..."
+        android:inputType="textMultiLine"
+        android:lines="4"
+        android:maxLines="4"
+        android:minLines="4"
+        android:scrollHorizontally="false"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"
+        android:singleLine="false" 
+        android:background="@drawable/login_edit"/>
+
+    <Spinner
+        android:id="@+id/spinnerPicType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_comment_content" 
+        android:background="@drawable/login_edit"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp">
+    </Spinner>
+
+    <EditText
+        android:id="@+id/et_tag_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerPicType"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="top"
+        android:hint="在此输入标签，用,分隔。"
+        android:lines="1"
+        android:maxLines="1"
+        android:minLines="1"
+        android:singleLine="true"
+        android:background="@drawable/login_edit" />
+
+    <Button
+        android:id="@+id/btn_comment_addBtn"
+        android:layout_width="@dimen/btn_width"
+        android:layout_height="@dimen/btn_height"
+        android:layout_below="@id/et_tag_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_theme1"
+        android:text="@string/push_is"
+        android:textColor="@color/theme1_red"
+        android:textSize="20sp" />
+
+</RelativeLayout>

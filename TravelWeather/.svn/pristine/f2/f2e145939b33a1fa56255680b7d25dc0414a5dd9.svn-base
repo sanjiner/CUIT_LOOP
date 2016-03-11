@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_travel"
+    android:background="@drawable/login_bg"
+    android:orientation="vertical"   
+    tools:ignore="HardcodedText,ContentDescription" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:id="@+id/main_travel_relative"
+        android:background="@drawable/weather_top_bg"
+        android:orientation="horizontal"
+         >
+
+        <RadioGroup
+            android:id="@+id/travel_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:orientation="horizontal" >
+            <RadioButton 
+                android:id="@+id/travel_line_maked"
+                style="@style/picture_topbar_button"
+                android:checked="true"
+                android:text="@string/travel_line_maked"/>
+            <RadioButton 
+                android:id="@+id/travel_line_new"
+                style="@style/picture_topbar_button"
+                android:text="@string/travel_line_new"/>
+            
+        </RadioGroup>
+      
+    </RelativeLayout>
+
+    <RelativeLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content">
+
+		<RelativeLayout 
+		    android:id="@+id/travel_page_line_maked"
+		    android:layout_width="match_parent"
+    		android:layout_height="wrap_content"
+    		>
+            <ListView 
+                android:id="@+id/travle_list"
+                android:layout_width="match_parent"
+    		    android:layout_height="wrap_content"
+    		    >
+            </ListView>
+		   
+		    
+		</RelativeLayout>
+		<RelativeLayout
+		    android:id="@+id/travel_page_line_new"
+		    android:layout_width="match_parent"
+    		android:layout_height="wrap_content"
+    		android:visibility="gone"
+    		>
+            
+		    <LinearLayout
+		        android:id="@+id/line_rl_from"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginTop="15dp"
+		        android:layout_marginRight="10dp"
+		        android:clickable="true"
+		        
+		        android:background="@drawable/ic_preference_first"
+		        android:orientation="horizontal"
+		        >
+		
+		        <TextView
+		            android:id="@+id/chufa"
+		            style="@style/add_list"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="center"
+		            android:text="@string/push_from" />
+		
+		        <TextView
+		            android:id="@+id/line_tv_from"
+		            style="@style/add_list"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		             />
+		    </LinearLayout>
+		    
+		    <LinearLayout
+		        android:id="@+id/line_rl_to"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginRight="10dp"
+		        android:layout_below="@+id/line_rl_from"
+		        android:clickable="true"
+		        android:background="@drawable/ic_preference_last"
+		        android:orientation="horizontal"
+		        >
+		
+		        <TextView
+		            android:id="@+id/to"
+		            style="@style/add_list"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="center"
+		            android:text="@string/push_to" />
+		
+		        <TextView
+		            android:id="@+id/line_tv_to"
+		            style="@style/add_list"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		             />
+		    </LinearLayout>
+           
+		   	<TextView 
+		   	    android:id="@+id/tv_node_tip"
+		   	    android:layout_width="wrap_content"
+		   	    android:layout_height="wrap_content"
+		   	    android:text="途经点选择，最多三个，可以为空"
+		   	    android:textColor="@color/theme1_red"
+		   	    android:textSize="16sp"
+		   	    android:layout_below="@+id/line_rl_to"
+		   	    android:layout_marginTop="8dp"
+		   	    android:layout_marginBottom="3dp"
+		   	    android:layout_marginLeft="10dp"/>
+		    <LinearLayout
+		        android:id="@+id/line_rl_node1"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginRight="10dp"
+		        android:layout_below="@+id/tv_node_tip"
+		        android:clickable="true"
+		        android:background="@drawable/ic_preference_first"
+		        android:orientation="horizontal"
+		        >
+		
+		        <TextView
+		            android:id="@+id/tu1"
+		            style="@style/add_list"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="center"
+		            android:text="途径关注点一：" />
+		
+		        <TextView
+		            android:id="@+id/line_tv_node1"
+		            style="@style/add_list"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		             />
+		    </LinearLayout>
+		    
+		    <LinearLayout
+		        android:id="@+id/line_rl_node2"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginRight="10dp"
+		        android:layout_below="@+id/line_rl_node1"
+		        android:clickable="true"
+		        android:background="@drawable/ic_preference_mid"
+		        android:orientation="horizontal"
+		        >
+		
+		        <TextView
+		            android:id="@+id/tu2"
+		            style="@style/add_list"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="center"
+		            android:text="途径关注点二：" />
+		
+		        <TextView
+		            android:id="@+id/line_tv_node2"
+		            style="@style/add_list"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		             />
+		    </LinearLayout>
+		    
+		    <LinearLayout
+		        android:id="@+id/line_rl_node3"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginRight="10dp"
+		        android:layout_below="@+id/line_rl_node2"
+		        android:clickable="true"
+		        android:background="@drawable/ic_preference_last"
+		        android:orientation="horizontal"
+		        >
+		
+		        <TextView
+		            android:id="@+id/tu3"
+		            style="@style/add_list"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="center"
+		            android:text="途经关注点三：" />
+		
+		        <TextView
+		            android:id="@+id/line_tv_node3"
+		            style="@style/add_list"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		             />
+		    </LinearLayout>
+		    
+		    <Button
+		        android:id="@+id/add_button"
+				android:layout_width="@dimen/btn_width"
+			    android:layout_height="@dimen/btn_height"
+			    android:background="@drawable/btn_theme1"
+			    android:layout_centerHorizontal="true"
+			    android:layout_below="@+id/line_rl_node3"
+			    android:layout_marginTop="10dp"
+			    android:text="@string/push_is"
+			    android:textColor="@color/theme1_red"
+			    android:textSize="20sp"     
+		    />
+		    
+		    <TextView 
+		        android:id="@+id/line_tv_clear"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/add_button"
+		        android:textSize="16sp"
+		        android:textColor="@color/theme1_red"
+		        android:layout_centerHorizontal="true"
+		        android:layout_marginTop="8dp"
+		        android:clickable="true"
+		        android:text="点击清除已选地址"/>
+
+		
+		    
+		</RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"  
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_item_comment_userName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="显示用户名"
+        android:textColor="#999999" />
+
+    <TextView
+        android:id="@+id/tv_item_comment_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:lines="3"
+        android:maxLines="3"
+        android:minLines="1"
+        android:text="显示评论" />
+
+</LinearLayout>
