@@ -1,0 +1,215 @@
+package com.example.PCenter;
+
+import java.util.Timer;
+import java.util.TimerTask;
+import com.common.tools.L;
+import com.common.tools.T;
+import com.exam.ThreeSystem.R;
+import com.example.PCenter.fragments.AttendenceFragment;
+import com.example.PCenter.fragments.HomeFragment;
+import com.example.PCenter.fragments.HomeWorkFragment;
+import com.example.PCenter.fragments.MoreFragment;
+import com.example.PCenter.fragments.RecordFragment;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.RadioButton;
+import android.widget.Toast;
+
+public class MainActivity extends BaseActivity implements OnClickListener,RadioCheckMoreInterface{
+	private int currentMenuIndex, menuIndex;
+	private RadioButton rb_home, rb_listen, rb_homework, rb_question, rb_more;
+	//private RadioGroup rg_menu;
+	private Resources mResources;
+	private RadioButton[] mTabs;
+	private Fragment[] mFragments;
+	private String FILE = Constant.USERINFO_SP;//用于保存SharedPreferences的文件
+	private SharedPreferences sp;
+	private String userType;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.acitvity_main);
+		sp = getSharedPreferences(FILE, MODE_PRIVATE);
+		
+		mResources = getResources();
+		
+		String term = sp.getString(Constant.SPFIELD.CURRENTTERM, "");
+		userType = sp.getString(Constant.SPFIELD.USERIDENTITY, "");
+		if(TextUtils.isEmpty(term)){
+			initToMore();
+			T.showShort(mActivity, "请先设置学期");
+		}
+		else{
+			init();
+		}
+	}
+
+	private void getViewObj() {
+		rb_home = (RadioButton) findViewById(R.id.rb_home);
+		rb_listen = (RadioButton) findViewById(R.id.rb_listen);
+		if(userType.equals("学生")){
+			rb_listen.setVisibility(View.GONE);
+		}
+		rb_homework = (RadioButton) findViewById(R.id.rb_homework);
+		rb_question = (RadioButton) findViewById(R.id.rb_question);
+		rb_more = (RadioButton) findViewById(R.id.rb_more);
+		
+		//rg_menu = (RadioGroup) findViewById(R.id.rg_menu);
+	}
+	
+	private void setListener() {
+		rb_home.setOnClickListener(this);
+		rb_listen.setOnClickListener(this);
+		rb_homework.setOnClickListener(this);
+		rb_question.setOnClickListener(this);
+		rb_more.setOnClickListener(this);
+		
+	}
+
+	private void initToMore()
+	{
+		getViewObj();
+		setListener();
+		mTabs = new RadioButton[] { rb_home, rb_listen, rb_homework,
+				rb_question, rb_more };
+		currentMenuIndex = 4;
+		/*初始首页被选中*/
+		rb_more.setChecked(true);
+		mFragments = new Fragment[5];
+		mFragments[0] = new HomeFragment();
+		mFragments[1] = new AttendenceFragment();
+		mFragments[2] = new HomeWorkFragment();
+		mFragments[3] = new RecordFragment();
+		mFragments[4] = new MoreFragment();
+		getSupportFragmentManager().beginTransaction()
+				.add(R.id.rl_fragment_container, mFragments[4])
+				.show(mFragments[4]).commit();
+	}
+	
+	
+	private void init() {
+		getViewObj();
+		setListener();
+		mTabs = new RadioButton[] { rb_home, rb_listen, rb_homework,
+				rb_question, rb_more };		
+		currentMenuIndex = 0;
+		/*初始首页被选中*/
+		rb_home.setChecked(true);
+		mFragments = new Fragment[5];
+		mFragments[0] = new HomeFragment();
+		mFragments[1] = new AttendenceFragment();
+		mFragments[2] = new HomeWorkFragment();
+		mFragments[3] = new RecordFragment();
+		mFragments[4] = new MoreFragment();
+		getSupportFragmentManager().beginTransaction()
+				.add(R.id.rl_fragment_container, mFragments[0])
+				.show(mFragments[0]).commit();
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.rb_home:
+			menuIndex = 0;
+			break;
+		case R.id.rb_listen:
+			menuIndex = 1;
+			break;
+		case R.id.rb_homework:
+			menuIndex = 2;
+			break;
+		case R.id.rb_question:
+			menuIndex = 3;
+			break;
+		case R.id.rb_more:
+			menuIndex = 4;
+			break;
+		}
+
+		if(sp.getString(Constant.SPFIELD.USERIDENTITY,"").equals("学生") && menuIndex == 1){
+			T.showShort(mActivity, "没有权限");
+			return;
+		}
+		
+		if (currentMenuIndex != menuIndex) {
+			FragmentTransaction trx = getSupportFragmentManager()
+					.beginTransaction();
+			//trx.remove(mFragments[currentMenuIndex]);
+			trx.hide(mFragments[currentMenuIndex]);
+			//trx.replace(R.id.rl_fragment_container, mFragments[currentMenuIndex]);
+			L.d("fragmentTranct", mFragments[menuIndex].getClass().getName()
+					+ " is hide");
+			if (!mFragments[menuIndex].isAdded()) {
+				trx.add(R.id.rl_fragment_container, mFragments[menuIndex]);
+				L.d("fragmentTranct", mFragments[menuIndex].getClass()
+						.getName() + " is added");
+			}			
+			trx.show(mFragments[menuIndex]).commit();
+			
+			mFragments[menuIndex].onResume();
+			L.d("fragmentTranct", mFragments[menuIndex].getClass().getName()
+					+ " is show");
+
+			/*mTabs[currentMenuIndex].setTextColor(mResources
+					.getColor(R.color.menu_textcolor_unselect));
+			mTabs[menuIndex].setTextColor(mResources
+					.getColor(R.color.menu_textcolor_select));*/
+			currentMenuIndex = menuIndex;
+		}
+
+	}
+	
+	//点击退出弹出确认提示框
+	private static Boolean isQuit = false;
+	Timer timer = new Timer();
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	        if (keyCode == KeyEvent.KEYCODE_BACK) {
+	            if (isQuit == false) {
+	                isQuit = true;
+	                Toast.makeText(getBaseContext(), "再按一次返回键退出程序", Toast.LENGTH_SHORT).show();
+	                TimerTask task = null;
+	                task = new TimerTask() {
+	                    @Override
+	                    public void run() {
+	                        isQuit = false;
+	                    }
+	                };
+	                timer.schedule(task, 2000);
+	            } else {
+	                finish();
+	                System.exit(0);
+	            }
+	        }
+	        return false;
+	}
+
+	//重新加載更多界面
+	@Override
+	public void checkMore() {
+		initToMore();
+	}
+
+	@Override
+	public void checkAttendence() {
+
+	} 
+
+	@Override
+	public void checkHomework() {
+
+	}
+
+	@Override
+	public void checkQuestion() {
+		
+	}	
+}

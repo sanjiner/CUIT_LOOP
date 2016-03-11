@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-13 16:59:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.sys.entity.TbcuitmoonRolemodule" table="tbcuitmoon_rolemodule" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="cuitMoonRoleModuleId" type="string">
+            <column name="CuitMoon_RoleModuleID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="cuitMoonRoleId" type="string">
+            <column name="CuitMoon_RoleID" length="32" />
+        </property>
+        <property name="cuitMoonModuleId" type="string">
+            <column name="CuitMoon_ModuleID" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>

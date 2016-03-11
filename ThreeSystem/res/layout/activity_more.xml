@@ -1,0 +1,317 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/more_bg_color"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_head_height"
+            android:background="@color/theme_color"
+            android:gravity="center"
+            android:text="@string/more"
+            android:textColor="#FAFFFE"
+            android:textSize="20sp" />
+
+        <!--
+             <Button
+		    android:id="@+id/more_set"
+		    android:layout_width="40dp"
+		    android:layout_height="@dimen/activity_head_height"
+		    android:layout_marginLeft="10dp"
+		    android:background="@drawable/ic_more_set"
+		    android:layout_gravity="right"
+		    />
+        -->
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/rl_more_adLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/process_yuekao_framelayout"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <!-- 学期设定 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_more_term"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/selector_more_term"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_launcher" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginStart="80dp"
+                    android:text="@string/more_term"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_narrow_right" />
+            </RelativeLayout>
+
+            <!-- 模块设定 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_more_module"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/selector_more_term"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_more_module" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginStart="80dp"
+                    android:text="模块设定"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_narrow_right" />
+            </RelativeLayout>
+
+            <!-- 个人信息 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_more_userinfo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/selector_more_term"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_more_userinfo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginStart="80dp"
+                    android:text="@string/more_userinfo"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_narrow_right" />
+            </RelativeLayout>
+            <!-- 修改密码 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_more_modifypwd"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/selector_more_term"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_more_modifypwd" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginStart="80dp"
+                    android:text="@string/more_modifypwd"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_narrow_right" />
+            </RelativeLayout>
+            <!-- 关于我们 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_more_aboutus"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/selector_more_term"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_more_aboutuse" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginStart="80dp"
+                    android:text="@string/more_aboutus"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_narrow_right" />
+            </RelativeLayout>
+            <!-- 版本 -->
+
+
+            <!--
+            <RelativeLayout
+                android:id="@+id/rl_more_version"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/selector_more_term"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:visibility="gone"  >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_more_version" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginStart="80dp"
+                    android:text="@string/more_version"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_narrow_right" />
+            </RelativeLayout>
+            -->
+
+
+            <!-- 帮助 -->
+
+            <RelativeLayout
+                android:id="@+id/rl_more_help"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/selector_more_term"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_more_help" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginStart="80dp"
+                    android:text="@string/more_help"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_narrow_right" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/b_more_logout"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/selector_more_logout_btn"
+                android:text="@string/more_logout"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

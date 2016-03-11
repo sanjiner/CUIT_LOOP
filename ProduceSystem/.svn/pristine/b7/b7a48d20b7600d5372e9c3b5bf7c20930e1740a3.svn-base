@@ -1,0 +1,168 @@
+package edu.cuit.module.entm.web.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import edu.cuit.common.util.Page;
+import edu.cuit.common.web.controller.BaseController;
+import edu.cuit.module.authc.service.ApplyService;
+import edu.cuit.module.authc.service.ApprovedatamanagerService;
+import edu.cuit.module.authc.service.BearinginfoService;
+import edu.cuit.module.authc.service.PrictureinfomationService;
+import edu.cuit.module.authc.service.QualityIdentificationService;
+import edu.cuit.module.authc.service.ReportinfomationService;
+import edu.cuit.module.infom.service.BusinessmanagementService;
+import edu.cuit.module.infom.service.BusinessqualificationService;
+import edu.cuit.module.label.service.LabelapplicationService;
+import edu.cuit.module.model.service.ElementmodelService;
+import edu.cuit.module.model.service.ProductinfomationService;
+import edu.cuit.module.origin.service.CertificateService;
+import edu.cuit.module.origin.service.ProductapplyService;
+import edu.cuit.module.sys.entity.TbcuitmoonRole;
+import edu.cuit.module.sys.entity.TbcuitmoonUser;
+import edu.cuit.module.sys.service.TbcuitmoonAreaService;
+import edu.cuit.module.sys.service.TbcuitmoonDictionaryService;
+import edu.cuit.module.sys.service.TbcuitmoonUserService;
+
+@Controller
+@RequestMapping("enterprise/pic")
+public class EnterprisePicController extends BaseController{
+	@Value("#{settings['page.pageNo']}")
+	private int pageNo;
+	@Value("#{settings['page.pageCountSize']}")
+	private int pageCountSize;
+	@Value("#{settings['image.showpath']}")
+	public String imageShowPath;
+	
+	@Autowired
+	ApplyService applyService;
+	@Autowired
+	LabelapplicationService labelApplyService;
+	@Autowired
+	TbcuitmoonDictionaryService dictionaryService;
+	@Autowired
+	ProductapplyService productapplyService;
+	@Autowired
+	TbcuitmoonAreaService tbcuitmoonAreaService;
+	@Autowired
+	TbcuitmoonDictionaryService tbcuitmoonDictionaryService;
+	@Autowired
+	CertificateService certificateService;
+	@Autowired 
+	QualityIdentificationService qualityIdentificationService;
+	@Autowired
+	ApprovedatamanagerService approvedatamanagerService;
+	@Autowired 
+	PrictureinfomationService prictureinfomationService;
+	@Autowired
+	BusinessmanagementService businessmanagementService;
+	@Autowired
+	ReportinfomationService reportinfomationService;
+	@Autowired
+	QualityIdentificationService qaService;
+	@Autowired
+	ApprovedatamanagerService dataService;
+	@Autowired
+	BearinginfoService bearService;
+	@Autowired
+	ElementmodelService elmentService;
+	
+	//分页查询认证产品列表
+		private Page getProductApplyInfoList(String queryString, String applyType, 
+				String userName, String roleStr, Integer pageIndex) {
+			Page page;		
+			String sqlString = "";
+			if (pageIndex == null){
+				pageIndex = pageNo;
+			}	
+			//1表示气候品质认证 2表示农网认证
+			if(applyType != null && applyType.equals("2"))
+			{
+				if(roleStr.equals("商家"))
+				{
+					if(queryString == null)
+					{
+						sqlString = "from Productapply as p where p.orignStatus='100084' and p.applyPerson='"+userName+"'order by p.applyTime desc";
+					}else{
+						sqlString = "from Productapply as p where p.orignStatus='100084' and p.applyPerson='"+userName+"' and p.originName like '%" + queryString + "%'order by p.applyTime desc";
+					}	
+				}else{
+					if(queryString == null)
+					{
+						sqlString = "from Productapply as p where p.orignStatus='100084' order by p.applyTime desc";
+					}else{
+						sqlString = "from Productapply as p where p.orignStatus='100084' and p.originName like '%" + queryString + "%' order by p.applyTime desc";
+					}
+				}
+				page = productapplyService.getPage(sqlString, pageIndex-1, pageCountSize);
+			}else{
+				if(roleStr.equals("商家"))
+				{
+					if(queryString == null)
+					{
+						sqlString = "from Apply as a where a.handleResult='100084' and a.applyPerson='"+userName+"'order by a.applyTime desc";
+					}else{
+						sqlString = "from Apply as a where a.handleResult='100084' and a.applyPerson='"+userName+"' and a.productName like '%" + queryString + "%'order by a.applyTime desc";
+					}			
+				}else{
+					if(queryString == null)
+					{
+						sqlString = "from Apply as a where a.handleResult='100084' order by a.applyTime desc";
+					}else{
+						sqlString = "from Apply as a where a.handleResult='100084' and a.productName like '%" + queryString + "%' order by a.applyTime desc";
+					}
+				}
+				page = applyService.getPage(sqlString, pageIndex-1, pageCountSize);
+			}	
+			
+			
+			return page;
+		}
+		//查询该商家是否有认证申请
+		private String checkApplylist(String applyPerson){
+			String flag = "";
+			String hql ="from Apply as a where a.handleResult='100084' and a.applyPerson='"+applyPerson+"'";
+			List<?> list = applyService.find(hql);
+			if(list.size()>0)
+			{
+				flag = "1";
+			}else{
+				flag = "2";
+			}
+			return flag;
+		}
+	
+	@RequestMapping("list")
+	public String PCList(@RequestParam(required = false) Integer requestPageNo, 
+			@RequestParam(required = false) String queryString, 
+			@RequestParam(required = false) String applyType, Model model, HttpSession session)
+	{
+		if (queryString != null)
+			queryString = toUTF8(queryString != null ? queryString : "");
+		if(applyType == null)
+			applyType = "1";
+		TbcuitmoonUser user = getLoginUser(session);
+		String userName = user.getCuitMoonUserName();		
+		String roleStr = user == null ? "" : ((TbcuitmoonRole) user
+				.getTbcuitmoonRoles().toArray()[0]).getCuitMoonRoleName() + "";
+		if(roleStr.equals("商家"))
+		{
+			applyType = checkApplylist(userName);
+		}		
+		Page page = getProductApplyInfoList(queryString,applyType,userName,roleStr,requestPageNo);
+		boolean isPaging = page.getPageList().size() > 0 ? true : false; // 是否分页
+		model.addAttribute("DataList", page);
+		model.addAttribute("isPaging", isPaging);
+		model.addAttribute("queryString", queryString);
+		model.addAttribute("applyType", applyType);
+		return "enterprise/pic/list";
+	}
+}

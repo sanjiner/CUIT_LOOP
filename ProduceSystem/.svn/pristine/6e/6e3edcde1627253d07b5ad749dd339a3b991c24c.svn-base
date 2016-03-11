@@ -1,0 +1,530 @@
+package edu.cuit.module.authc.web.controller;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.WebUtils;
+
+import edu.cuit.common.web.controller.BaseController;
+import edu.cuit.module.auchc.entity.Apply;
+import edu.cuit.module.auchc.entity.Approvedatamanager;
+import edu.cuit.module.auchc.entity.Bearinginfo;
+import edu.cuit.module.auchc.entity.Disastoursdata;
+import edu.cuit.module.auchc.entity.Prictureinfomation;
+import edu.cuit.module.auchc.entity.QualityIdentification;
+import edu.cuit.module.authc.service.ApplyService;
+import edu.cuit.module.authc.service.ApprovedatamanagerService;
+import edu.cuit.module.authc.service.BearinginfoService;
+import edu.cuit.module.authc.service.DisastoursdataService;
+import edu.cuit.module.authc.service.PrictureinfomationService;
+import edu.cuit.module.authc.service.QualityIdentificationService;
+import edu.cuit.module.infom.entity.Weatherstationinfo;
+import edu.cuit.module.infom.service.WeatherstationinfoService;
+import edu.cuit.module.model.entity.Elementmodel;
+import edu.cuit.module.model.service.ElementmodelService;
+import edu.cuit.module.sys.entity.TbcuitmoonArea;
+import edu.cuit.module.sys.entity.TbcuitmoonUser;
+import edu.cuit.module.sys.service.TbcuitmoonAreaService;
+
+@Controller
+@RequestMapping("autc_data")
+public class AutcDataCotroller extends BaseController {
+
+	@Value("#{settings['image.path']}")
+	private String filePath;
+	@Autowired
+	ApprovedatamanagerService dataService;
+	@Autowired
+	ApplyService applyService;
+	@Autowired
+	QualityIdentificationService qaService;
+	@Autowired
+	TbcuitmoonAreaService areaService;
+	@Autowired
+	ElementmodelService elmentService;
+	@Autowired
+	WeatherstationinfoService weatherService;
+	@Autowired
+	PrictureinfomationService picService;
+	@Autowired
+	DisastoursdataService disatService;
+	@Autowired
+	TbcuitmoonAreaService tbAreaService;
+	@Autowired
+	BearinginfoService bearService;
+	@Autowired
+	WeatherstationinfoService stationService;
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/list")
+	public String list(String id, HttpSession session, Model model) {
+		TbcuitmoonUser user = getLoginUser(session);
+		String dataHQL = "from Approvedatamanager where remark = ?";
+		String val = "";
+		if (user != null) {
+			if (!user.getCuitMoonAreaId().trim().equals("1012")) {
+				val = "1012|";
+				String areHQL = "from TbcuitmoonArea where cuitMoonAreaCode = ?";
+				List<TbcuitmoonArea> areaList = (List<TbcuitmoonArea>) areaService
+						.find(areHQL,
+								Long.parseLong(user.getCuitMoonAreaId().trim()));
+				if (areaList.size() > 0) {
+					val += areaList.get(0).getCuitMoonParentAreaCode() + "|";
+					val += user.getCuitMoonAreaId().trim();
+
+				}
+			}
+		}
+		List<Approvedatamanager> list = null;
+		if (val.equals("")) {
+			list = (List<Approvedatamanager>) dataService.loadAll();
+		} else {
+			list = (List<Approvedatamanager>) dataService
+					.find("from Approvedatamanager where remark like'%" + val
+							+ "%'");
+		}
+		List<Map<String, Object>> applyList = new ArrayList<Map<String, Object>>();
+		for (Approvedatamanager item : list) {
+			List<QualityIdentification> qList = (List<QualityIdentification>) qaService
+					.find("from QualityIdentification where qualityIdentificationNum = ?",
+							item.getQualityIdentificationNum());
+			if (qList.size() > 0) {
+				List<?> tmp = applyService.find("from Apply where applyBh = ?",
+						qList.get(0).getApplyBh());
+				if (tmp.size() > 0) {
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("productName",
+							((Apply) tmp.get(0)).getProductName());
+					map.put("productBrand",
+							((Apply) tmp.get(0)).getProductBrand());
+					map.put("applyTime", ((Apply) tmp.get(0)).getApplyTime());
+					map.put("approveCode", item.getApproveDataCode());
+					map.put("num", qList.get(0).getQualityIdentificationNum());
+					applyList.add(map);
+				}
+			}
+
+		}
+		model.addAttribute("applyList", applyList);
+		return "/autc_data/list";
+	}
+
+	@RequestMapping("factor_process")
+	private String process(String id, Model model) {
+		if (id != null) {
+			// 绑定气象要素
+			List<Elementmodel> model_list = new ArrayList<Elementmodel>();
+			Approvedatamanager aEntity = dataService.get(id);
+			if (aEntity != null) {
+				QualityIdentification qEntity = qaService.get(aEntity
+						.getQualityIdentificationNum());
+				model.addAttribute("stationId", qEntity.getClimateStationName());
+				if (qEntity != null) {
+					String elements = "";
+					// 获取该方案下的所有生育期信息，筛选出生育期内不同的气象指标
+					@SuppressWarnings("unchecked")
+					List<Bearinginfo> b_list = (List<Bearinginfo>) bearService
+							.find("from Bearinginfo where qualityIdentificationNum = ?",
+									qEntity.getQualityIdentificationNum());
+					for (int i = 0; i < b_list.size(); i++) {
+						elements += b_list.get(i).getMeteIndicators() + "|";
+					}
+					String[] strs = elements.split("\\|");
+					List<String> list_str = new ArrayList<String>();
+					for (int i = 0; i < strs.length; i++) {
+						if (strs[i].length() <= 0)
+							continue;
+						if (list_str.contains(strs[i]))
+							continue;
+						list_str.add(strs[i]);
+					}
+					for (int i = 0; i < list_str.size(); i++) {
+						Elementmodel tmp = elmentService.get(list_str.get(i));
+						if (tmp != null) {
+							model_list.add(tmp);
+						}
+					}
+				}
+			}
+			model.addAttribute("elements", model_list);
+		}
+		return "autc_data/factor_process";
+	}
+
+	@RequestMapping("factor_process2")
+	private String process2(String id, String stationid, Model model) {
+		if (id != null) {
+			// 绑定气象要素
+			model.addAttribute("stationId", stationid);
+			List<Elementmodel> model_list = new ArrayList<Elementmodel>();
+			String[] strs = id.split("\\|");
+			List<String> list_str = new ArrayList<String>();
+			for (int i = 0; i < strs.length; i++) {
+				if (strs[i].length() <= 0)
+					continue;
+				if (list_str.contains(strs[i]))
+					continue;
+				list_str.add(strs[i]);
+			}
+			for (int i = 0; i < list_str.size(); i++) {
+				Elementmodel tmp = elmentService.get(list_str.get(i));
+				if (tmp != null) {
+					model_list.add(tmp);
+				}
+			}
+			model.addAttribute("elements", model_list);
+		}
+		return "autc_data/factor_process";
+	}
+
+	@RequestMapping("getData")
+	@ResponseBody
+	private Map<String, Object> getData(HttpServletRequest request) {
+		String url = "";
+		Map<String, Object> map = new HashMap<String, Object>();
+		String code = WebUtils.findParameterValue(request, "code");
+		String start = WebUtils.findParameterValue(request, "start");
+		String end = WebUtils.findParameterValue(request, "end");
+		String modelId = WebUtils.findParameterValue(request, "modelId");
+		String stationId = WebUtils.findParameterValue(request, "stationId");
+		if (code != null && start != null && end != null) {
+			Weatherstationinfo station = weatherService.get(stationId);
+			Elementmodel element = elmentService.get(modelId);
+			if (station != null && element != null) {
+				map.put("unit", element.getUnit());
+				String urls = "{%22con%22:%22" + element.getRemark() + ","
+						+ station.getWeatherStationId().trim() + "," + start
+						+ "," + end + "%22,%22type%22:%22vw_ele_days%22}";
+				url = "http://d.scnjw.gov.cn/MeteoInterface/MeteoInterface?user=csd&psd=123789456&route="
+						+ urls;
+			}
+		}
+		String result = getURLContent(url);
+		if (result.length() > 0) {
+			result = result
+					.substring(result.indexOf("</script>") + 9, result.length())
+					.replaceAll("\n", "").trim();
+			String[] sets = result.split(",");// 得到所有的元素
+			String[] time = new String[sets.length];
+			String[] value = new String[sets.length];
+			for (int i = value.length - 1; i >= 0; i--) {
+				String[] tmp = sets[value.length - i - 1].split("\\|");
+				time[i] = tmp[1];
+				value[i] = tmp[2];
+			}
+			map.put("time", time);
+			map.put("value", value);
+		}
+		return map;
+	}
+
+	/**
+	 * 程序中访问http数据接口
+	 */
+	public static String getURLContent(String urlStr) {
+		URL url = null;
+		BufferedReader in = null;
+		StringBuffer sb = new StringBuffer();
+		try {
+			url = new URL(urlStr);
+			in = new BufferedReader(new InputStreamReader(url.openStream(),
+					"UTF-8"));
+			String str = null;
+			while ((str = in.readLine()) != null) {
+				sb.append(str);
+			}
+		} catch (Exception ex) {
+
+		} finally {
+			try {
+				if (in != null) {
+					in.close();
+				}
+			} catch (IOException ex) {
+			}
+		}
+		String result = sb.toString();
+		System.out.println(result);
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping("image")
+	private String image(String id, String num, HttpServletRequest request,
+			Model model) {
+		String hql = "from Prictureinfomation as pic where pic.approveDataCode = ?";
+		String start = WebUtils.findParameterValue(request, "start");
+		String end = WebUtils.findParameterValue(request, "end");
+		if (start != null && end != null) {
+			hql += "and collectionTime >= '" + start.replace("-", "")
+					+ "' and collectionTime<= '" + end.replace("-", "") + "'";
+		}
+		hql += "order by collectionTime desc";
+		List<Prictureinfomation> list = (List<Prictureinfomation>) picService
+				.find(hql, id);
+		List<Bearinginfo> bear_list = (List<Bearinginfo>) bearService.find(
+				"from Bearinginfo where qualityIdentificationNum = ?", num);
+		for (Prictureinfomation item : list) {
+			String url = item.getProctureUrl();
+			if (url != null) {
+				String[] strs = url.split("\\|");
+				item.setProctureUrl(strs[0]);
+			}
+		}
+		model.addAttribute("list", list);
+		model.addAttribute("num", num);
+		model.addAttribute("code", id);
+		model.addAttribute("bear", bear_list);
+		return "autc_data/image";
+	}
+
+	@RequestMapping("image_add")
+	private String image_add(String stage, Model model, HttpSession session,
+			String num) {
+		String areHql = "from TbcuitmoonArea as T where T.cuitMoonParentAreaCode = ? ";
+		List<?> areaList = tbAreaService.find(areHql, 0l);
+		model.addAttribute("pro", areaList);
+		TbcuitmoonUser user = getLoginUser(session);
+		model.addAttribute("area", user == null ? "" : user.getCuitMoonAreaId()
+				.trim().trim());
+		model.addAttribute("num", num);
+		try {
+			byte[] byte1 = null;
+			byte1 = stage.getBytes("ISO-8859-1");
+			stage = new String(byte1, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("stage", stage);
+		return "autc_data/image_add";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "image_add", method = RequestMethod.POST)
+	private Map<String, String> image_add(HttpServletRequest request) {
+		Map<String, String> map = new HashMap<String, String>();
+		Prictureinfomation entity = new Prictureinfomation();
+		entity.setPictureCode(UUID.randomUUID().toString().replace("-", ""));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+		Date date = new Date(System.currentTimeMillis());
+		try {
+			date = sdf.parse(WebUtils.findParameterValue(request, "date"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		entity.setCollectionTime(date);
+		entity.setCropGrowthPeriod(WebUtils
+				.findParameterValue(request, "stage"));
+		entity.setDataOrigin(WebUtils.findParameterValue(request, "station"));
+		entity.setApproveDataCode(WebUtils.findParameterValue(request, "code"));
+		entity.setProctureUrl(WebUtils.findParameterValue(request, "img"));
+		entity.setRemark(WebUtils.findParameterValue(request, "memo"));
+		picService.save(entity);
+		map.put("success", "true");
+		return map;
+	}
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping("image_edit")
+	private String image_edit(String id, Model model) {
+		Prictureinfomation entity = picService.get(id);
+		if (entity != null) {
+			String code = weatherService.getCodeByName(entity.getDataOrigin());
+			List<Weatherstationinfo> list = (List<Weatherstationinfo>) weatherService
+					.find("from Weatherstationinfo where belongTo = ?", code);
+			model.addAttribute("stations", list);
+			model.addAttribute("entity", entity);
+		}
+		return "autc_data/image_edit";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "image_edit", method = RequestMethod.POST)
+	private Map<String, String> image_edit(HttpServletRequest request) {
+		Map<String, String> map = new HashMap<String, String>();
+		Prictureinfomation entity = picService.get(WebUtils.findParameterValue(
+				request, "id"));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd", Locale.CHINA);
+		Date date = new Date(System.currentTimeMillis());
+		try {
+			date = sdf.parse(WebUtils.findParameterValue(request, "date"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		entity.setCollectionTime(date);
+		entity.setCropGrowthPeriod(WebUtils
+				.findParameterValue(request, "stage"));
+		entity.setDataOrigin(WebUtils.findParameterValue(request, "station"));
+		entity.setApproveDataCode(WebUtils.findParameterValue(request, "code"));
+		entity.setProctureUrl(WebUtils.findParameterValue(request, "img"));
+		entity.setRemark(WebUtils.findParameterValue(request, "memo"));
+		picService.update(entity);
+		map.put("success", "true");
+		return map;
+	}
+
+	@RequestMapping("image_delete")
+	private String image_delete(String id, String num, String code,
+			HttpServletRequest request) {
+		if (id != null) {
+			Prictureinfomation entity = picService.get(id);
+			String url = entity.getProctureUrl();
+			String[] strs = url.split("\\|");
+			for (String str : strs) {
+				if (str.length() > 1) {
+					delFile(str.substring(str.lastIndexOf("/") + 1,
+							str.length()), request, 1);
+				}
+			}
+			picService.deleteByKey(id);
+		}
+		return "redirect:image?num=" + num + "&id=" + code;
+	}
+
+	@ResponseBody
+	@RequestMapping("image_del")
+	private Map<String, String> image_del(String fileName,
+			HttpServletRequest request) {
+		Map<String, String> map = new HashMap<String, String>();
+		String imageSavePath = request.getServletContext()
+				.getRealPath(filePath);
+		File file = new File(imageSavePath + File.separator + fileName);
+		if (file.delete()) {
+			map.put("success", "true");
+		} else {
+			map.put("success", "false");
+		}
+		return map;
+	}
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping("weather")
+	private String weather(String id, HttpServletRequest request, Model model) {
+		String hql = "from Disastoursdata where approveDataCode=? ";
+		String start = WebUtils.findParameterValue(request, "start");
+		String end = WebUtils.findParameterValue(request, "end");
+		if (start != null && end != null) {
+			hql += "and addTime >= '" + start.replace("-", "")
+					+ "' and addTime<= '" + end.replace("-", "") + "'";
+		}
+		List<Disastoursdata> list = (List<Disastoursdata>) disatService.find(
+				hql, id);
+		model.addAttribute("list", list);
+		model.addAttribute("code", id);
+		return "autc_data/weather";
+	}
+
+	@RequestMapping("weather_add")
+	private String weather_add(String code, Model model, HttpSession session) {
+		String areHql = "from TbcuitmoonArea as T where T.cuitMoonParentAreaCode = ? ";
+		List<?> areaList = tbAreaService.find(areHql, 0l);
+		model.addAttribute("pro", areaList);
+		TbcuitmoonUser user = getLoginUser(session);
+		model.addAttribute("area", user == null ? "" : user.getCuitMoonAreaId()
+				.trim().trim());
+		return "autc_data/weather_add";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/weather_add", method = RequestMethod.POST)
+	private Map<String, String> weather_add(HttpServletRequest request) {
+		Map<String, String> map = new HashMap<String, String>();
+		Disastoursdata entity = new Disastoursdata();
+		entity.setApproveDataCode(WebUtils.findParameterValue(request, "code"));
+		entity.setAddTime(new Date(System.currentTimeMillis()));
+		entity.setDataCode(UUID.randomUUID().toString().replace("-", ""));
+		entity.setDataOrigin(WebUtils.findParameterValue(request, "station"));
+		entity.setDisastoursDescription(WebUtils.findParameterValue(request,
+				"descript"));
+		entity.setRemark(WebUtils.findParameterValue(request, "memo"));
+
+		Serializable s = disatService.save(entity);
+		if (s == null) {
+			map.put("success", "false");
+		} else {
+			map.put("success", "true");
+		}
+		return map;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/weather_edit", method = RequestMethod.POST)
+	private Map<String, String> weather_edit(HttpServletRequest request) {
+		Map<String, String> map = new HashMap<String, String>();
+		Disastoursdata entity = disatService.get(WebUtils.findParameterValue(
+				request, "id"));
+		if (entity != null) {
+			entity.setApproveDataCode(WebUtils.findParameterValue(request,
+					"code"));
+			entity.setAddTime(new Date(System.currentTimeMillis()));
+			entity.setDataOrigin(WebUtils
+					.findParameterValue(request, "station"));
+			entity.setDisastoursDescription(WebUtils.findParameterValue(
+					request, "descript"));
+			entity.setRemark(WebUtils.findParameterValue(request, "memo"));
+		}
+		try {
+			disatService.update(entity);
+			map.put("success", "true");
+		} catch (Exception ex) {
+			map.put("success", "false");
+			return map;
+		}
+		return map;
+	}
+
+	@RequestMapping("weather_delete")
+	private String weather_delete(String id, String code) {
+		if (id != null) {
+			disatService.deleteByKey(id);
+		}
+		return "redirect:weather?id=" + code;
+	}
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping("weather_edit")
+	private String weather_edit(String id, Model model) {
+		Disastoursdata entity = disatService.get(id);
+		model.addAttribute("entity", entity);
+		String code = weatherService.getCodeByName(entity.getDataOrigin());
+		List<Weatherstationinfo> list = (List<Weatherstationinfo>) weatherService
+				.find("from Weatherstationinfo where belongTo = ?", code);
+		model.addAttribute("stations", list);
+		return "autc_data/weather_edit";
+	}
+
+	@ResponseBody
+	@RequestMapping("getStations")
+	private Map<String, Object> getStations(HttpServletRequest request) {
+		List<?> list = weatherService.find(
+				"from Weatherstationinfo where belongTo = ?",
+				WebUtils.findParameterValue(request, "code"));
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("stations", list);
+		return map;
+	}
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 19:14:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.auchc.entity.Prictureinfomation" table="prictureinfomation" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="pictureCode" type="string">
+            <column name="PictureCode" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="approveDataCode" type="string">
+            <column name="ApproveDataCode" length="32" not-null="true" />
+        </property>
+        <property name="proctureUrl" type="string">
+            <column name="ProctureUrl" length="65535" />
+        </property>
+        <property name="cropGrowthPeriod" type="string">
+            <column name="cropGrowthPeriod" length="20" />
+        </property>
+        
+        <property name="collectionTime" type="timestamp">
+            <column name="CollectionTime" length="19" />
+        </property>
+        <property name="remark" type="string">
+            <column name="Remark" length="200" />
+        </property>
+        <property name="dataOrigin" type="string">
+            <column name="DataOrigin" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

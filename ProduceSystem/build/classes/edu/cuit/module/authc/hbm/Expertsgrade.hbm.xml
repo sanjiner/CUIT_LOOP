@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-6-3 20:51:27 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.auchc.entity.Expertsgrade" table="expertsgrade" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="gradeBh" type="string">
+            <column name="gradeBh" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="cropGrowthPeriod" type="string">
+            <column name="Crop_growth_period" length="20" />
+        </property>
+        <property name="timeRange" type="string">
+            <column name="TimeRange" length="50" />
+        </property>
+        <property name="element" type="string">
+            <column name="element" length="50" />
+        </property>
+        <property name="optimalRange" type="string">
+            <column name="OptimalRange" length="50" />
+        </property>
+        <property name="realCondition" type="string">
+            <column name="RealCondition" length="45" />
+        </property>
+        <property name="gradeLevel" type="string">
+            <column name="gradeLevel" length="45" />
+        </property>
+        <property name="gradeValue" type="java.lang.Float">
+            <column name="gradeValue" precision="12" scale="0" />
+        </property>
+        <property name="bearingInfoId" type="string">
+            <column name="BearingInfoId" length="45" />
+        </property>
+        <property name="expertsgradecol" type="string">
+            <column name="expertsgradecol" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>

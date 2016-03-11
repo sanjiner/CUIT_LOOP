@@ -1,0 +1,243 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+     android:background="@color/more_bg_color" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_header_hight"
+        android:gravity="center_vertical" >
+
+        <TextView 
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:text="任务书"
+		android:gravity="center"
+		android:textSize="20sp"
+		android:textColor="#FAFFFE"
+		android:background="@color/theme_color"
+		/>
+        <Button
+		    android:id="@+id/project_taskbook_back"
+		    android:layout_width="40dp"
+		    android:layout_height="@dimen/activity_head_height"
+		    android:layout_marginLeft="10dp"
+		    android:background="@drawable/selector_header_back"
+		    android:layout_gravity="left"
+		    />
+        
+        <ImageView
+            android:id="@+id/project_taskbook_edit_btn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_homework_add"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+        
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/more_bg_color" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <!-- 课题名称： -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:layout_marginTop="15dp"
+                        android:background="#FFFF"
+                         >
+
+                        <TextView
+                            android:id="@+id/project_textview1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:text="课题名称：" />
+
+                        <TextView
+                            android:id="@+id/project_taskbook_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="center_vertical|left"
+                            android:layout_toRightOf="@+id/project_textview1"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical|left"
+                            android:singleLine="true"
+                            android:textSize="15sp" />
+ 
+                </RelativeLayout>
+
+                <!-- 课题来源： -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:layout_marginTop="3dp"
+                        android:background="#FFFF"
+                         >
+
+                        <TextView
+                            android:id="@+id/project_textview2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:text="课题来源：" />
+
+                        <TextView
+                            android:id="@+id/project_taskbook_comefrom"
+                            android:layout_width="51dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="center_vertical|left"
+                            android:layout_toRightOf="@+id/project_textview2"
+                            android:gravity="center_vertical|left"
+                            android:textSize="15sp" />
+ 
+                </RelativeLayout>
+                <!-- 课题类型： -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:layout_marginTop="3dp"
+                        android:background="#FFFF"
+                         >
+
+                        <TextView
+                            android:id="@+id/project_textview3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:text="课题类型：" />
+
+                        
+ 
+                </RelativeLayout>
+                
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:background="#9999"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="3dp"
+                         >
+					<TextView
+                            android:id="@+id/project_taskbook_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|left"
+                            android:gravity="center_vertical|left"
+                            android:textSize="15sp" />
+				</RelativeLayout>
+                <!-- 选题背景及目的： -->
+
+               <RelativeLayout
+                    android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:layout_marginTop="3dp"
+                        android:background="#FFFF"
+                         >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16.5sp"
+                            android:text="选题背景及目的：" />
+
+                        
+                </RelativeLayout>
+				<RelativeLayout
+                    android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:background="#9999"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="3dp"
+                         >
+					<TextView
+                            android:id="@+id/project_taskbook_grade"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|left"
+                            android:gravity="center_vertical|left"
+                            android:textSize="15sp" />
+				</RelativeLayout>
+                <!-- 工作任务及要求： -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:layout_marginTop="3dp"
+                        android:background="#FFFF"
+                         >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16.5sp"
+                            android:text="工作任务及要求： " />
+
+                        
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:background="#9999"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="3dp"
+                         >
+					<TextView
+                            android:id="@+id/project_ataskbook_Requirement"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|left"
+                            android:gravity="center_vertical|left"
+                            android:textSize="15sp" />
+				</RelativeLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/more_bg_color" >
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_header_hight"
+        android:gravity="center_vertical" >
+ 		<TextView 
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:text="选题管理"
+		android:gravity="center"
+		android:textSize="20sp"
+		android:textColor="#FAFFFE"
+		android:background="@color/theme_color"
+		/>
+	</RelativeLayout>
+ 
+    <FrameLayout 
+	     android:layout_width="match_parent"
+	     android:layout_height="match_parent"
+	     >
+ 		
+        <com.example.PCenter.DownrefreshListView
+        	android:id="@+id/layout_topicofmanagementfragment_ListView"
+       		android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:dividerHeight="3dp"
+		    android:divider="@color/more_bg_color"		     
+		    android:padding="5dp"
+		    android:layout_marginLeft="5dp"
+		    android:layout_marginRight="5dp"
+		    android:layout_marginTop="10dp"
+        />
+ 		 <ProgressBar 
+		    android:id="@+id/layout_topicofmanagementfragment_ProgressBar"
+		    android:layout_gravity="center"
+		    android:layout_width="60dp"
+            android:layout_height="60dp"
+            />
+        <TextView 
+           	  android:id="@+id/layout_topicofmanagementfragment_TextView_NoData"
+		      android:layout_width="fill_parent"
+		      android:layout_height="wrap_content"
+		      android:text="暂无数据"
+		      android:layout_gravity="center"
+		      android:gravity="center"
+		      android:textSize="20sp"
+		      android:visibility="gone"
+		      />
+    
+        
+    </FrameLayout>
+</LinearLayout>

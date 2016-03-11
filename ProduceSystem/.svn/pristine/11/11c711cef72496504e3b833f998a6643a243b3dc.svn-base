@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 21:24:14 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.model.entity.Productinfomation" table="productinfomation" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="productNumber" type="string">
+            <column name="ProductNumber" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="productName" type="string">
+            <column name="ProductName" length="50" />
+        </property>
+        <property name="productType" type="string">
+            <column name="ProductType" length="32" />
+        </property>
+        <property name="productDescription" type="string">
+            <column name="ProductDescription" length="65535" />
+        </property>
+        <property name="addTime" type="timestamp">
+            <column name="AddTime" length="19" />
+        </property>
+        <property name="remark" type="string">
+            <column name="Remark" length="65535" />
+        </property>
+        <property name="productTypeAclass" type="string">
+            <column name="ProductTypeAclass" length="50" />
+        </property>
+        <property name="productTypeBclass" type="string">
+            <column name="ProductTypeBclass" length="50" />
+        </property>
+        <property name="productCode" type="string">
+            <column name="ProductCode" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>

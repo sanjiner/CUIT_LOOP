@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/more_bg_color"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_head_height"
+            android:background="@color/theme_color"
+            android:gravity="center"
+            android:text="成绩"
+            android:textColor="#FAFFFE"
+            android:textSize="20sp" />
+        
+        <!-- <Button
+		    android:id="@+id/more_set"
+		    android:layout_width="40dp"
+		    android:layout_height="@dimen/activity_head_height"
+		    android:layout_marginLeft="10dp"
+		    android:background="@drawable/ic_more_set"
+		    android:layout_gravity="right"
+		    /> -->
+    </FrameLayout>
+  
+    
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+
+        
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/activity_head_height"
+        android:background="@color/theme_color" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="中期检查"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/thesis_StudentHome_MidleCheck_back"
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/selector_header_back" />
+
+        <Button
+            android:id="@+id/thesis_StudentHome_MidleCheck_write"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/thesis_selector_studentedite"
+            android:text="编辑"
+            android:textColor="@color/white" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/thesis_StudentHome_MidleCheck_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/activity_ys_textcolor"
+            android:textSize="@dimen/activity_ys_textsize" 
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="总结: " />
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_MidleCheck_summary"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_thesis_edittext"
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/activity_ys_textcolor"
+            android:textSize="@dimen/activity_ys_textsize" 
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="指导情况: " />
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_MidleCheck_Direct"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shape_thesis_edittext"
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/activity_ys_textcolor"
+            android:textSize="@dimen/activity_ys_textsize" 
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="任务完成评估: " />
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_MidleCheck_Finish"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shape_thesis_edittext"
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/activity_ys_textcolor"
+            android:textSize="@dimen/activity_ys_textsize" 
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="教师指导情况: " />
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_MidleCheck_TeacherRedirect"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shape_thesis_edittext"
+            android:textSize="@dimen/activity_ys_textsize" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/thesis_StudentHome_MidleCheck_err"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:visibility="gone" />
+
+</LinearLayout>

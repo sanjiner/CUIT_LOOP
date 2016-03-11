@@ -1,0 +1,94 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/more_bg_color"
+	 >
+	<FrameLayout 
+	     android:layout_width="fill_parent"
+	     android:layout_height="wrap_content"
+	     >
+		<TextView 
+		      android:layout_width="fill_parent"
+		      android:layout_height="40dp"
+		      android:text="@string/homework"
+		      android:gravity="center"
+		      android:textSize="20sp"
+		      android:textColor="#FAFFFE"
+		      android:background="@color/theme_color"
+		      android:ellipsize="end"
+              android:singleLine="true" 
+		      
+		      />
+		<Button
+		    android:id="@+id/homework_add"
+		    android:layout_width="40dp"
+		    android:layout_height="40dp"
+		    android:layout_marginRight="10dp"
+		    android:background="@drawable/ic_homework_add"
+		    android:layout_gravity="right"
+		    />
+	</FrameLayout>
+
+	<TextView
+            android:id="@+id/homework_attendance_show_term"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_more_item_bg_bottom"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="显示当前学期"
+            android:textSize="20sp"
+            android:ellipsize="end"
+            android:singleLine="true" 
+             />
+	
+	<FrameLayout 
+	     android:layout_width="match_parent"
+	     android:layout_height="match_parent" 
+	     >
+		
+		    
+		  <com.example.PCenter.DownrefreshListView  
+
+		     android:id="@+id/homework_ListView"
+		     android:layout_width="match_parent"
+		     android:layout_height="wrap_content"
+		     android:divider="@color/more_bg_color"
+		     android:dividerHeight="5dp"
+		     android:padding="5dp"
+		     android:choiceMode="singleChoice"
+	     	 />
+	       
+		    
+		<ProgressBar 
+		    android:id="@+id/homework_progressbar"
+		    android:layout_gravity="center"
+		    android:layout_width="60dp"
+            android:layout_height="60dp"/>
+		<TextView 
+           	  android:id="@+id/withoutdata_textview_1"
+		      android:layout_width="fill_parent"
+		      android:layout_height="wrap_content"
+		      android:text="暂无数据"
+		      android:layout_gravity="center"
+		      android:gravity="center"
+		      android:textSize="20sp"
+		      />
+		<Button 
+		    android:id="@+id/homework_button_set_term"
+		    android:layout_width="fill_parent"
+		    android:layout_height="80dp"
+		    android:layout_gravity="center"
+		    android:gravity="center"
+		    android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+		    android:background="@drawable/selector_all_button"
+		    android:text="还没设置学期，点更多去设置"
+		    />
+	</FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fadingEdge="none"
+    android:fillViewport="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    android:background="@drawable/beijing1"
+        android:orientation="vertical"
+        android:paddingLeft="10.0dip"
+        android:paddingRight="10.0dip"
+        android:paddingTop="10.0dip" >
+
+        <RelativeLayout
+            android:id="@+id/setting_accountSetting_rela"
+            android:layout_width="fill_parent"
+            android:layout_height="63.0dip"
+            android:background="@drawable/common_strip_setting_top"
+            android:clickable="true"
+            android:focusable="true" >
+
+            <FrameLayout
+                android:id="@+id/frameLayout1"
+                android:layout_width="54.0dip"
+                android:layout_height="54.0dip"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10.0dip" >
+
+                <ImageView
+                    android:id="@+id/face"
+                    android:layout_width="50.0dip"
+                    android:layout_height="50.0dip"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_launcher" />
+
+                <ImageView
+                    android:id="@+id/statusIcon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="bottom|right|center"
+                    android:contentDescription="@null"
+                    android:src="@drawable/status_online" />
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10.0dip"
+                android:contentDescription="@null"
+                android:duplicateParentState="true"
+                android:src="@drawable/common_arrow_right_selector" />
+
+            <TextView
+                android:id="@+id/setting_status_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/nick"
+                android:layout_marginRight="10.0dip"
+                android:layout_toLeftOf="@id/imageView1"
+                android:duplicateParentState="true" />
+
+            <TextView
+                android:id="@+id/nick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="69.0dip"
+                android:layout_toRightOf="@id/frameLayout1"
+                android:duplicateParentState="true"
+                android:ellipsize="end"
+                android:singleLine="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="44.0dip"
+            android:background="@drawable/common_strip_setting_middle"
+            android:clickable="false"
+            android:focusable="false" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12.0dip"
+                android:duplicateParentState="true"
+                android:gravity="center_vertical"
+                android:text="@string/setting_msg_toast_v" />
+
+            <CheckBox
+                android:id="@+id/setting_msg_voice"
+                android:layout_width="80dip"
+                android:layout_height="28dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8.0dip"
+                android:background="@drawable/switch_checkbox"
+                android:button="@null"
+                android:checked="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="44.0dip"
+            android:background="@drawable/common_strip_setting_middle"
+            android:clickable="false"
+            android:focusable="false" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12.0dip"
+                android:duplicateParentState="true"
+                android:gravity="center_vertical"
+                android:text="@string/setting_msg_toast" />
+
+            <CheckBox
+                android:id="@+id/setting_vibrator_switch"
+                android:layout_width="80dip"
+                android:layout_height="28dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8.0dip"
+                android:background="@drawable/switch_checkbox"
+                android:button="@null"
+                android:checked="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="44.0dip"
+            android:background="@drawable/common_strip_setting_middle"
+            android:clickable="false"
+            android:focusable="false" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12.0dip"
+                android:duplicateParentState="true"
+                android:gravity="center_vertical"
+                android:text="@string/setting_message_notify" />
+
+            <CheckBox
+                android:id="@+id/setting_message_notify"
+                android:layout_width="80dip"
+                android:layout_height="28dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8.0dip"
+                android:background="@drawable/switch_checkbox"
+                android:button="@null"
+                android:checked="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="44.0dip"
+            android:background="@drawable/common_strip_setting_middle"
+            android:clickable="false"
+            android:focusable="false" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12.0dip"
+                android:duplicateParentState="true"
+                android:gravity="center_vertical"
+                android:text="@string/setting_auto_start" />
+
+            <CheckBox
+                android:id="@+id/setting_auto_start"
+                android:layout_width="80dip"
+                android:layout_height="28dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8.0dip"
+                android:background="@drawable/switch_checkbox"
+                android:button="@null"
+                android:checked="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="44.0dip"
+            android:background="@drawable/common_strip_setting_bottom"
+            android:clickable="false"
+            android:focusable="false" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12.0dip"
+                android:duplicateParentState="true"
+                android:gravity="center_vertical"
+                android:text="@string/setting_my_security" />
+
+            <CheckBox
+                android:id="@+id/setting_my_security"
+                android:layout_width="80dip"
+                android:layout_height="28dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8.0dip"
+                android:background="@drawable/switch_checkbox"
+                android:button="@null"
+                android:checked="true" />
+        </RelativeLayout>
+
+        <!-- LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16.0dip"
+            android:orientation="vertical" > -->
+
+            <!--
+            <RelativeLayout
+                android:id="@+id/setting_register_rela"
+                android:layout_width="fill_parent"
+                android:layout_height="44.0dip"
+                android:background="@drawable/common_strip_setting_top"
+                android:clickable="true"
+                android:focusable="true" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12.0dip"
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/setting_register" />
+
+                <ImageView
+                    android:layout_width="14.0dip"
+                    android:layout_height="14.0dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8.0dip"
+                    android:contentDescription="@string/app_name"
+                    android:duplicateParentState="true"
+                    android:src="@drawable/common_arrow_right_selector" />
+            </RelativeLayout>
+            -->
+
+            <!-- <RelativeLayout
+                android:id="@+id/setting_my_position"
+                android:layout_width="fill_parent"
+                android:layout_height="44.0dip"
+                android:layout_marginTop="15.0dp"
+                android:background="@drawable/common_strip_setting_top"
+                android:clickable="true"
+                android:focusable="true" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12.0dip"
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/setting_my_position" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="14.0dip"
+                    android:layout_height="14.0dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8.0dip"
+                    android:contentDescription="@string/app_name"
+                    android:duplicateParentState="true"
+                    android:src="@drawable/common_arrow_right_selector" />
+            </RelativeLayout> -->
+
+            <RelativeLayout
+                android:id="@+id/setting_about_rela"
+                android:layout_width="fill_parent"
+                android:layout_height="44.0dip"
+                android:layout_marginTop="16.0dp"
+                android:background="@drawable/common_strip_setting_bg"
+                android:clickable="true"
+                android:focusable="true" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="12.0dip"
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/setting_about" />
+
+                <ImageView
+                    android:layout_width="14.0dip"
+                    android:layout_height="14.0dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8.0dip"
+                    android:contentDescription="@string/app_name"
+                    android:duplicateParentState="true"
+                    android:src="@drawable/common_arrow_right_selector" />
+            </RelativeLayout>
+
+        <Button
+            android:id="@+id/setting_exit_app"
+            android:layout_width="match_parent"
+            android:layout_height="42.0dip"
+            android:layout_marginBottom="20.0dip"
+            android:layout_marginTop="15.0dip"
+            android:background="@drawable/selector_logout_btn"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</ScrollView>

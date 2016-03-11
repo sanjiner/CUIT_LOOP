@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-13 16:59:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.sys.entity.TbcuitmoonUser" table="tbcuitmoon_user" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="cuitMoonUserId" type="string">
+            <column name="CuitMoon_UserID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="cuitMoonUserName" type="string">
+            <column name="CuitMoon_UserName" length="20" not-null="true" unique="true" />
+        </property>
+        <property name="cuitMoonUserPassWord" type="string">
+            <column name="CuitMoon_UserPassWord" length="32" not-null="true" />
+        </property>
+        <property name="cuitMoonUserRealName" type="string">
+            <column name="CuitMoon_UserRealName" length="20" />
+        </property>
+        <property name="cuitMoonUserSex" type="java.lang.Long">
+            <column name="CuitMoon_UserSex" />
+        </property>
+        <property name="cuitMoonUserBirthday" type="date">
+            <column name="CuitMoon_UserBirthday" length="10" />
+        </property>
+        <property name="cuitMoonUserCellphone" type="string">
+            <column name="CuitMoon_UserCellphone" length="15" />
+        </property>
+        <property name="cuitMoonUserAddress" type="string">
+            <column name="CuitMoon_UserAddress" length="100" />
+        </property>
+        <property name="cuitMoonUserZipCode" type="string">
+            <column name="CuitMoon_UserZipCode" length="10" />
+        </property>
+        <property name="cuitMoonUserEmail" type="string">
+            <column name="CuitMoon_UserEmail" length="100" />
+        </property>
+        <property name="cuitMoonUserQq" type="string">
+            <column name="CuitMoon_UserQQ" length="12" />
+        </property>
+        <property name="cuitMoonUserMsn" type="string">
+            <column name="CuitMoon_UserMSN" length="100" />
+        </property>
+        <property name="cuitMoonUserRegTime" type="timestamp">
+            <column name="CuitMoon_UserRegTime" length="19" />
+        </property>
+        <property name="cuitMoonUserLoginCount" type="java.lang.Long">
+            <column name="CuitMoon_UserLoginCount" />
+        </property>
+        <property name="cuitMoonUserStatus" type="java.lang.Long">
+            <column name="CuitMoon_UserStatus" />
+        </property>
+        <property name="cuitMoonUserRemarks" type="string">
+            <column name="CuitMoon_UserRemarks" length="200" />
+        </property>
+        <property name="cuitMoonAreaId" type="string">
+            <column name="CuitMoon_AreaID" length="32" not-null="true" />
+        </property>
+        <property name="cuitMoonDepartmentId" type="string">
+            <column name="CuitMoon_DepartmentID" length="32" not-null="true" />
+        </property>
+        <property name="cuitMoonUserLoginStatus" type="java.lang.Long">
+            <column name="CuitMoon_UserLoginStatus" />
+        </property>
+        <set name="tbcuitmoonRoles" table="tbcuitmoon_userrole" lazy="false" cascade="save-update" inverse="true" fetch="select">
+            <key>
+                <column name="CuitMoon_UserID" not-null="true" />
+            </key>
+            <many-to-many entity-name="edu.cuit.module.sys.entity.TbcuitmoonRole">
+                <column name="CuitMoon_RoleID" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-28 16:10:35 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.auchc.entity.Bearinginfo" table="bearinginfo" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="bearingInfoId" type="string">
+            <column name="bearingInfoId" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="meteIndicatorsReason" type="string">
+            <column name="meteIndicatorsReason" length="500" />
+        </property>
+        <property name="meteIndicators" type="string">
+            <column name="meteIndicators" length="500" />
+        </property>
+        <property name="cropGrowthPeriod" type="string">
+            <column name="cropGrowthPeriod" length="20" />
+        </property>
+        <property name="startCollectionTime" type="timestamp">
+            <column name="startCollectionTime" length="19" />
+        </property>
+        <property name="endCollectionTime" type="timestamp">
+            <column name="endCollectionTime" length="19" />
+        </property>
+        <property name="qualityIdentificationNum" type="string">
+            <column name="qualityIdentificationNum" length="32" />
+        </property>
+        <property name="stationId" type="string">
+            <column name="stationId" length="32" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

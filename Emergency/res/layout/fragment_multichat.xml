@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        
+      android:background="@drawable/beijing1"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <cc.util.android.view.PullListView
+            android:id="@+id/multichat_listView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:cacheColorHint="#00000000"
+            android:divider="@null"
+            android:gravity="bottom"
+            android:scrollingCache="false" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:background="@drawable/bg_radiogroup_main"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/multichat_more_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/selector_chat_choose_more"
+                android:contentDescription="@string/app_name"
+                android:onClick="onClick" />
+
+            <CheckBox
+                android:id="@+id/multichat_keyboard_checkBox"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/selector_chat_or_voice"
+                android:button="@null"
+                android:checked="false" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:orientation="horizontal"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp" >
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp" >
+
+                    <EditText
+                        android:id="@+id/multichat_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="1dp"
+                        android:background="@drawable/linear_corner_white"
+                        android:hint=""
+                        android:padding="2dp"
+                        android:singleLine="true" />
+
+                    <Button
+                        android:id="@+id/multichat_voice_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/selector_record_button"
+                        android:text="@string/chat_voice_button"
+                        android:textColor="@color/default_textColor"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <Button
+                    android:id="@+id/multichat_send_button"
+                    android:layout_width="48dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/send_button"
+                    android:contentDescription="@string/app_name"
+                    android:onClick="onClick"
+                    android:text="@string/chat_send_button"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/multichat_more_linear"
+            android:layout_width="fill_parent"
+            android:layout_height="120dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:background="@color/white"
+            android:visibility="gone" >
+
+            <ImageButton
+                android:id="@+id/multichat_more_from_local"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="80dp" 
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/add_pic_from_local"
+                android:contentDescription="@string/app_name"
+                android:onClick="onClick" />
+
+            <ImageButton
+                android:id="@+id/multichat_more_from_camera"
+               android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="80dp"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/photo"
+                android:contentDescription="@string/app_name"
+                android:onClick="onClick" />
+            
+            <ImageButton
+                android:id="@+id/multichat_more_invite"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="80dp"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/selector_invitefriend"
+                android:contentDescription="@string/app_name"
+                android:onClick="onClick" />
+            
+            <ImageButton
+                android:id="@+id/multichat_more_check"
+              android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="80dp"
+                android:layout_marginLeft="25dp"
+                 android:layout_marginRight="10dp"
+                android:background="@drawable/selector_members"
+                android:contentDescription="@string/app_name"
+                android:onClick="onClick" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <include
+        layout="@layout/record_view"
+        android:visibility="gone" />
+
+</FrameLayout>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/activity_head_height"
+        android:background="@color/theme_color"
+        android:gravity="center"
+        android:text="@string/home"
+        android:textColor="#FAFFFE"
+        android:textSize="20sp" />
+
+    <RelativeLayout
+        android:id="@+id/thesis_stuHome_personGrade"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_ys_height"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/selector_more_term"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="个人成绩查看"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_narrow_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/thesis_stuHome_classInfo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_ys_height"
+        android:background="@drawable/selector_more_term"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="课题信息查看"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_narrow_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/thesis_stuHome_taskBook"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_ys_height"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/selector_more_term"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="任务书"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_narrow_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/thesis_stuHome_open"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_ys_height"
+        android:background="@drawable/selector_more_term"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="开题报告填写"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_narrow_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/thesis_stuHome_direct"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_ys_height"
+        android:background="@drawable/selector_more_term"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="指导报告书"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_narrow_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/thesis_stuHome_midle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_ys_height"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/selector_more_term"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="中期检查管理"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_narrow_right" />
+    </RelativeLayout>
+
+</LinearLayout>

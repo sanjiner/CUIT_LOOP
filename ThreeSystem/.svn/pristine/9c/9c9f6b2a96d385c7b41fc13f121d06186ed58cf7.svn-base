@@ -1,0 +1,55 @@
+package com.example.theses.fragments.teacher;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.exam.ThreeSystem.R;
+import com.example.PCenter.fragments.BaseFragment;
+
+public class ProjectManagementFragment extends BaseFragment implements OnItemClickListener{
+	
+	public ListView thesis_projectmanagementfragment_Listview;
+	public ProgressBar thesis_projectmanagementfragment_ProgressBar;
+	public TextView thesis_projectmanagementfragment_TextView;
+	
+	//课题管理
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.thesis_projectmanagementfragment, container, false);
+		init(view);
+		return view;
+	}
+
+	public void getViewObj(View view )
+	{
+		thesis_projectmanagementfragment_Listview=(ListView) view.findViewById(R.id.thesis_projectmanagementfragment_Listview);
+		thesis_projectmanagementfragment_ProgressBar=(ProgressBar) view.findViewById(R.id.thesis_projectmanagementfragment_ProgressBar);
+		thesis_projectmanagementfragment_TextView=(TextView) view.findViewById(R.id.thesis_projectmanagementfragment_TextView);
+		
+	}
+	public void setlistener()
+	{
+		thesis_projectmanagementfragment_Listview.setOnItemClickListener(this);
+	}
+	
+	public void init(View view )
+	{
+		getViewObj(view);
+		setlistener();
+	}
+	
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		// TODO 自动生成的方法存根
+		
+	}
+	
+}

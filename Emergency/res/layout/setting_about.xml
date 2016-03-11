@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="280dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/popup_bg"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="10dp" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:minHeight="35.0dp"
+        android:paddingLeft="5sp"
+        android:text="@string/setting_about_title"
+        android:textColor="#fff"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/popup_devider" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="5sp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/setting_about_content_name"
+        android:textColor="#fff"
+        android:textSize="18sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="5sp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/setting_about_content_version"
+        android:textColor="#fff"
+        android:textSize="18sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="5sp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/setting_about_content_right"
+        android:textColor="#fff"
+        android:textSize="18sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="5sp"
+        android:layout_marginBottom="10dp"
+        android:autoLink="email"
+        android:text="@string/setting_about_content_contact"
+        android:textColor="#fff"
+        android:textSize="18sp" />
+
+</LinearLayout>

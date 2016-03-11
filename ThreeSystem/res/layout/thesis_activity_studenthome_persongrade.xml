@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/activity_head_height"
+        android:background="@color/theme_color" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="个人成绩查看"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/thesis_stuHome_personGrade_back"
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/selector_header_back" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/thesis_stuhome_personGrade_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/thesis_stuHome_personGrade_redirect"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_ys_height"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="指导老师分数: "
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" >
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/grey" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/thesis_stuHome_personGrade_read"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_ys_height"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="评阅老师分数: "
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" >
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/grey" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/thesis_stuHome_personGrade_answer"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_ys_height"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="答辩小组分数: "
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <TextView
+            android:id="@+id/thesis_stuHome_personGrade_intGrade"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_ys_height"
+            android:layout_marginTop="20dp"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="初评总分: "
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" >
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/grey" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/thesis_stuHome_personGrade_pass"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_ys_height"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="是否通过: "
+            android:textSize="@dimen/activity_ys_textsize" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/thesis_stuHome_personGrade_err"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:visibility="gone" />
+
+</LinearLayout>

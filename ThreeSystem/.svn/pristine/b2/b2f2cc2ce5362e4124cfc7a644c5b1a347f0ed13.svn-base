@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_list_view_bg" >
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">
+		<TextView
+	        android:id="@+id/tv_more_class_listview_item_finnishing_1"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/selector_more_class_list_item_textcolor"
+	        android:padding="6dp"
+	        android:layout_marginLeft="50dp"
+	        android:textSize="15sp"/>
+		<TextView
+		    android:id="@+id/tv_more_term1_listview_item_finnishing_1"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/selector_more_class_list_item_textcolor"
+	        android:padding="6dp"
+	        android:layout_marginRight="30dp"
+	        android:layout_centerInParent="true"
+	        android:textSize="15sp"/>
+	</LinearLayout>
+<LinearLayout
+        android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">
+		<TextView
+	        android:id="@+id/tv_more_class_listview_item_finshing_isTimeOut"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/selector_more_class_list_item_textcolor"
+	        android:padding="6dp"
+	       android:layout_marginLeft="50dp"
+	        android:textSize="15sp"/>
+		<TextView
+	        android:id="@+id/tv_more_class_listview_item_finnishing_2"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/selector_more_class_list_item_textcolor"
+	        android:padding="6dp"
+	       android:layout_marginLeft="50dp"
+	        android:textSize="15sp"/>
+
+		<TextView
+	        android:id="@+id/tv_more_class_listview_item_finishing_DeadTime"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/selector_more_class_list_item_textcolor"
+	        android:padding="6dp"
+	        android:gravity="right"
+	        android:layout_marginRight="30dp"
+	        android:layout_centerInParent="true"
+	        android:textSize="15sp"/>
+	</LinearLayout>
+	<LinearLayout
+        android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">
+		<TextView
+	        android:id="@+id/tv_more_class_listview_item_finnishing_3"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/selector_more_class_list_item_textcolor"
+	        android:padding="6dp"
+	        android:layout_marginLeft="50dp"
+	        android:textSize="15sp"/>
+		<TextView
+		    android:id="@+id/tv_more_term1_listview_item_finnishing_3"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/selector_more_class_list_item_textcolor"
+	        android:padding="6dp"
+	        android:layout_marginRight="30dp"
+	        android:layout_centerInParent="true"
+	        android:textSize="15sp"/>
+	</LinearLayout>
+	
+	<ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_narrow_right" />
+</RelativeLayout>

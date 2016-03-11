@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 19:14:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.auchc.entity.ClimateQualitycertificationExperts" table="climate_qualitycertification_experts" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="expertsNum" type="string">
+            <column name="Experts_Num" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="applyBh" type="string">
+            <column name="ApplyBh" length="32" />
+        </property>
+        <property name="expertsLevel" type="string">
+            <column name="expertsLevel" length="32" />
+        </property>
+        <property name="expertsClass" type="string">
+            <column name="Experts_Class" length="32" />
+        </property>
+        <property name="remark" type="string">
+            <column name="Remark" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

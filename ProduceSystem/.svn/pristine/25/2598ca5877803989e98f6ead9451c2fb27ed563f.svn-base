@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 18:33:50 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.entm.entity.TbncpQiyeProduct" table="tbncp_qiye_product" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="productId" type="string">
+            <column name="productID" length="50" />
+            <generator class="assigned" />
+        </id>
+        <property name="qiyenum" type="string">
+            <column name="qiyenum" length="50" />
+        </property>
+        <property name="cretime" type="timestamp">
+            <column name="cretime" length="19" />
+        </property>
+        <property name="productname" type="string">
+            <column name="productname" length="50" />
+        </property>
+        <property name="productimg" type="string">
+            <column name="productimg" length="100" />
+        </property>
+        <property name="productcontent" type="string">
+            <column name="productcontent" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

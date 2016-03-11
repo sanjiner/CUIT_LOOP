@@ -1,0 +1,373 @@
+package edu.cuit.module.infom.web.controller;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import edu.cuit.common.enums.DictionaryEnum;
+import edu.cuit.common.util.Constant;
+import edu.cuit.common.util.Page;
+import edu.cuit.common.web.controller.BaseController;
+import edu.cuit.module.infom.entity.Expertmanagement;
+import edu.cuit.module.infom.service.ExpertmanagementService;
+import edu.cuit.module.sys.entity.TbcuitmoonArea;
+import edu.cuit.module.sys.entity.TbcuitmoonDictionary;
+import edu.cuit.module.sys.entity.TbcuitmoonUser;
+import edu.cuit.module.sys.entity.TbcuitmoonUserrole;
+import edu.cuit.module.sys.enums.JurCodeEnum;
+import edu.cuit.module.sys.service.TbcuitmoonAreaService;
+import edu.cuit.module.sys.service.TbcuitmoonDictionaryService;
+import edu.cuit.module.sys.service.TbcuitmoonUserService;
+import edu.cuit.module.sys.service.TbcuitmoonUserroleService;
+
+@Controller
+@RequestMapping("auth_center_info/expert_info")
+public class ExpertManagementController extends BaseController {
+	private int pageNo;
+	private int pageCountSize;
+	//@Value("#{settings['file.path']}")
+	//private String fileDirectory;
+	@Value("#{settings['image.path']}")
+	public String imgeRootPath;
+	@Value("#{settings['file.path']}")
+	public String fileRootPath;
+
+	@Autowired
+	ExpertmanagementService expertService;
+	@Autowired
+	TbcuitmoonDictionaryService dictionaryService;
+	@Autowired
+	TbcuitmoonAreaService areaService;
+	@Autowired
+	TbcuitmoonUserService userService;
+	@Autowired
+	TbcuitmoonUserroleService userRoleService;
+
+	public ExpertManagementController() {
+		pageCountSize = 20; // 页面大小
+		pageNo = 1;
+	}
+
+	private Page getExpertInfoList(String queryString, Integer pageIndex) {
+		List<?> InfoList;
+		if (pageIndex == null)
+			pageIndex = pageNo;
+		String sqlString = "from Expertmanagement"
+				+ (queryString == null ? "" : " where Expertname like '%"
+						+ queryString + "%'") + " order by addTime desc";
+		Page page = expertService.getPage(sqlString, pageIndex - 1,
+				pageCountSize);
+		InfoList = page.getPageList();
+		String[] expertTypeArray;
+		List<?> tmpList;
+		for (int i = 0; i < InfoList.size(); i++) {
+			expertTypeArray = ((Expertmanagement) InfoList.get(i))
+					.getExpertCategory().split("\\|");
+			String expertString = "";
+			for (int j = 0; j < expertTypeArray.length; j++) {
+				tmpList = dictionaryService
+						.find("from TbcuitmoonDictionary where cuitMoonDictionaryCode like '%"
+								+ StringUtils
+										.trimWhitespace(expertTypeArray[j])
+								+ "%'");
+				if (tmpList.size() > 0) {
+
+					expertString += ((TbcuitmoonDictionary) tmpList.get(0))
+							.getCuitMoonDictionaryName() + " ";
+				}
+			}
+			((Expertmanagement) InfoList.get(i))
+					.setExpertCategory(expertString);
+		}
+		return page;
+	}
+
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public String expertInfoList(
+			@RequestParam(required = false) Integer requestPageNo,
+			@RequestParam(required = false) String queryString, Model model)
+			throws UnsupportedEncodingException {
+		if (queryString != null)
+			queryString = toUTF8(queryString != null ? queryString : "");
+		Page page = getExpertInfoList(queryString, requestPageNo);
+		boolean isPaging = page.getPageList().size() > 0 ? true : false; // 是否分页
+		model.addAttribute("DataList", page);
+		model.addAttribute("isPaging", isPaging);
+		model.addAttribute("queryString", queryString);
+		return "auth_center_info/expert_info/ExpertInfoList";
+	}
+
+	@RequestMapping(value = "list", method = RequestMethod.POST)
+	public String businessInfoList(String queryString,
+			@RequestParam(required = false) Integer requestPageNo, Model model)
+			throws UnsupportedEncodingException {
+		Page page = getExpertInfoList(queryString, requestPageNo);
+		boolean isPaging = page.getPageList().size() > 0 ? true : false; // 是否分页
+		model.addAttribute("DataList", page);
+		model.addAttribute("isPaging", isPaging);
+		model.addAttribute("queryString", queryString);
+		return "auth_center_info/expert_info/ExpertInfoList";
+	}
+
+	@RequestMapping(value = "add", method = RequestMethod.GET)
+	public String expertInfoAdd(Model model, HttpSession session) {
+		checkPermissions(JurCodeEnum.ADDEXPERT.value());
+		// 专家类别
+		List<?> tmpList = dictionaryService
+				.find("from TbcuitmoonDictionary where CuitMoon_ParentDictionaryCode ='"
+						+ DictionaryEnum.EXPERTCATEGORY.value() + "'");
+		model.addAttribute("expertCategoryList", tmpList);
+		
+		////绑定专家的层次 
+		TbcuitmoonUser user_model = (TbcuitmoonUser)session.getAttribute(Constant.LOGINUSER);
+		String areaString = user_model.getCuitMoonAreaId().trim();
+		model.addAttribute("belongToMeteorologyCode", areaString);
+		if(areaString.equals("1012")){
+			model.addAttribute("expertLevel", "省级专家");
+			model.addAttribute("belongToMeteorology", "四川省");
+		}
+		else{
+			model.addAttribute("expertLevel", "基层专家");
+			List<?> areaList = areaService.find("from TbcuitmoonArea where cuitmoon_areacode = '"+ areaString +"'");
+			if(areaList.size() > 0)
+				model.addAttribute("belongToMeteorology", ((TbcuitmoonArea)areaList.get(0)).getCuitMoonAreaName());
+			else
+				model.addAttribute("belongToMeteorology", "");
+		}
+		return "auth_center_info/expert_info/ExpertInfoAdd";
+	}
+
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	@ResponseBody
+	public String add(String userName, String password, String expertname,
+			String expertLevel, String expertCategory,
+			String belongToMeteorology, String idnumber, String workUnits,
+			String schools, String tel, String educationalBackground,
+			String mailBox, String address, String postCode, String qq,
+			String expertIntroduction, String remark, String photo) {
+		
+		///查询用户名称是否唯一
+		
+		List<?> userList = userService.find(" from TbcuitmoonUser where CuitMoon_UserName = '"+userName+"'");
+		if(userList.size() > 0)
+		{
+			return "E";
+		}
+		else
+		{
+			Expertmanagement model = new Expertmanagement();
+			String primaryKey = UUID.randomUUID().toString().replace("-", "");
+			model.setExpertNo(primaryKey); // 主键
+			model.setUsername(userName);
+			String md5Password = new SimpleHash("md5", password, null, 1).toHex()
+					.toUpperCase();
+			model.setLoginPassword(md5Password);
+			model.setExpertname(expertname);
+			model.setExpertLevel(expertLevel);
+			model.setExpertCategory(expertCategory);
+			model.setBelongToMeteorology(belongToMeteorology);
+			model.setIdnumber(idnumber);
+			model.setWorkUnits(workUnits);
+			model.setSchools(schools);
+			model.setTel(tel);
+			model.setEducationalBackground(educationalBackground);
+			model.setMailBox(mailBox);
+			model.setAddress(address);
+			model.setPostCode(postCode);
+			model.setQq(qq);
+			model.setExpertIntroduction(expertIntroduction);
+			model.setRemark(remark);
+			model.setAddTime(new Date());
+			if(photo.length() > 0)
+				model.setPhoto(imageShowPath+ "/"+ photo);
+			expertService.save(model);
+			
+			////添加到用户表
+			TbcuitmoonUser user_model = new TbcuitmoonUser();
+			primaryKey = UUID.randomUUID().toString().replace("-", "");
+			user_model.setCuitMoonUserId(primaryKey);
+			user_model.setCuitMoonUserName(userName);
+			user_model.setCuitMoonUserPassWord(md5Password);
+			user_model.setCuitMoonAreaId(belongToMeteorology);
+			user_model.setCuitMoonDepartmentId("0");
+			user_model.setCuitMoonUserStatus((long)1);
+			user_model.setCuitMoonUserRemarks(userName);
+			userService.save(user_model);
+			///添加到用户权限表
+			TbcuitmoonUserrole userRole_model = new TbcuitmoonUserrole();
+			String roleID = DictionaryEnum.PROVINCALEXPERTID.toString();
+	        if (expertLevel.equals("基层专家"))
+	        {
+	        	roleID = DictionaryEnum.PRIMARYEXPERTID.toString();//基层专家
+	        }
+			userRole_model.setCuitMoonRoleId(roleID);
+			userRole_model.setCuitMoonUserId(primaryKey);
+			primaryKey = UUID.randomUUID().toString().replace("-", "");
+			userRole_model.setCuitMoonUserRoleId(primaryKey);
+			userRoleService.save(userRole_model);	
+			return "T";
+		}
+	}
+
+	@RequestMapping(value = "edit", method = RequestMethod.GET)
+	public String expertInfoEdit(@RequestParam String id, Model model,HttpServletRequest request) {
+		checkPermissions(JurCodeEnum.EDITEXPERT.value());
+		model.addAttribute("primaryKey", id);
+		Expertmanagement model_expert = expertService.get(id);
+		model.addAttribute("userName", model_expert.getUsername());
+		model.addAttribute("expertname", model_expert.getExpertname());
+		model.addAttribute("expertLevel", model_expert.getExpertLevel());
+		model.addAttribute("expertCategory", model_expert.getExpertCategory());
+		model.addAttribute("belongToMeteorology",
+				model_expert.getBelongToMeteorology());
+		model.addAttribute("idnumber", model_expert.getIdnumber());
+		model.addAttribute("workUnits", model_expert.getWorkUnits());
+		model.addAttribute("schools", model_expert.getSchools());
+		model.addAttribute("tel", model_expert.getTel());
+		model.addAttribute("educationalBackground",
+				model_expert.getEducationalBackground());
+		model.addAttribute("mailBox", model_expert.getMailBox());
+		model.addAttribute("address", model_expert.getAddress());
+		model.addAttribute("postCode", model_expert.getPostCode());
+		model.addAttribute("qq", model_expert.getQq());
+		model.addAttribute("expertIntroduction",
+				model_expert.getExpertIntroduction());
+		model.addAttribute("remark", model_expert.getRemark());
+		model.addAttribute("photo", model_expert.getPhoto());
+		
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://"
+				+ request.getServerName() + ":" + request.getServerPort()
+				+ path;
+		String imgPath =basePath + "/"+model_expert.getPhoto();
+		model.addAttribute("photoPath", imgPath);
+		
+		
+		// 专家类别
+		List<?> tmpList = dictionaryService
+				.find("from TbcuitmoonDictionary where CuitMoon_ParentDictionaryCode ='"
+						+ DictionaryEnum.EXPERTCATEGORY.value() + "'");
+		model.addAttribute("expertCategoryList", tmpList);
+		
+		List<?> areaList = areaService.find("from TbcuitmoonArea where cuitmoon_areacode = '"+ model_expert.getBelongToMeteorology() +"'");
+		if(areaList.size() > 0)
+			model.addAttribute("belongToMeteorologyName", ((TbcuitmoonArea)areaList.get(0)).getCuitMoonAreaName());
+		else
+			model.addAttribute("belongToMeteorologyName", "");
+		return "auth_center_info/expert_info/ExpertInfoEdit";
+	}
+
+	@RequestMapping(value = "edit", method = RequestMethod.POST)
+	@ResponseBody
+	// 更新
+	public String update(String primaryKey, String userName, String expertname,
+			String expertLevel, String expertCategory,
+			String belongToMeteorology, String idnumber, String workUnits,
+			String schools, String tel, String educationalBackground,
+			String mailBox, String address, String postCode, String qq,
+			String expertIntroduction, String remark, String photo) {
+		Expertmanagement model = expertService.get(primaryKey);
+		model.setExpertNo(primaryKey); // 主键
+		model.setUsername(userName);
+		model.setExpertname(expertname);
+		model.setExpertLevel(expertLevel);
+		model.setExpertCategory(expertCategory);
+		model.setBelongToMeteorology(belongToMeteorology);
+		model.setIdnumber(idnumber);
+		model.setWorkUnits(workUnits);
+		model.setSchools(schools);
+		model.setTel(tel);
+		model.setEducationalBackground(educationalBackground);
+		model.setMailBox(mailBox);
+		model.setAddress(address);
+		model.setPostCode(postCode);
+		model.setQq(qq);
+		model.setExpertIntroduction(expertIntroduction);
+		model.setRemark(remark);
+		model.setAddTime(new Date());
+		if(photo.length() > 0)
+			model.setPhoto(imageShowPath+ "/"+ photo);
+		expertService.update(model);
+		return "T";
+	}
+
+	@RequestMapping(value = "details", method = RequestMethod.GET)
+	public String details(@RequestParam String id, Model model) {
+		Expertmanagement model_expert = expertService.get(id);
+		model.addAttribute("userName", model_expert.getUsername());
+		model.addAttribute("expertname", model_expert.getExpertname());
+		model.addAttribute("expertLevel", model_expert.getExpertLevel());
+		model.addAttribute("belongToMeteorology",
+				model_expert.getBelongToMeteorology());
+		model.addAttribute("idnumber", model_expert.getIdnumber());
+		model.addAttribute("workUnits", model_expert.getWorkUnits());
+		model.addAttribute("schools", model_expert.getSchools());
+		model.addAttribute("tel", model_expert.getTel());
+		model.addAttribute("educationalBackground",
+				model_expert.getEducationalBackground());
+		model.addAttribute("mailBox", model_expert.getMailBox());
+		model.addAttribute("address", model_expert.getAddress());
+		model.addAttribute("postCode", model_expert.getPostCode());
+		model.addAttribute("qq", model_expert.getQq());
+		model.addAttribute("expertIntroduction",
+				model_expert.getExpertIntroduction());
+		model.addAttribute("remark", model_expert.getRemark());
+		String[] expertCategory = model_expert.getExpertCategory().split("\\|");
+		String ecString = "";
+		for (int i = 0; i < expertCategory.length; i++) {
+			ecString += getNameByDictionaryCode(expertCategory[i]) + " ";
+		}
+		model.addAttribute("expertCategory", ecString);
+		return "auth_center_info/expert_info/ExpertInfoDetails";
+	}
+
+	private String getNameByDictionaryCode(String code) {
+		List<?> tmpList = dictionaryService
+				.find("from TbcuitmoonDictionary where cuitMoonDictionaryCode like '%"
+						+ StringUtils.trimWhitespace(code) + "%'");
+		if (tmpList.size() > 0) {
+			return ((TbcuitmoonDictionary) tmpList.get(0))
+					.getCuitMoonDictionaryName();
+		} else
+			return "";
+	}
+
+	@RequestMapping(value = "file", method = RequestMethod.POST)
+	@ResponseBody
+	public String file( HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String fileDirectory = request.getServletContext().getRealPath(imgeRootPath);
+		return uploadFile(request, fileDirectory);
+	}
+	
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	@ResponseBody //删除
+	public String delete(String primaryKey) {
+		checkPermissions(JurCodeEnum.DELTEEXPERT.value());
+		Expertmanagement expert_model = expertService.get(primaryKey);
+		List<?> userList = userService.find(" from TbcuitmoonUser where CuitMoon_UserName = '"+expert_model.getUsername()+"'");
+		for(int i = 0; i < userList.size(); i++)
+		{
+			userService.deleteByKey(((TbcuitmoonUser)userList.get(i)).getCuitMoonUserId());
+		}
+		expertService.deleteByKey(primaryKey);
+		return "T";
+	}
+}

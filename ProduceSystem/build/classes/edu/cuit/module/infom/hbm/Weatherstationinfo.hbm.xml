@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-15 13:38:50 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.infom.entity.Weatherstationinfo" table="weatherstationinfo" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="weatherStationInfoId" type="string">
+            <column name="WeatherStationInfoID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="weatherStationId" type="string">
+            <column name="WeatherStationID" length="50" />
+        </property>
+        <property name="name" type="string">
+            <column name="Name" length="50" />
+        </property>
+        <property name="belongTo" type="string">
+            <column name="BelongTo" length="100" />
+        </property>
+        <property name="longitude" type="string">
+            <column name="Longitude" length="100" />
+        </property>
+        <property name="latitude" type="string">
+            <column name="Latitude" length="100" />
+        </property>
+        <property name="measuringelements" type="string">
+            <column name="Measuringelements" length="65535" />
+        </property>
+        <property name="remark" type="string">
+            <column name="Remark" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

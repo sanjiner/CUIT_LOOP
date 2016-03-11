@@ -1,0 +1,239 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link href="<%=basePath%>res/css/common/applay.css" rel="stylesheet"
+	type="text/css" />
+<link href="<%=basePath%>res/css/right/addandedit.css" rel="stylesheet" type="text/css" />
+<link href="<%=basePath%>res/js/jquery.uploadify/uploadify.css"
+	rel="stylesheet" type="text/css" />
+<link href="<%=basePath%>res/css/right/style.css" rel="stylesheet"
+	type="text/css" />
+<script type="text/javascript"
+	src="<%=basePath%>/res/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>/res/js/jquery.validate.min.js">
+</script>
+<script
+	src="<%=basePath%>res/js/jquery.uploadify/jquery.uploadify.min.js"
+	type="text/javascript"></script>
+	<script type="text/javascript"
+	src="<%=basePath%>/res/js/My97DatePicker/calendar.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>/res/js/My97DatePicker/WdatePicker.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>产品图片管理</title>
+<style type="text/css">
+div.wrapper {
+	position: relative;
+	width: 125px;
+	height: 125px;
+	border: 0;
+	float: left;
+	background-color: transparent;
+	text-align: center;
+}
+
+.divdelete {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1;
+	display: block;
+	width: 32px;
+	height: 32px;
+	background-image: url(<%=basePath%>/res/images/common/Close_Box_Red.gif);
+	-moz-opacity: .5;
+	filter: alpha(opacity = 100);
+}
+</style>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$("#uploadImage").uploadify({
+	    debug: false,
+	    method: 'post',
+	    height: 30,
+	    swf: '<%=basePath%>res/js/jquery.uploadify/uploadify.swf',
+	    uploader: '<%=basePath%>enterprise/pic/file',
+				//文件选择后的容器ID  
+				queueID : 'fileQueue',
+				width : 120,
+				auto : true,
+				buttonText : '上传图片',
+				fileTypeDesc : '支持的格式：',
+				fileTypeExts : '*.jpg;*.bmp;*.gif;*.png',
+				fileSizeLimit : '3072KB',
+				removeTimeout : 1,
+				multi : false, //是否支持多文件上传
+				onUploadSuccess : function(file, data, response) {
+					//alert(data);
+					if (data.toString() == 'error') {
+						alert('文件上传失败，请重新上传');
+					} else {
+						//alert(data.toString());
+						var json = eval("(" + data + ")");
+						$("#divDel").css("display","block");
+						$("#divwrapper").attr("title",json["fileName"]);
+						$("#imgProduce").attr("src",json["filePath"]);
+						var imgName = $("#divwrapper").attr("title");
+						document.getElementById('imgName').value = imgName;
+					}
+				}
+			});
+		});	
+		
+function deleImg(btnDel){
+	//向服务器发送删除图片的请求
+	$.get("<%=basePath%>enterprise/pic/image_del?fileName="
+			+ $(btnDel).parent().attr("title"), function(data) {
+		if (data.success == "true") {
+			alert("删除成功");
+			$("#divDel").css("display", "none");
+			$("#imgProduce").attr("src", "");
+		} else {
+			alert("删除失败,请重试");
+		}
+	});
+}
+
+function validate() {
+    return $("#form1").validate({
+        rules: {
+        	applyNum: { required: true },
+        },
+        messages: {
+        	applyNum: { required: "请输入图片名称"},
+        }
+    }).form();
+}
+
+function del_cert(thiz,id) {
+	if(!confirm('是否删除该图片?')){
+		return false;
+	}
+	$.ajax({
+		type:"POST",
+		url:"<%=basePath%>enterprise/pic/del_cert",
+		data:{"id":id},
+		success:function(data){
+        	 if(data.success == "true"){
+        		 alert("删除成功");
+        		 $(thiz).parent().parent().remove();
+        	 }else{
+        		 alert("删除失败");
+        	 }
+		}
+	});
+}
+
+function btnOK() {
+	if(validate()){
+		document.getElementById('form1').submit();
+	}
+}	
+
+	function back() {
+		window.location.href="<%=basePath%>enterprise/pic/list";
+	}
+	
+</script>
+</head>
+<body style="background: #edf1fc">
+<input type="hidden" id="inputHidden">
+<tr><td><input type="hidden" value="${AppleBh}" id="AppleBh"/></td></tr>
+<div style="background: #4c9ee7;width: 100%;height: 30px;margin-bottom: 5px">
+	<label style="width: auto;height: 30px;text-align: center;color: white;line-height: 30px;margin-left: 5px">认证产品列表>>图片管理</label>
+	</div>
+	<div id="div_third" style="display: block; margin: 10px">
+	<div style="width: 100%; height: 30px; line-height: 30px; background: #0090d7; padding-left: 10px; margin-top: 10dp; margin-right: 10dp">
+				<label><font color="#fff" size="+1.5"><b>已上传的图片</b></font></label>
+			</div>
+		<table class="gvtable" style="margin: 10dp">
+			<thead style="text-align: center;">
+				<tr>
+					<th>图片</th>
+					<th>图片名称</th>
+					<th>上传时间</th>
+					<th>操作</th>
+				</tr>
+			<tbody>
+				<c:if test="${piclist.size() <= 0}">
+					<tr>
+						<td colspan="5" style="margin: 5px">暂无数据</td>
+					</tr>
+				</c:if>
+				<c:forEach items="${piclist}" var="item">
+					<tr>
+						<td><img height="50px" width="50px" src="<%=path %>${item.picsrc }"></td>
+						<td>${item.picName }</td>
+						<td>${item.time }</td>
+						<td><a onclick="del_cert(this,'${item.id}')">删除</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<div style="width: 100%; height: 30px; line-height: 30px; background: #0090d7; padding-left: 10px; margin-top: 10dp; margin-right: 10dp">
+				<label><font color="#fff" size="+1.5"><b>添加图片</b></font></label>
+			</div>
+			<form id="form1" action="<%=basePath%>enterprise/pic/edit" method="post">	
+		<div>
+		<input id="imgName" name="imgName" type="hidden" value=""/>
+		<input id="applyBh" name="applyBh" type="hidden" value="${AppleBh}"/>
+		<input id="labeltype" name="labeltype" type="hidden" value="${labeltype}"/>
+		<input id="businessName" name="businessName" type="hidden" value="${businessName}"/>
+		<table  >
+		<tbody>	
+			<tr>
+				<td class="text_right">图片名称</td>
+				<td class="content_left"><input type="text" id="applyNum" name = "applyNum" /><span style="color: #FF0000">*</span></td>
+			</tr>
+			<tr>
+				<td class="text_right">图片描述</td>
+				<td class="content_left"><textarea id="applyReason" name="applyReason" rows="5" cols="50" ></textarea></td>
+			</tr>
+			<tr>
+				<td>示例图片</td>
+				<td>
+					<div id="imgContainer" style="height: auto; min-height: 190px">
+						<div id="divwrapper" class="wrapper" style="cursor: pointer;">
+							<img id="imgProduce"
+								style="width: 120px; height: 180px; margin: 5px; background: #c2c2c2; cursor: pointer;" />
+							<div onclick="deleImg(this)" class="divdelete" id="divDel"
+								style="display: none;"></div>
+						</div>
+					</div>
+					<div>
+						<div id="fileQueue"></div>
+						<div style="margin-left:5px; float: left; width: 125px;">
+							<input type="file" name="file" id="uploadImage" />
+						</div>
+					</div>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+	<br/>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" value="提交" onclick="btnOK()" class="btn_blue" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" value="返回" onclick="back()" class="btn_blue" />
+	</div>
+</form>
+			<div id="fileQueue"></div>
+		</div>
+	</div>
+</body>
+</html>

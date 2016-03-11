@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/more_bg_color" >
+    
+
+    <TextView 
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/activity_head_height"
+		android:text="@string/home"
+		android:gravity="center"
+		android:textSize="20sp"
+		android:textColor="#FAFFFE"
+		android:background="@color/theme_color"
+		/>
+<RelativeLayout
+                android:id="@+id/thesisdefense_guidescore"
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/selector_more_term"
+                android:paddingLeft="0dp"
+                android:paddingRight="15dp" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_more_version_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginStart="80dp"
+                    android:text="指导老师打分"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_narrow_right" />
+            </RelativeLayout>    
+    
+<RelativeLayout
+                android:id="@+id/thesisdefense_revscore"
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/selector_more_term"
+                android:paddingLeft="0dp"
+                android:paddingRight="15dp" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_more_version_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginStart="80dp"
+                    android:text="评阅老师打分"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_narrow_right" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/thesisdefense_teamscore"
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/selector_more_term"
+                android:paddingLeft="0dp"
+                android:paddingRight="15dp" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_more_version_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginStart="80dp"
+                    android:text="答辩小组打分"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_narrow_right" />
+            </RelativeLayout>
+    
+</LinearLayout>

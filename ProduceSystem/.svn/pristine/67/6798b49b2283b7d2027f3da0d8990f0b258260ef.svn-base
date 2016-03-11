@@ -1,0 +1,7 @@
+package edu.cuit.module.entm.web.controller;
+
+import edu.cuit.common.web.controller.BaseController;
+
+public class EnterprisePicController extends BaseController{
+	
+}

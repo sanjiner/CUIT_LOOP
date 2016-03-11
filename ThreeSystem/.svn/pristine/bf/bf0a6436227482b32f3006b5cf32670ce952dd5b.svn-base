@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/more_bg_color" >
+    
+	<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_header_hight"
+        android:gravity="center_vertical" >
+
+        <TextView 
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:text="选题管理"
+		android:gravity="center"
+		android:textSize="20sp"
+		android:textColor="#FAFFFE"
+		android:background="@color/theme_color"
+		/>
+        <Button
+		    android:id="@+id/topic_management_detail_back"
+		    android:layout_width="40dp"
+		    android:layout_height="@dimen/activity_head_height"
+		    android:layout_marginLeft="10dp"
+		    android:background="@drawable/selector_header_back"
+		    android:layout_gravity="left"
+		    />
+    </RelativeLayout>
+    
+	<ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <!-- 姓名: -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:background="#FFFF" >
+
+                        <TextView
+                            android:layout_width="51dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="16.5sp"
+                            android:text="姓名: " />
+
+                        <TextView
+                            android:id="@+id/topicmanagechoose_username"
+                            android:layout_width="match_parent"
+			                android:layout_height="match_parent"
+			                android:layout_gravity="center_vertical|left"
+			                android:gravity="center_vertical|left"
+			                android:layout_marginRight="15dp"
+                            android:textSize="15sp"
+                            />
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/et_topicmanagechoose_taskname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="0.2dp"
+                    android:background="#FFFFFF"
+                    android:hint="课题名称"
+                    android:padding="10dp"
+                    android:textSize="14sp"
+                    android:ellipsize="end"
+					android:singleLine="true" />
+
+                <!-- <EditText
+                    android:id="@+id/et_topicmanagechoose_majorsatisfy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0.2dp"
+                    android:background="#FFFFFF"
+                    android:hint="专业符合度"
+                    android:padding="10dp"
+                    android:textSize="14sp"
+                    android:ellipsize="end"
+					android:singleLine="true" /> -->
+
+                
+                <RelativeLayout
+                    android:id="@+id/et_topicmanagechoose_majorsatisfy"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_item_height"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:background="#FFFF" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textSize="16.5sp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:text="专业符合度：" />
+
+                    <TextView
+                        android:id="@+id/et_topicmanagechoose_majorsatisfy_value"
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="150dp"
+                        android:gravity="center_vertical"
+                        android:text="符合" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_item_narrow_right" />
+                </RelativeLayout>
+                
+                <RelativeLayout
+                    android:id="@+id/topicmanagechoose_difficulty"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_item_height"
+                    android:padding="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:background="#FFFF" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textSize="16.5sp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:text="选题难度：" />
+
+                    <TextView
+                        android:id="@+id/topicmanagechoose_difficulty_value"
+                        android:layout_width="51dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="150dp"
+                        android:gravity="center_vertical"
+                        android:text="偏易" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_item_narrow_right" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/topicmanagechoose_assignment"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_item_height"
+                    android:background="#FFFF"
+                    android:paddingLeft="20dp"
+                    android:padding="10dp"
+                    android:paddingRight="20dp" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:textSize="16.5sp"
+                        android:text="工作量：" />
+
+                    <TextView
+                        android:id="@+id/topicmanagechoose_assignment_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="150dp"
+                        android:gravity="center_vertical"
+                        android:text="偏小" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_item_narrow_right" />
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/topicmanagechoose_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="30dp"
+                    android:background="@drawable/selector_all_button"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="提   交"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+	
+    
+</LinearLayout>

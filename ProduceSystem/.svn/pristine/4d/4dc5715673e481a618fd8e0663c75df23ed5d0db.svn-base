@@ -1,0 +1,325 @@
+package edu.cuit.module.label.web.controller;
+
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import edu.cuit.common.util.Constant;
+import edu.cuit.common.util.DateFormat;
+import edu.cuit.common.util.Page;
+import edu.cuit.common.web.controller.BaseController;
+import edu.cuit.module.authc.service.ApplyService;
+import edu.cuit.module.label.entity.Labelapplication;
+import edu.cuit.module.label.service.LabelapplicationService;
+import edu.cuit.module.origin.entity.Productapply;
+import edu.cuit.module.origin.service.ProductapplyService;
+import edu.cuit.module.sys.entity.TbcuitmoonArea;
+import edu.cuit.module.sys.entity.TbcuitmoonDictionary;
+import edu.cuit.module.sys.entity.TbcuitmoonRole;
+import edu.cuit.module.sys.entity.TbcuitmoonUser;
+import edu.cuit.module.auchc.entity.Apply;
+import edu.cuit.module.sys.service.TbcuitmoonAreaService;
+import edu.cuit.module.sys.service.TbcuitmoonDictionaryService;
+
+@Controller
+@RequestMapping("/label/apply")
+public class ApplyLabelController extends BaseController{
+	@Value("#{settings['page.pageNo']}")
+	private int pageNo;
+	@Value("#{settings['page.pageCountSize']}")
+	private int pageCountSize;
+	@Value("#{settings['image.showpath']}")
+	public String imageShowPath;
+	
+	@Autowired
+	ApplyService applyService;
+	@Autowired
+	LabelapplicationService labelApplyService;
+	@Autowired
+	TbcuitmoonDictionaryService dictionaryService;
+	@Autowired
+	ProductapplyService productapplyService;
+	@Autowired
+	TbcuitmoonAreaService tbcuitmoonAreaService;
+	@Autowired
+	TbcuitmoonDictionaryService tbcuitmoonDictionaryService;
+	
+	//分页查询认证产品列表
+	private Page getProductApplyInfoList(String queryString, String applyType, 
+			String userName, String roleStr, Integer pageIndex) {
+		Page page;		
+		String sqlString = "";
+		if (pageIndex == null){
+			pageIndex = pageNo;
+		}	
+		//1表示气候品质认证 2表示农网认证
+		if(applyType != null && applyType.equals("2"))
+		{
+			if(roleStr.equals("商家"))
+			{
+				if(queryString == null)
+				{
+					sqlString = "from Productapply as p where p.orignStatus='100084' and p.applyPerson='"+userName+"'order by p.applyTime desc";
+				}else{
+					sqlString = "from Productapply as p where p.orignStatus='100084' and p.applyPerson='"+userName+"' and p.originName like '%" + queryString + "%'order by p.applyTime desc";
+				}	
+			}else{
+				if(queryString == null)
+				{
+					sqlString = "from Productapply as p where p.orignStatus='100084' order by p.applyTime desc";
+				}else{
+					sqlString = "from Productapply as p where p.orignStatus='100084' and p.originName like '%" + queryString + "%' order by p.applyTime desc";
+				}
+			}
+			page = productapplyService.getPage(sqlString, pageIndex-1, pageCountSize);
+		}else{
+			if(roleStr.equals("商家"))
+			{
+				if(queryString == null)
+				{
+					sqlString = "from Apply as a where a.handleResult='100084' and a.applyPerson='"+userName+"'order by a.applyTime desc";
+				}else{
+					sqlString = "from Apply as a where a.handleResult='100084' and a.applyPerson='"+userName+"' and a.productName like '%" + queryString + "%'order by a.applyTime desc";
+				}			
+			}else{
+				if(queryString == null)
+				{
+					sqlString = "from Apply as a where a.handleResult='100084' order by a.applyTime desc";
+				}else{
+					sqlString = "from Apply as a where a.handleResult='100084' and a.productName like '%" + queryString + "%' order by a.applyTime desc";
+				}
+			}
+			page = applyService.getPage(sqlString, pageIndex-1, pageCountSize);
+		}	
+		
+		
+		return page;
+	}
+	
+	//分页查询标签申请列表
+	private Page getLabelApplyInfoList(String queryString, String applyBh, Integer pageIndex){
+		Page page;
+		String sqlString = "";
+		if (pageIndex == null){
+			pageIndex = pageNo;
+		}
+		if(queryString == null || queryString.equals(""))
+		{
+			sqlString = "from Labelapplication as lmodel where lmodel.applyBh='"+applyBh+"'order by lmodel.applyTime desc";
+		}else{
+			sqlString = "from Labelapplication as lmodel where lmodel.applyBh='"+applyBh+"'and lmodel.piCi like '%"+queryString+"%'order by lmodel.applyTime desc";
+		}
+		page = labelApplyService.getPage(sqlString, pageIndex-1, pageCountSize);
+		return page;
+	}
+	
+	//查询该商家是否有认证申请
+	private String checkApplylist(String applyPerson){
+		String flag = "";
+		String hql ="from Apply as a where a.handleResult='100084' and a.applyPerson='"+applyPerson+"'";
+		List<?> list = applyService.find(hql);
+		if(list.size()>0)
+		{
+			flag = "1";
+		}else{
+			flag = "2";
+		}
+		return flag;
+	}
+	
+	@RequestMapping(value = "applylist", method = RequestMethod.GET)
+	public String applyList(@RequestParam(required = false) Integer requestPageNo, 
+			@RequestParam(required = false) String queryString, 
+			@RequestParam(required = false) String applyType, Model model, HttpSession session) {
+		if (queryString != null)
+			queryString = toUTF8(queryString != null ? queryString : "");
+		if(applyType == null)
+			applyType = "1";
+		TbcuitmoonUser user = getLoginUser(session);
+		String userName = user.getCuitMoonUserName();		
+		String roleStr = user == null ? "" : ((TbcuitmoonRole) user
+				.getTbcuitmoonRoles().toArray()[0]).getCuitMoonRoleName() + "";
+		if(roleStr.equals("商家"))
+		{
+			applyType = checkApplylist(userName);
+		}		
+		Page page = getProductApplyInfoList(queryString,applyType,userName,roleStr,requestPageNo);
+		boolean isPaging = page.getPageList().size() > 0 ? true : false; // 是否分页
+		model.addAttribute("DataList", page);
+		model.addAttribute("isPaging", isPaging);
+		model.addAttribute("queryString", queryString);
+		model.addAttribute("applyType", applyType);
+		
+		return "label/apply/ApplyList";
+	}
+	
+	@RequestMapping(value = "applylist", method = RequestMethod.POST)
+	public String applyList_post(@RequestParam(required = false) Integer requestPageNo, 
+			@RequestParam(required = false) String queryString, 
+			@RequestParam(required = false) String applyType, Model model, HttpSession session){
+		if(applyType == null)
+			applyType = "1";
+		TbcuitmoonUser user = getLoginUser(session);
+		String userName = user.getCuitMoonUserName();
+		String roleStr = user == null ? "" : ((TbcuitmoonRole) user
+				.getTbcuitmoonRoles().toArray()[0]).getCuitMoonRoleName() + "";
+		if(roleStr.equals("商家"))
+		{
+			//applyType = checkApplylist(userName);
+		}
+		Page page = getProductApplyInfoList(queryString,applyType,userName,roleStr,requestPageNo);
+		boolean isPaging = page.getPageList().size() > 0 ? true : false; // 是否分页
+		model.addAttribute("DataList", page);
+		model.addAttribute("isPaging", isPaging);
+		model.addAttribute("queryString", queryString);
+		model.addAttribute("applyType", applyType);
+		return "label/apply/ApplyList";
+	}
+
+	@RequestMapping(value = "add", method = RequestMethod.GET)
+	public String applyAdd(@RequestParam("key") String pid,
+			@RequestParam("type") String applytype, Model model,HttpSession session) {
+		String productName = "";
+		String productBrand = "";
+		String productBase = "";
+		String applyTime = "";
+		String labeltype = "";
+		String businessName = "";
+		if(applytype.equals("1"))
+		{
+			Apply amodel = applyService.get(pid);
+			productName = amodel.getProductName();
+			productBrand = amodel.getProductBrand();
+			productBase = analyzeProductBase(amodel.getProduceBase());
+			applyTime = DateFormat.getStrTime(amodel.getApplyTime(),1);
+			businessName = amodel.getUnityName();
+			labeltype = "气候品质认证";
+		}else{
+			Productapply pmodel = productapplyService.get(pid);
+			productName = pmodel.getOriginName();
+			productBrand = pmodel.getProductBrand();
+			productBase = analyzeProductBase(pmodel.getOriginAddress());
+			applyTime = DateFormat.getStrTime(pmodel.getApplyTime(),1);
+			businessName = pmodel.getApplyCompany();
+			labeltype = "农网认证";
+		}
+		model.addAttribute("applyBh", pid);
+		model.addAttribute("productName", productName);
+		model.addAttribute("productBrand", productBrand);
+		model.addAttribute("productBase", productBase);
+		model.addAttribute("applyTime", applyTime);
+		model.addAttribute("labeltype", labeltype);
+		model.addAttribute("businessName", businessName);
+		return "label/apply/Add";
+	}
+
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	public String applyAdd_post(String applyBh,String applyNum, String pici, 
+			String labeltype, String businessName, String applyReason,
+			String format, String imgName){		
+		try {
+			Labelapplication lamodel = new Labelapplication();
+			String labelApplicationId = UUID.randomUUID().toString().replace("-", "");
+			String labelMakeStatus = "1000190";
+			String labelPayment = "1000180";
+			String applyStatus = "待处理";
+			Date applyTime = new Date();
+			
+			lamodel.setLabelApplicationId(labelApplicationId);
+			lamodel.setLabelMakeStatus(labelMakeStatus);
+			lamodel.setLabelPayment(labelPayment);
+			lamodel.setApplyBh(applyBh);
+			lamodel.setApplyType(labeltype);
+			lamodel.setApplyReason(applyReason);
+			lamodel.setApplyPerson(businessName);
+			lamodel.setApplyTime(applyTime);
+			lamodel.setApplyStatus(applyStatus);
+			lamodel.setConfirmor(applyNum);
+			lamodel.setInTotal(applyNum);
+			lamodel.setPiCi(pici);
+			lamodel.setFormat(format);
+			lamodel.setImage(imageShowPath + "/" + imgName);
+			labelApplyService.save(lamodel);
+		} catch (Exception e) {
+			System.out.println(e);
+		}		
+		return "redirect:/label/apply/applylist";
+	}
+	
+	@RequestMapping(value = "look", method = RequestMethod.GET)
+	public String applyLook(@RequestParam(required = false) Integer requestPageNo, 
+			@RequestParam(required = false) String queryString, 
+			@RequestParam("key") String pid, Model model) {
+		if (queryString != null)
+			queryString = toUTF8(queryString != null ? queryString : "");
+		Page page = getLabelApplyInfoList(queryString, pid, requestPageNo);
+		boolean isPaging = page.getPageList().size() > 0 ? true : false; // 是否分页
+		for(int i=0;i<page.getPageList().size();i++)
+		{
+			String code = ((Labelapplication)(page.getPageList().get(i))).getLabelMakeStatus();
+			code = analyzeCode(code);
+			((Labelapplication)(page.getPageList().get(i))).setLabelMakeStatus(code);
+		}
+		model.addAttribute("DataList", page);
+		model.addAttribute("isPaging", isPaging);
+		model.addAttribute("queryString", queryString);
+		model.addAttribute("pid", pid);
+		return "label/apply/List";
+	}
+	
+	@RequestMapping(value = "look", method = RequestMethod.POST)
+	public String applyLook_post(@RequestParam(required = false) Integer requestPageNo, 
+			@RequestParam(required = false) String queryString, 
+			@RequestParam("key") String pid, Model model) {
+		
+		Page page = getLabelApplyInfoList(queryString, pid, requestPageNo);
+		boolean isPaging = page.getPageList().size() > 0 ? true : false; // 是否分页
+		for(int i=0;i<page.getPageList().size();i++)
+		{
+			String code = ((Labelapplication)(page.getPageList().get(i))).getLabelMakeStatus();
+			code = analyzeCode(code);
+			((Labelapplication)(page.getPageList().get(i))).setLabelMakeStatus(code);
+		}
+		model.addAttribute("DataList", page);
+		model.addAttribute("isPaging", isPaging);
+		model.addAttribute("queryString", queryString);
+		model.addAttribute("pid", pid);
+		return "label/apply/List";
+	}
+	
+	//解析产地
+	private String analyzeProductBase(String productBase){
+		String[] Info = productBase.split("\\|");
+		String shengstr = Info[0];
+		String shistr = Info[1];
+		String xianstr = Info[2];
+		String hql1 = "from TbcuitmoonArea as tbArea where tbArea.cuitMoonAreaCode='" + shengstr + "'";
+		String hql2 = "from TbcuitmoonArea as tbArea where tbArea.cuitMoonAreaCode='" + shistr + "'";
+		String hql3 = "from TbcuitmoonArea as tbArea where tbArea.cuitMoonAreaCode='" + xianstr + "'";
+		String sheng = ((TbcuitmoonArea) tbcuitmoonAreaService.find(hql1).get(0)).getCuitMoonAreaName();
+		String shi = ((TbcuitmoonArea) tbcuitmoonAreaService.find(hql2).get(0)).getCuitMoonAreaName();
+		String xian = ((TbcuitmoonArea) tbcuitmoonAreaService.find(hql3).get(0)).getCuitMoonAreaName();
+		
+		productBase = sheng + shi + xian;
+		return productBase;
+	}	
+	
+	//解析字典编码
+	private String analyzeCode(String code){
+		String name = "";
+		String hql = "from TbcuitmoonDictionary as dmodel where dmodel.cuitMoonDictionaryCode='" + code + "'";
+		name = ((TbcuitmoonDictionary)tbcuitmoonDictionaryService.find(hql).get(0)).getCuitMoonDictionaryName();
+		return name;
+	} 	
+
+}

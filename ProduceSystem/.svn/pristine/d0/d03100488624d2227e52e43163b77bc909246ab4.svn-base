@@ -1,0 +1,25 @@
+﻿.info{margin:10px 0 0 0; min-width:680px;display:inline-table; overflow:hidden;}
+.info tr td{margin:0 0 0 10px;padding:3px 5px 3px 5px;height:36px;color:#000; word-break: break-all; word-wrap:break-word;}
+.info tr td.text{width:120px;color:#000;text-align:right;font-weight:normal;font-size:12px;}
+.info tr td.value{color:#000;font-weight:normal;font-size:12px; overflow:hidden;}
+td.value .width60per{display:block;width:60%;height:20px;}
+td.value .width25per{width:25%; float:left;}
+td.value .width15per{width:15%; float:left;}
+td.value .width50per{display:block;width:50%;}
+td.value .width300{display:block;width:300px;}
+td.value .width200{display:block;width:200px;}
+td.value .width182{display:block;width:182px;}
+td.value .width100{display:block;width:100px;}
+td.value textarea{display:block;width:80%;overflow-y:visible;}
+/*td.value textarea.height160{height:160px;}*/
+.info tr td.value input.input_txt{width:80%;height:25px;line-height:25px; border:solid 1px #e4e4e4; text-indent:5px;  }
+.info tr td.value input.input_txt:hover{width:80%;height:25px;line-height:25px;border:solid 1px #bbb;text-indent:5px;}
+.info tr td.value textarea.input_area{ border:solid 1px #e4e4e4;}
+.info tr td.value textarea.input_area:hover{border:solid 1px #bbb;}
+span.required{color:#ea461e;font-size:14px;}
+.error{color:Red;font-weight:normal;font-size:12px;}
+
+.container{position:relative; height:30px;width:100px; cursor:pointer;display:block;vertical-align:middle;font-size:12px;font-weight:bold;line-height:30px;text-align:center;text-decoration:none;border-radius:5px;color:#F3F7FC;background-color:#0ba3a9; border:0;}
+.container:hover{border-color:#0a898f;color:#fff;background-color:#0ec8d1;background:-webkit-linear-gradient(top, #0fc9d2, #0ba3a9);background:-moz-linear-gradient(top, #0fc9d2, #0ba3a9);background:linear-gradient(top, #0fc9d2, #0ba3a9);}
+.file_input{position:absolute;top:0;right:0;overflow:hidden;height:26px;font-size:22px;opacity:0;cursor:pointer;filter:alpha(opacity=0);}
+.container a{color:White;font-size:12px;font-weight:bold;}

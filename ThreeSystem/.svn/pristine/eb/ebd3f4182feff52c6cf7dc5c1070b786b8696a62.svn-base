@@ -1,0 +1,203 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/more_bg_color"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_head_height"
+            android:background="@color/theme_color"
+            android:gravity="center"
+            android:text="我的"
+            android:textColor="#FAFFFE"
+            android:textSize="20sp" />
+        
+        <!-- <Button
+		    android:id="@+id/more_set"
+		    android:layout_width="40dp"
+		    android:layout_height="@dimen/activity_head_height"
+		    android:layout_marginLeft="10dp"
+		    android:background="@drawable/ic_more_set"
+		    android:layout_gravity="right"
+		    /> -->
+    </FrameLayout>
+  
+    
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+       <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+                  
+            <!-- 个人信息 -->
+
+            <RelativeLayout
+                android:id="@+id/thesis_stu_info"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/selector_more_term"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_more_userinfo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginStart="80dp"
+                    android:text="@string/more_userinfo"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_narrow_right" />
+            </RelativeLayout>
+            <!-- 修改密码 -->
+
+            <RelativeLayout
+                android:id="@+id/thesis_stu_modifypwd"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/selector_more_term"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_more_modifypwd" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginStart="80dp"
+                    android:text="@string/more_modifypwd"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_narrow_right" />
+            </RelativeLayout>
+            <!-- 关于我们 -->
+
+            <RelativeLayout
+                android:id="@+id/thesis_stu_aboutus"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/selector_more_term"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_more_aboutuse" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginStart="80dp"
+                    android:text="@string/more_aboutus"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_narrow_right" />
+            </RelativeLayout>
+            <!-- 版本 -->
+
+            <!-- <RelativeLayout
+                android:id="@+id/rl_more_version"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/selector_more_term"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:visibility="gone"  >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_more_version" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginStart="80dp"
+                    android:text="@string/more_version"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_narrow_right" />
+            </RelativeLayout> -->
+
+
+            
+            
+            <Button
+	            android:id="@+id/thesis_stu_logout"
+	            android:layout_width="match_parent"
+	            android:layout_height="44dp"
+	            android:layout_marginBottom="12dp"
+	            android:layout_marginLeft="10dip"
+	            android:layout_marginRight="10dip"
+	            android:layout_marginTop="20dp"
+	            android:background="@drawable/selector_more_logout_btn"
+	            android:text="@string/more_logout"
+	            android:textColor="@android:color/white"
+	            android:textSize="18sp" />
+        </LinearLayout>
+
+        
+    </ScrollView>
+
+</LinearLayout>

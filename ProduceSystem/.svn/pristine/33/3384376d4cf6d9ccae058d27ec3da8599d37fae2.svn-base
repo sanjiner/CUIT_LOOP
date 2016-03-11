@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 19:14:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.auchc.entity.Apply" table="apply" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="applyBh" type="string">
+            <column name="ApplyBh" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="repersentative" type="string">
+            <column name="repersentative" length="100" />
+        </property>
+        <property name="unitProperty" type="string">
+            <column name="unitProperty" length="100" />
+        </property>
+        <property name="counterMan" type="string">
+            <column name="counterMan" length="100" />
+        </property>
+        <property name="applicationType" type="string">
+            <column name="applicationType" length="32" />
+        </property>
+        <property name="honour" type="string">
+            <column name="Honour" length="65535" />
+        </property>
+        <property name="relationContact" type="string">
+            <column name="relationContact" length="50" />
+        </property>
+        <property name="countermanPhone" type="string">
+            <column name="countermanPhone" length="50" />
+        </property>
+        <property name="countermanFax" type="string">
+            <column name="countermanFax" length="50" />
+        </property>
+        <property name="location" type="string">
+            <column name="location" length="100" />
+        </property>
+        <property name="applyOriginType" type="string">
+            <column name="ApplyOriginType" length="32" />
+        </property>
+        <property name="produceBase" type="string">
+            <column name="ProduceBase" length="200" />
+        </property>
+        <property name="address" type="string">
+            <column name="Address" length="200" />
+        </property>
+        <property name="productionCharger" type="string">
+            <column name="ProductionCharger" length="50" />
+        </property>
+        <property name="applyTime" type="timestamp">
+            <column name="ApplyTime" length="19" />
+        </property>
+        <property name="contact" type="string">
+            <column name="Contact" length="20" />
+        </property>
+        <property name="phone" type="string">
+            <column name="Phone" length="20" />
+        </property>
+        <property name="fax" type="string">
+            <column name="Fax" length="20" />
+        </property>
+        <property name="email" type="string">
+            <column name="Email" length="30" />
+        </property>
+        <property name="isApplyOriginCode" type="string">
+            <column name="IsApplyOriginCode" length="32" />
+        </property>
+        <property name="productName" type="string">
+            <column name="ProductName" length="20" />
+        </property>
+        <property name="productBrand" type="string">
+            <column name="ProductBrand" length="200" />
+        </property>
+        <property name="productDescription" type="string">
+            <column name="ProductDescription" length="65535" />
+        </property>
+        <property name="productOverview" type="string">
+            <column name="ProductOverview" length="65535" />
+        </property>
+        <property name="produtOutput" type="string">
+            <column name="ProdutOutput" length="50" />
+        </property>
+        <property name="outputValue" type="string">
+            <column name="OutputValue" length="50" />
+        </property>
+        <property name="scale" type="string">
+            <column name="scale" length="50" />
+        </property>
+        <property name="regionManageOpinion" type="string">
+            <column name="RegionManageOpinion" length="200" />
+        </property>
+        <property name="regionHeader" type="string">
+            <column name="RegionHeader" length="50" />
+        </property>
+        <property name="regionAuditTime" type="timestamp">
+            <column name="RegionAuditTime" length="19" />
+        </property>
+        <property name="cityManageAudit" type="string">
+            <column name="CityManageAudit" length="200" />
+        </property>
+        <property name="cityHeader" type="string">
+            <column name="CityHeader" length="50" />
+        </property>
+        <property name="cityAuditTime" type="timestamp">
+            <column name="CityAuditTime" length="19" />
+        </property>
+        <property name="provinceManageOpinion" type="string">
+            <column name="ProvinceManageOpinion" length="200" />
+        </property>
+        <property name="provinceHeader" type="string">
+            <column name="ProvinceHeader" length="50" />
+        </property>
+        <property name="provinceAuditTime" type="timestamp">
+            <column name="ProvinceAuditTime" length="19" />
+        </property>
+        <property name="controlImplement" type="string">
+            <column name="ControlImplement" length="65535" />
+        </property>
+        <property name="number" type="java.lang.Integer">
+            <column name="Number" />
+        </property>
+        <property name="format" type="string">
+            <column name="Format" length="50" />
+        </property>
+        <property name="applyPerson" type="string">
+            <column name="ApplyPerson" length="50" />
+        </property>
+        <property name="declareStatus" type="string">
+            <column name="DeclareStatus" length="32" />
+        </property>
+        <property name="handleResult" type="string">
+            <column name="HandleResult" length="200" />
+        </property>
+        <property name="handleDescription" type="string">
+            <column name="HandleDescription" length="200" />
+        </property>
+        <property name="inTotal" type="string">
+            <column name="inTotal" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="Remark" length="200" />
+        </property>
+        <property name="isWithDraw" type="string">
+            <column name="isWithDraw" length="32" />
+        </property>
+        <property name="unityName" type="string">
+            <column name="unityName" length="200" />
+        </property>
+        <property name="commodityType" type="string">
+            <column name="commodityType" length="200" />
+        </property>
+        <property name="productScoreStatus" type="string">
+            <column name="ProductScoreStatus" length="20" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

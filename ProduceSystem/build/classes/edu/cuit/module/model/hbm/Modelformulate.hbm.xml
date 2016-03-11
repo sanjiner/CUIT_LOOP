@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 21:24:14 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.model.entity.Modelformulate" table="modelformulate" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="productApproModelId" type="string">
+            <column name="ProductApproModelId" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="productNumber" type="string">
+            <column name="ProductNumber" length="65535" />
+        </property>
+        <property name="modelType" type="string">
+            <column name="ModelType" length="32" />
+        </property>
+        <property name="modelName" type="string">
+            <column name="ModelName" length="200" not-null="true" />
+        </property>
+        <property name="modelDescription" type="string">
+            <column name="ModelDescription" length="65535"/>
+        </property>
+        <property name="remark" type="string">
+            <column name="Remark" length="65535" />
+        </property>
+        <property name="modelTypeAclass" type="string">
+            <column name="ModelTypeAclass" length="50" />
+        </property>
+        <property name="modelTypeBclass" type="string">
+            <column name="ModelTypeBclass" length="50" />
+        </property>
+        <property name="growthPeriod" type="string">
+            <column name="GrowthPeriod" length="32" />
+        </property>
+        <property name="element" type="string">
+            <column name="Element" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>

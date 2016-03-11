@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:focusable="true"  
+    android:background="@color/more_bg_color"
+   	>
+   	
+    <FrameLayout 
+	     android:layout_width="fill_parent"
+	     android:layout_height="wrap_content"
+	     >
+		<TextView 
+		      android:layout_width="fill_parent"
+		      android:layout_height="@dimen/activity_head_height"
+		      android:text="@string/other_giveScore_title"
+		      android:gravity="center"
+		      android:textSize="20sp"
+		      android:textColor="#FAFFFE"
+		      android:background="@color/theme_color"
+		      />
+		<Button
+		    android:id="@+id/home_other_givescore_back"
+		    android:layout_width="40dp"
+		    android:layout_height="@dimen/activity_head_height"
+		    android:layout_marginLeft="10dp"
+		    android:background="@drawable/selector_header_back"
+		    android:layout_gravity="left"
+		    />
+	</FrameLayout>
+	
+	<LinearLayout 
+	    android:id="@+id/home_other_givescore_linear"
+	    android:layout_width="match_parent"
+	    android:layout_height="40dp"
+	    android:layout_marginTop="15dp"
+	    android:layout_marginLeft="10dp"
+	    android:orientation="horizontal"
+	    >
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="40dp"
+	        android:textSize="20sp"
+	        android:text="@string/other_giveScore_please"
+	        />
+	    <TextView 
+	        android:id="@+id/home_other_givescore_studentName"
+	        android:layout_width="wrap_content"
+	        android:layout_height="40dp"
+	        android:textSize="20sp"
+	        android:text="某人"
+	        />
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="40dp"
+	        android:textSize="20sp"
+	        android:text="@string/other_giveScore_title"
+	        />
+	</LinearLayout>
+	
+	<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <SeekBar
+            android:id="@+id/home_other_givescore_seekbar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:max="4"
+            android:padding="6dp"
+            android:progress="2"
+            android:layout_toLeftOf="@+id/home_other_givescore_score"
+            android:textColor="@color/selector_more_class_list_item_textcolor"
+            android:textSize="50sp"
+            android:progressDrawable="@drawable/seekbar_style"  
+        	android:thumb="@drawable/selector_thumb" />
+
+
+        <EditText
+            android:id="@+id/home_other_givescore_score"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:editable="false"
+            android:text="C"
+            android:background="@drawable/shape_greay_boarder"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+	
+	<EditText
+	    android:id="@+id/home_other_give_Desc"
+	    android:layout_width="fill_parent"
+	    android:layout_height="50dp"
+	    android:background="@drawable/shape_addhomework_edittext"
+	    android:hint="输入打分原因"
+	    />
+	
+	<Button
+	    android:id="@+id/home_other_givescore_submit"
+	    android:layout_width="fill_parent"
+	    android:layout_height="40dp"
+	    android:layout_marginTop="20dp"
+	    android:background="@drawable/selector_all_button"
+	    android:text="@string/other_giveScore_Submit"
+	    />
+    	
+</LinearLayout>

@@ -1,0 +1,71 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="<%=basePath%>res/css/right/style.css" rel="stylesheet"
+	type="text/css" />
+
+<title>新闻</title>
+<style type="text/css">
+body {
+	font-family: "黑体";
+}
+
+.container {
+	width: 100%;
+	margin: 0 auto;
+}
+
+a {
+	display: inline-block;
+	width: 50px;
+	float: inherit;
+}
+</style>
+</head>
+
+<body style="background: #edf1fc;">
+<div style="background: #4c9ee7;width: 100%;height: 30px;margin-bottom: 5px">
+	<label style="width: auto;height: 30px;text-align: center;color: white;line-height: 30px;margin-left: 5px">企业个性化管理>>新闻管理>>新闻详情</label>
+	</div>
+	<form id="form1" action="<%=basePath%>enterprise/news/add"
+		method="post">
+		<center>
+			<table style="margin-top: 20px">
+				<tr>
+					<td>标题：</td>
+					<td style="width: 500px; margin: 5px">${news.newstitle }</td>
+				</tr>
+				<tr>
+					<td>内容：</td>
+					<td style="width: 500px; margin: 5px">${news.newscontent}</td>
+				</tr>
+				<tr>
+					<td>添加时间：</td>
+					<td style="width: 500px; margin: 5px">${news.cretime}</td>
+				</tr>
+				<tr>
+					<td>添加人：</td>
+					<td style="width: 500px; margin: 5px"><fmt:formatDate
+							value="${item.cretime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+				</tr>
+			</table>
+			<div style="text-align: center; width: 550px; margin-top: 10px">
+				<a style="width: 100px" class="btn_blue"
+					href="<%=basePath%>enterprise/news/list">返回</a>
+			</div>
+	</form>
+	</center>
+</body>
+
+</html>

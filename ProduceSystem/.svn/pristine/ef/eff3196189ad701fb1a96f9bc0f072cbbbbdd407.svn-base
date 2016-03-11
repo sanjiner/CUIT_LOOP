@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 22:06:25 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.origin.entity.Certificate" table="certificate" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="certificateId" type="string">
+            <column name="CertificateID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="certificateName" type="string">
+            <column name="CertificateName" length="100" />
+        </property>
+        <property name="pictureUrl" type="string">
+            <column name="PictureUrl" length="65535" />
+        </property>
+        <property name="getTime" type="string">
+            <column name="GetTime" length="50" />
+        </property>
+        <property name="awardDepart" type="string">
+            <column name="AwardDepart" length="100" />
+        </property>
+        <property name="remark" type="string">
+            <column name="Remark" length="65535" />
+        </property>
+        <property name="originId" type="string">
+            <column name="OriginID" length="32" />
+        </property>
+        <property name="campanyNo" type="string">
+            <column name="CampanyNo" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>

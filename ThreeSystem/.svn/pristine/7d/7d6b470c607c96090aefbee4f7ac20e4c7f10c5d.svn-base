@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+      <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/activity_head_height"
+        android:background="@color/theme_color" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="开题报告"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/thesis_StudentHome_OpenReport_back"
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/selector_header_back" />
+   <Button
+       android:id="@+id/thesis_StudentHome_OpenReport_write"
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="10dp"
+            android:drawableTop="@drawable/selector_ys_write"
+            android:background="@color/theme_color"
+       />
+        </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/thesis_StudentHome_OpenReport_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_OpenReport_Title"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_ys_height"
+            android:background="@drawable/ic_more_item_bg_bottom"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="标题: "
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_OpenReport_BackGround"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_ys_height"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_more_item_bg_bottom"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="背景: "
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_OpenReport_Thought"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_ys_height"
+            android:background="@drawable/ic_more_item_bg_bottom"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="思路: "
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_OpenReport_Progress"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_ys_height"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_more_item_bg_bottom"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="进度: "
+            android:textSize="@dimen/activity_ys_textsize" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/thesis_StudentHome_OpenReport_err"
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/thesis_StudentHome_OpenReport_ok"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/selector_all_button"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+    
+
+</LinearLayout>

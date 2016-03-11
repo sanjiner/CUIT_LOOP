@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 20:41:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.label.entity.Labelidmanage" table="labelidmanage" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="labelId" type="string">
+            <column name="LabelId" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="productName" type="string">
+            <column name="ProductName" length="50" />
+        </property>
+        <property name="companyName" type="string">
+            <column name="CompanyName" length="50" />
+        </property>
+        <property name="certificateName" type="string">
+            <column name="CertificateName" length="50" />
+        </property>
+        <property name="applyBh" type="string">
+            <column name="ApplyBh" length="32" />
+        </property>
+        <property name="originId" type="string">
+            <column name="OriginID" length="32" />
+        </property>
+        <property name="labelType" type="string">
+            <column name="LabelType" length="32" />
+        </property>
+        <property name="manufactureTime" type="timestamp">
+            <column name="ManufactureTime" length="19" />
+        </property>
+        <property name="labelStatus" type="string">
+            <column name="LabelStatus" length="32" />
+        </property>
+        <property name="scanTimes" type="java.lang.Integer">
+            <column name="ScanTimes" />
+        </property>
+        <property name="remark" type="string">
+            <column name="Remark" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_height="match_parent" 
+ android:layout_width="fill_parent"
+ >
+ 
+<LinearLayout 
+ 
+ android:layout_height="match_parent" 
+ android:layout_width="fill_parent"
+ android:layout_gravity="bottom"
+ android:alpha="0.8"
+ android:orientation="vertical"
+ android:background="@drawable/beijing1"
+
+>
+<ImageView
+    android:layout_height="1350dp"
+    android:layout_width="fill_parent"
+   android:src="@drawable/beijing1"/>
+    
+</LinearLayout>
+
+ <LinearLayout 
+     android:layout_height="match_parent" 
+ android:layout_width="fill_parent">
+ <LinearLayout 
+ android:orientation="vertical"
+ android:layout_height="wrap_content" 
+ android:layout_width="fill_parent"
+ android:background="@drawable/beijing"
+ android:alpha="0.9"
+ android:layout_gravity="bottom"
+ android:layout_marginBottom="150dp">
+ 
+     
+<TextView
+    android:id="@+id/dialogtext"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+	android:text="等待对方视频接听中. . ."
+	android:textColor="@color/white"
+	android:layout_gravity="center"
+	android:textSize="25sp"
+/>
+ 
+ 
+ <!-- 确认按钮 -->
+ <ImageButton 
+     android:layout_marginTop="20dp"
+  android:id="@+id/btn_ok" 
+  android:layout_height="match_parent"
+  android:layout_width="match_parent" 
+  android:background="@drawable/jieting" />
+ 
+ <!-- 取消按钮 -->
+ <ImageButton 
+  android:layout_marginTop="20dp"
+  android:id="@+id/btn_cancel" 
+  android:layout_height="match_parent"
+  android:layout_width="match_parent" 
+  android:background="@drawable/guaduan" />
+ 
+ 
+    </LinearLayout>s
+    
+
+</LinearLayout>
+</FrameLayout>

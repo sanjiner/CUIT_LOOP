@@ -1,0 +1,14 @@
+package com.example.process;
+
+import com.example.PCenter.BaseActivity;
+
+import android.os.Bundle;
+
+public class ExamRecordActivity extends BaseActivity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+	}
+}

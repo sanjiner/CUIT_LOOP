@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 20:41:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.label.entity.Payrecord" table="payrecord" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="payRecordId" type="string">
+            <column name="payRecordID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="payPerson" type="string">
+            <column name="payPerson" length="100" />
+        </property>
+        <property name="inTotal" type="string">
+            <column name="inTotal" length="50" />
+        </property>
+        <property name="payTime" type="timestamp">
+            <column name="payTime" length="19" />
+        </property>
+        <property name="payType" type="string">
+            <column name="payType" length="32" />
+        </property>
+        <property name="payId" type="string">
+            <column name="pay_ID" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>

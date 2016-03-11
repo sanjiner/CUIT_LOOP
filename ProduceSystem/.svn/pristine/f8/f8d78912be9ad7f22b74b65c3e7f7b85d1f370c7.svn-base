@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 19:14:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.auchc.entity.IdentificationRecord" table="identification_record" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="recordNum" type="string">
+            <column name="Record_Num" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="applyBh" type="string">
+            <column name="ApplyBh" length="32" />
+        </property>
+        <property name="fileCode" type="string">
+            <column name="FileCode" length="50" />
+        </property>
+        <property name="projectName" type="string">
+            <column name="ProjectName" length="50" />
+        </property>
+        <property name="archivePeople" type="string">
+            <column name="ArchivePeople" length="10" />
+        </property>
+        <property name="filingTime" type="string">
+            <column name="FilingTime" length="10" />
+        </property>
+        <property name="remark" type="string">
+            <column name="Remark" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

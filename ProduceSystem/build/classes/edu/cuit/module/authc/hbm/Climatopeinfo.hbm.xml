@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-6-15 21:45:53 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.auchc.entity.Climatopeinfo" table="climatopeinfo" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="climatopeInfoNo" type="string">
+            <column name="climatopeInfoNo" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="meteorologicalfactor" type="string">
+            <column name="meteorologicalfactor" length="20" />
+        </property>
+        <property name="symbol" type="string">
+            <column name="symbol" length="20" />
+        </property>
+        <property name="unit" type="string">
+            <column name="unit" length="10" />
+        </property>
+        <property name="avgValues" type="string">
+            <column name="avg_values" length="5000" />
+        </property>
+        <property name="months" type="string">
+            <column name="months" length="5000" />
+        </property>
+        <property name="years" type="string">
+            <column name="years" length="50" />
+        </property>
+        <property name="qualityIdentificationNum" type="string">
+            <column name="QualityIdentificationNum" length="32" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

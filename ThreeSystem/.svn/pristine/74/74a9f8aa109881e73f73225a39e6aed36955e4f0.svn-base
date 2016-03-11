@@ -1,0 +1,20 @@
+package com.example.thesis.student.activity;
+
+import com.exam.ThreeSystem.R;
+import com.example.PCenter.BaseActivity;
+
+import android.os.Bundle;
+import android.widget.ListView;
+
+public class Thesis_StudentHome_GuideContentActivity extends BaseActivity{
+	private ListView lv;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.thesis_activity_studenthome_guidecontent);
+		initView();
+	}
+	private void initView() {
+	//	lv = (ListView) findViewById(R.id.)
+	}
+}

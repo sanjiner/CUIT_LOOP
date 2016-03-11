@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 20:41:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.label.entity.Labermanagement" table="labermanagement" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="labelId" type="string">
+            <column name="LabelID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="labelStyle" type="string">
+            <column name="LabelStyle" length="10" />
+        </property>
+        <property name="labelQueryId" type="string">
+            <column name="LabelQueryID" length="16" />
+        </property>
+        <property name="originId" type="string">
+            <column name="OriginID" length="32" />
+        </property>
+        <property name="labelKinds" type="string">
+            <column name="LabelKinds" length="32" />
+        </property>
+        <property name="scanNum" type="java.lang.Integer">
+            <column name="ScanNum" />
+        </property>
+        <property name="productInformation" type="string">
+            <column name="ProductInformation" length="100" />
+        </property>
+        <property name="companyImation" type="string">
+            <column name="CompanyImation" length="100" />
+        </property>
+        <property name="certificateImation" type="string">
+            <column name="CertificateImation" length="50" />
+        </property>
+        <property name="makeTime" type="timestamp">
+            <column name="MakeTime" length="19" />
+        </property>
+        <property name="labelStatus" type="string">
+            <column name="LabelStatus" length="32" />
+        </property>
+        <property name="reark" type="string">
+            <column name="Reark" length="65535" />
+        </property>
+        <property name="applyOriginType" type="string">
+            <column name="ApplyOriginType" length="32" />
+        </property>
+        <property name="applyOriginCode" type="string">
+            <column name="ApplyOriginCode" length="32" />
+        </property>
+        <property name="applyBh" type="string">
+            <column name="ApplyBh" length="32" />
+        </property>
+        <property name="abnormal" type="string">
+            <column name="Abnormal" length="10" />
+        </property>
+        <property name="abnormalType" type="string">
+            <column name="AbnormalType" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

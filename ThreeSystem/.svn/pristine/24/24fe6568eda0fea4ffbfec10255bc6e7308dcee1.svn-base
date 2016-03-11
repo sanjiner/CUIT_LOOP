@@ -1,0 +1,192 @@
+package com.example.PCenter;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import com.exam.ThreeSystem.R;
+
+public class Homework_finishList_work extends BaseActivity implements OnClickListener{
+	private String WorkName;
+	private String WorkDesc;
+	private String WorkScore;
+	private String DeadTime;
+	private String WorkMemo;
+	private SharedPreferences sp;
+	private String FILE = Constant.USERINFO_SP;
+	private TextView homeworkDetail_title;
+	private TextView homeworkDetail_manfen;
+	private TextView homeworkDetail_guoqi;
+	private TextView homeworkDetail_text_content;//作业内容描述
+	private TextView homeworkDetail_note;
+	private TextView homework_isouttime_textview;
+	private TextView homeworkDetail_datetime;
+	private Button homework_homeworkDetail_back;
+	private LinearLayout stu_work_daan_linearlayout;
+	private LinearLayout allscore_LinearLayout;
+	private LinearLayout stu_ImageView_LinearLayout;
+	private EditText homeworkDetail_edit;
+	private Button homeworkDetail_content;
+	private Button homework_homeworkDetail_submit;
+	private TextView homeworkDetail_teacher;
+	private LinearLayout homeworkDetail_teacher_LinearLayout;
+	private Thread mThread;
+	private String URL="http://222.18.158.198:8016";
+	private String realurl;
+	private static ImageView stu_homework_image_view;
+	private String WorkURL;
+	private Bitmap bitmap;
+	private static final int MSG_SUCCESS = 0;// 获取图片成功的标识
+	private static final int MSG_FAILURE = 1;// 获取图片失败的标识
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_homework_homeworkdetail);
+		mActivity = this;
+		TAG = mActivity.getClass().getSimpleName();
+		sp = mActivity.getSharedPreferences(FILE, Context.MODE_PRIVATE);
+		getViewObj();
+		setListener();
+		getdata();
+		setText();
+		getimage();
+		
+	}
+	private void getViewObj()
+	{
+		homeworkDetail_datetime=(TextView) findViewById(R.id.homeworkDetail_datetime);
+		homeworkDetail_title=(TextView) findViewById(R.id.homeworkDetail_title);
+		homeworkDetail_manfen=(TextView) findViewById(R.id.homeworkDetail_manfen);
+		homeworkDetail_guoqi=(TextView) findViewById(R.id.homeworkDetail_guoqi);
+		homeworkDetail_text_content=(TextView) findViewById(R.id.homeworkDetail_text_content);
+		homeworkDetail_note=(TextView) findViewById(R.id.homeworkDetail_note);
+		homework_homeworkDetail_back=(Button) findViewById(R.id.homework_homeworkDetail_back);
+		stu_work_daan_linearlayout=(LinearLayout) findViewById(R.id.stu_work_daan_linearlayout);
+		homeworkDetail_edit=(EditText) findViewById(R.id.homeworkDetail_edit);
+		homeworkDetail_content=(Button) findViewById(R.id.homeworkDetail_content);
+		homeworkDetail_teacher=(TextView) findViewById(R.id.homeworkDetail_teacher);
+		homework_homeworkDetail_submit=(Button) findViewById(R.id.homework_homeworkDetail_submit);
+		homework_isouttime_textview=(TextView) findViewById(R.id.homework_isouttime_textview);
+		allscore_LinearLayout=(LinearLayout) findViewById(R.id.allscore_LinearLayout);
+		homeworkDetail_teacher_LinearLayout=(LinearLayout) findViewById(R.id.homeworkDetail_teacher_LinearLayout);
+		homeworkDetail_teacher_LinearLayout.setVisibility(View.GONE);
+		stu_ImageView_LinearLayout=(LinearLayout) findViewById(R.id.stu_ImageView_LinearLayout);
+		stu_homework_image_view=(ImageView) findViewById(R.id.stu_homework_image_view);
+		allscore_LinearLayout.setVisibility(View.GONE);
+		homeworkDetail_guoqi.setVisibility(View.GONE);
+		homework_isouttime_textview.setVisibility(View.GONE);
+		homework_homeworkDetail_submit.setVisibility(View.GONE);
+		homeworkDetail_edit.setVisibility(View.INVISIBLE);
+		homeworkDetail_edit.setVisibility(View.GONE);
+		homeworkDetail_content.setVisibility(View.GONE);
+		homeworkDetail_teacher.setVisibility(View.GONE);
+		stu_work_daan_linearlayout.setVisibility(View.INVISIBLE);
+		stu_work_daan_linearlayout.setVisibility(View.GONE);
+	}
+	
+	private void setListener()
+	{
+		homework_homeworkDetail_back.setOnClickListener(this);
+	}
+	
+	private void getdata()
+	{
+		WorkName=Homework_tea_class_list_activity.WorkName;
+		WorkDesc=Homework_tea_class_list_activity.WorkDesc;
+		WorkScore=Homework_tea_class_list_activity.WorkScore;
+		DeadTime=Homework_tea_class_list_activity.DeadTime;
+		WorkMemo=Homework_tea_class_list_activity.Memo;
+		WorkURL=Homework_tea_class_list_activity.WorkURL;
+		if(WorkURL.equals(""))
+		{
+			stu_ImageView_LinearLayout.setVisibility(View.GONE);
+		}
+		realurl=URL+WorkURL;
+	}
+	private void setText()
+	{
+		homeworkDetail_title.setText(WorkName);
+		homeworkDetail_datetime.setText(DeadTime);
+		homeworkDetail_text_content.setText(WorkDesc);
+		homeworkDetail_note.setText(WorkMemo);
+	}
+	@Override
+	public void onClick(View v) {
+		// TODO 自动生成的方法存根
+		switch(v.getId())
+		{
+		case R.id.homework_homeworkDetail_back:
+		{
+			finish();
+		}
+		break;
+		}
+		
+	}
+	
+	public void show_click(View v){
+	     startActivity(new Intent(this,ImageShower_detail.class));
+	    }
+	
+	private void getimage()
+	{
+		mThread = new Thread(runnable);
+		mThread.start();
+		System.out.println(realurl);
+		 
+
+	}
+	
+	Runnable runnable = new Runnable()
+	{
+
+		@Override
+		public void run() {
+			// TODO 自动生成的方法存根
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpGet httpGet = new HttpGet(realurl);
+//			final Bitmap bitmap;
+			try
+			{
+				HttpResponse httpResponse = httpClient.execute(httpGet);
+				bitmap = BitmapFactory.decodeStream(httpResponse.getEntity().getContent());
+			}
+			catch(Exception e)
+			{
+				mHandler.obtainMessage(MSG_FAILURE).sendToTarget();
+				return;
+			}
+			mHandler.obtainMessage(MSG_SUCCESS, bitmap).sendToTarget();
+		}
+		
+	};
+	private static  Handler mHandler = new Handler()
+	{
+		public void handleMessage(Message msg)
+		{
+			switch (msg.what)
+			{
+			case MSG_SUCCESS:
+				stu_homework_image_view.setImageBitmap((Bitmap) msg.obj);
+				break;
+			case MSG_FAILURE:
+				break;
+			}
+		}
+	};
+}

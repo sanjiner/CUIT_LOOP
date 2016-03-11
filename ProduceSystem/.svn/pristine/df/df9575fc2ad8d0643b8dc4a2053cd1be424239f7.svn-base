@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-13 16:59:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.sys.entity.TbcuitmoonDictionary" table="tbcuitmoon_dictionary" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="cuitMoonDictionaryId" type="string">
+            <column name="CuitMoon_DictionaryID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="cuitMoonDictionaryName" type="string">
+            <column name="CuitMoon_DictionaryName" length="65535" not-null="true" />
+        </property>
+        <property name="cuitMoonDictionaryCode" type="java.lang.Long">
+            <column name="CuitMoon_DictionaryCode" not-null="true" />
+        </property>
+        <property name="cuitMoonParentDictionaryCode" type="java.lang.Long">
+            <column name="CuitMoon_ParentDictionaryCode" />
+        </property>
+        <property name="cuitMoonDictionaryOrderNum" type="java.lang.Integer">
+            <column name="CuitMoon_DictionaryOrderNum" />
+        </property>
+        <property name="cuitMoonDictionaryRemarks" type="string">
+            <column name="CuitMoon_DictionaryRemarks" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

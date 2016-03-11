@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#fff" />
+
+    <RadioGroup
+        android:id="@+id/main_radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:padding="2dp"
+        android:background="@drawable/bg_radiogroup_main"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="0sp"
+            android:visibility="invisible" />
+
+        <RadioButton
+            android:id="@+id/main_radio_message"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:background="@drawable/selector_main_radio_bg"
+            android:button="@drawable/selector_main_radio_message"
+            android:checked="true"
+            android:gravity="center"
+            android:textSize="0sp" />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:textSize="0sp"
+            android:visibility="invisible" />
+
+        <RadioButton
+            android:id="@+id/main_radio_contact"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:background="@drawable/selector_main_radio_bg"
+            android:button="@drawable/selector_main_radio_contact"
+            android:gravity="center"
+            android:textSize="0sp" />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:textSize="0sp"
+            android:visibility="invisible" />
+
+        <RadioButton
+            android:id="@+id/main_radio_setting"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:background="@drawable/selector_main_radio_bg"
+            android:button="@drawable/selector_main_radio_seeting"
+            android:gravity="center"
+            android:textSize="0sp" />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="0sp"
+            android:visibility="invisible" />
+    </RadioGroup>
+
+</LinearLayout>

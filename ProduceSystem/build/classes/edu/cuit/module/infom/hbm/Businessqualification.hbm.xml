@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-5-14 17:06:53 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.infom.entity.Businessqualification" table="businessqualification" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="businessId" type="string">
+            <column name="BusinessID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="Name" length="50" />
+        </property>
+        <property name="awardTime" type="string">
+            <column name="awardTime" length="50" />
+        </property>
+        <property name="publishUnit" type="string">
+            <column name="publishUnit" length="100" />
+        </property>
+        <property name="picUrl" type="string">
+            <column name="picUrl" length="500" />
+        </property>
+        <property name="companyNo" type="string">
+            <column name="CompanyNo" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>

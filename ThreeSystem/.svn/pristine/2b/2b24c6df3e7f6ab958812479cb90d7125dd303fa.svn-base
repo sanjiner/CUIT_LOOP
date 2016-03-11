@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="menu_textcolor_unselect">#c3c2c2</color>
+    <color name="menu_textcolor_select">#FFFFFF</color>
+    <color name="theme_color">#1979CA</color>
+    <color name="header_text_color">#FFFFFF</color>
+    <color name="more_bg_color">#E6E6E6</color>
+    <color name="more_verson_text_color">#929292</color>
+    <!--  下拉刷新-->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="grey">#CCCCCC</color>
+    
+    <!-- ys -->
+      <color name="activity_ys_textcolor">#808080</color>  
+ 
+</resources>

@@ -1,0 +1,233 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/more_bg_color"
+    android:orientation="vertical" >
+    
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+        
+        
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_head_height"
+            android:background="@color/theme_color"
+            android:gravity="center"
+            android:text="个人信息"
+            android:textColor="#FAFFFE"
+            android:textSize="20sp" />
+        <Button
+		    android:id="@+id/personal_information_back"
+		    android:layout_width="40dp"
+		    android:layout_height="@dimen/activity_head_height"
+		    android:layout_marginLeft="10dp"
+		    android:background="@drawable/selector_header_back"
+		    android:layout_gravity="left"
+		    />
+
+
+     </FrameLayout>
+     
+    
+    <LinearLayout
+            android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/more_bg_color"
+        android:orientation="vertical" >
+        
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="0dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="0dp" >
+            
+             <TextView
+                 android:layout_width="51dp"
+                 android:layout_height="match_parent"
+                 android:background="#a9a9a9"
+                 android:gravity="center_vertical|left"
+                 android:padding="0dp"
+                 android:textSize="16.5dip"
+                 android:text="姓名："
+                 />
+
+             <TextView
+                 android:id="@+id/personal_information_name"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center_vertical|left"
+                 android:gravity="center_vertical|left"
+                 android:layout_marginRight="0dp"
+                 android:background="#fff"
+                 android:textSize="13sp"
+                 />
+
+            </LinearLayout>
+        
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="0dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="0dp" >
+            
+             <TextView
+                 android:layout_width="51dp"
+                 android:layout_height="match_parent"
+                 android:background="#a9a9a9"
+                 android:gravity="center_vertical|left"
+                 android:padding="0dp"
+                 android:textSize="16.5dip"
+                 android:text="学院：" />
+
+             <TextView
+                 android:id="@+id/personal_information_School"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center_vertical|left"
+                 android:layout_marginRight="0dp"
+                 android:gravity="center_vertical|left"
+                 android:background="#fff" />
+
+            </LinearLayout>
+            
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="0dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="0dp" >
+            
+             <TextView
+                 android:layout_width="51dp"
+                 android:layout_height="match_parent"
+                 android:background="#a9a9a9"
+                 android:gravity="center_vertical|left"
+                 android:padding="0dp"
+                 android:textSize="16.5dip" 
+                 android:text="性别："/>
+
+             <TextView
+                 android:id="@+id/personal_information_sex"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center_vertical|left"
+                 android:gravity="center_vertical|left"
+                 android:layout_marginRight="0dp"
+                 android:background="#fff" />
+
+            </LinearLayout>
+            
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="0dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="0dp" >
+            
+             <TextView
+                 android:layout_width="51dp"
+                 android:layout_height="match_parent"
+                 android:background="#a9a9a9"
+                 android:gravity="center_vertical|left"
+                 android:padding="0dp"
+                 android:textSize="16.5dip"
+                 android:text="年龄：" />
+
+             <TextView
+                 android:id="@+id/personal_information_age"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center_vertical|left"
+                 android:gravity="center_vertical|left"
+                 android:layout_marginRight="0dp"
+                 android:background="#fff" />
+
+            </LinearLayout>
+            
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="0dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="0dp" >
+            
+             <TextView
+                 android:layout_width="51dp"
+                 android:layout_height="match_parent"
+                 android:background="#a9a9a9"
+                 android:gravity="center_vertical|left"
+                 android:padding="0dp"
+                 android:textSize="16.5dip" 
+                 android:text="电话："/>
+
+             <TextView
+                 android:id="@+id/personal_information_telephone"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center_vertical|left"
+                 android:gravity="center_vertical|left"
+                 android:layout_marginRight="0dp"
+                 android:background="#fff" />
+
+            </LinearLayout>
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="0dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="0dp" >
+            
+             <TextView
+                 android:layout_width="51dp"
+                 android:layout_height="match_parent"
+                 android:background="#a9a9a9"
+                 android:gravity="center_vertical|left"
+                 android:padding="0dp"
+                 android:textSize="16.5dip" 
+                 android:text="邮箱："/>
+
+             <TextView
+                 android:id="@+id/personal_information_Email"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center_vertical|left"
+                 android:gravity="center_vertical|left"
+                 android:layout_marginRight="0dp"
+                 android:background="#fff" />
+
+            </LinearLayout>
+            
+            
+            
+        </LinearLayout>
+        
+
+</LinearLayout>

@@ -1,0 +1,91 @@
+package com.example.process.fragments;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+
+import com.exam.ThreeSystem.R;
+import com.example.PCenter.fragments.BaseFragment;
+import com.trinea.connect.AdManager;
+import com.trinea.connect.br.AdSize;
+import com.trinea.connect.br.AdView;
+import com.trinea.connect.br.AdViewListener;
+
+public class YuekaoFragmentProcess extends BaseFragment implements OnClickListener{
+
+	private RelativeLayout tadayExam,historyExam;
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		
+		View view = inflater.inflate(R.layout.activity_process_yuekao, container, false);
+		mActivity = getActivity();
+		AdManager.getInstance(mActivity).init("4927c476dbf90a2a", "44ed53fa4ed9e50a", true);
+		init(view);
+		return view;
+	}
+	
+	private void init(View view)
+	{
+		Youmi(view);
+		getViewObj(view);
+	}
+
+	private void Youmi(View view)
+	{
+		// 实例化广告条
+		AdView adView = new AdView(mActivity, AdSize.FIT_SCREEN);
+		// 获取要嵌入广告条的布局
+		LinearLayout adLayout=(LinearLayout)view.findViewById(R.id.process_yuekao_adLayout);
+		// 将广告条加入到布局中
+		adLayout.addView(adView);
+		
+		adView.setAdListener(new AdViewListener() {
+		    @Override
+		    public void onSwitchedAd(AdView adView) {
+		        //Toast.makeText(mActivity, "切换广告并展示", Toast.LENGTH_SHORT).show();
+		    }
+		    @Override
+		    public void onReceivedAd(AdView adView) {
+		        // 请求广告成功
+		    	//Toast.makeText(mActivity, "请求广告成功", Toast.LENGTH_SHORT).show();
+		    }
+		    @Override
+		    public void onFailedToReceivedAd(AdView adView) {
+		        // 请求广告失败
+		    	//Toast.makeText(mActivity, "请求广告失败", Toast.LENGTH_SHORT).show();
+		    }
+		});
+	}
+	
+	private void getViewObj(View view)
+	{
+		tadayExam = (RelativeLayout) view.findViewById(R.id.process_today_exam);
+		historyExam = (RelativeLayout) view.findViewById(R.id.process_history_exam);
+		setListener();
+	}
+	
+
+	private void setListener()
+	{
+		tadayExam.setOnClickListener(this);
+		historyExam.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.process_today_exam:
+			
+			break;
+		case R.id.process_history_exam:
+			
+			break;
+		}
+	}
+}

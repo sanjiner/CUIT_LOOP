@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-7-8 17:46:03 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.model.entity.Growthelement" table="growthelement" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="growthElemId" type="string">
+            <column name="growthElemId" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="growthId" type="string">
+            <column name="growthId" length="32" />
+        </property>
+        <property name="elementNumber" type="string">
+            <column name="elementNumber" length="32" />
+        </property>
+        <property name="elementValue" type="string">
+            <column name="elementValue" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

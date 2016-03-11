@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 20:41:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.label.entity.Labelapplication" table="labelapplication" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="labelApplicationId" type="string">
+            <column name="LabelApplicationId" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="labelMakeStatus" type="string">
+            <column name="LabelMakeStatus" length="100" />
+        </property>
+        <property name="labelPayment" type="string">
+            <column name="LabelPayment" length="100" />
+        </property>
+        <property name="paymentTime" type="timestamp">
+            <column name="PaymentTime" length="19" />
+        </property>
+        <property name="labelStyle" type="string">
+            <column name="LabelStyle" length="100" />
+        </property>
+        <property name="receiveStatus" type="string">
+            <column name="ReceiveStatus" length="32" />
+        </property>
+        <property name="applyType" type="string">
+            <column name="applyType" length="32" />
+        </property>
+        <property name="applyBh" type="string">
+            <column name="ApplyBh" length="32" />
+        </property>
+        <property name="applyReason" type="string">
+            <column name="ApplyReason" length="200" />
+        </property>
+        <property name="applyStatus" type="string">
+            <column name="ApplyStatus" length="32" />
+        </property>
+        <property name="applyPerson" type="string">
+            <column name="ApplyPerson" length="50" />
+        </property>
+        <property name="applyTime" type="timestamp">
+            <column name="ApplyTime" length="19" />
+        </property>
+        <property name="confirmor" type="string">
+            <column name="Confirmor" length="50" />
+        </property>
+        <property name="confirmTime" type="timestamp">
+            <column name="ConfirmTime" length="19" />
+        </property>
+        <property name="inTotal" type="string">
+            <column name="inTotal" length="50" />
+        </property>
+        <property name="piCi" type="string">
+            <column name="PiCi" length="50" />
+        </property>
+        <property name="format" type="string">
+        	<column name="Format" length="50"/>
+        </property>
+        <property name="image" type="string">
+        	<column name="Image" length="200"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 20:41:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.label.entity.Labelproviderecord" table="labelproviderecord" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="receiveId" type="string">
+            <column name="ReceiveId" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="applyBh" type="string">
+            <column name="ApplyBh" length="32" />
+        </property>
+        <property name="receiveAmount" type="int">
+            <column name="ReceiveAmount" not-null="true" />
+        </property>
+        <property name="receivePerson" type="string">
+            <column name="ReceivePerson" length="50" />
+        </property>
+        <property name="receiveTime" type="timestamp">
+            <column name="ReceiveTime" length="19" />
+        </property>
+        <property name="originId" type="string">
+            <column name="OriginID" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>

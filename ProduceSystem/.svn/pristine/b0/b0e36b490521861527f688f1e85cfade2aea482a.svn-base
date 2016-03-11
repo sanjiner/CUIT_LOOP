@@ -1,0 +1,254 @@
+package edu.cuit.module.authc.web.controller;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.WebUtils;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import edu.cuit.common.util.Page;
+import edu.cuit.common.web.controller.BaseController;
+import edu.cuit.module.auchc.entity.Apply;
+import edu.cuit.module.auchc.entity.Bearinginfo;
+import edu.cuit.module.auchc.entity.Expertsgrade;
+import edu.cuit.module.auchc.entity.QualityIdentification;
+import edu.cuit.module.auchc.entity.Reportinfomation;
+import edu.cuit.module.auchc.entity.Reportinfomationother;
+import edu.cuit.module.authc.service.ApplyService;
+import edu.cuit.module.authc.service.BearinginfoService;
+import edu.cuit.module.authc.service.ExpertsgradeService;
+import edu.cuit.module.authc.service.QualityIdentificationService;
+import edu.cuit.module.authc.service.ReportinfomationService;
+import edu.cuit.module.authc.service.ReportinfomationotherService;
+
+@Controller
+@RequestMapping("quality_archive")
+public class QualityArchiveController extends BaseController {
+	@Value("#{settings['page.pageNo']}")
+	private int pageNo;
+	@Value("#{settings['page.pageCountSize']}")
+	private int pageCounSize;
+	@Value("#{settings['image.showpath']}")
+	public String imageShowPath;
+	@Value("#{settings['file.showpath']}")
+	public String fileShowPath;
+	@Value("#{settings['file.path']}")
+	public String fileRootPath;
+
+	@Autowired
+	ApplyService applyService;
+	@Autowired
+	ExpertsgradeService gradeService;
+	@Autowired
+	QualityIdentificationService qualityService;
+	@Autowired
+	BearinginfoService bearService;
+	@Autowired
+	ReportinfomationService reportService;
+	@Autowired
+	ReportinfomationotherService otherService;
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping("list")
+	public String list(@RequestParam(required = false) Integer requsetPageNo,
+			String key, Model model) throws UnsupportedEncodingException {
+		Page page;
+		if (requsetPageNo == null) {
+			requsetPageNo = pageNo;
+		}
+		String hql = "from Apply where productScoreStatus = '110013'";
+		if (key != null && key != "") {
+			hql += " and productName like '%" + key + "%'";
+		}
+		page = applyService.getPage(hql, pageNo - 1, pageCounSize);
+		for (Apply apply : (List<Apply>) page.getPageList()) {
+			List<Reportinfomation> r_list = (List<Reportinfomation>) reportService
+					.find("from Reportinfomation where applyBh = ?",
+							apply.getApplyBh());
+			if (r_list != null && r_list.size() > 0) {
+				apply.setHandleDescription(r_list.get(0).getHeadleAgency());
+			}
+		}
+		model.addAttribute("applyPage", page);
+		return "quality_archive/list";
+	}
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping("add")
+	public String add(String applyBh, Model model, HttpSession session) {
+		// 评分信息
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		QualityIdentification quality = null;
+		List<QualityIdentification> q_list = (List<QualityIdentification>) qualityService
+				.find("from QualityIdentification where applyBh = ?", applyBh);
+		if (q_list.size() > 0) {
+			quality = q_list.get(0);
+		}
+		// 获取生育期信息
+		List<Bearinginfo> b_list = (List<Bearinginfo>) bearService.find(
+				"from Bearinginfo where qualityIdentificationNum = ?",
+				quality == null ? "" : quality.getQualityIdentificationNum());
+		for (int i = 0; i < b_list.size(); i++) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("name", b_list.get(i).getCropGrowthPeriod());
+			map.put("start", b_list.get(i).getStartCollectionTime());
+			map.put("end", b_list.get(i).getEndCollectionTime());
+			map.put("id", b_list.get(i).getBearingInfoId());
+			list.add(map);
+			List<Expertsgrade> grades = (List<Expertsgrade>) gradeService.find(
+					"from Expertsgrade where bearingInfoId = ?", b_list.get(i)
+							.getBearingInfoId());
+			map.put("grades", grades);
+		}
+		model.addAttribute("applyBh", applyBh);
+		model.addAttribute("list", list);
+
+		Apply apply = applyService.get(applyBh);
+		model.addAttribute("apply", apply);
+		model.addAttribute("user", getLoginUser(session));
+		return "quality_archive/add";
+	}
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping("details")
+	public String details(String applyBh, Model model, HttpSession session) {
+		// 评分信息
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		QualityIdentification quality = null;
+		List<QualityIdentification> q_list = (List<QualityIdentification>) qualityService
+				.find("from QualityIdentification where applyBh = ?", applyBh);
+		if (q_list.size() > 0) {
+			quality = q_list.get(0);
+		}
+		// 获取生育期信息
+		List<Bearinginfo> b_list = (List<Bearinginfo>) bearService.find(
+				"from Bearinginfo where qualityIdentificationNum = ?",
+				quality == null ? "" : quality.getQualityIdentificationNum());
+		for (int i = 0; i < b_list.size(); i++) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("name", b_list.get(i).getCropGrowthPeriod());
+			map.put("start", b_list.get(i).getStartCollectionTime());
+			map.put("end", b_list.get(i).getEndCollectionTime());
+			map.put("id", b_list.get(i).getBearingInfoId());
+			list.add(map);
+			List<Expertsgrade> grades = (List<Expertsgrade>) gradeService.find(
+					"from Expertsgrade where bearingInfoId = ?", b_list.get(i)
+							.getBearingInfoId());
+			map.put("grades", grades);
+		}
+		model.addAttribute("applyBh", applyBh);
+		model.addAttribute("list", list);
+
+		List<Reportinfomation> r_list = (List<Reportinfomation>) reportService
+				.find("from Reportinfomation where applyBh = ?", applyBh);
+		model.addAttribute("report", r_list.get(0));
+		Apply apply = applyService.get(applyBh);
+		model.addAttribute("apply", apply);
+		model.addAttribute("user", getLoginUser(session));
+		List<Reportinfomationother> other = (List<Reportinfomationother>) otherService
+				.find("from Reportinfomationother where ReportBh = ?", r_list
+						.get(0).getReportBh());
+		model.addAttribute("other", other);
+		return "quality_archive/details";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	public Map<String, String> add(HttpServletRequest request,
+			HttpSession session) {
+		Map<String, String> map = new HashMap<String, String>();
+		String applyId = WebUtils.findParameterValue(request, "applyId");
+		Apply apply = applyService.get(applyId);
+		Reportinfomation info = new Reportinfomation(UUID.randomUUID()
+				.toString().replace("-", ""));
+		info.setAddPerson(getLoginUserName());
+		info.setApplyBh(applyId);
+		info.setApproveAgency(WebUtils.findParameterValue(request,
+				"approveAgenct"));
+		info.setHeadleAgency(WebUtils.findParameterValue(request,
+				"handelAgency"));
+		info.setApproveConclusion(WebUtils.findParameterValue(request,
+				"conclusion"));
+		info.setApprovelevel(WebUtils.findParameterValue(request, "level"));
+		info.setRemark(WebUtils.findParameterValue(request, "remark"));
+		//String a = WebUtils.findParameterValue(request, "url");
+		//info.setAttachmentUrl(imageShowPath + "/"+WebUtils.findParameterValue(request, "url"));
+		info.setAttachmentUrl(WebUtils.findParameterValue(request, "url"));
+        //info.setCertificateImage(imageShowPath + "/"+WebUtils.findParameterValue(request,"imgCertificate"));
+		info.setCertificateImage(WebUtils.findParameterValue(request,"imgCertificate"));
+		String  reportUrl = WebUtils.findParameterValue(request,
+				"reportUrl");
+		if(reportUrl.equals(null))
+			reportUrl="";
+		info.setCertificateAttachment(fileShowPath+"/"+reportUrl.substring(reportUrl.lastIndexOf("/")+1));
+		info.setIfOther(WebUtils.findParameterValue(request,"reportName"));
+		info.setAreaInfomation(apply.getAddress());
+		info.setProductInfomantion(apply.getProductName());
+		info.setProducerImation(apply.getApplyPerson());
+		info.setReportAddTime(new Date(System.currentTimeMillis()));
+
+		String json = WebUtils.findParameterValue(request, "language");
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			JsonNode node = mapper.readTree(json);
+			for (int i = 0; i < node.size(); i++) {
+				JsonNode child = node.get(i);
+				Reportinfomationother other = new Reportinfomationother(UUID
+						.randomUUID().toString().replace("-", ""),
+						info.getReportBh());
+				other.setAddPerson(getLoginUserName());
+				other.setApproveAgency(child.get("approve").asText());
+				other.setApproveConclusion(child.get("conclusion").asText());
+				other.setApprovelevel(child.get("level").asText());
+				other.setAreaInfomation(child.get("address").asText());
+				other.setCertificateAttachment(info.getCertificateAttachment());
+				other.setCertificateImage(info.getCertificateImage());
+				other.setHeadleAgency(child.get("handel").asText());
+				other.setLanguageType(child.get("language").asText());
+				other.setProducerImation(child.get("company").asText());
+				other.setProductInfomantion(child.get("name").asText());
+				other.setRemark(child.get("remark").asText());
+				other.setReportAddTime(new Date(System.currentTimeMillis()));
+				otherService.save(other);
+			}
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+
+		reportService.save(info);
+		// 设置归档状态:待归档
+		apply.setDeclareStatus("100029");
+		applyService.update(apply);
+		map.put("success", "true");
+		return map;
+	}
+
+	@RequestMapping(value = "file", method = RequestMethod.POST)
+	@ResponseBody
+	public String file(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		String fileDirectory = request.getServletContext().getRealPath(fileRootPath);
+		return uploadFile(request,fileDirectory, false);
+	}
+}

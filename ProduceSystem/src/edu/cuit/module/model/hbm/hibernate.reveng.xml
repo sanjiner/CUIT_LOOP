@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="ProduceSystem" match-name="productinfomation"/>
+  <table-filter match-catalog="ProduceSystem" match-name="modelformulate"/>
+  <table-filter match-catalog="ProduceSystem" match-name="elementinfomation"/>
+  <table-filter match-catalog="ProduceSystem" match-name="elementmodel"/>
+  <table-filter match-catalog="ProduceSystem" match-name="approvemodelmanage"/>
+</hibernate-reverse-engineering>

@@ -1,0 +1,17 @@
+.button {
+	border-style: none;
+	border-color: inherit;
+	border-width: medium;
+	width: 90px;
+	height: 28px;
+	line-height: 28px;
+	color: #ffffff;
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	padding: 0px;
+	margin: 0px;
+	vertical-align: middle;
+	background: url(/ProduceSystem/res/images/common/button.gif) no-repeat;
+	cursor: pointer;
+}

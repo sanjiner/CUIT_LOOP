@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-13 16:59:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.sys.entity.TbcuitmoonInformation" table="tbcuitmoon_information" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="cuitMoonInformationId" type="string">
+            <column name="CuitMoon_InformationID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="cuitMoonInformationContent" type="string">
+            <column name="CuitMoon_InformationContent" length="65535" />
+        </property>
+        <property name="cuitMoonInformationFrom" type="string">
+            <column name="CuitMoon_InformationFrom" length="20" />
+        </property>
+        <property name="cuitMoonInformationTo" type="string">
+            <column name="CuitMoon_InformationTo" length="20" />
+        </property>
+        <property name="cuitMoonInformationSendTime" type="timestamp">
+            <column name="CuitMoon_InformationSendTime" length="19" />
+        </property>
+        <property name="cuitMoonInformationStatus" type="java.lang.Long">
+            <column name="CuitMoon_InformationStatus" />
+        </property>
+    </class>
+</hibernate-mapping>

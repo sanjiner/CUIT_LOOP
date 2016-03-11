@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-13 16:59:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.sys.entity.TbcuitmoonJurisdiction" table="tbcuitmoon_jurisdiction" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="cuitMoonJurisdictionId" type="string">
+            <column name="CuitMoon_JurisdictionID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="cuitMoonJurisdictionName" type="string">
+            <column name="CuitMoon_JurisdictionName" length="50" not-null="true" />
+        </property>
+        <property name="cuitMoonJurisdictionCode" type="string">
+            <column name="CuitMoon_JurisdictionCode" length="50" not-null="true" />
+        </property>
+        <property name="cuitMoonModuleId" type="string">
+            <column name="CuitMoon_ModuleID" length="32" not-null="true" />
+        </property>
+        <property name="cuitMoonJurisdictionStatus" type="java.lang.Long">
+            <column name="CuitMoon_JurisdictionStatus" />
+        </property>
+        <property name="cuitMoonJurisdictionOrderNum" type="java.lang.Integer">
+            <column name="CuitMoon_JurisdictionOrderNum" />
+        </property>
+        <property name="cuitMoonJurisdictionDescription" type="string">
+            <column name="CuitMoon_JurisdictionDescription" length="200" />
+        </property>
+        <property name="cuitMoonJurisdictionRemarks" type="string">
+            <column name="CuitMoon_JurisdictionRemarks" length="200" />
+        </property>
+        
+        <set name="tbcuitmoonRoles" table="tbcuitmoon_rolejurisdiction" fetch="select">
+            <key>
+                <column name="CuitMoon_JurisdictionID" not-null="true" />
+            </key>
+            <many-to-many entity-name="edu.cuit.module.sys.entity.TbcuitmoonRole">
+                <column name="CuitMoon_RoleID" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

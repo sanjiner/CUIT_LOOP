@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/invite_swiperefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/beijing1"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            
+            <EditText
+                android:id="@+id/room_name"
+           
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="新建群组名" />
+            
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >                
+
+                <cc.util.android.view.InnerExpandableListView
+                    android:id="@+id/invite_expandedlistview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="#fff"
+                    android:dividerHeight="1dp"
+                    android:fadingEdge="none"
+                    android:footerDividersEnabled="false"
+                    android:groupIndicator="@null"
+                    android:headerDividersEnabled="false"
+                    android:scrollingCache="false" />
+
+                <cc.util.android.view.InnerListView
+                    android:id="@+id/invite_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@drawable/press"
+                    android:dividerHeight="1dp"
+                    android:fadingEdge="none"
+                    android:visibility="gone"
+                    android:headerDividersEnabled="false"
+                    android:scrollingCache="false" />
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.v4.widget.SwipeRefreshLayout>

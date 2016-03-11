@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="HelloTitle">等待对方打开摄像头</string>
+    <string name="endCall1">结束通话</string>
+    
+    
+    <string name="app_name">应急通讯</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="next">下一项</string>
+    <string name="dialoghint">新建群组名</string>
+    
+    <!-- 登录界面  -->
+    <string name="login_button_login">登&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;录</string>
+	<string name="login_prompt">正在登录......</string>
+	<string name="login_save_passwd">记住密码</string>
+	<string name="login_hide">隐身登录</string>
+	
+	<!-- 联系人界面 -->
+    <string name="roster_friend">联&#160;&#160;系&#160;&#160;人</string>
+    <string name="roster_group">群&#160;&#160;&#160;&#160;&#160;&#160;组</string>
+    <string name="roster_group_create">点击创建群聊会话</string>
+    
+    
+    <!-- 聊天界面 -->
+    <string name="chat_send_button">发&#160;&#160;送</string>
+    <string name="chat_voice_button">录&#160;&#160;音</string>
+    
+    <!-- 设置界面 -->
+    <string name="setting_msg_toast_v">消息提示音</string>
+    <string name="setting_friend_status">好友上下线提醒</string>
+    <string name="setting_message_notify">新消息通知</string>
+    <string name="setting_msg_toast">消息振动提示</string>
+    <string name="setting_auto_reconnect">断线自动重连</string>
+    <string name="setting_auto_start">开机启动</string>
+    <string name="setting_my_security">安全监测</string>
+    <string name="setting_about">关于</string>
+    <string name="setting_about_title">关于软件:</string>
+    <string name="setting_about_content_name">软件名称：应急通讯</string>
+    <string name="setting_about_content_version">软件版本：version 1.0</string>
+    <string name="setting_about_content_right">软件所有权：Copyright © 2014 wangcccong. All Rights Reserved.</string>
+    <string name="setting_about_content_contact">problem：wangcccong@gmail.com</string>
+    
+    <!-- 异地登录提示界面 -->
+    <string name="conflict_title">警&#160;&#160;&#160;&#160;告</string>
+    <string name="conflict_content">你的账号在另一地登录，请注意账号安全，如果有必要请修改密码</string>
+    <string name="conflict_logout">退&#160;&#160;&#160;&#160;出</string>
+    <string name="conflict_re_login">重新登录</string>
+
+</resources>

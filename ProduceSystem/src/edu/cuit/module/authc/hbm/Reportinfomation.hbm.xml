@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 19:14:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.auchc.entity.Reportinfomation" table="reportinfomation" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="reportBh" type="string">
+            <column name="ReportBh" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="applyBh" type="string">
+            <column name="ApplyBh" length="32" />
+        </property>
+        <property name="productInfomantion" type="string">
+            <column name="ProductInfomantion" length="100" />
+        </property>
+        <property name="producerImation" type="string">
+            <column name="ProducerImation" length="100" />
+        </property>
+        <property name="areaInfomation" type="string">
+            <column name="AreaInfomation" length="100" />
+        </property>
+        <property name="approvelevel" type="string">
+            <column name="Approvelevel" length="50" />
+        </property>
+        <property name="approveConclusion" type="string">
+            <column name="ApproveConclusion" length="200" />
+        </property>
+        <property name="headleAgency" type="string">
+            <column name="HeadleAgency" length="50" />
+        </property>
+        <property name="approveAgency" type="string">
+            <column name="ApproveAgency" length="50" />
+        </property>
+        <property name="reportAddTime" type="timestamp">
+            <column name="ReportAddTime" length="19" />
+        </property>
+        <property name="addPerson" type="string">
+            <column name="AddPerson" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="Remark" length="200" />
+        </property>
+        <property name="attachmentUrl" type="string">
+            <column name="AttachmentURL" length="200" />
+        </property>
+        
+        <property name="certificateImage" type="string">
+            <column name="certificateImage" length="200" />
+        </property>
+        <property name="certificateAttachment" type="string">
+            <column name="certificateAttachment" length="200" />
+        </property>
+        <property name="ifOther" type="string">
+            <column name="If_other" length="32" />
+        </property>
+        <property name="languageType" type="string">
+            <column name="languageType" length="20" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/activity_head_height"
+        android:background="@color/theme_color" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="任务书填写"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/thesis_StudentHome_Taskbook_Write_back"
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/selector_header_back" />
+
+        <Button
+            android:id="@+id/thesis_StudentHome_TaskBook_Write_submit"
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/thesis_selector_studentedite"
+            android:text="提交"
+            android:textColor="@color/white" />
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="课题来源: "
+        android:textColor="@color/activity_ys_textcolor"
+        android:textSize="15sp" />
+
+    <RadioGroup
+        android:id="@+id/thesis_StudentHome_Taskbook_Write_taskSource"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+
+            <RadioButton
+                android:id="@+id/thesis_StudentHome_Taskbook_Write_rb1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="科研项目" />
+
+            <RadioButton
+                android:id="@+id/thesis_StudentHome_Taskbook_Write_rb2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生产实践" />
+
+
+            <RadioButton
+                android:id="@+id/thesis_StudentHome_Taskbook_Write_rb3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自选题目" />
+
+            <RadioButton
+                android:id="@+id/thesis_StudentHome_Taskbook_Write_rb4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="其他" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="课题类型: "
+        android:textColor="@color/activity_ys_textcolor"
+        android:textSize="15sp" />
+
+    <RadioGroup
+        android:id="@+id/thesis_StudentHome_Taskbook_Write_taskType"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+
+            <RadioButton
+                android:id="@+id/thesis_StudentHome_Taskbook_Write_rb11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="理论研究" />
+
+            <RadioButton
+                android:id="@+id/thesis_StudentHome_Taskbook_Write_rb22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="科学实验" />
+
+
+            <RadioButton
+                android:id="@+id/thesis_StudentHome_Taskbook_Write_rb33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="设计开发" />
+
+            <RadioButton
+                android:id="@+id/thesis_StudentHome_Taskbook_Write_rb44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="其他" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:text="选题背景及目的: "
+        android:textColor="@color/activity_ys_textcolor"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/thesis_StudentHome_TaskBook_Write_BackgroundAndGoal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_thesis_edittext"
+        android:gravity="top"
+        android:hint="请填写选题背景及目的" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:text="工作任务及要求: "
+        android:textColor="@color/activity_ys_textcolor"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/thesis_StudentHome_TaskBook_Write_TaskAndRequire"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_thesis_edittext"
+        android:gravity="top"
+        android:hint="请填工作任务及要求" />
+
+</LinearLayout>

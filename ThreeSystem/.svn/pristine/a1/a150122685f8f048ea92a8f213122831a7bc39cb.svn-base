@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_list_view_bg" >
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">
+	    <LinearLayout 
+	        android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	   		android:orientation="horizontal">
+			<TextView
+		        android:id="@+id/tv_record2_class_listview_item"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:textColor="@color/selector_more_class_list_item_textcolor"
+		        android:padding="6dp"
+		        android:layout_marginLeft="10dp"
+		        android:textSize="20sp"/>
+			<TextView
+		        android:id="@+id/tv_record2_TeacherName_listview_item"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:textColor="@color/selector_more_class_list_item_textcolor"
+		        android:padding="6dp"
+		        android:layout_marginLeft="50dp"
+		        android:textSize="20sp"/>
+		</LinearLayout>
+		<TextView
+		    android:id="@+id/tv_record2_term_listview_item"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="right"
+	        android:layout_marginRight="10dp"
+	        android:textColor="@color/selector_more_class_list_item_textcolor"
+	        android:padding="6dp"
+	        android:layout_centerInParent="true"
+	        android:textSize="15sp"/>
+	</LinearLayout>
+</RelativeLayout>

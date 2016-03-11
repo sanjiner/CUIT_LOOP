@@ -1,0 +1,13 @@
+.bread{
+	background-color: #0090D7;
+}
+.bread ul{
+	list-style-type: none;
+	margin:0px;
+	padding: 0px 10px;
+}
+.bread ul li{
+	color: #FFF;
+	line-height:30px;
+	display: inline;
+}

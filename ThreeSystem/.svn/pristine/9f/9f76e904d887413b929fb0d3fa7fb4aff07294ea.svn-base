@@ -1,0 +1,872 @@
+package com.example.PCenter;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.http.Header;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.FileEntity;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
+
+import cn.trinea.android.common.entity.FailedReason;
+import cn.trinea.android.common.service.impl.ImageCache;
+import cn.trinea.android.common.service.impl.RemoveTypeLastUsedTimeFirst;
+import cn.trinea.android.common.service.impl.ImageMemoryCache.OnImageCallbackListener;
+
+import com.common.tools.L;
+import com.common.tools.T;
+import com.exam.ThreeSystem.R;
+import com.example.PCenter.adapter.ClassListViewAdapter_homework_list_finishing;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.BitmapFactory.Options;
+import android.media.ExifInterface;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.Display;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.view.animation.AlphaAnimation;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ImageView.ScaleType;
+
+public class Homework_stu_detail_activity_finishing extends BaseActivity implements OnClickListener{
+	private Button homework_homeworkDetail_back;
+	private Button homework_homeworkDetail_submit;
+	private Button homeworkDetail_content;
+
+	private String FILE = Constant.USERINFO_SP;
+	private TextView homeworkDetail_text_content;
+	private TextView homeworkDetail_title;
+	private TextView homeworkDetail_note;
+	private TextView homeworkDetail_manfen;
+	private TextView homeworkDetail_guoqi;
+	private TextView homeworkDetail_stu_daan;
+	private TextView homeworkDetail_teacher;
+	private TextView homeworkDetail_datetime;
+	private EditText homeworkDetail_edit;
+	private String StuNumber;
+	private String HomeworkID;
+	private String WorkContent;
+	private String StudentNum;
+	private String judge;
+	private String HomeworkName;
+	private String WorkName;
+	private String isTimeOut;
+	private String Memo;
+	private String DeadTime;
+	private String WorkScore;
+	private String WorkDesc;
+	private String TeachingClassID;
+	private String realPath = null;
+	private int oode1;
+	private String urlPath;
+	private String actionwithimage = "";
+	private String action = "";
+	private String urlPathwithimage;
+	private String judgehomework="false";
+	private LinearLayout allscore_LinearLayout;
+	private SharedPreferences sp;
+	private LinearLayout homeworkDetail_teacher_LinearLayout;
+	private LinearLayout stu_ImageView_LinearLayout;
+	private ImageView imageView;//照片显示
+	private static ImageView stu_homework_image_view;
+	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+	private static final int PICK_IMAGE_ACTIVITY_REQUEST_CODE = 200;
+//	private static String realPath;
+	private final static int MSG_POST_HOME_WORKE = 0x0001;
+	private ProgressDialog  dialog;
+	private ProgressDialog  dialog2;
+	private String WorkURL;
+	private Thread mThread;
+	private Bitmap bit;
+	//private String URL="http://222.18.158.198:8016";
+	private String URL;
+	private String realurl;
+	public    Bitmap bitmap;
+	private static final int MSG_SUCCESS = 0;// 获取图片成功的标识
+	private static final int MSG_FAILURE = 1;// 获取图片失败的标识
+	public static final ImageCache IMAGE_CACHE = new ImageCache(128, 512);
+	public static final String TAG_CACHE = "image_cache";
+	private String  getalldata="true";
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_homework_homeworkdetail);
+		actionwithimage="AddFinishedHomeworkAndImagePost";
+		sp = mActivity.getSharedPreferences(FILE, Context.MODE_PRIVATE);
+		action="AddFinishedHomeworkNoImagePost";
+		urlPath = Constant.INTERFACE_SITE + action;
+		URL=Constant.URL;
+		getViewObj();
+		setListener();
+		getdata();
+		setText();
+		initBiCache();
+//		getimage();
+		if(!WorkURL.equals(""))
+		{
+		Dialog2();
+		stu_homework_image_view.setScaleType(ScaleType.CENTER_CROP);
+		stu_homework_image_view.setBackgroundResource(R.drawable.image_border);
+		LinearLayout.LayoutParams layoutParams = (LinearLayout
+				.LayoutParams) stu_homework_image_view
+				.getLayoutParams();
+		Display display = getWindowManager().getDefaultDisplay();
+		layoutParams.width = display.getWidth();
+		layoutParams.height = (int) (display.getHeight() * 0.5);
+		stu_homework_image_view.setLayoutParams(layoutParams);
+		String pictureLink = realurl;
+		IMAGE_CACHE.get(pictureLink, stu_homework_image_view);
+		}
+	}
+	private void getViewObj()
+	{
+		imageView = (ImageView) findViewById(R.id.homeworkDetail_content_image_view);
+		stu_homework_image_view=(ImageView) findViewById(R.id.stu_homework_image_view);
+		homeworkDetail_content=(Button) findViewById(R.id.homeworkDetail_content);
+		homework_homeworkDetail_back=(Button) findViewById(R.id.homework_homeworkDetail_back);
+		homework_homeworkDetail_submit=(Button) findViewById(R.id.homework_homeworkDetail_submit);
+		homeworkDetail_title=(TextView) findViewById(R.id.homeworkDetail_title);
+		homeworkDetail_note=(TextView) findViewById(R.id.homeworkDetail_note);
+		homeworkDetail_text_content=(TextView) findViewById(R.id.homeworkDetail_text_content);
+		homeworkDetail_manfen=(TextView) findViewById(R.id.homeworkDetail_manfen);
+		homeworkDetail_datetime=(TextView) findViewById(R.id.homeworkDetail_datetime);
+		homeworkDetail_guoqi=(TextView) findViewById(R.id.homeworkDetail_guoqi);
+		homeworkDetail_edit=(EditText) findViewById(R.id.homeworkDetail_edit);
+		homeworkDetail_stu_daan=(TextView) findViewById(R.id.homeworkDetail_stu_daan);
+		allscore_LinearLayout=(LinearLayout) findViewById(R.id.allscore_LinearLayout);
+		homeworkDetail_teacher_LinearLayout=(LinearLayout) findViewById(R.id.homeworkDetail_teacher_LinearLayout);
+		homeworkDetail_teacher_LinearLayout.setVisibility(View.GONE);
+		stu_ImageView_LinearLayout=(LinearLayout) findViewById(R.id.stu_ImageView_LinearLayout);
+		allscore_LinearLayout.setVisibility(View.GONE);
+		homeworkDetail_stu_daan.setVisibility(View.INVISIBLE);
+		homeworkDetail_teacher=(TextView) findViewById(R.id.homeworkDetail_teacher);
+		homeworkDetail_teacher.setVisibility(View.INVISIBLE);
+
+	}
+	private void setListener()
+	{
+		homework_homeworkDetail_back.setOnClickListener(this);
+		homework_homeworkDetail_submit.setOnClickListener(this);
+		homeworkDetail_content.setOnClickListener(this);
+//		homeworkDetail_content.setVisibility(View.INVISIBLE);
+//		homework_homeworkDetail_submit.setVisibility(View.INVISIBLE);
+		
+	}
+	
+	private void Dialog()
+	{
+		dialog = new ProgressDialog(mActivity);
+		dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);// 设置进度条的形式为圆形转动的进度条  
+        dialog.setCancelable(true);// 设置是否可以通过点击Back键取消  
+        dialog.setCanceledOnTouchOutside(false);// 设置在点击Dialog外是否取消Dialog进度条  
+        dialog.setIcon(R.drawable.ic_launcher);//  
+        dialog.setMessage("请等待。。。。");  
+        dialog.setTitle("提示");
+        dialog.show();
+	}
+	public void onClick(View v)
+	{
+		switch(v.getId())
+		{
+			case R.id.homework_homeworkDetail_back:
+			{
+				finish();
+			}
+			break;
+			case R.id.homework_homeworkDetail_submit:
+			{
+				Dialog();
+				if(realPath==null)
+				{
+					if(getalldata.equals("false"))
+					{
+						Toast.makeText(mActivity, "获取信息异常",
+								Toast.LENGTH_SHORT).show();
+					}
+					else
+				{
+					new Thread(new Runnable() {
+						
+						
+						@Override
+						public void run() {
+							HttpPostData();
+						}
+					}).start();
+				}
+				}
+				else if(realPath!=null)
+				{
+					if(getalldata.equals("false"))
+					{
+						Toast.makeText(mActivity, "获取信息异常",
+								Toast.LENGTH_SHORT).show();
+					}
+					else 
+					{
+					new Thread(new Runnable() {
+
+						@Override
+						public void run() {
+							HttpPostData();
+						}
+					}).start();
+					}
+				}
+				System.out.println("点击了提交");
+				if(judgehomework.equals("true"))
+				{
+					finish();
+					
+				}
+				else
+				{
+					
+				}
+				
+			}
+			break;
+			case R.id.homeworkDetail_content:
+			{
+			//AddImg();
+				WorkContent=homeworkDetail_edit.getText().toString();
+				StudentNum=sp.getString(Constant.SPFIELD.NAME,"");
+				if(getalldata.equals("false"))
+				{
+					Toast.makeText(mActivity, "获取信息异常",
+							Toast.LENGTH_SHORT).show();
+				}
+				else {
+				Intent intent =new Intent(Homework_stu_detail_activity_finishing.this,Homework_stu_detail_activity_finishing_Addpiconweb.class);
+				intent.putExtra("HomeworkID", HomeworkID);
+				intent.putExtra("TeachingClassID", TeachingClassID);
+				intent.putExtra("WorkContent",WorkContent );
+				intent.putExtra("StudentNum", StudentNum);
+				startActivity(intent);
+				}
+			}
+			break;
+		}
+	}
+	private void getdata()
+	{
+		Intent intent = getIntent();
+		HomeworkID=intent.getStringExtra("HomeworkID");
+		TeachingClassID=intent.getStringExtra("TeachingClassID");
+		WorkName=homework_state_activity_stu_finnishing.WorkName;
+//		WorkScore=homework_state_activity_stu_finnishing.WorkScore;
+		isTimeOut=homework_state_activity_stu_finnishing.isTimeOut;
+		WorkDesc=homework_state_activity_stu_finnishing.WorkDesc;
+		Memo=homework_state_activity_stu_finnishing.Memo;
+		judge=homework_state_activity_stu_finnishing.judge;
+		DeadTime=homework_state_activity_stu_finnishing.DeadTime;
+		WorkURL=homework_state_activity_stu_finnishing.WorkURL;
+		if(WorkURL.equals(""))
+		{
+			stu_ImageView_LinearLayout.setVisibility(View.GONE);
+		}
+		realurl=URL+WorkURL;
+		
+	}
+	private void setText()
+	{
+		homeworkDetail_title.setText(WorkName);
+		homeworkDetail_note.setText(Memo);
+		homeworkDetail_text_content.setText(WorkDesc);
+		homeworkDetail_manfen.setText(WorkScore);
+		homeworkDetail_datetime.setText(DeadTime);
+		if(judge.equals("outOfDate"))
+		{
+			homework_homeworkDetail_submit.setVisibility(View.GONE);
+			homeworkDetail_content.setVisibility(View.GONE);
+			
+		}
+		if(isTimeOut.equals("YES"))
+		{
+			homeworkDetail_guoqi.setText("已过期");
+		}
+		else if(isTimeOut.equals("NO"))
+		{
+			homeworkDetail_guoqi.setText("未过期");
+		}		
+	}
+	
+	//点击显示大图
+		public void show_click(View v){
+		     //startActivity(new Intent(this,Stu_ImageShower.class));
+		    }
+		
+	
+	
+	//选择添加图片方法
+	public void AddImg()
+	{
+		View view = getLayoutInflater().inflate(R.layout.activity_homework_photo_choose_dialog, null);
+		Button button1 = (Button) view.findViewById(R.id.homework_choose_localphoto);
+		Button button2 = (Button) view.findViewById(R.id.homework_choose_takephoto);
+		Button button3 = (Button) view.findViewById(R.id.homework_choose_canclephoto);
+		final Dialog dialog = new Dialog(mActivity, R.style.transparentFrameWindowStyle);
+		dialog.setContentView(view, new LayoutParams(LayoutParams.FILL_PARENT,
+				LayoutParams.WRAP_CONTENT));
+		Window window = dialog.getWindow();
+		// 设置显示动画
+		window.setWindowAnimations(R.style.main_menu_animstyle);
+		WindowManager.LayoutParams wl = window.getAttributes();
+		wl.x = 0;
+		wl.y = getWindowManager().getDefaultDisplay().getHeight();
+		// 以下这两句是为了保证按钮可以水平满屏
+		wl.width = ViewGroup.LayoutParams.MATCH_PARENT;
+		wl.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+
+		// 设置显示位置
+		dialog.onWindowAttributesChanged(wl);
+		// 设置点击外围解散
+		dialog.setCanceledOnTouchOutside(true);
+		dialog.show();
+		button1.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				openAlbum();
+				dialog.dismiss();
+			}
+		});
+		button2.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				takePicture();
+				dialog.dismiss();
+			}
+		});
+		button3.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
+	}
+	
+	//拍照
+    public void takePicture(){
+    	String state = Environment.getExternalStorageState();  
+        if (state.equals(Environment.MEDIA_MOUNTED)) {  
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); 
+            File outDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);  
+            if (!outDir.exists()) {  
+            	outDir.mkdirs();
+            }  
+            File outFile =  new File(outDir, System.currentTimeMillis() + ".jpg");  
+            realPath = outFile.getAbsolutePath();
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(outFile));  
+            intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);  
+            startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);  
+        } else{
+        	Log.d(TAG, "请确认已经插入SD卡");
+        }
+    }
+    
+    //打开本地相册
+    public void openAlbum(){
+    	Intent intent = new Intent();
+    	intent.setType("image/*");   
+        intent.setAction(Intent.ACTION_GET_CONTENT);   
+    	this.startActivityForResult(intent, PICK_IMAGE_ACTIVITY_REQUEST_CODE);
+    }
+    
+    //与拍照有关的
+ 	@Override
+ 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+ 		super.onActivityResult(requestCode, resultCode, data);
+ 		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+ 			if (resultCode == RESULT_OK) {
+ 				Log.e(TAG, "获取图片成功，path="+realPath);
+ 				toast("获取图片成功，path="+realPath);
+ 				setImageView(realPath);
+ 			} else if (resultCode == RESULT_CANCELED) {
+ 				// 用户取消了图像捕获
+ 			} else {
+ 				// 图像捕获失败，提示用户
+ 				Log.e(TAG, "拍照失败");
+ 			}
+ 		} else if (requestCode == PICK_IMAGE_ACTIVITY_REQUEST_CODE) {
+ 			if (resultCode == RESULT_OK) {
+ 				Uri uri = data.getData();
+ 				if(uri != null){
+ 					realPath = getRealPathFromURI(uri);
+ 					Log.e(TAG, "获取图片成功，path="+realPath);
+ 					toast("获取图片成功，path="+realPath);
+ 					setImageView(realPath);
+ 				}else{
+ 					Log.e(TAG, "从相册获取图片失败");
+ 				}
+ 			}
+ 		}
+ 	}
+ 	
+ 	//与拍照有关的
+ 	private void setImageView(String realPath){
+ 		Bitmap bmp = BitmapFactory.decodeFile(realPath);
+ 		int degree = readPictureDegree(realPath);
+ 		if(degree <= 0){
+ 			imageView.setImageBitmap(bmp);
+ 		}else{
+ 			Log.e(TAG, "rotate:"+degree);
+ 			//创建操作图片是用的matrix对象
+ 	 		Matrix matrix=new Matrix();
+ 	 		//旋转图片动作
+ 	 		matrix.postRotate(degree);
+ 	 		//创建新图片
+ 	 		Bitmap resizedBitmap=Bitmap.createBitmap(bmp,0,0,bmp.getWidth(),bmp.getHeight(),matrix,true);
+ 	 		imageView.setImageBitmap(resizedBitmap);
+ 		}
+ 	}
+ 	
+ 	/**
+     * This method is used to get real path of file from from uri<br/>
+     * http://stackoverflow.com/questions/11591825/how-to-get-image-path-just-captured-from-camera
+     * //与拍照有关的
+     * @param contentUri
+     * @return String
+     */
+	public String getRealPathFromURI(Uri contentUri){
+        try{
+            String[] proj = {MediaStore.Images.Media.DATA};
+            // Do not call Cursor.close() on a cursor obtained using this method, 
+            // because the activity will do that for you at the appropriate time
+            Cursor cursor = this.managedQuery(contentUri, proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        }catch (Exception e){
+            return contentUri.getPath();
+        }
+	}
+	
+	/** 
+     * 读取照片exif信息中的旋转角度<br/>
+     * http://www.eoeandroid.com/thread-196978-1-1.html
+     * //与拍照有关的
+     * @param path 照片路径 
+     * @return角度 
+     */  
+    public static int readPictureDegree(String path) {  
+            int degree  = 0;  
+            try {  
+                    ExifInterface exifInterface = new ExifInterface(path);  
+                    int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);  
+                    switch (orientation) {  
+                    case ExifInterface.ORIENTATION_ROTATE_90:
+                            degree = 90;  
+                            break;  
+                    case ExifInterface.ORIENTATION_ROTATE_180:  
+                            degree = 180;  
+                            break;  
+                    case ExifInterface.ORIENTATION_ROTATE_270:  
+                            degree = 270;  
+                            break;  
+                    }  
+            } catch (IOException e) {  
+                    e.printStackTrace();
+            }
+            return degree;  
+    }  
+    //与拍照有关的
+	public void toast(String msg){
+		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+	}
+	
+	private Handler mHandler = new Handler() {
+		@Override
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case MSG_POST_HOME_WORKE:
+				T.showShort(mActivity, "提交作业成功");
+				break;
+
+			default:
+				break;
+			}
+		};
+	};
+    public void HttpPostData()
+    {
+    	int code;
+		System.out.println("开始httppost");
+		try {
+			HomeworkID=homework_state_activity_stu_finnishing.HomeworkID;
+			Intent intent = getIntent();
+			TeachingClassID = intent.getStringExtra("TeachingClassID");
+			WorkContent=homeworkDetail_edit.getText().toString();
+			
+			StudentNum=sp.getString(Constant.SPFIELD.NAME,"");
+			if(realPath==null)
+			{
+				HttpParams params = new BasicHttpParams();
+				HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+				HttpProtocolParams.setContentCharset(params, "UTF-8");
+				HttpClient httpclient = new DefaultHttpClient();
+				HttpPost httppost = new HttpPost(urlPath);
+				System.out.println("urlPath" + urlPath);
+				// 添加http头信息
+				httppost.addHeader("Content-Type", "application/octet-stream");
+				JSONObject obj = new JSONObject();
+				if(HomeworkID.equals("")||TeachingClassID.equals("")||StudentNum.equals(""))
+				{
+					getalldata="false";
+				}
+				else {
+					getalldata="true";
+				obj.put("HomeworkID", HomeworkID);
+				obj.put("TeachingClassID", TeachingClassID);
+				obj.put("WorkContent", WorkContent);
+				obj.put("StudentNum", StudentNum);
+				
+				//
+				httppost.setEntity(new StringEntity(obj.toString(), "UTF-8"));
+
+				System.out.println("obj" + obj.toString());
+
+				HttpResponse response;
+				response = httpclient.execute(httppost);
+				System.out.println("请求" + response.toString());
+				code = response.getStatusLine().getStatusCode();
+				System.out.println("这个code是  " + code);
+				// 检验状态码，如果成功接收数据
+				if (code == 200) {
+					dialog.dismiss();
+					WorkContent=URLEncoder.encode(WorkContent, "UTF-8");
+					String rev = EntityUtils
+							.toString(response.getEntity(), "UTF-8");// 返回json格式：
+					JSONObject result = new JSONObject(rev);
+					if (result.get("Success").equals("true")) {
+						mHandler.sendEmptyMessage(MSG_POST_HOME_WORKE);
+						finish();
+					}
+					L.e("TAG", rev);
+					// String id = obj.getString("id");
+					// String version = obj.getString("version");
+				}
+				else if(code != 200)
+				{
+					dialog.dismiss();
+					Toast.makeText(mActivity, "提交作业失败",
+							Toast.LENGTH_SHORT).show();
+				}
+				}
+				
+			}
+			else if(realPath!=null)
+			{
+			
+				if(HomeworkID.equals("")||TeachingClassID.equals("")||StudentNum.equals(""))
+				{
+					getalldata="false";
+				}
+				else 
+				{
+					getalldata="true";
+				
+				WorkContent=URLEncoder.encode(WorkContent, "UTF-8");
+				
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+					
+						String url = Constant.INTERFACE_SITE + actionwithimage + "?"
+								+ "HomeworkID=" + HomeworkID + "&"
+								+ "TeachingClassID=" + TeachingClassID
+								+ "&" + "WorkContent=" + WorkContent + "&" + "StudentNum="
+								+ StudentNum;
+						HttpPost post = new HttpPost(url);
+						HttpParams params1 = new BasicHttpParams();
+						HttpConnectionParams.setConnectionTimeout(params1, 1000*10);
+						HttpConnectionParams.setConnectionTimeout(params1, 1000*10);
+						HttpProtocolParams.setVersion(params1, HttpVersion.HTTP_1_1);
+						HttpClient client1 = new DefaultHttpClient(params1);
+						
+						Options options = BitmapHelper.getBitmapOptions(realPath);
+						int size = options.outHeight * options.outWidth;
+						File file = null;
+							Log.e("size--->", options.outWidth +"----" + options.outHeight);
+							/*if (size >= 480 * 800) {
+								file = new File(BitmapHelper.compressBitmap(homework_tea_addhomework.this, realPath,
+										options.outHeight > options.outWidth ? 480 : 800, options.outHeight > options.outWidth ? 800 : 480, true));
+							} else if (size > 320 * 480 && size < 480 * 800) {
+								file = new File(BitmapHelper.compressBitmap(homework_tea_addhomework.this, realPath,
+										options.outHeight > options.outWidth ? 320 : 480, options.outHeight > options.outWidth ? 480 : 320, true));
+							}*/  
+							file = new File(BitmapHelper.compressBitmap(Homework_stu_detail_activity_finishing.this, realPath,
+									128,128, true));
+						try {
+							FileEntity entity = new FileEntity(file, "binary/octet-stream");
+							entity.setContentEncoding("binary/octet-stream");
+							post.setEntity(entity);
+							HttpResponse response = client1.execute(post);
+							 oode1 = response.getStatusLine().getStatusCode();
+							Log.e("RESP",oode1+"");
+							if(oode1==200)
+							{
+								dialog.dismiss();
+								Looper.prepare();
+								Toast.makeText(mActivity, "添加作业成功",
+										Toast.LENGTH_SHORT).show();
+								
+								judgehomework="true";
+								finish();
+								Looper.loop();
+							}
+							else if(oode1!=200)
+							{
+								if(file.length()>(1024*1000))
+								{
+									dialog.dismiss();
+									Looper.prepare();
+									
+									Toast.makeText(mActivity, "上传图片过大",
+											Toast.LENGTH_LONG).show();
+									Looper.loop();
+								}
+								else {
+								dialog.dismiss();
+								Looper.prepare();
+								
+								Toast.makeText(mActivity, "添加作业失败",
+										Toast.LENGTH_LONG).show();
+								Looper.loop();
+								}
+							}
+							
+							}
+						catch(Exception ex){
+							ex.printStackTrace();
+						}
+						
+					}
+				}).start();
+				
+				
+				
+			}
+			}
+
+			
+		} catch (Exception ex) {
+			
+			ex.printStackTrace();
+		}
+    }
+    public static Bitmap GetLocalOrNetBitmap(String url) {
+
+		Bitmap bitmap = null;
+		File file = new File(url);
+		if (file.exists()) {
+			bitmap = BitmapFactory.decodeFile(url);
+		}
+		return bitmap;
+	}
+
+    
+    // 显示网络加载的图片 
+    private void getimage()
+	{
+		mThread = new Thread(runnable);
+		mThread.start();
+		System.out.println(realurl);
+		 
+
+	}
+	
+	Runnable runnable = new Runnable()
+	{
+
+		@Override
+		public void run() {
+			// TODO 自动生成的方法存根
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpGet httpGet = new HttpGet(realurl);
+//			final Bitmap bitmap;
+			try
+			{
+				HttpResponse httpResponse = httpClient.execute(httpGet);
+				bitmap = BitmapFactory.decodeStream(httpResponse.getEntity().getContent());
+			}
+			catch(Exception e)
+			{
+				mHandler2.obtainMessage(MSG_FAILURE).sendToTarget();
+				return;
+			}
+			mHandler2.obtainMessage(MSG_SUCCESS, bitmap).sendToTarget();
+		}
+		
+	};
+	private static  Handler mHandler2 = new Handler()
+	{
+		public void handleMessage(Message msg)
+		{
+			switch (msg.what)
+			{
+			case MSG_SUCCESS:
+				stu_homework_image_view.setImageBitmap((Bitmap) msg.obj);
+				break;
+			case MSG_FAILURE:
+				break;
+			}
+		}
+	};
+	public void initBiCache() {
+		/** init icon cache **/
+		OnImageCallbackListener imageCallBack = new OnImageCallbackListener() {
+			@Override
+			public void onGetSuccess(String imageUrl, Bitmap loadedImage, View view, boolean isInCache) {
+				if (view != null && loadedImage != null) {
+					
+					bit=BitmapHelper.comp(loadedImage);
+					loadedImage.recycle();
+					ImageView imageView = (ImageView) view;
+					imageView.setImageBitmap(bit);
+					dialog2.dismiss();
+					if (!isInCache) {
+						imageView.startAnimation(getInAlphaAnimation(2000));
+					}
+
+				}
+			}
+
+			/**
+			 * callback function before get image, run on ui thread
+			 * 
+			 * @param imageUrl
+			 *            imageUrl
+			 * @param view
+			 *            view need the image
+			 */
+			@Override
+			public void onPreGet(String imageUrl, View view) {
+				// Log.e(TAG_CACHE, "pre get image");
+			}
+
+			/**
+			 * callback function after get image failed, run on ui thread
+			 * 
+			 * @param imageUrl
+			 *            imageUrl
+			 * @param loadedImage
+			 *            bitmap
+			 * @param view
+			 *            view need the image
+			 * @param failedReason
+			 *            failed reason for get image
+			 */
+			@Override
+			public void onGetFailed(String imageUrl, Bitmap loadedImage, View view, FailedReason failedReason) {
+				Log.e(TAG_CACHE,
+						new StringBuilder(128).append("get image ").append(imageUrl)
+								.append(" error, failed type is: ").append(failedReason.getFailedType())
+								.append(", failed reason is: ").append(failedReason.getCause().getMessage())
+								.toString());
+			}
+
+			@Override
+			public void onGetNotInCache(String imageUrl, View view) {
+				if (view != null && view instanceof ImageView) {
+					((ImageView) view).setImageResource(R.drawable.not_loaded);// 等待载入时的图片
+				}
+			}
+		};
+		IMAGE_CACHE.setOnImageCallbackListener(imageCallBack);
+		IMAGE_CACHE.setCacheFullRemoveType(new RemoveTypeLastUsedTimeFirst<Bitmap>());
+
+		IMAGE_CACHE.setHttpReadTimeOut(10000);
+		IMAGE_CACHE.setOpenWaitingQueue(true);
+		IMAGE_CACHE.setValidTime(-1);
+		/**
+		 * close connection, default is connect keep-alive to reuse connection.
+		 * if image is from different server, you can set this
+		 */
+		// IMAGE_CACHE.setRequestProperty("Connection", "false");
+	}
+	public static AlphaAnimation getInAlphaAnimation(long durationMillis) {
+		AlphaAnimation inAlphaAnimation = new AlphaAnimation(0, 1);
+		inAlphaAnimation.setDuration(durationMillis);
+		return inAlphaAnimation;
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO 自动生成的方法存根
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if(IMAGE_CACHE!=null)
+			{
+			IMAGE_CACHE.clear();
+			}
+			if(bit!=null)
+			{
+			bit.recycle();
+			}
+        	finish();
+             return true; 
+        }else { 
+            return super.onKeyDown(keyCode, event); 
+        } 
+	}
+	private void Dialog2()
+	{
+		dialog2 = new ProgressDialog(mActivity);
+		dialog2.setProgressStyle(ProgressDialog.STYLE_SPINNER);// 设置进度条的形式为圆形转动的进度条  
+        dialog2.setCancelable(false);// 设置是否可以通过点击Back键取消  
+        dialog2.setCanceledOnTouchOutside(false);// 设置在点击Dialog外是否取消Dialog进度条  
+        dialog2.setIcon(R.drawable.ic_launcher);//  
+        dialog2.setMessage("正在加载图片");  
+        dialog2.setTitle("提示");
+        dialog2.show();
+	}
+}
+

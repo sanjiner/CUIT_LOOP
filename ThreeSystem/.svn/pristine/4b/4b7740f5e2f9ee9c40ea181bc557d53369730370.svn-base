@@ -1,0 +1,78 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/more_bg_color"
+	 >
+	<FrameLayout 
+	     android:layout_width="fill_parent"
+	     android:layout_height="wrap_content"
+	     >
+		<TextView 
+		      android:layout_width="fill_parent"
+		      android:layout_height="40dp"
+		      android:text="模块设定"
+		      android:gravity="center"
+		      android:textSize="20sp"
+		      android:textColor="#FAFFFE"
+		      android:background="@color/theme_color"
+		      />
+		<Button
+            android:id="@+id/setModle_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/selector_header_back" />
+		<Button
+		    android:id="@+id/setModle_addModle"
+		    android:layout_width="40dp"
+		    android:layout_height="40dp"
+		    android:layout_marginRight="10dp"
+		    android:background="@drawable/ic_homework_add"
+		    android:layout_gravity="right"
+		    />
+	</FrameLayout>
+	
+	<TextView
+	    	android:id="@+id/setModle_info"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="该班当前模块 (长按删除模块)"
+		    android:textSize="20sp"
+		    android:gravity="center_vertical"
+		    android:layout_marginLeft="10dp"
+		    />
+	
+	<FrameLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent" >		
+		    
+		<GridView
+		     android:id="@+id/setModle_modle_gridview"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_marginTop="10dp"
+		     android:horizontalSpacing="10dp"
+		     android:numColumns="3"
+		     android:verticalSpacing="10dp"
+		     />
+
+		<TextView
+	    	android:id="@+id/setModle_no_data"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:text="暂无数据"
+		    android:textSize="20sp"
+		    android:gravity="center"
+		    />
+		
+		<ProgressBar 
+		    android:id="@+id/setModle_module_progressbar"
+		    android:layout_gravity="center"
+		    android:layout_width="60dp"
+            android:layout_height="60dp"/>
+		
+	</FrameLayout>
+</LinearLayout>

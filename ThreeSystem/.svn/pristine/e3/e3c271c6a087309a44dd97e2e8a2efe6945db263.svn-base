@@ -1,0 +1,233 @@
+package com.example.PCenter;
+
+import java.util.HashMap;
+import java.util.Map;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import com.exam.ThreeSystem.R;
+import com.example.PCenter.fragments.HomeWorkFragment;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+//添加數據、、、、、
+public class Homework_stu_detail_activity extends BaseActivity implements OnClickListener{
+	private Button homework_homeworkDetail_back;
+	private Button homework_homeworkDetail_submit;
+	private Button homeworkDetail_content;
+	private TextView homeworkDetail_text_content;
+	private TextView homeworkDetail_guoqi;
+	private TextView homeworkDetail_teacher;
+	private TextView homeworkDetail_title;
+	private TextView homeworkDetail_note;
+	private TextView homeworkDetail_manfen;
+	private TextView homeworkDetail_stu_daan;
+	private TextView homeworkDetail_datetime;
+	private EditText homeworkDetail_edit;
+	private String StuNumber;
+	private String FILE = Constant.USERINFO_SP;
+	private String HomeworkName;
+	private String Memo;
+	private String WorkScore;
+	private String isTimeOut;
+	private String DeadTime;
+	private String StuAnswer;
+	private String WorkDesc;
+	private String TeacherName;
+	private String TeachingClassID;
+	private LinearLayout stu_ImageView_LinearLayout;
+	private String isMarked;
+	private Thread mThread;
+	private String realurl;
+	private String WorkURL;
+	//private String URL="http://222.18.158.198:8016";
+	private String URL;
+	
+	public  static  Bitmap bitmap;
+	private static ImageView stu_homework_image_view;
+	private LinearLayout allscore_LinearLayout;
+	private SharedPreferences sp;
+	private static final int MSG_SUCCESS = 0;// 获取图片成功的标识
+	private static final int MSG_FAILURE = 1;// 获取图片失败的标识
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_homework_homeworkdetail);
+		mActivity = this;
+		TAG = mActivity.getClass().getSimpleName();
+		sp = mActivity.getSharedPreferences(FILE, Context.MODE_PRIVATE);
+		URL=sp.getString(Constant.URL,"");
+		
+		getViewObj();
+		setListener();
+		getdata();
+		setText();
+		getimage();
+	}
+	private void getViewObj()
+	{
+		stu_homework_image_view=(ImageView) findViewById(R.id.stu_homework_image_view);
+		homework_homeworkDetail_back=(Button) findViewById(R.id.homework_homeworkDetail_back);
+		homework_homeworkDetail_submit=(Button) findViewById(R.id.homework_homeworkDetail_submit);
+		homeworkDetail_content=(Button) findViewById(R.id.homeworkDetail_content);
+		homeworkDetail_title=(TextView) findViewById(R.id.homeworkDetail_title);
+		homeworkDetail_note=(TextView) findViewById(R.id.homeworkDetail_note);
+		homeworkDetail_text_content=(TextView) findViewById(R.id.homeworkDetail_text_content);
+		homeworkDetail_manfen=(TextView) findViewById(R.id.homeworkDetail_manfen);
+		homeworkDetail_guoqi=(TextView) findViewById(R.id.homeworkDetail_guoqi);
+		//顯示評閱老師
+		homeworkDetail_teacher=(TextView) findViewById(R.id.homeworkDetail_teacher);
+		homeworkDetail_edit=(EditText) findViewById(R.id.homeworkDetail_edit);
+		homeworkDetail_datetime=(TextView) findViewById(R.id.homeworkDetail_datetime);
+		allscore_LinearLayout=(LinearLayout) findViewById(R.id.allscore_LinearLayout);
+		allscore_LinearLayout.setVisibility(View.GONE);
+		homeworkDetail_edit.setVisibility(View.INVISIBLE);
+		homeworkDetail_stu_daan=(TextView) findViewById(R.id.homeworkDetail_stu_daan);
+		stu_ImageView_LinearLayout=(LinearLayout) findViewById(R.id.stu_ImageView_LinearLayout);
+		
+	}
+	private void setListener()
+	{
+		homework_homeworkDetail_back.setOnClickListener(this);
+		homework_homeworkDetail_submit.setOnClickListener(this);
+		homeworkDetail_content.setOnClickListener(this);
+		homeworkDetail_content.setVisibility(View.INVISIBLE);
+		homework_homeworkDetail_submit.setVisibility(View.INVISIBLE);
+		
+	}
+	public void onClick(View v)
+	{
+		switch(v.getId())
+		{
+		case R.id.homework_homeworkDetail_back:
+		{
+			finish();
+		}
+		break;
+//		case R.id.homework_homeworkDetail_submit:
+//		{
+//			
+//		}
+//		break;
+		case R.id.homeworkDetail_content:
+		{
+			
+		}
+		break;
+		}
+	}
+	private void getdata()
+	{
+		Intent intent = getIntent();
+		isMarked=intent.getStringExtra("isMarked");
+		TeachingClassID = HomeWorkFragment.Stu_TeachingClassID;
+//		HomeworkName= intent.getStringExtra("HomeworkName");
+		HomeworkName=homework_state_activity_stu_finnished.WorkName;
+		System.out.println("這個那麼是    。。。。"+HomeworkName);
+//		WorkScore=homework_state_activity_stu_finnished.WorkScore;
+		isTimeOut=homework_state_activity_stu_finnished.isTimeOut;
+		WorkDesc=homework_state_activity_stu_finnished.WorkDesc;
+		Memo=homework_state_activity_stu_finnished.Memo;
+		StuAnswer=homework_state_activity_stu_finnished.StuAnswer;
+		TeacherName=homework_state_activity_stu_finnished.TeacherName;
+		DeadTime=homework_state_activity_stu_finnished.DeadTime;
+		WorkURL=homework_state_activity_stu_finnished.WorkURL;
+		if(WorkURL.equals(""))
+		{
+			stu_ImageView_LinearLayout.setVisibility(View.GONE);
+		}
+		realurl=URL+WorkURL;
+	}
+	private void setText()
+	{
+		homeworkDetail_title.setText(HomeworkName);
+		homeworkDetail_note.setText(Memo);
+		homeworkDetail_text_content.setText(WorkDesc);
+		homeworkDetail_manfen.setText(WorkScore);
+		homeworkDetail_datetime.setText(DeadTime);
+		if(isTimeOut.equals("NO"))
+		{
+			homeworkDetail_guoqi.setText("未过期");
+		}
+		else if(isTimeOut.equals("YES"))
+		{
+			homeworkDetail_guoqi.setText("已过期");
+		}
+		if(isMarked.equals("NO"))
+		{
+			homeworkDetail_teacher.setText("暂未批阅");
+		}
+		else if(isMarked.equals("YES"))
+		{
+		homeworkDetail_teacher.setText(TeacherName);
+		}
+		homeworkDetail_stu_daan.setText(StuAnswer);
+	}
+	// 显示网络加载的图片 
+    private void getimage()
+	{
+		mThread = new Thread(runnable);
+		mThread.start();
+		System.out.println(realurl);
+		 
+
+	}
+	
+	Runnable runnable = new Runnable()
+	{
+
+		@Override
+		public void run() {
+			// TODO 自动生成的方法存根
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpGet httpGet = new HttpGet(realurl);
+//			final Bitmap bitmap;
+			try
+			{
+				HttpResponse httpResponse = httpClient.execute(httpGet);
+				bitmap = BitmapFactory.decodeStream(httpResponse.getEntity().getContent());
+			}
+			catch(Exception e)
+			{
+				mHandler2.obtainMessage(MSG_FAILURE).sendToTarget();
+				return;
+			}
+			mHandler2.obtainMessage(MSG_SUCCESS, bitmap).sendToTarget();
+		}
+		
+	};
+	private static  Handler mHandler2 = new Handler()
+	{
+		public void handleMessage(Message msg)
+		{
+			switch (msg.what)
+			{
+			case MSG_SUCCESS:
+				stu_homework_image_view.setImageBitmap((Bitmap) msg.obj);
+				break;
+			case MSG_FAILURE:
+				break;
+			}
+		}
+	};
+
+	//点击显示大图
+		public void show_click(View v){
+		     startActivity(new Intent(this,Stu_finnished_Imageshower.class));
+		    }
+		
+}

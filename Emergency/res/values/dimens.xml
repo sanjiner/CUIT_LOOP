@@ -1,0 +1,20 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- radio bottom button -->
+    <dimen name="radiobtn_minHeight">60dp</dimen>
+    <dimen name="radiobtn_maxHeight">64.5dp</dimen>
+    <dimen name="radiobtn_minWidth">64dp</dimen>
+    <dimen name="radiobtn_maxWidth">64dp</dimen>
+    
+    <!-- progress bar default -->
+    <dimen name="progressbar_middle">48dp</dimen>
+    <dimen name="progressbar_small">24dp</dimen>
+    
+    <!-- main -->
+    <dimen name="tabbar_height">60dp</dimen>
+    <dimen name="topbar_height">44dp</dimen>
+</resources>

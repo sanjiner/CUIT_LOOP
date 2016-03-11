@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 20:41:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.label.entity.Labelscanrecord" table="labelscanrecord" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="scanRecordId" type="string">
+            <column name="ScanRecordID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="labelId" type="string">
+            <column name="LabelID" length="32" />
+        </property>
+        <property name="scanId" type="string">
+            <column name="ScanID" length="10" />
+        </property>
+        <property name="scanTime" type="timestamp">
+            <column name="ScanTime" length="19" />
+        </property>
+        <property name="scanPlace" type="string">
+            <column name="ScanPlace" length="200" />
+        </property>
+        <property name="province" type="string">
+            <column name="Province" length="20" />
+        </property>
+        <property name="city" type="string">
+            <column name="City" length="20" />
+        </property>
+        <property name="county" type="string">
+            <column name="County" length="20" />
+        </property>
+        <property name="labelApplyBh" type="string">
+        	<column name="LabelApplyBh" length="50" />
+        </property>
+        <property name="originID" type="string">
+        	<column name="OriginID" length="50"/>
+        </property>
+    </class>
+</hibernate-mapping>

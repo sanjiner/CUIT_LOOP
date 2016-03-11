@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-15 13:38:50 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.infom.entity.Checkcenternewsreport" table="checkcenternewsreport" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="newsNumber" type="string">
+            <column name="NewsNumber" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="newsTitle" type="string">
+            <column name="NewsTitle" length="100" />
+        </property>
+        <property name="newsKey" type="string">
+            <column name="NewsKey" length="50" />
+        </property>
+        <property name="newsCategory" type="string">
+            <column name="NewsCategory" length="32" />
+        </property>
+        <property name="chargePictureNews" type="string">
+            <column name="ChargePictureNews" length="32" />
+        </property>
+        <property name="pictureUrl" type="string">
+            <column name="PictureURL" length="200" />
+        </property>
+        <property name="text" type="string">
+            <column name="Text" />
+        </property>
+        <property name="sort" type="java.lang.Long">
+            <column name="Sort" />
+        </property>
+        <property name="hits" type="java.lang.Long">
+            <column name="Hits" />
+        </property>
+        <property name="newsState" type="string">
+            <column name="NewsState" length="32" />
+        </property>
+        <property name="attachmentUrl" type="string">
+            <column name="AttachmentURL" length="65535" />
+        </property>
+        <property name="reportTime" type="timestamp">
+            <column name="ReportTime" length="19" />
+        </property>
+        <property name="reportName" type="string">
+            <column name="ReportName" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="Remark" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

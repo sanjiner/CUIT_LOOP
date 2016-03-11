@@ -1,0 +1,422 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="<%=basePath%>res/css/right/style.css" rel="stylesheet"
+	type="text/css" />
+<script type="text/javascript"
+	src="<%=basePath%>/res/js/jquery-1.11.1.min.js"></script>
+<link href="<%=basePath%>res/js/jquery.uploadify/uploadify.css"
+	rel="stylesheet" type="text/css" />
+<script
+	src="<%=basePath%>res/js/jquery.uploadify/jquery.uploadify.min.js"
+	type="text/javascript"></script>
+<title>创建档案</title>
+<style type="text/css">
+body {
+	font-family: "黑体";
+}
+
+.container {
+	width: 100%;
+	margin: 0 auto;
+}
+
+a {
+	display: inline-block;
+	width: 50px;
+	float: inherit;
+}
+
+.border_black {
+	border: 1px solid black;
+}
+
+.table td {
+	width: 25%;
+	min-height: 40px;
+	text-align: right;
+}
+
+.table {
+	width: 100%;
+}
+
+.table tr:nth-child(odd) {
+	background: #F4F4F4;
+}
+
+.table td:nth-child(even) {
+	text-align: left;
+}
+
+ div.wrapper {
+	position: relative;
+	width: 125px;
+	height: 125px;
+	border: 0;
+	float:left;
+	background-color: transparent;
+	text-align: center;
+}
+.divdelete {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1;
+	display: none;
+	width: 32px;
+	height: 32px;
+	background-image: url(<%=basePath%>/res/images/common/Close_Box_Red.gif);
+	-moz-opacity: .5;
+	filter: alpha(opacity = 100);
+}
+
+</style>
+<script type="text/javascript">
+	function validate() {
+		if ($("#edit_search_key").val() == "") {
+			alert("请输入要查找的产品名称");
+			return false;
+		}
+		return true;
+	}
+	
+	function submit(){
+		var imags = "";
+		if($("#textHandel").val() == ""){
+			alert("请填写受理机构名称");
+			return;
+		}
+		if($("#textApprove").val() == ""){
+			alert("请填写认证机构名称");
+			return;
+		}
+		if($("#textConclusion").val() == ""){
+			alert("请填写认证结论");
+			return;
+		}
+		if($("#textHandel").val() == ""){
+			alert("请填写受理机构名称");
+			return;
+		}
+		/* if($("#imgSign").attr("src") == ""){
+			alert("请上传签名照");
+			return;
+		} */
+		if($("#imgContainer").attr("src") == ""){
+			alert("请上传签名照");
+			return;
+		}
+		$("#imgContainer").children().each(function(){
+			imags += '/Upload/PicturePath/'+$(this).attr("id")+"|";
+		});
+		//拼接多语言数据
+		//textLanguage textAddress textProductName textCompany select_level textHandel textApprove textConclusion textRemark
+		var json = "[";
+		$("[title='language']").each(function(){
+			json += "{\"language\":\""+$(this).find("#textLanguage").val()+"\",";
+			json += "\"address\":\""+$(this).find("#textAddress").val()+"\",";
+			json += "\"name\":\""+$(this).find("#textProductName").val()+"\",";
+			json += "\"company\":\""+$(this).find("#textCompany").val()+"\",";
+			json += "\"level\":\""+$(this).find("#select_level option:selected").text()+"\",";
+			json += "\"handel\":\""+$(this).find("#textHandel").val()+"\",";
+			json += "\"approve\":\""+$(this).find("#textApprove").val()+"\",";
+			json += "\"conclusion\":\""+$(this).find("#textConclusion").val()+"\",";
+			json += "\"remark\":\""+$(this).find("#textRemark").val()+"\"},";
+		});
+		json = json.substring(0,json.length - 1) + "]";
+		$.ajax({
+			url : "<%=basePath%>quality_archive/add",
+			type : "POST",
+			data:{"applyId":"${apply.applyBh}",
+					/* "url":$("#imgSign").attr("title"), */
+					"url":imags,
+					"handelAgency":$("#textHandel").val(),
+					"approveAgenct":$("#textApprove").val(),
+					"level":$("#select_level option:selected").val(),
+					"conclusion":$("#textConclusion").val(),
+					"remark":$("#textRemark").val(),
+					"imgCertificate":$("#imgCet").attr("title"),
+					"reportName":$("#linkReport").text(),
+					"reportUrl":$("#linkReport").attr("href"),
+					"language":json
+					},
+			success:function(data){
+				if(data.success == "true"){
+					alert("成功创建档案");
+					window.location.href="<%=basePath%>quality_archive/list";
+				}else{
+					alert("创建失败");
+				}
+			}
+		});
+	}
+	
+	$(document).ready(function(){
+		$("#uploadImage").uploadify({
+		    debug: false,
+		    method: 'post',
+		    height: 30,
+		    swf: '<%=basePath%>res/js/jquery.uploadify/uploadify.swf',
+		    uploader: "<%=basePath%>auth_center_info/expert_info/file",
+			//文件选择后的容器ID  
+			queueID : 'fileQueue',
+			width : 120,
+			auto : true,
+			buttonText : '上传照片',
+			fileTypeDesc : '支持的格式：',
+			fileTypeExts : '*.jpg;*.bmp;*.gif;*.png',
+			fileSizeLimit : '512KB',
+			removeTimeout : 1,
+			multi : false, //是否支持多文件上传
+			onUploadSuccess : function(file, data, response) {
+				//alert(data);
+				if (data.toString() == 'error') {
+					alert('文件上传失败，请重新上传');
+				} else {
+					var json = eval("(" + data + ")");
+					//$("#imgSign").attr("src", json["filePath"]);
+					//$("#imgSign").attr("title", json["fileName"]);
+					var html = "<div id=\""+json["fileName"]+"\" class=\"wrapper\"  style=\"cursor: pointer;\"><img style=\"width: 120px; height: 120px;margin:5px; background: #c2c2c2; cursor: pointer;\" src=\""+json["filePath"]+"\"/><div onclick=\"deleImg(this)\" class=\"divdelete\" style=\"display: block;\"></div></div>";
+					$("#imgContainer").append(html); 
+				}
+			}
+		});
+	});
+	
+	function deleImg(btnDel){
+		if(!confirm('是否删除该图片')){
+			return false;
+		}
+		//向服务器发送删除图片的请求
+		$.get("<%=basePath%>autc_data/image_del?fileName="+$(btnDel).parent().attr("id"),function(data){
+			if(data.success == "true"){
+				alert("删除成功");
+				$(btnDel).parent().remove();
+			}else{
+				alert("删除失败,请重试");
+			}
+		});
+		
+	}
+	
+	$(document).ready(function(){
+		$("#uploadCetificate").uploadify({
+		    debug: false,
+		    method: 'post',
+		    height: 30,
+		    swf: '<%=basePath%>res/js/jquery.uploadify/uploadify.swf',
+		    uploader: "<%=basePath%>auth_center_info/expert_info/file",
+			//文件选择后的容器ID  
+			queueID : 'queuecet',
+			width : 120,
+			auto : true,
+			buttonText : '上传证书',
+			fileTypeDesc : '支持的格式：',
+			fileTypeExts : '*.jpg;*.bmp;*.gif;*.png',
+			fileSizeLimit : '512KB',
+			removeTimeout : 1,
+			multi : false, //是否支持多文件上传
+			onUploadSuccess : function(file, data, response) {
+				//alert(data);
+				if (data.toString() == 'error') {
+					alert('文件上传失败，请重新上传');
+				} else {
+					var json = eval("(" + data + ")");
+					$("#imgCet").attr("src", json["filePath"]);
+					$("#imgCet").attr("title", json["fileName"]);
+					/* var html = "<div id=\""+json["fileName"]+"\" class=\"wrapper\"  style=\"cursor: pointer;\"><img style=\"width: 120px; height: 120px;margin:5px; background: #c2c2c2; cursor: pointer;\" src=\""+json["filePath"]+"\"/><div onclick=\"deleImg(this)\" class=\"divdelete\" style=\"display: block;\"></div></div>";
+					$("#imgContainer").append(html); */
+				}
+			}
+		});
+	});
+	$(document).ready(function(){
+		$("#uploadReport").uploadify({
+		    debug: false,
+		    method: 'post',
+		    height: 30,
+		    swf: '<%=basePath%>res/js/jquery.uploadify/uploadify.swf',
+		    uploader: "<%=basePath%>quality_archive/file",
+			//文件选择后的容器ID  
+			queueID : 'queueReoprt',
+			width : 120,
+			auto : true,
+			buttonText : '上传报告',
+			fileTypeDesc : '支持的格式：',
+			fileTypeExts : '*.docx;*.docm;*.doc;*.dotx,*.dotm',
+			fileSizeLimit : '2048KB',
+			removeTimeout : 1,
+			multi : false, //是否支持多文件上传
+			onUploadSuccess : function(file, data, response) {
+				data = decodeURI(data);
+				//alert(data);
+				if (data.toString() == 'error') {
+					alert('文件上传失败，请重新上传');
+				} else {
+					var json = eval("(" + data + ")");
+					$("#linkReport").attr("href", json["filePath"]);
+					$("#linkReport").attr("title", json["fileName"]);
+					$("#linkReport").text(file.name);
+				}
+			}
+		});
+	});
+	function addLanguage() { 
+		var html = "<table title=\"language\" class=\"table\"><tr><td style=\"text-align: center;\" colspan=\"4\"><label>Language:<input id=\"textLanguage\"></label>&nbsp;&nbsp;<label onclick=\"delLanguage(this)\">-</label></td><tr>"
+				+"<td>Place Of Production:</td><td><input id=\"textAddress\" value=${apply.address}></td><td>Produce:</td><td><input id=\"textProductName\" value=${apply.productName }></td>"
+				+ "</tr><tr><td>Company:</td><td><input id=\"textCompany\" value=${apply.unityName }></td><td>Grade:</td><td><select id=\"select_level\">"
+				+ "<option value=\"100101\">A+</option><option value=\"100102\">A</option><option value=\"100103\">B</option></select></td>	</tr>"
+				+ "<tr><td>Acceptance Mechanism:</td><td><input type=\"text\" id=\"textHandel\"  /></td><td>Authentication Mechanism:</td><td><input type=\"text\" id=\"textApprove\"/></td></tr>"
+				+ "<tr><td>Authentication Conclusion:</td><td><textarea id=\"textConclusion\" style=\"width: 100%; height: 150px\"></textarea></td>"
+				+ "<td>Remarks:</td><td><textarea id=\"textRemark\"style=\"width: 100%; height: 150px\"></textarea></td></tr></table>";
+		$("#table_chinese").after(html);
+	}
+	
+	function delLanguage(thiz){
+		$(thiz).parentsUntil("table").remove();
+	}
+</script>
+</head>
+
+<body style="background: #edf1fc">
+<div style="background: #4c9ee7;width: 100%;height: 30px;margin-bottom: 5px">
+	<label style="width: auto;height: 30px;text-align: center;color: white;line-height: 30px;margin-left: 5px">应用中心>>品质档案>>建立档案</label>
+	</div>
+	<div style="margin-top: 10px;">
+		<table class="gvtable">
+			<thead>
+				<tr>
+					<th width="10%">生育期</th>
+					<th width="30%">时间范围</th>
+					<th width="10%">气象因子</th>
+					<th width="10%">最适范围</th>
+					<th width="20%">实测气象条件</th>
+					<th width="10%">专家评级</th>
+					<th width="10%">具体分值</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${list}" var="item">
+					<tr title="bearInfo" id="${item.id }">
+						<td rowspan="${item.grades.size() +1}">${item.name }</td>
+						<td rowspan="${item.grades.size() +1}"><fmt:formatDate
+								value="${item.start}" pattern="yyyy-MM-dd" />~<fmt:formatDate
+								value="${item.end}" pattern="yyyy-MM-dd" /></td>
+					</tr>
+					<c:forEach items="${item.grades}" var="grade">
+						<tr>
+							<td>${grade.element}</td>
+							<td>${grade.optimalRange }</td>
+							<td>${grade.realCondition }</td>
+							<td>${grade.gradeLevel }</td>
+							<td>${grade.gradeValue }</td>
+						</tr>
+					</c:forEach>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	<div style="width: 100%;height: 30px;background: #0090d7;line-height: 30px;padding-left: 5px">
+	<label style="size: +1.5;color: white;"><b>填写品种档案报告</b></label> <label
+			onclick="addLanguage()" style="size: +2;color: white;"><b>+</b></label>
+	</div>
+	<div
+		style="min-height: 100px; margin-top: 10px; padding: 10px">
+		<table id="table_chinese" class="table">
+			<tr>
+				<td style="text-align: center;" colspan="4"><label>语种:汉语</label>
+				</td>
+			<tr>
+			<tr>
+				<td>产地名称:</td>
+				<td>${apply.address }</td>
+				<td>产品名称:</td>
+				<td>${apply.productName }</td>
+			</tr>
+			<tr>
+				<td>公司名称:</td>
+				<td>${apply.unityName }</td>
+				<td>认证等级:</td>
+				<td><select id="select_level">
+						<option value="100101">特优</option>
+						<option value="100102">优</option>
+						<option value="100103">良</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td>受理机构:</td>
+				<td><input type="text" id="textHandel" placeHolder="请填写受理机构名称" /></td>
+				<td>认证机构:</td>
+				<td><input type="text" id="textApprove" placeHolder="请填写认证机构名称" /></td>
+			</tr>
+			<tr>
+				<td>认证结论:</td>
+				<td><textarea id="textConclusion" placeHolder="请填写认证结论"
+						style="width: 100%; height: 150px"></textarea></td>
+				<td>备注:</td>
+				<td><textarea id="textRemark" placeHolder="请填写认证结论"
+						style="width: 100%; height: 150px"></textarea></td>
+			</tr>
+			<tr>
+				<td>专家签名照：</td>
+				<td>
+				<div id="imgContainer" style="height: auto;min-height: 250px">
+					</div>
+				<!-- <img id="imgSign" src="" width="120px" height="150px"> -->
+					<div>
+						<div id="fileQueue"></div>
+						<div>
+							<input type="file" name="file" id="uploadImage" />
+						</div>
+					</div></td>
+				<td>认证报告：</td>
+				<td><a id="linkReport" style="width: auto" target="_blank"></a>
+					<div>
+						<div id="queueReoprt"></div>
+						<div>
+							<input type="file" name="file" id="uploadReport" />
+						</div>
+					</div></td>
+			</tr>
+			<tr>
+				<td>认证证书：</td>
+				<td><img id="imgCet" src="" width="120px" height="150px">
+					<div>
+						<div id="queuecet"></div>
+						<div style="float: left; width: 125px;">
+							<input type="file" value="上传证书" name="file" id="uploadCetificate" />
+						</div>
+					</div></td>
+			</tr>
+		</table>
+		<table class="table">
+			<tr>
+				<td>添加人:</td>
+				<td><label>${user.cuitMoonUserName }</label></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: right;"><input
+					class="btn_blue" type="button" value="提交" id="submit"
+					onclick="submit()" /></td>
+				<td colspan="2"><a class="btn_blue"
+					href="<%=basePath%>quality_archive/list">返回</a></td>
+			</tr>
+		</table>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,206 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+     android:background="@color/more_bg_color" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_header_hight"
+        android:gravity="center_vertical" >
+
+        <TextView 
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:text="学生成绩查看"
+		android:gravity="center"
+		android:textSize="20sp"
+		android:textColor="#FAFFFE"
+		android:background="@color/theme_color"
+		/>
+        <Button
+		    android:id="@+id/project_showstugrage_back"
+		    android:layout_width="40dp"
+		    android:layout_height="@dimen/activity_head_height"
+		    android:layout_marginLeft="10dp"
+		    android:background="@drawable/selector_header_back"
+		    android:layout_gravity="left"
+		    />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         android:background="@color/more_bg_color" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <!-- 指导老师分数： -->
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#FFFF"
+                         >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16.5sp"
+                            android:text="指导老师分数：" />
+
+                        <TextView
+                            android:id="@+id/project_showstugrade_guidegrade"
+                            android:layout_width="51dp"
+			                android:layout_height="match_parent"
+			                android:layout_gravity="center_vertical|left"
+			                android:gravity="center_vertical|left"
+			                android:layout_marginLeft="50dp"
+                            android:textSize="15sp"
+                            />
+
+                    </LinearLayout>
+
+                <!-- 评阅老师分数： -->
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:layout_marginTop="3dp"
+                        android:background="#FFFF" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16.5sp"
+                            android:text="评阅老师分数：" />
+
+                        <TextView
+                            android:id="@+id/project_showstugrage_checkgrade"
+                            android:layout_width="51dp"
+			                android:layout_height="match_parent"
+			                android:layout_gravity="center_vertical|left"
+			                android:gravity="center_vertical|left"
+			                android:layout_marginLeft="50dp"
+                            android:textSize="15sp"
+                            />
+
+                    </LinearLayout>
+                <!-- 答辩小组分数： -->
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:layout_marginTop="3dp"
+                        android:background="#FFFF" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16.5sp"
+                            android:text="答辩小组分数：" />
+
+                        <TextView
+                            android:id="@+id/project_showstugrade_juegegrade"
+                            android:layout_width="51dp"
+			                android:layout_height="match_parent"
+			                android:layout_gravity="center_vertical|left"
+			                android:gravity="center_vertical|left"
+			                android:layout_marginLeft="50dp"
+                            android:textSize="15sp"
+                            />
+
+                    </LinearLayout>
+
+                <!-- 初评总分： -->
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:layout_marginTop="3dp"
+                        android:background="#FFFF" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16.5sp"
+                            android:text="初评总分：" />
+
+                        <TextView
+                            android:id="@+id/project_showstugrade_firstgrade"
+                            android:layout_width="51dp"
+			                android:layout_height="match_parent"
+			                android:layout_gravity="center_vertical|left"
+			                android:gravity="center_vertical|left"
+			               android:layout_marginLeft="50dp"
+                            android:textSize="15sp"
+                            />
+
+                    </LinearLayout>
+
+
+                <!-- 是否通过： -->
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:layout_marginTop="3dp"
+                        android:background="#FFFF" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16.5sp"
+                            android:text="是否通过：" />
+
+                        <TextView
+                            android:id="@+id/project_showstugrade_ispass"
+                            android:layout_width="51dp"
+			                android:layout_height="match_parent"
+			                android:layout_gravity="center_vertical|left"
+			                android:gravity="center_vertical|left"
+			                android:layout_marginLeft="50dp"
+                            android:textSize="15sp"
+                            />
+
+                    </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/loading_animation "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

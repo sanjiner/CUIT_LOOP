@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-6-15 21:45:53 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.auchc.entity.Reportinfomationother" table="reportinfomationother" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="languageId" type="string">
+            <column name="languageId" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="productInfomantion" type="string">
+            <column name="ProductInfomantion" length="100" />
+        </property>
+        <property name="producerImation" type="string">
+            <column name="ProducerImation" length="100" />
+        </property>
+        <property name="areaInfomation" type="string">
+            <column name="AreaInfomation" length="100" />
+        </property>
+        <property name="approvelevel" type="string">
+            <column name="Approvelevel" length="50" />
+        </property>
+        <property name="approveConclusion" type="string">
+            <column name="ApproveConclusion" length="200" />
+        </property>
+        <property name="headleAgency" type="string">
+            <column name="HeadleAgency" length="50" />
+        </property>
+        <property name="approveAgency" type="string">
+            <column name="ApproveAgency" length="50" />
+        </property>
+        <property name="reportAddTime" type="timestamp">
+            <column name="ReportAddTime" length="19" />
+        </property>
+        <property name="addPerson" type="string">
+            <column name="AddPerson" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="Remark" length="200" />
+        </property>
+        <property name="certificateImage" type="string">
+            <column name="certificateImage" length="200" />
+        </property>
+        <property name="certificateAttachment" type="string">
+            <column name="certificateAttachment" length="200" />
+        </property>
+        <property name="languageType" type="string">
+            <column name="languageType" length="20" />
+        </property>
+        <property name="reportBh" type="string">
+            <column name="ReportBh" length="32" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

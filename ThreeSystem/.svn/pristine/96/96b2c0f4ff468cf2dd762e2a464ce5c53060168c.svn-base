@@ -1,0 +1,53 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+	 >
+	<TextView 
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/activity_head_height"
+		android:text="@string/home"
+		android:gravity="center"
+		android:textSize="20sp"
+		android:textColor="#FAFFFE"
+		android:background="@color/theme_color"
+		/>
+
+	
+	<FrameLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent" >
+	    
+		<ScrollView
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:scrollbars="none" >
+			<LinearLayout
+			    android:id="@+id/home_all_list_linear"
+			    android:layout_width="fill_parent"  
+		        android:layout_height="wrap_content" 
+		        android:orientation="vertical"
+			    ></LinearLayout>
+		</ScrollView>
+		
+		<ProgressBar 
+		    android:id="@+id/home_progressbar"
+		    android:layout_gravity="center"
+		    android:layout_width="60dp"
+            android:layout_height="60dp"/>
+		
+		<Button 
+		    android:id="@+id/home_button_set_term"
+		    android:layout_width="fill_parent"
+		    android:layout_height="80dp"
+		    android:layout_gravity="center"
+		    android:gravity="center"
+		    android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+		    android:background="@drawable/selector_all_button"
+		    android:text="还没设置学期，点更多去设置"
+		    /> 
+	</FrameLayout>
+	
+</LinearLayout>

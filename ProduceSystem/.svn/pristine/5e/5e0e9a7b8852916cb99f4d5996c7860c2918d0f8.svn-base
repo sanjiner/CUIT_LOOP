@@ -1,0 +1,30 @@
+#mysql database setting
+jdbc.type=mysql
+jdbc.driver=com.mysql.jdbc.Driver
+#jdbc.url=jdbc:mysql://222.209.224.81:3306/ProduceSystem?useUnicode=true&characterEncoding=utf-8
+#jdbc.url=jdbc:mysql://127.0.0.1:3306/ProduceSystem?useUnicode=true&characterEncoding=utf-8
+#jdbc.url=jdbc:mysql://192.168.169.25:3307/ProduceSystem?useUnicode=true&characterEncoding=utf-8
+jdbc.url=jdbc:mysql://210.41.225.194:3306/ProduceSystem?useUnicode=true&characterEncoding=utf-8
+#jdbc.username=root
+jdbc.username=cjq
+#jdbc.password=root
+jdbc.password=6602
+
+#hibernate
+hibernate.show_sql=false
+hibernate.format_sql=false
+hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+
+#page 
+page.pageNo=1
+page.pageCountSize=10
+
+#image upload path
+image.path=/WEB-INF/Upload/PicturePath
+#File upload path
+file.path=/WEB-INF/Upload/FilePath
+#image show path
+image.showpath=/Upload/PicturePath
+file.showpath=/Upload/FilePath
+#\u8BA4\u8BC1\u62A5\u544A\u4FDD\u5B58\u7684\u5730\u5740
+report.path=D\:\\ReportFolder

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 21:24:14 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.model.entity.Approvemodelmanage" table="approvemodelmanage" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="approveLevelId" type="string">
+            <column name="ApproveLevelId" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="productApproModelId" type="string">
+            <column name="ProductApproModelId" length="32" />
+        </property>
+        <property name="approveLevelName" type="string">
+            <column name="ApproveLevelName" length="50" />
+        </property>
+        <property name="approveLevelDescription" type="string">
+            <column name="ApproveLevelDescription" />
+        </property>
+        <property name="remark" type="string">
+            <column name="Remark" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

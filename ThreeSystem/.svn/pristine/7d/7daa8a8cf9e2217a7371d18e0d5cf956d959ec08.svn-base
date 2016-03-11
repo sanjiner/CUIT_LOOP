@@ -1,0 +1,17 @@
+package com.example.thesis;
+
+import android.os.Bundle;
+
+import com.exam.ThreeSystem.R;
+import com.example.PCenter.BaseActivity;
+
+public class ThesisDefense_studentlist  extends BaseActivity{
+
+	
+	
+	
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.guide_teacher_rate);
+	}
+}

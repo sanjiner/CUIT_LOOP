@@ -1,0 +1,63 @@
+td {
+	text-align: center;
+	height: 40px;
+}
+
+.simple_button{
+	width: 100px;
+	height: 30px;
+	background: white;
+	border: gray;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.text_right{
+	text-align: right;
+}
+.content_left{
+	text-align: left;
+	padding-left: 5px;
+}
+
+.tb_float_right {
+	float: right|center;
+}
+
+.tb_float_left {
+	float: left;
+}
+
+.line_tbd {
+	background: #dcdcdc;
+	width: 100%;
+	height: 4px;
+}
+
+.line_done {
+	background: #049354;
+	width: 100%;
+	height: 4px;
+}
+
+input {
+	width: 80%;
+}
+
+.node_tbd {
+	width: 30px;
+	height: 30px;
+	background-color: #dcdcdc;
+	border-radius: 25px;
+}
+
+.node_done {
+	width: 30px;
+	height: 30px;
+	background-color: #049354;
+	border-radius: 25px;
+}
+
+select{
+	width: 80px;
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-13 16:59:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+	<class name="edu.cuit.module.sys.entity.TbcuitmoonModule" table="tbcuitmoon_module"
+		catalog="ProduceSystem" optimistic-lock="version">
+		<id name="cuitMoonModuleId" type="string">
+			<column name="CuitMoon_ModuleID" length="32" />
+			<generator class="assigned" />
+		</id>
+		<property name="cuitMoonModuleName" type="string">
+			<column name="CuitMoon_ModuleName" length="20" not-null="true" />
+		</property>
+		<property name="cuitMoonModuleUrl" type="string">
+			<column name="CuitMoon_ModuleURL" length="200" />
+		</property>
+		<property name="cuitMoonModuleIcon" type="string">
+			<column name="CuitMoon_ModuleIcon" length="200" />
+		</property>
+		<property name="cuitMoonParentModuleId" type="string">
+			<column name="CuitMoon_ParentModuleID" length="32" />
+		</property>
+		<property name="cuitMoonModuleStatus" type="java.lang.Long">
+			<column name="CuitMoon_ModuleStatus" />
+		</property>
+		<property name="cuitMoonModuleOrderNum" type="java.lang.Integer">
+			<column name="CuitMoon_ModuleOrderNum" />
+		</property>
+		<property name="cuitMoonModuleDescription" type="string">
+			<column name="CuitMoon_ModuleDescription" length="200" />
+		</property>
+		<property name="cuitMoonModuleRemarks" type="string">
+			<column name="CuitMoon_ModuleRemarks" length="200" />
+		</property>
+		<set name="tbcuitmoonJurisdictions" order-by="cuitMoonJurisdictionOrderNum asc" table="tbcuitmoon_jurisdiction"
+			fetch="select">
+			<key column="CuitMoon_ModuleID" />
+			<one-to-many class="edu.cuit.module.sys.entity.TbcuitmoonJurisdiction" />
+		</set>
+		
+	</class>
+</hibernate-mapping>

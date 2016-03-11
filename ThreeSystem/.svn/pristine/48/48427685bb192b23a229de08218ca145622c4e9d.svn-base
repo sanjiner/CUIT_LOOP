@@ -1,0 +1,82 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/more_bg_color" >
+
+    <RelativeLayout
+        android:id="@+id/rl_more_term_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_head_height"
+        android:background="@color/theme_color" >
+
+        <Button
+            android:id="@+id/b_more_term_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/selector_header_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/more_term"
+            android:textColor="@color/header_text_color"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/b_more_term_confirm"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/ic_confirm" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_more_term_selectedterm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_more_term_header"
+        android:background="@drawable/ic_more_item_bg_bottom" >
+
+        <TextView
+            android:id="@+id/more_term_currentterm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="当前学期："
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/more_term_selectedterm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/more_term_currentterm"
+            android:text="未设置"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_more_term_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_more_term_selectedterm"
+        android:choiceMode="singleChoice"
+        android:divider="@color/more_bg_color"
+        android:dividerHeight="5dp"
+        android:listSelector="@drawable/selector_more_term_list_item"
+        android:padding="5dp" >
+    </ListView>
+
+    <ProgressBar
+        android:id="@+id/pb_more_term"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

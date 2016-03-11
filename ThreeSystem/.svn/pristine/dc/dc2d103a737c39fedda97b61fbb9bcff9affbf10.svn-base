@@ -1,0 +1,371 @@
+package com.example.PCenter;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
+import com.exam.ThreeSystem.R;
+
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.provider.MediaStore;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.webkit.ValueCallback;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ContentResolver;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
+
+import java.lang.Object;
+public class Homework_tea_addhomework_onweb extends BaseActivity implements OnClickListener,MyWebChromeClient.OpenFileChooserCallBack{
+
+	private WebView mWebView;
+	private Button backButton;
+	private ProgressBar progressBar;
+	private ValueCallback<Uri> mUploadMsg;
+	private static final String TAG = "MyActivity";  
+    private static final int REQUEST_CODE_PICK_IMAGE = 0;  
+    private static final int REQUEST_CODE_IMAGE_CAPTURE = 1;
+    private ValueCallback<Uri> mUploadFile;
+    private static final int REQUEST_UPLOAD_FILE_CODE = 12343;
+    private Intent mSourceIntent;
+	private String TeachingClassIDListString="";
+	private String TeacherName="";
+	private String WorkName="";
+	private String DeadTime2="";
+	private String WorkDesc="";
+	private String IsStuSee="";
+	private String Memo="";
+	private String realURL="";
+	private String UPloadURL="http://222.18.158.198:8016/PhoneAccess/TeacherUploadPictures/List.aspx?";
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO 自动生成的方法存根
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.homework_tea_addhomework_onweb);
+		init();
+		getintent();
+		WebSettings webSettings =   mWebView .getSettings();       
+		/*webSettings.setUseWideViewPort(true);//设置此属性，可任意比例缩放
+		webSettings.setLoadWithOverviewMode(true);
+		webSettings.setJavaScriptEnabled(true);  
+		webSettings.setBuiltInZoomControls(true);
+		webSettings.setSupportZoom(true);
+		webSettings.setAllowFileAccess(true);
+		webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+		webSettings.setLoadsImagesAutomatically(true);
+		webSettings.setAllowFileAccess(true);*/
+		fixDirPath();
+		mWebView.loadUrl(realURL);
+		
+	}
+	private void resetURL()
+	{
+		realURL=UPloadURL+"TeacherName=" + TeacherName + "&"
+				+ "TeachingClassIDListString=" + TeachingClassIDListString
+				+ "&" + "WorkName=" + WorkName + "&" + "WorkDesc="
+				+ WorkDesc + "&" + "DeadTime=" + DeadTime2 + "&"
+				+ "IsStuSee=" + IsStuSee + "&" + "Memo=" + Memo  ;
+		System.out.println(realURL);
+	}
+	private void getintent()
+	{
+		Intent intent=getIntent();
+		TeachingClassIDListString=intent.getStringExtra("TeachingClassIDListString");
+		TeacherName=intent.getStringExtra("TeacherName");
+		WorkName=intent.getStringExtra("WorkName");
+		WorkDesc=intent.getStringExtra("WorkDesc");
+		DeadTime2=intent.getStringExtra("DeadTime");
+		IsStuSee=intent.getStringExtra("IsStuSee");
+		Memo=intent.getStringExtra("Memo");
+		resetURL();
+	}
+	private void init()
+	{
+		GetViewObj();
+		setlistener();
+	}
+	private void GetViewObj()
+	{
+		mWebView=(WebView) findViewById(R.id.webView);
+		progressBar=(ProgressBar) findViewById(R.id.progressBar_web);
+		mWebView.requestFocusFromTouch();
+		backButton=(Button) findViewById(R.id.homework_Addhomework_web_back);
+		
+	}
+	private void setlistener()
+	{
+		backButton.setOnClickListener(this);
+		//setWebChromeClient();
+		mWebView.setWebChromeClient(new MyWebChromeClient(this));
+		mWebView.setWebViewClient(new WebViewClient(){
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				// TODO 自动生成的方法存根
+				view.loadUrl(url);   
+                return true;   
+			}
+
+						//网页加载开始时调用，显示加载提示旋转进度条
+			            @Override
+			            public void onPageStarted(WebView view, String url,Bitmap favicon) {
+			                // TODO Auto-generated method stub
+			                super.onPageStarted(view, url, favicon);
+			                progressBar.setVisibility(android.view.View.VISIBLE);
+//			                Toast.makeText(ElecHall.this, "onPageStarted", 2).show();
+			            }
+
+			//网页加载完成时调用，隐藏加载提示旋转进度条
+			            @Override
+			            public void onPageFinished(WebView view, String url) {
+			                // TODO Auto-generated method stub
+			                super.onPageFinished(view, url);
+			                progressBar.setVisibility(android.view.View.GONE);
+//			                Toast.makeText(ElecHall.this, "onPageFinished", 2).show();
+			            }
+			//网页加载失败时调用，隐藏加载提示旋转进度条
+			            @Override
+			            public void onReceivedError(WebView view, int errorCode,
+			                    String description, String failingUrl) {
+			                // TODO Auto-generated method stub
+			                super.onReceivedError(view, errorCode, description, failingUrl);
+			                progressBar.setVisibility(android.view.View.GONE);
+//			                Toast.makeText(ElecHall.this, "onReceivedError", 2).show();
+			            }
+			            
+			        });
+		
+	}
+
+	@Override
+	public void onClick(View view) {
+		// TODO 自动生成的方法存根
+		switch (view.getId()) {
+		case R.id.homework_Addhomework_web_back:
+			finish();
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	@Override  
+    public boolean onKeyDown(int keyCode, KeyEvent event) {   
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {   
+        	mWebView.goBack(); //goBack()表示返回WebView的上一页面   
+            return true;   
+        }   
+        else if((keyCode == KeyEvent.KEYCODE_BACK) && !mWebView.canGoBack())
+        {
+        	
+        	finish();
+        	 return false; 
+        }
+        else 
+        {return false;}
+
+         
+    }
+
+	
+	
+	 @Override  
+	    public void onActivityResult(int requestCode, int resultCode, Intent data) {  
+	        if (resultCode != Activity.RESULT_OK) {  
+	            return;  
+	        }  
+	        switch (requestCode) {  
+	            case REQUEST_CODE_IMAGE_CAPTURE:  
+	            case REQUEST_CODE_PICK_IMAGE: {  
+	                try {  
+	                    if (mUploadMsg == null) {  
+	                        return;  
+	                    }  
+	                    String sourcePath = ImageUtil.retrievePath(this, mSourceIntent, data);  
+	                    if (TextUtils.isEmpty(sourcePath) || !new File(sourcePath).exists()) {  
+	                        Log.w(TAG, "sourcePath empty or not exists.");  
+	                        break;  
+	                    }  
+	                    Uri uri = Uri.fromFile(new File(sourcePath));  
+	                    mUploadMsg.onReceiveValue(uri);  
+	                } catch (Exception e) {  
+	                    e.printStackTrace();  
+	                }  
+	                break;  
+	            }  
+	        }  
+	    }  
+	  
+	    @Override  
+	    public void openFileChooserCallBack(ValueCallback<Uri> uploadMsg, String acceptType) {  
+	        mUploadMsg = uploadMsg;  
+	        showOptions();  
+	    }  
+	  
+	    public void showOptions() {  
+	        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);  
+	        alertDialog.setOnCancelListener(new ReOnCancelListener());  
+	        alertDialog.setTitle("选择");  
+	        alertDialog.setItems(R.array.options, new DialogInterface.OnClickListener() {  
+	                    @Override  
+	                    public void onClick(DialogInterface dialog, int which) {  
+	                        if (which == 0) {  
+	                            mSourceIntent = ImageUtil.choosePicture();  
+	                            startActivityForResult(mSourceIntent, REQUEST_CODE_PICK_IMAGE);  
+	                        } else {  
+	                            mSourceIntent = ImageUtil.takeBigPicture();  
+	                            startActivityForResult(mSourceIntent, REQUEST_CODE_IMAGE_CAPTURE);  
+	                        }  
+	                    }  
+	                }  
+	        );  
+	        alertDialog.show();  
+	    }  
+	  
+	    private void fixDirPath() {  
+	        String path = ImageUtil.getDirPath();  
+	        File file = new File(path);  
+	        if (!file.exists()) {  
+	            file.mkdirs();  
+	        }  
+	    }  
+	  
+	    private class ReOnCancelListener implements DialogInterface.OnCancelListener {  
+	  
+	        @Override  
+	        public void onCancel(DialogInterface dialogInterface) {  
+	            if (mUploadMsg != null) {  
+	                mUploadMsg.onReceiveValue(null);  
+	                mUploadMsg = null;  
+	            }  
+	        }  
+	    }
+	
+	
+	
+//	////////////////////////////////////////////////////////////////////////////////////////////////
+	  
+	   /*private Intent createCameraIntent()  
+	    {  
+	        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//拍照  
+	        //=======================================================  
+	        Intent imageIntent = new Intent(Intent.ACTION_GET_CONTENT);//选择图片文件  
+	        imageIntent.setType("image/*");  
+	        //=======================================================  
+	        return cameraIntent;  
+	    }  
+	    //最后在OnActivityResult中接受返回的结果  
+	    protected void onActivityResult(int requestCode, int resultCode, Intent data)  
+	    {  
+	        if (requestCode == REQUEST_UPLOAD_FILE_CODE && resultCode == RESULT_OK)  
+	        {  
+	            if (null == mUploadFile)  
+	            {  
+	                return;  
+	            }  
+	            Uri result = (null == data) ? null : data.getData();  
+	            if (null != result)  
+	            {  
+	                ContentResolver resolver = this.getContentResolver();  
+	                String[] columns = { MediaStore.Images.Media.DATA };  
+	                Cursor cursor = resolver.query(result, columns, null, null, null);  
+	                cursor.moveToFirst();  
+	                int columnIndex = cursor.getColumnIndex(columns[0]);  
+	                String imgPath = cursor.getString(columnIndex);  
+	                System.out.println("imgPath = " + imgPath);  
+	                if (null == imgPath)  
+	                {  
+	                    return;  
+	                }  
+	                File file = new File(imgPath);  
+	                   //将图片处理成大小符合要求的文件  
+	                result = Uri.fromFile(handleFile(file));  
+	                mUploadFile.onReceiveValue(result);  
+	                mUploadFile = null;       
+	            }  
+	        }  
+	        super.onActivityResult(requestCode, resultCode, data);  
+	    }  
+	    *//**处理拍照/选择的文件*//*  
+	    private File handleFile(File file)  
+	    {  
+	        DisplayMetrics dMetrics = getResources().getDisplayMetrics();  
+	        BitmapFactory.Options options = new Options();  
+	        options.inJustDecodeBounds = true;  
+	         BitmapFactory.decodeFile(file.getAbsolutePath(), options);  
+	        int imageWidth = options.outWidth;  
+	        int imageHeight = options.outHeight;  
+	        System.out.println("  imageWidth = " + imageWidth + " imageHeight = " + imageHeight);  
+	        int widthSample = (int) (imageWidth / (dMetrics.density * 90));  
+	        int heightSample = (int) (imageHeight / (dMetrics.density * 90));  
+	        System.out.println("widthSample = " + widthSample + " heightSample = " + heightSample);  
+	        options.inSampleSize = widthSample < heightSample ? heightSample : widthSample;  
+	        options.inJustDecodeBounds = false;  
+	        Bitmap newBitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);  
+	        System.out.println("newBitmap.size = " + newBitmap.getRowBytes() * newBitmap.getHeight());  
+	        File handleFile = new File(file.getParentFile(), "upload.png");  
+	        try  
+	        {  
+	            if (newBitmap.compress(CompressFormat.PNG, 50, new FileOutputStream(handleFile)))  
+	            {  
+	                System.out.println("保存图片成功");  
+	            }  
+	        }  
+	        catch (FileNotFoundException e)  
+	        {  
+	            e.printStackTrace();  
+	        }  
+	  
+	        return handleFile;  
+	  
+	    }  
+	    
+	    
+	    private void setWebChromeClient()  
+	    {  
+	        if (null != mWebView)  
+	        {  
+	        	mWebView.setWebChromeClient(new WebChromeClient()  
+	            {  
+	                // Andorid 4.1+  
+	                public void openFileChooser(ValueCallback<Uri> uploadFile, String acceptType, String capture)  
+	                {  
+	                    openFileChooser(uploadFile);  
+	                }  
+	  
+	                // Andorid 3.0 +  
+	                public void openFileChooser(ValueCallback<Uri> uploadFile, String acceptType)  
+	                {  
+	                    openFileChooser(uploadFile);  
+	                }  
+	  
+	                // Android 3.0  
+	                public void openFileChooser(ValueCallback<Uri> uploadFile)  
+	                {  
+	                    // Toast.makeText(WebviewActivity.this, "上传文件/图片",Toast.LENGTH_SHORT).show();  
+	                    mUploadFile = uploadFile;  
+	                    startActivityForResult(Intent.createChooser(createCameraIntent(), "Image Browser"), REQUEST_UPLOAD_FILE_CODE);  
+	                }  
+	            });  
+	        }  
+	    }  */
+}

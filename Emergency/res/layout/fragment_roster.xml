@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/roster_swiperefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/beijing1"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <RadioGroup
+                android:id="@+id/roster_radiogroup"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/shape_roster_radiogroup_bg"
+                android:orientation="horizontal"
+                android:paddingBottom="20dp"
+                android:paddingLeft="45dp"
+                android:paddingRight="40dp"
+                android:paddingTop="20dp" >
+
+                <RadioButton
+                    android:id="@+id/roster_radio_friend"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_roster_radio_left"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="@string/roster_friend"
+                    android:textColor="@color/color_roster_radio_text"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/roster_radio_group"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_roster_radio_right"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/roster_group"
+                    android:textColor="@color/color_roster_radio_text"
+                    android:textSize="18sp" />
+            </RadioGroup>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <LinearLayout
+                    android:id="@+id/parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+                </LinearLayout>
+
+                <cc.util.android.view.InnerListView
+                    android:id="@+id/roster_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@drawable/press"
+                    android:dividerHeight="1dp"
+                    android:fadingEdge="none"
+                    android:headerDividersEnabled="false"
+                    android:scrollingCache="false"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.v4.widget.SwipeRefreshLayout>

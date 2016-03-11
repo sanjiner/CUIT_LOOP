@@ -1,0 +1,194 @@
+package edu.cuit.module.infom.web.controller;
+
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import edu.cuit.common.util.Constant;
+import edu.cuit.common.util.Page;
+import edu.cuit.common.web.controller.BaseController;
+import edu.cuit.module.infom.entity.Expertsgroup;
+import edu.cuit.module.infom.entity.Weatherstationinfo;
+import edu.cuit.module.infom.service.WeatherstationinfoService;
+import edu.cuit.module.model.service.ElementmodelService;
+import edu.cuit.module.sys.entity.TbcuitmoonArea;
+import edu.cuit.module.sys.entity.TbcuitmoonUser;
+import edu.cuit.module.sys.enums.JurCodeEnum;
+import edu.cuit.module.sys.service.TbcuitmoonAreaService;
+import edu.cuit.module.sys.service.TbcuitmoonDictionaryService;
+
+@Controller
+@RequestMapping("auth_center_info/weatherStation_info")
+public class WeatherStationController extends BaseController {
+	private int pageNo;
+	private int pageCountSize;
+
+	@Autowired
+	WeatherstationinfoService weatherStationService;
+	@Autowired
+	TbcuitmoonDictionaryService dictionaryService;
+	@Autowired
+	ElementmodelService elementModelService;
+	@Autowired
+	TbcuitmoonAreaService areaService;
+
+	public WeatherStationController() {
+		pageCountSize = 20; // 页面大小
+		pageNo = 1;
+	}
+
+	private Page getWeatherStationInfoList(String queryString, Integer pageIndex) {
+		if (pageIndex == null)
+			pageIndex = pageNo;
+		String sqlString = "from Weatherstationinfo"
+				+ (queryString == null ? "" : " where Name like '%"
+						+ queryString + "%'");
+		Page page = weatherStationService.getPage(sqlString, pageIndex - 1,
+				pageCountSize);
+		List<?> infoList = page.getPageList();
+		String areaID;
+		List<?> tmpList;
+		for (int i = 0; i < infoList.size(); i++) {
+			areaID = ((Weatherstationinfo) infoList.get(i))
+					.getBelongTo();
+			// ///根据areaID获取区域的中文名称
+			tmpList = areaService
+					.find("from TbcuitmoonArea where cuitMoonAreaCode like '%"
+							+ areaID + "%'");
+			if (tmpList.size() > 0) {
+				((Weatherstationinfo) infoList.get(i))
+						.setBelongTo(((TbcuitmoonArea) tmpList.get(0))
+								.getCuitMoonAreaName());
+			}
+		}
+		return page;
+	}
+
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public String List(@RequestParam(required = false) Integer requestPageNo,
+			@RequestParam(required = false) String queryString, Model model)
+			throws UnsupportedEncodingException {
+		if (queryString != null)
+			queryString = toUTF8(queryString != null ? queryString : "");
+		Page page = getWeatherStationInfoList(queryString, requestPageNo);
+		boolean isPaging = page.getPageList().size() > 0 ? true : false; // 是否分页
+		model.addAttribute("DataList", page);
+		model.addAttribute("isPaging", isPaging);
+		model.addAttribute("queryString", queryString);
+		return "auth_center_info/weatherStation_info/WeatherStationInfoList";
+	}
+
+	@RequestMapping(value = "list", method = RequestMethod.POST)
+	public String List(String queryString, @RequestParam(required = false) Integer requestPageNo, Model model)
+			throws UnsupportedEncodingException {
+		Page page = getWeatherStationInfoList(queryString, requestPageNo);
+		boolean isPaging = page.getPageList().size() > 0 ? true : false; // 是否分页
+		model.addAttribute("DataList", page);
+		model.addAttribute("isPaging", isPaging);
+		model.addAttribute("queryString", queryString);
+		return "auth_center_info/weatherStation_info/WeatherStationInfoList";
+	}
+	
+	@RequestMapping(value = "add", method = RequestMethod.GET)
+	public String Add(Model model, HttpSession session) {
+		//选择要素
+		List<?> tmpList = elementModelService
+				.find("from Elementmodel order by ElementNumber asc");
+		model.addAttribute("ElementList", tmpList);
+		////绑定专家的层次 
+		TbcuitmoonUser user_model = (TbcuitmoonUser)session.getAttribute(Constant.LOGINUSER);
+		String areaString = user_model.getCuitMoonAreaId().trim();
+		if(areaString.equals("1012")){
+			model.addAttribute("belongTo", "四川省");
+		}
+		else{
+			List<?> areaList = areaService.find("from TbcuitmoonArea where cuitmoon_areacode = '"+ areaString +"'");
+			if(areaList.size() > 0)
+				model.addAttribute("belongTo", ((TbcuitmoonArea)areaList.get(0)).getCuitMoonAreaName());
+			else
+				model.addAttribute("belongTo", "");
+		}
+		return "auth_center_info/weatherStation_info/WeatherStationInfoAdd";
+	}
+	
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	@ResponseBody
+	public String Add(String stationID, String name, String belongTo,
+			String longitude, String latitude, String measuringelements, String remark) {
+		Weatherstationinfo model = new Weatherstationinfo();
+		String primaryKey = UUID.randomUUID().toString().replace("-", "");
+		model.setWeatherStationInfoId(primaryKey); // 主键
+		model.setWeatherStationId(stationID);
+		model.setName(name);
+		model.setBelongTo(belongTo);
+		model.setLatitude(latitude);
+		model.setMeasuringelements(measuringelements);
+		model.setLongitude(longitude);
+		model.setRemark(remark);
+		weatherStationService.save(model);
+		return "T";
+	}
+	
+	@RequestMapping(value = "edit", method = RequestMethod.GET)
+	public String Edit(@RequestParam String id, Model model) {
+		checkPermissions(JurCodeEnum.EDITControl.value());
+		//选择要素
+		List<?> tmpList = elementModelService
+				.find("from Elementmodel order by ElementNumber asc");
+		model.addAttribute("ElementList", tmpList);
+		//气象站数据
+		Weatherstationinfo stationInfo = weatherStationService.get(id);
+		model.addAttribute("primaryKey", stationInfo.getWeatherStationInfoId());
+		model.addAttribute("stationID", stationInfo.getWeatherStationId());
+		model.addAttribute("name", stationInfo.getName());
+		
+		model.addAttribute("longitude", stationInfo.getLongitude());
+		model.addAttribute("latitude", stationInfo.getLatitude());
+		model.addAttribute("measuringelements", stationInfo.getMeasuringelements());
+		model.addAttribute("remark", stationInfo.getRemark());
+		
+		tmpList = areaService
+				.find("from TbcuitmoonArea where cuitMoonAreaCode like '%"
+						+ stationInfo.getBelongTo() + "%'");
+		if (tmpList.size() > 0) {
+			model.addAttribute("belongTo", ((TbcuitmoonArea) tmpList.get(0))
+					.getCuitMoonAreaName());
+		}
+		
+		return "auth_center_info/weatherStation_info/WeatherStationInfoEdit";
+	}
+	
+	@RequestMapping(value = "edit", method = RequestMethod.POST)
+	@ResponseBody 
+	public String Edit(String primaryKey,String stationID, String name, String belongTo,
+			String longitude, String latitude, String measuringelements, String remark) {
+		Weatherstationinfo model = weatherStationService.get(primaryKey);
+		model.setWeatherStationId(stationID);
+		model.setName(name);
+		model.setBelongTo(belongTo);
+		model.setLatitude(latitude);
+		model.setMeasuringelements(measuringelements);
+		model.setLongitude(longitude);
+		model.setRemark(remark);
+		weatherStationService.update(model);
+		return "T";
+	}
+	
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	@ResponseBody //删除
+	public String delete(String primaryKey) {
+		checkPermissions(JurCodeEnum.DELTEControl.value());
+		weatherStationService.deleteByKey(primaryKey);
+		return "T";
+	}
+}

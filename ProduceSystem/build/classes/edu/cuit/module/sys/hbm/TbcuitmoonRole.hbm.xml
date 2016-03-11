@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-13 16:59:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.sys.entity.TbcuitmoonRole" table="tbcuitmoon_role" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="cuitMoonRoleId" type="string">
+            <column name="CuitMoon_RoleID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="cuitMoonRoleName" type="string">
+            <column name="CuitMoon_RoleName" length="20" not-null="true" />
+        </property>
+        <property name="cuitMoonParentRoleId" type="string">
+            <column name="CuitMoon_ParentRoleID" length="32" />
+        </property>
+        <property name="cuitMoonRoleStatus" type="java.lang.Long">
+            <column name="CuitMoon_RoleStatus" />
+        </property>
+        <property name="cuitMoonRoleOrderNum" type="java.lang.Integer">
+            <column name="CuitMoon_RoleOrderNum" />
+        </property>
+        <property name="cuitMoonRoleDescription" type="string">
+            <column name="CuitMoon_RoleDescription" length="200" />
+        </property>
+        <property name="cuitMoonRoleRemarks" type="string">
+            <column name="CuitMoon_RoleRemarks" length="200" />
+        </property>
+        <property name="cuitMoonRoleLevel" type="java.lang.Integer">
+            <column name="CuitMoon_RoleLevel" />
+        </property>
+        
+        <set name="tbcuitmoonUsers" table="tbcuitmoon_userrole" cascade="save-update" fetch="select">
+            <key>
+                <column name="CuitMoon_RoleID" not-null="true" />
+            </key>
+            <many-to-many entity-name="edu.cuit.module.sys.entity.TbcuitmoonUser">
+                <column name="CuitMoon_UserID" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="tbcuitmoonJurisdictions" table="tbcuitmoon_rolejurisdiction" lazy="false" fetch="select">
+            <key>
+                <column name="CuitMoon_RoleID" not-null="true" />
+            </key>
+            <many-to-many entity-name="edu.cuit.module.sys.entity.TbcuitmoonJurisdiction">
+                <column name="CuitMoon_JurisdictionID" not-null="true" />
+            </many-to-many>
+        </set>
+        
+        <set name="tbcuitmoonModules" table="tbcuitmoon_rolemodule" fetch="select">
+            <key>
+                <column name="CuitMoon_RoleID" not-null="true" />
+            </key>
+            <many-to-many entity-name="edu.cuit.module.sys.entity.TbcuitmoonModule">
+                <column name="CuitMoon_ModuleID" not-null="true" />
+            </many-to-many>
+        </set>
+        
+    </class>
+</hibernate-mapping>

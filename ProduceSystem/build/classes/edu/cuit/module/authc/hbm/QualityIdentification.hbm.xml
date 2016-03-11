@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 19:14:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.auchc.entity.QualityIdentification" table="quality_identification" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="qualityIdentificationNum" type="string">
+            <column name="QualityIdentificationNum" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="applyBh" type="string">
+            <column name="ApplyBh" length="32" />
+        </property>
+        <property name="projectName" type="string">
+            <column name="ProjectName" length="50" />
+        </property>
+        <property name="expertsNum" type="string">
+            <column name="Experts_Num" length="32" />
+        </property>
+        <property name="applyFrequency" type="string">
+            <column name="ApplyFrequency" length="32" />
+        </property>
+        <property name="identificationer" type="string">
+            <column name="Identificationer" length="50" />
+        </property>
+        <property name="phone" type="string">
+            <column name="Phone" length="20" />
+        </property>
+        <property name="address" type="string">
+            <column name="Address" length="200" />
+        </property>
+        <property name="cropGrowthPeriod" type="string">
+            <column name="Crop_growth_period" length="100" />
+        </property>
+        <property name="originSituation" type="string">
+            <column name="Origin_Situation" length="65535" />
+        </property>
+        <property name="meteorologicalDisaster" type="string">
+            <column name="Meteorological_Disaster" length="65535" />
+        </property>
+        <property name="diseasesInsectPests" type="string">
+            <column name="Diseases_InsectPests" length="65535" />
+        </property>
+        <property name="basicPanelAuditOpinion" type="string">
+            <column name="BasicPanel_AuditOpinion" length="200" />
+        </property>
+        <property name="basicPanelSign" type="string">
+            <column name="BasicPanel_Sign" length="50" />
+        </property>
+        <property name="basicAuditTime" type="timestamp">
+            <column name="BasicAuditTime" length="19" />
+        </property>
+        <property name="provincialPanelAuditOpinion" type="string">
+            <column name="ProvincialPanel_AuditOpinion" length="200" />
+        </property>
+        <property name="provincialPanelSign" type="string">
+            <column name="ProvincialPanel_Sign" length="50" />
+        </property>
+        <property name="provincialAuditTime" type="timestamp">
+            <column name="ProvincialAuditTime" length="19" />
+        </property>
+        <property name="meteDataSources" type="string">
+            <column name="Mete_Data_Sources" length="50" />
+        </property>
+        <property name="meteLongitudeLatitude" type="string">
+            <column name="Mete_Longitude_Latitude" length="50" />
+        </property>
+        <property name="meteIndicators" type="string">
+            <column name="Mete_Indicators" length="65535" />
+        </property>
+        <property name="meteIndicatorsReason" type="string">
+            <column name="Mete_Indicators_Reason" length="65535" />
+        </property>
+        <property name="state" type="string">
+            <column name="State" length="32" />
+        </property>
+        <property name="remark" type="string">
+            <column name="Remark" length="65535" />
+        </property>
+        <property name="produceBase" type="string">
+            <column name="produceBase" length="65535" />
+        </property>
+        <property name="stationLatitude" type="string">
+            <column name="stationLatitude" length="65535" />
+        </property>
+        <property name="climateStationName" type="string">
+            <column name="climateStationName" length="200" />
+        </property>
+        <property name="startCollectionTime" type="date">
+            <column name="startCollectionTime" length="10" />
+        </property>
+        <property name="endCollectionTime" type="date">
+            <column name="endCollectionTime" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,208 @@
+package com.example.PCenter;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.Display;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ImageView.ScaleType;
+import cn.trinea.android.common.entity.FailedReason;
+import cn.trinea.android.common.service.impl.ImageCache;
+import cn.trinea.android.common.service.impl.RemoveTypeLastUsedTimeFirst;
+import cn.trinea.android.common.service.impl.ImageMemoryCache.OnImageCallbackListener;
+
+import com.exam.ThreeSystem.R;
+
+public class Stu_finnished_Imageshower extends Activity {
+private Bitmap bitmap;
+//private String URL="http://222.18.158.198:8016";
+private String URL;
+private SharedPreferences sp;
+private Activity mActivity;
+
+private String realurl;
+private String WorkURL;
+private Thread mThread;
+private ImageView imageview_bigimage;
+private static final int MSG_SUCCESS = 0;// 获取图片成功的标识
+private static final int MSG_FAILURE = 1;// 获取图片失败的标识
+public static final ImageCache IMAGE_CACHE = new ImageCache(128, 512);
+public static final String TAG_CACHE = "image_cache";
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.imageshower);
+       mActivity=this;
+       sp=mActivity.getSharedPreferences(Constant.USERINFO_SP, Context.MODE_PRIVATE);
+       URL=Constant.URL;
+        WorkURL=homework_state_activity_stu_finnished.WorkURL;
+		realurl=URL+WorkURL;
+		imageview_bigimage=(ImageView) findViewById(R.id.imageview_bigimage);
+        final ImageLoadingDialog dialog = new ImageLoadingDialog(this);
+//        dialog.show();
+//        getimage();
+        // 两秒后关闭后dialog
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                dialog.dismiss();
+//            }
+//        }, 1000 * 2);
+        imageview_bigimage.setScaleType(ScaleType.CENTER_CROP);
+        imageview_bigimage.setBackgroundResource(R.drawable.image_border);
+		LinearLayout.LayoutParams layoutParams = (LinearLayout
+				.LayoutParams) imageview_bigimage
+				.getLayoutParams();
+		Display display = getWindowManager().getDefaultDisplay();
+		layoutParams.width = display.getWidth();
+		layoutParams.height = (int) (display.getHeight() *0.85);
+		imageview_bigimage.setLayoutParams(layoutParams);
+		String pictureLink = realurl;
+		IMAGE_CACHE.get(pictureLink, imageview_bigimage);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        // TODO Auto-generated method stub
+        finish();
+        return true;
+    }
+    
+    private void getimage()
+	{
+		mThread = new Thread(runnable);
+		mThread.start();
+		System.out.println(realurl);
+		 
+
+	}
+	
+	Runnable runnable = new Runnable()
+	{
+
+		@Override
+		public void run() 
+		{
+			// TODO 自动生成的方法存根
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpGet httpGet = new HttpGet(realurl);
+
+			try
+			{
+				HttpResponse httpResponse = httpClient.execute(httpGet);
+				bitmap = BitmapFactory.decodeStream(httpResponse.getEntity().getContent());
+			}
+			catch(Exception e)
+			{
+				mHandler.obtainMessage(MSG_FAILURE).sendToTarget();
+				return;
+			}
+			mHandler.obtainMessage(MSG_SUCCESS, bitmap).sendToTarget();
+		}
+		
+	};
+	private Handler mHandler = new Handler()
+	{
+		public void handleMessage(Message msg)
+		{
+			switch (msg.what)
+			{
+			case MSG_SUCCESS:
+				imageview_bigimage.setImageBitmap((Bitmap) msg.obj);
+				break;
+			case MSG_FAILURE:
+				break;
+			}
+		}
+	};
+	static {
+		/** init icon cache **/
+		OnImageCallbackListener imageCallBack = new OnImageCallbackListener() {
+			@Override
+			public void onGetSuccess(String imageUrl, Bitmap loadedImage, View view, boolean isInCache) {
+				if (view != null && loadedImage != null) {
+					ImageView imageView = (ImageView) view;
+					imageView.setImageBitmap(loadedImage);
+					if (!isInCache) {
+						imageView.startAnimation(getInAlphaAnimation(2000));
+					}
+
+				}
+			}
+
+			/**
+			 * callback function before get image, run on ui thread
+			 * 
+			 * @param imageUrl
+			 *            imageUrl
+			 * @param view
+			 *            view need the image
+			 */
+			@Override
+			public void onPreGet(String imageUrl, View view) {
+				// Log.e(TAG_CACHE, "pre get image");
+			}
+
+			/**
+			 * callback function after get image failed, run on ui thread
+			 * 
+			 * @param imageUrl
+			 *            imageUrl
+			 * @param loadedImage
+			 *            bitmap
+			 * @param view
+			 *            view need the image
+			 * @param failedReason
+			 *            failed reason for get image
+			 */
+			@Override
+			public void onGetFailed(String imageUrl, Bitmap loadedImage, View view, FailedReason failedReason) {
+				Log.e(TAG_CACHE,
+						new StringBuilder(128).append("get image ").append(imageUrl)
+								.append(" error, failed type is: ").append(failedReason.getFailedType())
+								.append(", failed reason is: ").append(failedReason.getCause().getMessage())
+								.toString());
+			}
+
+			@Override
+			public void onGetNotInCache(String imageUrl, View view) {
+				if (view != null && view instanceof ImageView) {
+					((ImageView) view).setImageResource(R.drawable.not_loaded);// 等待载入时的图片
+				}
+			}
+		};
+		IMAGE_CACHE.setOnImageCallbackListener(imageCallBack);
+		IMAGE_CACHE.setCacheFullRemoveType(new RemoveTypeLastUsedTimeFirst<Bitmap>());
+
+		IMAGE_CACHE.setHttpReadTimeOut(10000);
+		IMAGE_CACHE.setOpenWaitingQueue(true);
+		IMAGE_CACHE.setValidTime(-1);
+		/**
+		 * close connection, default is connect keep-alive to reuse connection.
+		 * if image is from different server, you can set this
+		 */
+		// IMAGE_CACHE.setRequestProperty("Connection", "false");
+	}
+	public static AlphaAnimation getInAlphaAnimation(long durationMillis) {
+		AlphaAnimation inAlphaAnimation = new AlphaAnimation(0, 1);
+		inAlphaAnimation.setDuration(durationMillis);
+		return inAlphaAnimation;
+	}
+
+}

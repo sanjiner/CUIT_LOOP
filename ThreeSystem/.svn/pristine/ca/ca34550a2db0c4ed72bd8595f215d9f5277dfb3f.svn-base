@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_head_height"
+            android:background="@color/theme_color"
+            android:gravity="center"
+            android:text="预约考试"
+            android:textColor="#FAFFFE"
+            android:textSize="20sp" />
+        
+        <Button
+		    android:id="@+id/process_appoint_exam_back"
+		    android:layout_width="40dp"
+		    android:layout_height="@dimen/activity_head_height"
+		    android:layout_marginLeft="10dp"
+		    android:background="@drawable/selector_header_back"
+		    android:layout_gravity="left"
+		    />
+    </FrameLayout>
+
+    
+    
+    
+</LinearLayout>

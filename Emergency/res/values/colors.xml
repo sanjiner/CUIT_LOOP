@@ -1,0 +1,14 @@
+<resources>
+
+    <color name="black_overlay">#66000000</color>
+
+   	<!-- 默认字体颜色  -->
+    <color name="default_textColor">#000</color>
+    	<color name="grey">#363636</color>
+    <color name="dark_grey">#282828</color>
+    <color name="trans_dark_grey">#80282828</color>
+    <color name="white">#ffffff</color>
+    <color name="trans_white">#20ffffff</color>
+    <color name="trans">#00000000</color>
+    <color name="blue">#cc33b5e5</color>
+</resources>

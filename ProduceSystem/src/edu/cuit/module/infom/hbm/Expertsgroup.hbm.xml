@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-15 13:38:50 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.infom.entity.Expertsgroup" table="expertsgroup" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="expertsId" type="string">
+            <column name="expertsID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="expertsLevel" type="string">
+            <column name="expertsLevel" length="32" />
+        </property>
+        <property name="region" type="string">
+            <column name="Region" length="200" />
+        </property>
+        <property name="expertsName" type="string">
+            <column name="expertsName" length="100" />
+        </property>
+        <property name="expertsPerson" type="string">
+            <column name="expertsPerson" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

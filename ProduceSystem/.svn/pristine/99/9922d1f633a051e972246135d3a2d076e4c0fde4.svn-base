@@ -1,0 +1,806 @@
+package edu.cuit.module.label.web.controller;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import edu.cuit.common.util.DateFormat;
+import edu.cuit.common.web.controller.BaseController;
+import edu.cuit.module.auchc.entity.Apply;
+import edu.cuit.module.auchc.entity.Approvedatamanager;
+import edu.cuit.module.auchc.entity.Bearinginfo;
+import edu.cuit.module.auchc.entity.Climatopeinfo;
+import edu.cuit.module.auchc.entity.Expertsgrade;
+import edu.cuit.module.auchc.entity.Prictureinfomation;
+import edu.cuit.module.auchc.entity.QualityIdentification;
+import edu.cuit.module.auchc.entity.Reportinfomation;
+import edu.cuit.module.auchc.entity.Reportinfomationother;
+import edu.cuit.module.authc.service.ApplyService;
+import edu.cuit.module.authc.service.ApprovedatamanagerService;
+import edu.cuit.module.authc.service.BearinginfoService;
+import edu.cuit.module.authc.service.ClimatopeinfoService;
+import edu.cuit.module.authc.service.ExpertsgradeService;
+import edu.cuit.module.authc.service.PrictureinfomationService;
+import edu.cuit.module.authc.service.QualityIdentificationService;
+import edu.cuit.module.authc.service.ReportinfomationService;
+import edu.cuit.module.authc.service.ReportinfomationotherService;
+import edu.cuit.module.infom.entity.Businessmanagement;
+import edu.cuit.module.infom.service.BusinessmanagementService;
+import edu.cuit.module.infom.service.WeatherstationinfoService;
+import edu.cuit.module.label.entity.Labelapplication;
+import edu.cuit.module.label.entity.Labelscanrecord;
+import edu.cuit.module.label.entity.Labermanagement;
+import edu.cuit.module.label.service.LabelapplicationService;
+import edu.cuit.module.label.service.LabelscanrecordService;
+import edu.cuit.module.label.service.LabermanagementService;
+import edu.cuit.module.origin.entity.Productapply;
+import edu.cuit.module.origin.service.CertificateService;
+import edu.cuit.module.origin.service.ProductapplyService;
+import edu.cuit.module.sys.entity.TbcuitmoonArea;
+import edu.cuit.module.sys.entity.TbcuitmoonDictionary;
+import edu.cuit.module.sys.service.TbcuitmoonAreaService;
+import edu.cuit.module.sys.service.TbcuitmoonDictionaryService;
+
+@Controller
+@RequestMapping("labelscan")
+public class LabelScanController extends BaseController{
+	@Autowired
+	ApplyService applyService;
+	@Autowired
+	ProductapplyService productapplyService; 
+	@Autowired
+	LabermanagementService labermanagementService;
+	@Autowired
+	LabelscanrecordService labelscanrecordService;
+	@Autowired
+	LabelapplicationService labelapplicationService;
+	@Autowired
+	TbcuitmoonAreaService tbcuitmoonAreaService;
+	@Autowired
+	BusinessmanagementService businessmanagementService;
+	@Autowired
+	CertificateService certificateService;
+	@Autowired 
+	QualityIdentificationService qualityIdentificationService;
+	@Autowired
+	ApprovedatamanagerService approvedatamanagerService;
+	@Autowired 
+	PrictureinfomationService prictureinfomationService;
+	@Autowired
+	ReportinfomationService reportinfomationService;
+	@Autowired
+	ReportinfomationotherService reportinfomationotherService;
+	@Autowired
+	TbcuitmoonDictionaryService tbcuitmoonDictionaryService;
+	@Autowired
+	WeatherstationinfoService weatherstationinfoService;
+	@Autowired
+	ClimatopeinfoService climatopeinfoService;
+	@Autowired
+	BearinginfoService bearinginfoService;
+	@Autowired
+	ExpertsgradeService expertsgradeService;
+	
+	@RequestMapping(value="ScanResult",method = RequestMethod.GET)
+	public String show(@RequestParam("id") String labelId, Model model){			
+		//获取标签信息
+		Labermanagement lmmodel = labermanagementService.get(labelId);
+		String labelType = lmmodel.getLabelKinds().trim();     //标签类别
+		String aocode = lmmodel.getApplyOriginCode();   //认证或溯源申请编号
+		String labelApplyId = lmmodel.getApplyBh();     //标签申请编号
+		String labelStatus = lmmodel.getLabelStatus();   //标签状态
+		String cautious = "";
+		if(labelStatus.equals("无效"))
+		{
+			cautious = "<label style=\"color: red;\">(请谨慎购买!)</label>";
+		}
+				
+		if(labelType.equals("农网认证"))
+		{
+			String divStyle = "display:none"; //农网认证没有气候环境信息、产地图片、品质认证
+			model.addAttribute("divStyle", divStyle);
+			//获取相关资质证书
+			model = getCertiImages(aocode,"1", model);			
+		}else{
+			//获取其他语言版本
+			model = getLanguage(aocode,model);
+			//通过接口获取气候要素数据
+			model = getelementInfo(aocode, model);		
+			//获取相关资质证书
+			model = getCertiImages(aocode, "2", model);						
+			//获取产品产地图片
+			model = getGrowthPlaceImage(aocode, model);
+			//获取品质认证信息
+			model = getReportInfo(aocode, model);	
+			String divStyle = "";
+			model.addAttribute("divStyle", divStyle);
+		}
+		model.addAttribute("labelInfo", lmmodel);	
+		model.addAttribute("cautious", cautious);
+		//获取标签申请表信息
+		model = getLabelApplyInfo(labelApplyId, model);		
+		//获取标签扫描记录
+		model = getLabelScanInfo(labelId,model);		
+		//获取溯源认证申请信息或农网认证申请信息
+		model = getProductInfo(labelType, aocode, model);
+        return "labelscan/ScanResult";
+	}	
+	
+	@RequestMapping(value="ScanResult",method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> updateScanInfo(HttpServletRequest request,HttpServletResponse response){
+		String labelId = request.getParameter("labelId");
+		String provinceStr = request.getParameter("province");
+		String cityStr = request.getParameter("city");
+		String districtStr = request.getParameter("district");
+		String addressStr = request.getParameter("address");
+		String labelApplyBh = request.getParameter("labelApplyBh");
+		String originID = request.getParameter("originID");
+		
+		//更新标签扫描次数
+		String numStr = updateLabelInfo(labelId);		
+		//添加扫描记录
+		addScanInfo(labelId,numStr,provinceStr,cityStr,districtStr,addressStr,labelApplyBh,originID);
+		
+        Map<String,Object> map = new HashMap<String,Object>();          
+        map.put("success", "true"); 
+        return map;  
+	}	
+	
+	@RequestMapping(value="ScanResultEN",method = RequestMethod.GET)
+	public String showEN(@RequestParam("id") String labelId, 
+			@RequestParam("lan") String languageType, Model model){			
+		//获取标签信息
+		Labermanagement lmmodel = labermanagementService.get(labelId);
+		String labelType = lmmodel.getLabelKinds().trim();     //标签类别
+		String aocode = lmmodel.getApplyOriginCode();   //认证或溯源申请编号
+		String labelApplyId = lmmodel.getApplyBh();     //标签申请编号
+		String labelStatus = lmmodel.getLabelStatus();   //标签状态
+		String cautious = "";
+		if(labelStatus.equals("无效"))
+		{
+			cautious = "<label style=\"color: red;\">(请谨慎购买!)</label>";
+		}	
+		
+		if(labelType.equals("农网认证"))
+		{
+			String divStyle = "display:none"; //农网认证没有气候环境信息、产地图片、品质认证
+			model.addAttribute("divStyle", divStyle);
+			//获取相关资质证书
+			model = getCertiImages(aocode,"1", model);			
+		}else{
+				
+			//通过接口获取气候要素数据
+			model = getelementInfo(aocode, model);		
+			//获取相关资质证书
+			model = getCertiImages(aocode, "2", model);						
+			//获取产品产地图片
+			model = getGrowthPlaceImage(aocode, model);
+			//获取品质认证信息
+			model = getReportInfoEN(aocode,languageType, model);	
+			String divStyle = "";
+			model.addAttribute("divStyle", divStyle);
+		}
+		model.addAttribute("labelInfo", lmmodel);	
+		model.addAttribute("cautious", cautious);
+		//获取标签申请表信息
+		model = getLabelApplyInfo(labelApplyId, model);		
+		//获取标签扫描记录
+		model = getLabelScanInfo(labelId,model);		
+		//获取溯源认证申请信息或农网认证申请信息
+		model = getProductInfo(labelType, aocode, model);
+        return "labelscan/ScanResultEN";
+	}	
+	
+	@RequestMapping(value="ScanResultEN",method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> updateScanInfoEN(HttpServletRequest request,HttpServletResponse response){
+		String labelId = request.getParameter("labelId");
+		String provinceStr = request.getParameter("province");
+		String cityStr = request.getParameter("city");
+		String districtStr = request.getParameter("district");
+		String addressStr = request.getParameter("address");
+		String labelApplyBh = request.getParameter("labelApplyBh");
+		String originID = request.getParameter("originID");
+		
+		//更新标签扫描次数
+		String numStr = updateLabelInfo(labelId);		
+		//添加扫描记录
+		addScanInfo(labelId,numStr,provinceStr,cityStr,districtStr,addressStr,labelApplyBh,originID);
+		
+        Map<String,Object> map = new HashMap<String,Object>();          
+        map.put("success", "true"); 
+        return map;  
+	}	
+	
+	@RequestMapping(value="ScanResultPC",method = RequestMethod.GET)
+	public String showPC(@RequestParam("id") String labelQueryId, Model model){			
+		//获取标签信息
+		String hql = "from Labermanagement as lmodel where lmodel.labelQueryId='"+labelQueryId+"'";
+		List<?> lmlist = labermanagementService.find(hql);
+		if(lmlist.size()>0)
+		{
+			Labermanagement lmmodel = (Labermanagement)(lmlist.get(0));
+			String labelId = lmmodel.getLabelId();
+			String labelType = lmmodel.getLabelKinds().trim();     //标签类别
+			String aocode = lmmodel.getApplyOriginCode();   //认证或溯源申请编号
+			String labelApplyId = lmmodel.getApplyBh();     //标签申请编号
+			String labelStatus = lmmodel.getLabelStatus();   //标签状态
+			String cautious = "";
+			if(labelStatus.equals("无效"))
+			{
+				cautious = "<label style=\"color: red;\">(请谨慎购买!)</label>";
+			}
+			
+			if(labelType.equals("农网认证"))
+			{
+				String divStyle = "display:none"; //农网认证没有气候环境信息、产地图片、品质认证
+				model.addAttribute("divStyle", divStyle);
+				//获取相关资质证书
+				model = getCertiImages(aocode,"1", model);			
+			}else{
+				//获取其他语言版本
+				model = getLanguage(aocode,model);	
+				//通过接口获取气候要素数据
+				model = getelementInfo(aocode, model);		
+				//获取相关资质证书
+				model = getCertiImages(aocode, "2", model);						
+				//获取产品产地图片
+				model = getGrowthPlaceImage(aocode, model);
+				//获取品质认证信息
+				model = getReportInfo(aocode, model);	
+				String divStyle = "";
+				model.addAttribute("divStyle", divStyle);
+			}
+			model.addAttribute("labelInfo", lmmodel);	
+			model.addAttribute("cautious", cautious);
+			//获取标签申请表信息
+			model = getLabelApplyInfo(labelApplyId, model);		
+			//获取标签扫描记录
+			model = getLabelScanInfo(labelId,model);		
+			//获取溯源认证申请信息或农网认证申请信息
+			model = getProductInfo(labelType, aocode, model);
+			return "labelscan/ScanResultPC";
+		}else {
+			return "labelscan/NoData";
+		}	       
+	}	
+	
+	@RequestMapping(value="ScanResultPC",method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> updateScanInfoPC(HttpServletRequest request,HttpServletResponse response){
+		String labelId = request.getParameter("labelId");
+		String provinceStr = request.getParameter("province");
+		String cityStr = request.getParameter("city");
+		String districtStr = request.getParameter("district");
+		String addressStr = request.getParameter("address");
+		String labelApplyBh = request.getParameter("labelApplyBh");
+		String originID = request.getParameter("originID");
+		
+		//更新标签扫描次数
+		String numStr = updateLabelInfo(labelId);		
+		//添加扫描记录
+		addScanInfo(labelId,numStr,provinceStr,cityStr,districtStr,addressStr,labelApplyBh,originID);
+		
+        Map<String,Object> map = new HashMap<String,Object>();          
+        map.put("success", "true"); 
+        return map;  
+	}	
+	
+	@RequestMapping(value="ScanResultPCEN",method = RequestMethod.GET)
+	public String showPCEN(@RequestParam("id") String labelQueryId,
+			@RequestParam("lan") String languageType, Model model){			
+		//获取标签信息
+		String hql = "from Labermanagement as lmodel where lmodel.labelQueryId='"+labelQueryId+"'";
+		List<?> lmlist = labermanagementService.find(hql);
+		if(lmlist.size()>0)
+		{
+			Labermanagement lmmodel = (Labermanagement)(lmlist.get(0));
+			String labelId = lmmodel.getLabelId();
+			String labelType = lmmodel.getLabelKinds().trim();     //标签类别
+			String aocode = lmmodel.getApplyOriginCode();   //认证或溯源申请编号
+			String labelApplyId = lmmodel.getApplyBh();     //标签申请编号
+			String labelStatus = lmmodel.getLabelStatus();   //标签状态
+			String cautious = "";
+			if(labelStatus.equals("无效"))
+			{
+				cautious = "<label style=\"color: red;\">(请谨慎购买!)</label>";
+			}
+			
+			if(labelType.equals("农网认证"))
+			{
+				String divStyle = "display:none"; //农网认证没有气候环境信息、产地图片、品质认证
+				model.addAttribute("divStyle", divStyle);
+				//获取相关资质证书
+				model = getCertiImages(aocode,"1", model);			
+			}else{
+					
+				//通过接口获取气候要素数据
+				model = getelementInfo(aocode, model);		
+				//获取相关资质证书
+				model = getCertiImages(aocode, "2", model);						
+				//获取产品产地图片
+				model = getGrowthPlaceImage(aocode, model);
+				//获取品质认证信息
+				model = getReportInfoEN(aocode,languageType, model);	
+				String divStyle = "";
+				model.addAttribute("divStyle", divStyle);
+			}
+			model.addAttribute("labelInfo", lmmodel);	
+			model.addAttribute("cautious", cautious);
+			//获取标签申请表信息
+			model = getLabelApplyInfo(labelApplyId, model);		
+			//获取标签扫描记录
+			model = getLabelScanInfo(labelId,model);		
+			//获取溯源认证申请信息或农网认证申请信息
+			model = getProductInfo(labelType, aocode, model);
+			return "labelscan/ScanResultPCEN";	
+		}else{
+			return "labelscan/NoData";
+		}	      	
+	}	
+	
+	@RequestMapping(value="ScanResultPCEN",method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> updateScanInfoPCEN(HttpServletRequest request,HttpServletResponse response){
+		String labelId = request.getParameter("labelId");
+		String provinceStr = request.getParameter("province");
+		String cityStr = request.getParameter("city");
+		String districtStr = request.getParameter("district");
+		String addressStr = request.getParameter("address");
+		String labelApplyBh = request.getParameter("labelApplyBh");
+		String originID = request.getParameter("originID");
+		
+		//更新标签扫描次数
+		String numStr = updateLabelInfo(labelId);		
+		//添加扫描记录
+		addScanInfo(labelId,numStr,provinceStr,cityStr,districtStr,addressStr,labelApplyBh,originID);
+		
+        Map<String,Object> map = new HashMap<String,Object>();          
+        map.put("success", "true"); 
+        return map;  
+	}	
+	
+	//更新标签扫描次数
+	private String updateLabelInfo(String id){
+		Labermanagement lmmodel = labermanagementService.get(id);
+		Integer num = lmmodel.getScanNum();
+		num = num + 1;
+		lmmodel.setScanNum(num);
+		labermanagementService.update(lmmodel);
+		String numStr = num.toString();
+		return numStr;
+	}
+	
+	//添加扫描记录
+	private String addScanInfo(String labelId, String numStr, String provinceStr, String cityStr,
+			String districtStr, String addressStr,String labelApplyBh, String originID){
+		Labelscanrecord lsmodel = new Labelscanrecord();
+		String scanRecordId =  UUID.randomUUID().toString().replace("-", "");
+		Date scanTime = new Date();
+		lsmodel.setScanRecordId(scanRecordId);
+		lsmodel.setLabelId(labelId);
+		lsmodel.setScanId(numStr);
+		lsmodel.setScanTime(scanTime);
+		lsmodel.setProvince(provinceStr);
+		lsmodel.setCity(cityStr);
+		lsmodel.setCounty(districtStr);
+		lsmodel.setScanPlace(addressStr);
+		lsmodel.setLabelApplyBh(labelApplyBh);
+		lsmodel.setOriginID(originID);
+		labelscanrecordService.save(lsmodel);
+		return "T";
+	}
+	
+	//查询标签申请表信息
+	private Model getLabelApplyInfo(String id, Model model){
+		String labelNum;  //当前批次标签申请数量
+		String format;   //标签规格
+		String imgURL;   //示例图片
+		Labelapplication lamodel = labelapplicationService.get(id);
+		labelNum = lamodel.getConfirmor().trim();
+		format = lamodel.getFormat();
+		imgURL = lamodel.getImage();		
+		model.addAttribute("labelNum", labelNum);
+		model.addAttribute("format", format);
+		model.addAttribute("imgURL", imgURL);
+		return model;
+	}
+	
+	//获取标签扫描记录
+	private Model getLabelScanInfo(String id, Model model){
+		String scanTime1 = "";   //标签第一次扫描时间
+		String scanTime2 = "";   //标签第二次扫描时间
+		String scanTimen = "";   //标签最后一次扫描时间
+		String address1 = "";    //标签第一次扫描地点
+		String address2 = "";    //标签第二次扫描地点
+		String addressn = "";    //标签最后一次扫描地点
+		String scanNumstr;       //扫描次数
+		
+		//查询之前是否有扫描记录
+		String hql = "from Labelscanrecord as lscmodel where lscmodel.labelId='" + id + "' order by lscmodel.scanTime";
+		List<?> list = labelscanrecordService.find(hql);
+		scanNumstr = ((Integer)(list.size()+1)).toString();
+		if(list.size() == 0)
+		{
+			Date date1 = new Date();			
+			scanTime1 =  DateFormat.getStrTime(date1, 1);
+		}
+		else if(list.size() == 1)
+		{
+			Date date1 = ((Labelscanrecord)list.get(0)).getScanTime();
+			scanTime1 = DateFormat.getStrTime(date1, 1);
+			address1 = ((Labelscanrecord)list.get(0)).getScanPlace();
+			Date date2 = new Date();					
+			scanTime2 = DateFormat.getStrTime(date2, 1);
+		}
+		else
+		{
+			Date date1 = ((Labelscanrecord)list.get(0)).getScanTime();
+			scanTime1 = DateFormat.getStrTime(date1, 1);
+			address1 = ((Labelscanrecord)list.get(0)).getScanPlace();
+			Date date2 = ((Labelscanrecord)list.get(1)).getScanTime();
+			scanTime2 = DateFormat.getStrTime(date2, 1);
+			address2 = ((Labelscanrecord)list.get(1)).getScanPlace();
+			Date daten = new Date();					
+			scanTimen = DateFormat.getStrTime(daten, 1);
+		}
+		model.addAttribute("scanNum", scanNumstr);
+		model.addAttribute("scantime1", scanTime1);
+		model.addAttribute("scantime2", scanTime2);
+		model.addAttribute("scantimen", scanTimen);
+		model.addAttribute("address1", address1);
+		model.addAttribute("address2", address2);
+		model.addAttribute("addressn", addressn);
+		return model;
+	}
+	
+	//获取溯源认证申请信息或农网认证申请信息
+	private Model getProductInfo(String labelType, String applyId, Model model){
+		String applyPerson = "";
+		String productName = "";  //产品名称
+		String productBrand = "";  //产品品牌
+		String productBase = "";   //产地
+		String company = "";      //所属商家
+		String phone = "";        //联系电话
+		String address = "";       //地址
+		String description = "";   //产品典型特征
+		String logoUrl = "";      //溯源页面logo地址
+		
+		if(labelType.equals("农网认证"))
+		{			
+			Productapply pmodel = productapplyService.get(applyId);	
+			productName = pmodel.getOriginName();
+			productBrand = pmodel.getProductBrand();
+			productBase = analyzeProductBase(pmodel.getOriginAddress());
+			company = pmodel.getApplyCompany();
+			phone = pmodel.getConstract();
+			address = pmodel.getPersonAdress();
+			description = pmodel.getOriginDescription();
+			applyPerson = pmodel.getApplyPerson();
+			logoUrl = "logo2.jpg";			
+		}else{
+		
+			Apply amodel = applyService.get(applyId);	
+			productName = amodel.getProductName();
+			productBrand = amodel.getProductBrand();
+			productBase = analyzeProductBase(amodel.getProduceBase());
+			company = amodel.getUnityName();
+			phone = amodel.getContact();
+			address = amodel.getAddress();
+			description = amodel.getProductDescription();
+			applyPerson = amodel.getApplyPerson();
+			logoUrl = "logo1.jpg";
+		}
+		model = getBusinessInfo(applyPerson,model);
+		model.addAttribute("productName", productName);
+		model.addAttribute("productBrand", productBrand);
+		model.addAttribute("productBase", productBase);
+		model.addAttribute("company", company);
+		model.addAttribute("phone", phone);
+		model.addAttribute("address", address);
+		model.addAttribute("description", description);
+		model.addAttribute("applyPerson", applyPerson);
+		model.addAttribute("logoUrl", logoUrl);
+		return model;
+	}
+	
+	//通过申请人查看申请商家
+	private Model getBusinessInfo(String applyPerson, Model model){
+		String businessName = "";
+		String businessId = "";
+		String hql = "from Businessmanagement as bm where bm.userName='"+applyPerson+"'";
+		List<?> bmlist = businessmanagementService.find(hql);
+		if(bmlist.size()>0)
+		{
+			Businessmanagement bm = (Businessmanagement)(bmlist.get(0));
+			businessId = bm.getCampanyNo();
+			businessName = bm.getCampanyName();
+		}
+		model.addAttribute("businessId", businessId);
+		model.addAttribute("businessName", businessName);
+		return model;
+	}
+	
+	//解析产地
+	private String analyzeProductBase(String productBase){
+		String[] Info = productBase.split("\\|");
+		String shengstr = Info[0];
+		String shistr = Info[1];
+		String xianstr = Info[2];
+		String hql1 = "from TbcuitmoonArea as tbArea where tbArea.cuitMoonAreaCode='" + shengstr + "'";
+		String hql2 = "from TbcuitmoonArea as tbArea where tbArea.cuitMoonAreaCode='" + shistr + "'";
+		String hql3 = "from TbcuitmoonArea as tbArea where tbArea.cuitMoonAreaCode='" + xianstr + "'";
+		String sheng = ((TbcuitmoonArea) tbcuitmoonAreaService.find(hql1).get(0)).getCuitMoonAreaName();
+		String shi = ((TbcuitmoonArea) tbcuitmoonAreaService.find(hql2).get(0)).getCuitMoonAreaName();
+		String xian = ((TbcuitmoonArea) tbcuitmoonAreaService.find(hql3).get(0)).getCuitMoonAreaName();
+		
+		productBase = sheng + shi + xian;
+		return productBase;
+	}
+	
+	//获取相关资质证书
+	private Model getCertiImages(String originId, String type, Model model){
+		String hqlstr = "from Certificate as cmodel where cmodel.originId='" + originId + "'";
+		List<?> list = certificateService.find(hqlstr);
+		model.addAttribute("certiImages", list);
+		return model;
+	}
+	
+	//获取产地图片
+	private Model getGrowthPlaceImage(String id, Model model){
+		List<String> Imagelist = new ArrayList<String>();
+		//查询实施方案
+		String hql = "from QualityIdentification as qimodel where qimodel.applyBh='" + id + "'";
+		List<?> qilist = qualityIdentificationService.find(hql);
+		if(qilist.size() > 0)
+		{
+			//实施方案编号
+			String qualityIdentificationNum = ((QualityIdentification)qilist.get(0)).getQualityIdentificationNum();
+			//查询认证过程数据管理信息
+			String hql2 = "from Approvedatamanager as admmodel where admmodel.qualityIdentificationNum='" + qualityIdentificationNum + "'";
+			List<?> admlist = approvedatamanagerService.find(hql2);
+			if(admlist.size() > 0)
+			{
+				//认证数据编号
+				String approveDataCode = ((Approvedatamanager)admlist.get(0)).getApproveDataCode();
+				//查询图片信息
+				String hql3 = "from Prictureinfomation as pimodel where pimodel.approveDataCode='" + approveDataCode + "'";
+				List<?> pilist = prictureinfomationService.find(hql3);
+				for(int i=0; i<pilist.size(); i++)
+				{
+					String[] strInfo = ((Prictureinfomation)pilist.get(i)).getProctureUrl().trim().split("\\|");
+					for(int j=0; j<strInfo.length;j++)
+					{											
+						Imagelist.add(strInfo[j]);
+					}
+				}
+			}
+		}
+		model.addAttribute("growthPlaceImagelist", Imagelist);
+		return model;
+	}
+	
+	//获取品质认证信息
+	private Model getReportInfo(String id, Model model){
+		//查询认证报告		
+		String hql = "from Reportinfomation as rmodel where rmodel.applyBh='" + id + "'";
+		List<?> list = reportinfomationService.find(hql);
+		if(list.size()>0)
+		{
+			Reportinfomation reportInfo = (Reportinfomation)(list.get(0));
+			String report_pName = reportInfo.getProductInfomantion();
+			String report_pArea = reportInfo.getAreaInfomation();
+			String report_level = analyzeApproveLevel(reportInfo.getApprovelevel());
+			Date date = reportInfo.getReportAddTime();
+			String report_time =  DateFormat.getStrTime(date, 4);
+			String report_agency = reportInfo.getApproveAgency();
+			String report_conclusion = reportInfo.getApproveConclusion();
+			String certificateImage = reportInfo.getCertificateImage();
+			model.addAttribute("report_pName", report_pName);
+			model.addAttribute("report_pArea", report_pArea);
+			model.addAttribute("report_level", report_level);
+			model.addAttribute("report_time", report_time);
+			model.addAttribute("report_agency", report_agency);
+			model.addAttribute("report_conclusion", report_conclusion);
+			model.addAttribute("certificateImage", certificateImage);
+		}		
+		return model;
+	}
+	
+	//获取品质认证信息外文
+	private Model getReportInfoEN(String id, String languageType, Model model){
+		//查询认证报告		
+		String hql = "from Reportinfomation as rmodel where rmodel.applyBh='" + id + "'";
+		List<?> rlist = reportinfomationService.find(hql);
+		if(rlist.size()>0)
+		{
+			Reportinfomation reportInfo = (Reportinfomation)(rlist.get(0));
+			String report_pName = reportInfo.getProductInfomantion();
+			String report_pArea = reportInfo.getAreaInfomation();
+			String report_level = analyzeApproveLevel(reportInfo.getApprovelevel());
+			Date date = reportInfo.getReportAddTime();
+			String report_time =  DateFormat.getStrTime(date, 4);
+			String report_agency = reportInfo.getApproveAgency();
+			String report_conclusion = reportInfo.getApproveConclusion();
+			String reportBh = reportInfo.getReportBh();
+			String certificateImage = reportInfo.getCertificateImage();
+			
+			String hql2 = "from Reportinfomationother as romodel where romodel.reportBh='"+reportBh+"'and romodel.languageType='"+languageType+"'";
+			List<?> rolist = reportinfomationotherService.find(hql2);
+			if(rolist.size()>0)
+			{
+				Reportinfomationother reportOther = ((Reportinfomationother)rolist.get(0));
+				report_pName = 	reportOther.getProductInfomantion();
+				report_pArea = reportOther.getAreaInfomation();
+				report_level = reportOther.getApprovelevel();
+				report_agency = reportOther.getApproveAgency();
+				report_conclusion = reportOther.getApproveConclusion();
+			}						
+			model.addAttribute("report_pName", report_pName);
+			model.addAttribute("report_pArea", report_pArea);
+			model.addAttribute("report_level", report_level);
+			model.addAttribute("report_time", report_time);
+			model.addAttribute("report_agency", report_agency);
+			model.addAttribute("report_conclusion", report_conclusion);
+			model.addAttribute("certificateImage", certificateImage);
+		}		
+		return model;
+	}
+	
+	//获取语言版本
+	private Model getLanguage(String id, Model model){
+		String hql = "from Reportinfomation as rmodel where rmodel.applyBh='" + id + "'";
+		List<?> rlist = reportinfomationService.find(hql);
+		if(rlist.size()>0)
+		{
+			Reportinfomation reportInfo = (Reportinfomation)(rlist.get(0));
+			String reportBh = reportInfo.getReportBh();
+			String hql2 = "from Reportinfomationother as romodel where romodel.reportBh='"+reportBh+"'";
+			List<?> rolist = reportinfomationotherService.find(hql2);	
+			model.addAttribute("languagelist",rolist);
+		}		
+		return model;
+	}
+	
+	//解析认证等级
+	private String analyzeApproveLevel(String code){
+		String name = "";
+		String hql = "from TbcuitmoonDictionary as dmodel where dmodel.cuitMoonDictionaryCode='" + code + "'";
+		name = ((TbcuitmoonDictionary)tbcuitmoonDictionaryService.find(hql).get(0)).getCuitMoonDictionaryName();
+		return name;
+	}
+	
+	//获取根据实施方案气候要素信息
+	private Model getelementInfo(String id, Model model){
+		String hql = "from QualityIdentification as qimodel where qimodel.applyBh='" + id + "'";
+		List<?> qilist = qualityIdentificationService.find(hql);
+		List<?> clist = null;
+		int n = 0; //数据总数
+		int m = 0; //横坐标间隔
+		if(qilist.size()>0)
+		{
+			String qId = ((QualityIdentification)(qilist.get(0))).getQualityIdentificationNum();
+			model = getBestCondition(qId,model);
+			String hqlstr = "from Climatopeinfo as cmodel where cmodel.qualityIdentificationNum='"+qId+"'";
+			clist = climatopeinfoService.find(hqlstr);
+			if(clist.size()>0)
+			{
+				String[] timeInfo = ((Climatopeinfo)(clist.get(0))).getMonths().split("\\,");
+				n = timeInfo.length;
+				m = n/5;
+			}			
+		}		
+		model.addAttribute("climatelist", clist);
+		model.addAttribute("xmLen", m);
+		return model;		
+	}	
+	
+	//重专家打分信息里查询最佳生长条件
+	private Model getBestCondition(String id, Model model){
+		String hql = "from Bearinginfo as bm where bm.qualityIdentificationNum='" + id + "' order by bm.startCollectionTime";
+		List<?> blist = bearinginfoService.find(hql);
+		String str = "";
+		if(blist.size()>0)
+		{
+			for(int i=0;i<blist.size();i++)
+			{
+				String bearingInfoId = ((Bearinginfo)(blist.get(i))).getBearingInfoId();
+				String crop_growth_period = ((Bearinginfo)(blist.get(i))).getCropGrowthPeriod();
+				Date date1 = ((Bearinginfo)(blist.get(i))).getStartCollectionTime();
+				Date date2 = ((Bearinginfo)(blist.get(i))).getEndCollectionTime();
+				String rangTime = DateFormat.getStrTime(date1, 4) + "至" + DateFormat.getStrTime(date2, 4);
+				str = str + crop_growth_period + "：" + rangTime + "; ";
+				String hqlstr = "from Expertsgrade as emodel where emodel.bearingInfoId='"+bearingInfoId+"'";
+				List<?> elist = expertsgradeService.find(hqlstr);
+				if(elist.size()>0)
+				{
+					for(int j=0;j<elist.size();j++)
+					{
+						String element = ((Expertsgrade)(elist.get(j))).getElement();
+						String optimalRange = ((Expertsgrade)(elist.get(j))).getOptimalRange();
+						str = str + element +"："+optimalRange + ";";
+					}
+					str = str + "<br/>";
+				}
+			}
+		}
+		model.addAttribute("bestCondition", str);
+		return model;
+	}
+	
+	//通过接口获取气象要素信息
+	private Map<String,Object> getElementData(String element, String stationId, String startTime, String endTime){
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<String> list1 = new ArrayList<String>(); 
+		List<String> list2 = new ArrayList<String>();
+		String urls = "{%22con%22:%22" + element + ","
+				+ stationId + "," + startTime
+				+ "," + endTime + "%22,%22type%22:%22vw_ele_days%22}";
+		String url = "http://d.scnjw.gov.cn/MeteoInterface/MeteoInterface?user=csd&psd=123789456&route="
+				+ urls;
+		String result = getURLData(url);
+		if (result.length() > 0) {
+			result = result
+					.substring(result.indexOf("</script>") + 9, result.length())
+					.replaceAll("\n", "").trim();
+			String[] sets = result.split("\\,");// 得到所有的元素
+			for (int i = sets.length-1; i >=0; i--) {
+				String[] tmp = sets[i].split("\\|");
+				list1.add(tmp[2]);
+				list2.add("'"+tmp[1]+"'");
+			}
+		}
+		map.put("value", list1);
+		map.put("time", list2);
+		return map;
+	}
+	
+	//加载URL获取数据
+	private String getURLData(String urlStr){
+		URL url = null;
+		BufferedReader in = null;
+		StringBuffer sb = new StringBuffer();
+		try {
+			url = new URL(urlStr);
+			in = new BufferedReader(new InputStreamReader(url.openStream(),
+					"UTF-8"));
+			String str = null;
+			while ((str = in.readLine()) != null) {
+				sb.append(str);
+			}
+		} catch (Exception ex) {
+
+		} finally {
+			try {
+				if (in != null) {
+					in.close();
+				}
+			} catch (IOException ex) {
+			}
+		}
+		String result = sb.toString();
+		return result;
+	}
+	
+}

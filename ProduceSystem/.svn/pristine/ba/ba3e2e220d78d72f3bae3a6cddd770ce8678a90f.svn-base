@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 21:24:14 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.model.entity.Elementmodel" table="elementmodel" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="elementNumber" type="string">
+            <column name="ElementNumber" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="unit" type="string">
+            <column name="Unit" length="32" />
+        </property>
+        <property name="elementName" type="string">
+            <column name="ElementName" length="50" not-null="true" />
+        </property>
+        <property name="elementType" type="string">
+            <column name="ElementType" length="32" not-null="true" />
+        </property>
+        <property name="elementDecription" type="string">
+            <column name="ElementDecription" />
+        </property>
+        <property name="addTime" type="timestamp">
+            <column name="AddTime" length="19" />
+        </property>
+        <property name="remark" type="string">
+            <column name="Remark" length="200" />
+        </property>
+        <property name="climateStation" type="string">
+            <column name="climateStation" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>

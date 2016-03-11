@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <FrameLayout 
+	     android:layout_width="fill_parent"
+	     android:layout_height="wrap_content"
+	     >
+		<TextView 
+		      android:layout_width="fill_parent"
+		      android:layout_height="@dimen/activity_head_height"
+		      android:text="上传作业"
+		      android:gravity="center"
+		      android:textSize="20sp"
+		      android:textColor="#FAFFFE"
+		      android:background="@color/theme_color"
+		      />
+		<Button
+		    android:id="@+id/homework_Addhomework_web_back"
+		    android:layout_width="40dp"
+		    android:layout_height="@dimen/activity_head_height"
+		    android:layout_marginLeft="10dp"
+		    android:background="@drawable/selector_header_back"
+		    android:layout_gravity="left"
+		    />
+		<!-- <Button
+		    android:id="@+id/homework_homeworkDetail_submit_##"
+		    android:layout_width="wrap_content"
+		    android:layout_height="@dimen/activity_head_height"
+		    android:layout_gravity="right"
+		    android:textColor="#FAFFFE"
+		    android:background="@color/theme_color"
+		    android:text="@string/homeworkDetail_submit"
+		   	android:visibility="gone"
+		    /> -->
+	</FrameLayout>
+	
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center">
+
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+    
+    <ProgressBar android:id="@+id/progressBar_web"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        />
+
+</FrameLayout>
+
+</LinearLayout>

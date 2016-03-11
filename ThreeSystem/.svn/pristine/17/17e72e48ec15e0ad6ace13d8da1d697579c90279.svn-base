@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <RadioGroup
+        android:id="@+id/rg_menu_process"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_main_menu_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/theme_color"
+        android:orientation="horizontal"
+        >
+        
+        <RadioButton
+            android:id="@+id/rb_home_process"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_menu_home"
+            android:gravity="center"
+            android:text="新闻"
+            android:textColor="@color/selector_menu_item_textcolor"
+            android:textSize="@dimen/activity_main_menu_textsize" />
+        
+        <RadioButton
+            android:id="@+id/rb_grade_process"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_menu_homework"
+            android:gravity="center"
+            android:text="成绩"
+            android:textColor="@color/selector_menu_item_textcolor"
+            android:textSize="@dimen/activity_main_menu_textsize" />
+        
+        <RadioButton
+            android:id="@+id/rb_yuekao_process"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_menu_listen"
+            android:gravity="center"
+            android:text="约考"
+            android:textColor="@color/selector_menu_item_textcolor"
+            android:textSize="@dimen/activity_main_menu_textsize" />
+        
+
+        
+        <RadioButton
+            android:id="@+id/rb_my_process"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_menu_question"
+            android:gravity="center"
+            android:text="@string/more"
+            android:textColor="@color/selector_menu_item_textcolor"
+            android:textSize="@dimen/activity_main_menu_textsize" />
+        
+    </RadioGroup>
+
+    <RelativeLayout
+        android:id="@+id/rl_fragment_container_process"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rg_menu_process" >
+    </RelativeLayout>
+    
+</RelativeLayout>

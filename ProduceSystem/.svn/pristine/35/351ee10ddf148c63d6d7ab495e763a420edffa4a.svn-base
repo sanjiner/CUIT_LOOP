@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="ProduceSystem" match-name="apply"/>
+  <table-filter match-catalog="ProduceSystem" match-name="quality_identification"/>
+  <table-filter match-catalog="ProduceSystem" match-name="identification_record"/>
+  <table-filter match-catalog="ProduceSystem" match-name="climate_qualitycertification_experts"/>
+  <table-filter match-catalog="ProduceSystem" match-name="member_group"/>
+  <table-filter match-catalog="ProduceSystem" match-name="reportinfomation"/>
+  <table-filter match-catalog="ProduceSystem" match-name="cimatequalityapproveprocess"/>
+  <table-filter match-catalog="ProduceSystem" match-name="approvedatamanager"/>
+  <table-filter match-catalog="ProduceSystem" match-name="elementsprocessvalue"/>
+  <table-filter match-catalog="ProduceSystem" match-name="disastoursdata"/>
+  <table-filter match-catalog="ProduceSystem" match-name="prictureinfomation"/>
+</hibernate-reverse-engineering>

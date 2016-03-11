@@ -1,0 +1,106 @@
+package com.example.process.fragments;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+
+import com.exam.ThreeSystem.R;
+import com.example.PCenter.Login;
+import com.example.PCenter.More.MoreAboutUsActivity;
+import com.example.PCenter.More.MoreModifyPwdActivity;
+import com.example.PCenter.More.MoreUserInfoActivity;
+import com.example.PCenter.fragments.BaseFragment;
+
+public class MyFragmentProcess extends BaseFragment implements OnClickListener{
+
+	private Button backbtn;
+	private RelativeLayout  infobtn, cpwdbtn, abontusbtn;
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.activity_process_my, container, false);	
+		mActivity = getActivity();
+		init(view);
+		return view;
+	}
+	
+	private void init(View view)
+	{
+		getViewObj(view);
+	}
+	
+	private void getViewObj(View view)
+	{
+		backbtn = (Button) view.findViewById(R.id.b_more_logout_process);
+		infobtn = (RelativeLayout) view.findViewById(R.id.rl_more_userinfo_process);
+		cpwdbtn = (RelativeLayout) view.findViewById(R.id.rl_more_modifypwd_process);
+		abontusbtn = (RelativeLayout) view.findViewById(R.id.rl_more_aboutus_process);
+		setListener();
+	}
+	
+
+	private void setListener()
+	{
+		backbtn.setOnClickListener(this);
+		infobtn.setOnClickListener(this);
+		cpwdbtn.setOnClickListener(this);
+		abontusbtn.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.b_more_logout_process:
+			dialog();
+			break;
+		case R.id.rl_more_userinfo_process:
+			Intent infoIntent = new Intent(getActivity(),
+					MoreUserInfoActivity.class);
+			startActivity(infoIntent);
+			break;
+		case R.id.rl_more_modifypwd_process:
+			Intent modifyIntent = new Intent(getActivity(),
+					MoreModifyPwdActivity.class);
+			startActivity(modifyIntent);
+			break;
+		case R.id.rl_more_aboutus_process:
+			Intent aboutusIntent = new Intent(getActivity(),
+					MoreAboutUsActivity.class);
+			startActivity(aboutusIntent);
+			break;
+		default:
+			break;
+		}
+		
+	}
+	
+	private void dialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+		builder.setTitle("注销");
+		builder.setMessage("确认注销么?");
+		builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				Intent logoutIntent = new Intent(getActivity(), Login.class);
+			//	logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+				startActivity(logoutIntent);
+				mActivity.finish();
+			}
+		});
+		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+
+			}
+		});
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}
+	
+}

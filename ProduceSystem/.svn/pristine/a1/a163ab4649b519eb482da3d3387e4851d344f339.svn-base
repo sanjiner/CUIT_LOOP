@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-13 16:59:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.sys.entity.TbcuitmoonLog" table="tbcuitmoon_log" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="cuitMoonLogId" type="string">
+            <column name="CuitMoon_LogID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="cuitMoonLogType" type="java.lang.Long">
+            <column name="CuitMoon_LogType" />
+        </property>
+        <property name="cuitMoonLogOperationUserName" type="string">
+            <column name="CuitMoon_LogOperationUserName" length="20" />
+        </property>
+        <property name="cuitMoonLogOperationIpv4" type="string">
+            <column name="CuitMoon_LogOperationIPv4" length="15" />
+        </property>
+        <property name="cuitMoonLogOperationIpv6" type="string">
+            <column name="CuitMoon_LogOperationIPv6" length="40" />
+        </property>
+        <property name="cuitMoonLogOperationTime" type="timestamp">
+            <column name="CuitMoon_LogOperationTime" length="19" />
+        </property>
+        <property name="cuitMoonLogOperationName" type="string">
+            <column name="CuitMoon_LogOperationName" length="50" />
+        </property>
+        <property name="cuitMoonLogOperationUrl" type="string">
+            <column name="CuitMoon_LogOperationURL" length="200" />
+        </property>
+        <property name="cuitMoonLogRemarks" type="string">
+            <column name="CuitMoon_LogRemarks" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

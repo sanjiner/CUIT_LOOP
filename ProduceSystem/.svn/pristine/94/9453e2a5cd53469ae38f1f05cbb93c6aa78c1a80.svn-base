@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 18:33:50 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.entm.entity.TbncpQiyeNews" table="tbncp_qiye_news" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="newsId" type="string">
+            <column name="newsID" length="50" />
+            <generator class="assigned" />
+        </id>
+        <property name="cretime" type="timestamp">
+            <column name="cretime" length="19" />
+        </property>
+        <property name="newstitle" type="string">
+            <column name="newstitle" length="20" />
+        </property>
+        <property name="newscontent" type="string">
+            <column name="newscontent" length="65535" />
+        </property>
+        <property name="qiyenum" type="string">
+            <column name="qiyenum" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

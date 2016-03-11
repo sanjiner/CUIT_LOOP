@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-13 16:59:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.sys.entity.TbcuitmoonDepartment" table="tbcuitmoon_department" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="cuitMoonDepartmentId" type="string">
+            <column name="CuitMoon_DepartmentID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="cuitMoonDepartmentName" type="string">
+            <column name="CuitMoon_DepartmentName" length="50" not-null="true" />
+        </property>
+        <property name="cuitMoonParentDepartmentId" type="string">
+            <column name="CuitMoon_ParentDepartmentID" length="32" />
+        </property>
+        <property name="cuitMoonDepartmentStatus" type="java.lang.Long">
+            <column name="CuitMoon_DepartmentStatus" />
+        </property>
+        <property name="cuitMoonDepartmentOrderNum" type="java.lang.Integer">
+            <column name="CuitMoon_DepartmentOrderNum" />
+        </property>
+        <property name="cuitMoonDepartmentRemarks" type="string">
+            <column name="CuitMoon_DepartmentRemarks" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/more_bg_color">
+    
+	<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_header_hight"
+        android:gravity="center_vertical" >
+
+        <TextView 
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:text="指导老师打分"
+		android:gravity="center"
+		android:textSize="20sp"
+		android:textColor="#FAFFFE"
+		android:background="@color/theme_color"
+		/>
+        <Button
+		    android:id="@+id/guid_personal_information_back"
+		    android:layout_width="40dp"
+		    android:layout_height="@dimen/activity_head_height"
+		    android:layout_marginLeft="10dp"
+		    android:background="@drawable/selector_header_back"
+		    android:layout_gravity="left"
+		    />
+    </RelativeLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/more_bg_color"
+        android:orientation="vertical" >
+        
+       <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="0dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="0dp" >
+            
+             <TextView
+                 android:layout_width="51dp"
+                 android:layout_height="match_parent"
+                 android:background="#a9a9a9"
+                 android:gravity="center_vertical|left"
+                 android:padding="0dp"
+                 android:textSize="16.5dip"
+                 android:text="姓名："
+                 />
+
+             <TextView
+                 android:id="@+id/teacher_rate_name"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center_vertical|left"
+                 android:gravity="center_vertical|left"
+                 android:layout_marginRight="0dp"
+                 android:background="#fff"
+                 android:textSize="13sp"
+                 />
+
+            </LinearLayout>
+            
+       <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingTop="2dp"
+            android:paddingBottom="0dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="0dp" >
+            
+             <TextView
+                 android:layout_width="51dp"
+                 android:layout_height="match_parent"
+                 android:background="#a9a9a9"
+                 android:gravity="center_vertical|left"
+                 android:padding="0dp"
+                 android:textSize="16.5dip"
+                 android:text="分数："
+                 />
+
+             <TextView
+                 android:id="@+id/teacher_rate_grade"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center_vertical|left"
+                 android:gravity="center_vertical|left"
+                 android:layout_marginRight="0dp"
+                 android:background="#fff"
+                 android:textSize="13sp"
+                 />
+
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="0dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="0dp" >
+            
+             <TextView
+                 android:layout_width="51dp"
+                 android:layout_height="match_parent"
+                 android:background="#a9a9a9"
+                 android:gravity="center_vertical|left"
+                 android:padding="0dp"
+                 android:textSize="16.5dip"
+                 android:text="质量："
+                 />
+
+             <EditText
+                 android:id="@+id/teacher_rate_Quality"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center_vertical|left"
+                 android:gravity="center_vertical|left"
+                 android:layout_marginRight="0dp"
+                 android:background="#fff"
+                 android:textSize="13sp"
+                 android:inputType="number"
+                 />
+
+            </LinearLayout>
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="0dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="0dp" >
+            
+             <TextView
+                 android:layout_width="51dp"
+                 android:layout_height="match_parent"
+                 android:background="#a9a9a9"
+                 android:gravity="center_vertical|left"
+                 android:padding="0dp"
+                 android:textSize="16.5dip"
+                 android:text="过程："
+                 />
+
+             <EditText
+                 android:id="@+id/teacher_rate_process"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center_vertical|left"
+                 android:gravity="center_vertical|left"
+                 android:layout_marginRight="0dp"
+                 android:background="#fff"
+                 android:textSize="13sp"
+                 android:inputType="number"
+                 />
+
+            </LinearLayout>
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="0dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="0dp" >
+            
+             <TextView
+                 android:layout_width="51dp"
+                 android:layout_height="match_parent"
+                 android:background="#a9a9a9"
+                 android:gravity="center_vertical|left"
+                 android:padding="0dp"
+                 android:textSize="16.5dip"
+                 android:text="评价："
+                 />
+
+             <EditText
+                 android:id="@+id/teacher_rate_judge"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center_vertical|left"
+                 android:gravity="center_vertical|left"
+                 android:layout_marginRight="0dp"
+                 android:background="#fff"
+                 android:textSize="13sp"
+                 android:inputType="number"
+                 />
+
+            </LinearLayout>
+            
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="0dp"
+            android:layout_marginTop="25dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp" >
+            <Button
+		    android:id="@+id/guide_teacher_rate_detail_submit"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:background="@drawable/selector_all_button"
+		    android:text="@string/other_giveScore_Submit"
+	    />
+            
+        </LinearLayout>
+        
+        </LinearLayout>
+	
+</LinearLayout>

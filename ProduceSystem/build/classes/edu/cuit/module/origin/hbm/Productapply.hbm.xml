@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 22:06:25 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.origin.entity.Productapply" table="productapply" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="originId" type="string">
+            <column name="OriginID" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="productValue" type="string">
+            <column name="ProductValue" length="50" />
+        </property>
+        <property name="productNum" type="string">
+            <column name="ProductNum" length="50" />
+        </property>
+        <property name="applyCompany" type="string">
+            <column name="ApplyCompany" length="100" />
+        </property>
+        <property name="applyPerson" type="string">
+            <column name="ApplyPerson" length="50" />
+        </property>
+        <property name="applyTime" type="timestamp">
+            <column name="ApplyTime" length="19" />
+        </property>
+        <property name="constract" type="string">
+            <column name="Constract" length="100" />
+        </property>
+        <property name="personAdress" type="string">
+            <column name="PersonAdress" length="100" />
+        </property>
+        <property name="originName" type="string">
+            <column name="OriginName" length="50" />
+        </property>
+        <property name="productBrand" type="string">
+            <column name="ProductBrand" length="50" />
+        </property>
+        <property name="originAddress" type="string">
+            <column name="OriginAddress" length="200" />
+        </property>
+        <property name="originDescription" type="string">
+            <column name="OriginDescription" length="200" />
+        </property>
+        <property name="isApllyCode" type="string">
+            <column name="IsApllyCode" length="32" />
+        </property>
+        <property name="codeNumber" type="java.lang.Integer">
+            <column name="CodeNumber" />
+        </property>
+        <property name="originCode" type="string">
+            <column name="OriginCode" length="200" />
+        </property>
+        <property name="labelNum" type="java.lang.Integer">
+            <column name="LabelNum" />
+        </property>
+        <property name="auditPerson" type="string">
+            <column name="AuditPerson" length="50" />
+        </property>
+        <property name="orignStatus" type="string">
+            <column name="OrignStatus" length="32" />
+        </property>
+        <property name="auditTime" type="timestamp">
+            <column name="AuditTime" length="19" />
+        </property>
+        <property name="auditAdvice" type="string">
+            <column name="AuditAdvice" length="200" />
+        </property>
+        <property name="cityPerson" type="string">
+            <column name="CityPerson" length="100" />
+        </property>
+        <property name="cityAdvice" type="string">
+            <column name="CityAdvice" length="65535" />
+        </property>
+        <property name="cityTime" type="timestamp">
+            <column name="CityTime" length="19" />
+        </property>
+        <property name="provincesPerson" type="string">
+            <column name="ProvincesPerson" length="100" />
+        </property>
+        <property name="provinceAdvice" type="string">
+            <column name="provinceAdvice" length="65535" />
+        </property>
+        <property name="provinceTime" type="timestamp">
+            <column name="provinceTime" length="19" />
+        </property>
+        <property name="inTotal" type="string">
+            <column name="inTotal" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="Remark" length="65535" />
+        </property>
+        <property name="handleResult" type="string">
+            <column name="HandleResult" length="32" />
+        </property>
+        <property name="isWithDraw" type="string">
+            <column name="isWithDraw" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/activity_head_height"
+        android:background="@color/theme_color" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="任务书"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/thesis_StudentHome_TaskBook_back"
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/selector_header_back" />
+
+        <Button
+            android:id="@+id/thesis_StudentHome_TaskBook_write"
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/thesis_selector_studentedite"
+            android:text="编辑"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/thesis_StudentHome_TaskBook_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_TaskBook_SubjectName"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_ys_height"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="课题名称: "
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/activity_ys_height"
+                android:background="#fff"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/activity_ys_paddingleft"
+                android:text="课题来源: "
+                android:textSize="@dimen/activity_ys_textsize" />
+
+            <TextView
+                android:id="@+id/thesis_StudentHome_TaskBook_SubjectSource"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/activity_ys_height"
+                android:background="#fff"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/activity_ys_textsize" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" >
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/grey" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/activity_ys_height"
+                android:background="#fff"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/activity_ys_paddingleft"
+                android:text="课题类型: "
+                android:textSize="@dimen/activity_ys_textsize" />
+
+            <TextView
+                android:id="@+id/thesis_StudentHome_TaskBook_SubjectType"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/activity_ys_height"
+                android:background="#fff"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/activity_ys_textsize" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="选题背景及目的: "
+            android:textColor="@color/activity_ys_textcolor"
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_TaskBook_SubjectBackgroudAndGoal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shape_thesis_edittext"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="工作任务及要求: "
+            android:textColor="@color/activity_ys_textcolor"
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_TaskBook_TaskAndRequire"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shape_thesis_edittext"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/thesis_StudentHome_TaskBook_err"
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:visibility="gone" />
+
+</LinearLayout>

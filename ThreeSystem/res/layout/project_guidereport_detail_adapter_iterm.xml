@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/activity_item_height"
+    android:paddingLeft="2dp"
+    android:paddingRight="20dp"
+    android:background="@drawable/selector_more_term"
+    android:layout_marginTop="2dp"
+    >
+    
+   		<ImageView
+   		    android:id="@+id/report_detail_item_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_homework_unselect" />
+
+		<TextView
+		    android:id="@+id/report_listview_item_text"
+		    android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:layout_marginLeft="50dp"
+	        android:layout_marginStart="80dp"
+	        android:textSize="13sp"
+	        android:layout_toLeftOf="@+id/thesis_imageview_second"/>
+		
+	<!-- <ImageView
+	    android:id="@+id/report_dteail_adapter_imageview_second"
+            android:layout_width="25dp"
+	        android:layout_height="25dp"
+	        android:layout_alignParentEnd="true"
+	        android:layout_alignParentRight="true"
+	        android:layout_centerVertical="true"
+	        android:src="@drawable/ic_item_narrow_right" /> -->
+</RelativeLayout>

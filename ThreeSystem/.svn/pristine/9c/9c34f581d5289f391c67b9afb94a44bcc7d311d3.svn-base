@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/activity_head_height"
+        android:background="@color/theme_color" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="中期检查记录填写"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/thesis_StudentHome_MidleCheck_Write_back"
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/selector_header_back" />
+
+        <Button
+            android:id="@+id/thesis_StudentHome_MidleCheck_Write_submit"
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/thesis_selector_studentedite"
+            android:text="提交"
+            android:textColor="@color/white" />
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="前期工作小结"
+        android:textColor="@color/activity_ys_textcolor"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/thesis_StudentHome_MidleCheck_Write_summary"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_thesis_edittext"
+        android:hint="请填写前期工作小结" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="指导情况"
+        android:textColor="@color/activity_ys_textcolor"
+        android:textSize="15sp" />
+
+    <RadioGroup
+        android:id="@+id/thesis_StudentHome_MidleCheck_Write_rgroup"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical" >
+
+        <RadioButton
+            android:id="@+id/thesis_StudentHome_MidleCheck_Write_rb11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="指导教师坚持每周指导，认真负责，要求严格" />
+
+        <RadioButton
+            android:id="@+id/thesis_StudentHome_MidleCheck_Write_rb22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="指导教师指导不够，要求欠严格" />
+    </RadioGroup>
+
+</LinearLayout>

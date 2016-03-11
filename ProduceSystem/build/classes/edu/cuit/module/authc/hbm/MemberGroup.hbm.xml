@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-14 19:14:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.cuit.module.auchc.entity.MemberGroup" table="member_group" catalog="ProduceSystem" optimistic-lock="version">
+        <id name="memberNum" type="string">
+            <column name="Member_Num" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="expertsNum" type="string">
+            <column name="Experts_Num" length="32" />
+        </property>
+        <property name="member" type="string">
+            <column name="Member" length="50" />
+        </property>
+        <property name="isGrouper" type="string">
+            <column name="IsGrouper" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

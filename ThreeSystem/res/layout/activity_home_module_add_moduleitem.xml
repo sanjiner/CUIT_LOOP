@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:focusable="true"  
+    android:background="@color/more_bg_color"
+   	>
+   	
+    <FrameLayout 
+	     android:layout_width="fill_parent"
+	     android:layout_height="wrap_content"
+	     >
+		<TextView 
+		      android:layout_width="fill_parent"
+		      android:layout_height="@dimen/activity_head_height"
+		      android:text="添加模块评分项"
+		      android:gravity="center"
+		      android:textSize="20sp"
+		      android:textColor="#FAFFFE"
+		      android:background="@color/theme_color"
+		      />
+		<Button
+		    android:id="@+id/home_module_addmodule_back"
+		    android:layout_width="40dp"
+		    android:layout_height="@dimen/activity_head_height"
+		    android:layout_marginLeft="10dp"
+		    android:background="@drawable/selector_header_back"
+		    android:layout_gravity="left"
+		    />
+	</FrameLayout>
+	
+	<LinearLayout 
+	    android:id="@+id/home_home_givescore_linear"
+	    android:layout_width="match_parent"
+	    android:layout_height="40dp"
+	    android:layout_marginTop="15dp"
+	    android:layout_marginLeft="10dp"
+	    android:orientation="horizontal"
+	    >
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="40dp"
+	        android:textSize="20sp"
+	        android:text="请为该模块添加评分项"
+	        />
+	</LinearLayout>
+	
+	<EditText
+	    android:id="@+id/home_module_addmodule_set_name"
+	    android:layout_width="fill_parent"
+	    android:layout_height="50dp"
+	    android:background="@drawable/shape_addhomework_edittext"
+	    android:hint="输入模块评分项名字"
+	    />
+	
+	<Button
+	    android:id="@+id/home_module_addmodule_set_time"
+	    android:layout_width="fill_parent"
+	    android:layout_height="50dp"
+	    android:background="@drawable/shape_addhomework_edittext"
+	    android:hint="选择学生提交截止日期"
+	    android:gravity="center"
+	    />
+	
+	<Button
+	    android:id="@+id/home_module_addmodule_submit"
+	    android:layout_width="fill_parent"
+	    android:layout_height="40dp"
+	    android:layout_marginTop="20dp"
+	    android:background="@drawable/selector_all_button"
+	    android:text="@string/other_giveScore_Submit"
+	    />
+    	
+</LinearLayout>

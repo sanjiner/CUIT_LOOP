@@ -1,0 +1,101 @@
+package com.example.PCenter;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.MotionEvent;
+import android.widget.ImageView;
+import com.exam.ThreeSystem.R;
+
+public class Stu_ImageShower extends Activity {
+private Bitmap bitmap;
+private String URL="http://222.18.158.198:8016";
+private String realurl;
+private String WorkURL;
+private Thread mThread;
+private ImageView imageview_bigimage;
+private static final int MSG_SUCCESS = 0;// 获取图片成功的标识
+private static final int MSG_FAILURE = 1;// 获取图片失败的标识
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.imageshower);
+        WorkURL=homework_state_activity_stu_finnishing.WorkURL;
+		realurl=URL+WorkURL;
+		imageview_bigimage=(ImageView) findViewById(R.id.imageview_bigimage);
+        final ImageLoadingDialog dialog = new ImageLoadingDialog(this);
+        dialog.show();
+        getimage();
+        // 两秒后关闭后dialog
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, 1000 * 2);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        // TODO Auto-generated method stub
+        finish();
+        return true;
+    }
+    
+    private void getimage()
+	{
+		mThread = new Thread(runnable);
+		mThread.start();
+		System.out.println(realurl);
+		 
+
+	}
+	
+	Runnable runnable = new Runnable()
+	{
+
+		@Override
+		public void run() {
+			// TODO 自动生成的方法存根
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpGet httpGet = new HttpGet(realurl);
+//			final Bitmap bitmap;
+			try
+			{
+				HttpResponse httpResponse = httpClient.execute(httpGet);
+				bitmap = BitmapFactory.decodeStream(httpResponse.getEntity().getContent());
+			}
+			catch(Exception e)
+			{
+				mHandler.obtainMessage(MSG_FAILURE).sendToTarget();
+				return;
+			}
+			mHandler.obtainMessage(MSG_SUCCESS, bitmap).sendToTarget();
+		}
+		
+	};
+	private Handler mHandler = new Handler()
+	{
+		public void handleMessage(Message msg)
+		{
+			switch (msg.what)
+			{
+			case MSG_SUCCESS:
+				imageview_bigimage.setImageBitmap((Bitmap) msg.obj);
+				break;
+			case MSG_FAILURE:
+				break;
+			}
+		}
+	};
+    
+
+}

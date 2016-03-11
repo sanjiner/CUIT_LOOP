@@ -1,0 +1,91 @@
+package edu.cuit.module.sys.web.controller;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import edu.cuit.common.util.Constant;
+import edu.cuit.common.web.controller.BaseController;
+import edu.cuit.module.sys.entity.TbcuitmoonUser;
+import edu.cuit.module.sys.service.TbcuitmoonUserService;
+import edu.cuit.module.sys.web.servlet.ValidateCodeServlet;
+
+@Controller
+public class LoginController extends BaseController {
+	@Autowired
+	TbcuitmoonUserService userService;
+	
+	@RequestMapping(value= "/login",method=RequestMethod.GET)
+	public String loginGet(){
+		Subject subject = SecurityUtils.getSubject();
+		if(subject.isAuthenticated()){
+			return "redirect:/sys/mainPage";
+		}else{
+			return "sys/login";
+		}
+	}
+	
+	@RequestMapping(value= "/login", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> loginPost(String username, String password, String validateCode, HttpServletRequest request, HttpSession session){
+		
+		String massage = "登录成功";
+		String state = "success";
+		Map<String, String> map = new HashMap<String, String>();
+		String sessionValidateCode = (String)session.getAttribute(ValidateCodeServlet.VALIDATE_CODE);
+		if(isEmpty(username, password,sessionValidateCode, validateCode)){
+			massage = "输入有误";
+			state = "false";
+		}
+		else{
+			//sessionValidateCode.equalsIgnoreCase(validateCode)
+			if(sessionValidateCode.equalsIgnoreCase(validateCode)){
+				Subject subject = SecurityUtils.getSubject();
+				String md5Password = new SimpleHash("md5", password, null, 1).toHex().toUpperCase();
+				UsernamePasswordToken token = new UsernamePasswordToken(username,
+						md5Password, request.getLocalAddr());
+				
+				try {
+					subject.login(token);
+					TbcuitmoonUser user=userService.findByName(username);
+					session.setAttribute(Constant.LOGINUSER ,user);
+					Constant.USERID=user.getCuitMoonUserId();
+					String aString="";
+				} catch (UnknownAccountException e) {
+					massage = "用户名/密码错误";
+					state = "false";
+				} catch (IncorrectCredentialsException e) {
+					massage = "用户名/密码错误";
+					state = "false";
+				} catch (AuthenticationException e) {
+					// 其他错误，比如锁定，如果想单独处理请单独catch 处理
+					massage = "其他错误：" + e.getMessage();
+					state = "false";
+				}
+			}
+			else{
+				massage = "验证码错误";
+				state = "false";
+			}
+		}
+		map.put("state", state);
+		map.put("result", massage);
+		return map;
+	}
+	
+}

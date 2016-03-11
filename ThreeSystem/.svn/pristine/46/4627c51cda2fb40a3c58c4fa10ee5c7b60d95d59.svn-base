@@ -1,0 +1,170 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/more_bg_color"
+    android:orientation="vertical"
+	 >
+	<TextView 
+		android:layout_width="fill_parent"
+		android:layout_height="@dimen/activity_head_height"
+		android:text="新闻"
+		android:gravity="center"
+		android:textSize="20sp"
+		android:textColor="#FAFFFE"
+		android:background="@color/theme_color"
+		/>
+
+	
+	<FrameLayout  
+        android:layout_width="fill_parent"  
+        android:layout_height="150dip" >  
+  
+        <android.support.v4.view.ViewPager  
+            android:id="@+id/home_vp"  
+            android:layout_width="fill_parent"  
+            android:layout_height="fill_parent" />  
+  
+        <LinearLayout  
+            android:layout_width="fill_parent"  
+            android:layout_height="35dip"  
+            android:layout_gravity="bottom"  
+            android:background="#33000000"
+            android:gravity="center"  
+            android:orientation="vertical" >  
+  
+            <TextView  
+                android:id="@+id/tv_title"  
+                android:layout_width="wrap_content"  
+                android:layout_height="wrap_content"  
+                android:text="中国家庭院校园区域名字体现"  
+                android:textColor="#ffffff" />  
+
+            <LinearLayout  
+                android:layout_width="wrap_content"  
+                android:layout_height="wrap_content"  
+                android:layout_marginTop="3dip"  
+                android:gravity="center" >  
+  
+                 <View
+                    android:id="@+id/v_dot0"
+                    android:layout_width="5dip"
+       				android:layout_height="5dip"
+        			android:layout_marginLeft="5dip"
+        			android:layout_marginRight="5dip"
+                    android:background="@drawable/shape_home_dot_focused" />
+
+                <View
+                    android:id="@+id/v_dot1"
+                    android:layout_width="5dip"
+       				android:layout_height="5dip"
+        			android:layout_marginLeft="5dip"
+        			android:layout_marginRight="5dip"
+                    android:background="@drawable/shape_home_dot_normal" />
+
+                <View
+                    android:id="@+id/v_dot2"
+                    android:layout_width="5dip"
+       				android:layout_height="5dip"
+        			android:layout_marginLeft="5dip"
+        			android:layout_marginRight="5dip"
+                    android:background="@drawable/shape_home_dot_normal" />  
+            </LinearLayout>               
+        </LinearLayout> 
+    </FrameLayout>
+
+	<ListView
+	    android:id="@+id/news_listview"
+	    android:scrollbars="none"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:choiceMode="singleChoice"
+	    android:dividerHeight="5dp"
+	    android:padding="5dp"
+	    />
+	
+	<!-- <LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="20dp"
+	    android:orientation="vertical"
+	    >
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="clip_horizontal"
+	        android:orientation="horizontal"
+	        >
+	        <TextView
+	            android:layout_width="1dp"
+	            android:layout_height="fill_parent"
+	            android:layout_weight="1"
+	            />
+	        <Button
+	            android:id="@+id/CheckGrade"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:background="@drawable/attendance"
+	            android:text="查看成绩"
+	            />
+	        <TextView
+	            android:layout_width="0dp"
+	            android:layout_height="fill_parent"
+	            android:layout_weight="1"
+	            />
+	        <Button
+	            android:id="@+id/home_homework"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:background="@drawable/homework"
+	            android:text="预约考试"
+	            />
+	        <TextView
+	            android:layout_width="1dp"
+	            android:layout_height="fill_parent"
+	            android:layout_weight="1"
+	            />
+	    </LinearLayout>
+	    
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="clip_horizontal"
+	        android:orientation="horizontal"
+	        android:layout_marginTop="20dp"
+	        >
+	        <TextView
+	            android:layout_width="1dp"
+	            android:layout_height="fill_parent"
+	            android:layout_weight="1"
+	            />
+	        <Button
+	            android:id="@+id/home_question"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:background="@drawable/question"
+	            android:text="新闻查看"
+	            />
+	        <TextView
+	            android:layout_width="0dp"
+	            android:layout_height="fill_parent"
+	            android:layout_weight="1"
+	            />
+	        <Button
+	            android:id="@+id/home_record"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:background="@drawable/record"
+	            android:text="@string/record"
+	            android:visibility="invisible"
+	            />
+	        <TextView
+	            android:layout_width="1dp"
+	            android:layout_height="fill_parent"
+	            android:layout_weight="1"
+	            />
+	    </LinearLayout>
+	    
+	</LinearLayout> -->
+	
+</LinearLayout>

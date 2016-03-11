@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/activity_head_height"
+        android:background="@color/theme_color" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="课题信息"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/thesis_StudentHome_SubjectInfoSelect_back"
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/selector_header_back" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/thesis_StudentHome_SubjectInfoSelect_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_SubjectInfoSelect_GuideTeacher"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_ys_height"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="指导老师: "
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" >
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/grey" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_SubjectInfoSelect_ViewTeacher"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_ys_height"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="评阅老师: "
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_SubjectInfoSelect_ReplyLeader"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_ys_height"
+            android:layout_marginTop="20dp"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="答辩组长: "
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" >
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/grey" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_SubjectInfoSelect_ReplySecretary"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_ys_height"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="答辩秘书: "
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" >
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/grey" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_SubjectInfoSelect_ReplyOtherTeacher"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_ys_height"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="答辩其他老师: "
+            android:textSize="@dimen/activity_ys_textsize" />
+
+        <TextView
+            android:id="@+id/thesis_StudentHome_SubjectInfoSelect_ReplyGroupStudent"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/activity_ys_height"
+            android:layout_marginTop="20dp"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/activity_ys_paddingleft"
+            android:text="答辩组学生:  "
+            android:textSize="@dimen/activity_ys_textsize" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/thesis_StudentHome_SubjectInfoSelect_err"
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:visibility="gone" />
+    <!--
+         <Button 
+        android:id="@+id/thesis_StudentHome_SubjectInfoSelect_ok"
+        android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="20dp"
+	    android:layout_marginLeft="50dp"
+	    android:layout_marginRight="50dp"
+	    android:text="确定"
+	    android:textColor="@color/white"
+	    android:textSize="20sp"
+	    android:background="@drawable/selector_all_button"/>
+    -->
+
+</LinearLayout>
